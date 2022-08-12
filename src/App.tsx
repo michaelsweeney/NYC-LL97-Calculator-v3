@@ -1,4 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "App.css";
+
+import MainLayout from "components/mainlayout";
 
 const theme = createTheme({
   palette: {
@@ -14,7 +17,7 @@ const theme = createTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <div>hey there LL97</div>
+      <MainLayout />
     </ThemeProvider>
   );
 };
