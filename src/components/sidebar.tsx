@@ -1,10 +1,19 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
+
 import * as React from "react";
 
 import InputBuilding from "./inputbuilding";
+import InputUtilities from "./inpututilities";
 
 const styles: { [key: string]: React.CSSProperties } = {
   root: {
-    width: 300,
+    width: 500,
     height: "100%",
     border: "1px solid black",
     display: "inline-block",
@@ -17,9 +26,26 @@ interface IAppProps {}
 const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
   return (
     <div style={styles.root}>
-      <div>Building Inputs</div>
-      <InputBuilding />
-      <div>Utility Inputs</div>
+      <TableContainer>
+        <Table size="small">
+          <TableBody>
+            <TableRow>
+              <TableCell variant="head" colSpan={4}>
+                Building Inputs
+              </TableCell>
+            </TableRow>
+
+            <InputBuilding />
+
+            <TableRow>
+              <TableCell variant="head" colSpan={4}>
+                Utility Inputs
+              </TableCell>
+            </TableRow>
+            <InputUtilities />
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

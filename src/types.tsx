@@ -17,6 +17,6 @@ export type BuildingType = {
 };
 
 export type BuildingInputTypes = {
-  building_inputs: BuildingType[];
-  utility_inputs: UtilityConsumptionType;
+  building_types: BuildingType[];
+  utilities: UtilityConsumptionType;
 };

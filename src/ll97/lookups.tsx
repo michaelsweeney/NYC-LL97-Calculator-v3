@@ -101,6 +101,22 @@ export const building_type_labels = building_type_abbreviation_array.map(
   (d) => d[0]
 );
 
+export const fuel_keys_to_labels = {
+  elec: "Electricity (kWh)",
+  steam: "Steam (mLbs)",
+  fuel_two: "Fuel Oil #2 (gal)",
+  fuel_four: "Fuel Oil #4 (gal)",
+  gas: "Natural Gas (therms)",
+};
+
+export const fuel_keys_to_rate_labels = {
+  elec: "$/kWh",
+  steam: "$/mlb",
+  fuel_two: "$/gal",
+  fuel_four: "$/gal",
+  gas: "$/therm",
+};
+
 export const co2_limits_by_building_type = {
   A: [0.01074, 0.0042, 0.0014],
   B_health: [0.02381, 0.0133, 0.0014],

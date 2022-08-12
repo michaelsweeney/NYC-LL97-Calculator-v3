@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as types from "types";
 
 const initialState: types.BuildingInputTypes = {
-  building_inputs: [
+  building_types: [
     {
       building_id: 0,
       building_type: "B_norm",
@@ -15,7 +15,7 @@ const initialState: types.BuildingInputTypes = {
       building_area: 3000,
     },
   ],
-  utility_inputs: {
+  utilities: {
     elec: {
       consumption: 750000,
       rate: 0.193,
@@ -39,25 +39,81 @@ const initialState: types.BuildingInputTypes = {
   },
 };
 
-export const UiSlice = createSlice({
+export const buildingInputSlice = createSlice({
   name: "building_inputs",
   initialState: initialState,
   reducers: {
-    createDemoBuilding: (
+    setBuildingType: (
       state,
-      action: PayloadAction<{ key: string; bool: boolean }>
+      action: PayloadAction<{ id: number; value: string }>
     ) => {
-      return;
+      let { id, value } = action.payload;
+      let { building_types } = state;
+      let to_change = building_types.find((d) => d.building_id === id);
+      if (to_change) {
+        to_change.building_type = value;
+      }
     },
-    createDefaultBuilding: (
+
+    setBuildingArea: (
       state,
-      action: PayloadAction<{ key: string; bool: boolean }>
+      action: PayloadAction<{ id: number; value: number }>
     ) => {
-      return;
+      let { id, value } = action.payload;
+      let { building_types } = state;
+      let to_change = building_types.find((d) => d.building_id === id);
+      if (to_change) {
+        to_change.building_area = value;
+      }
+    },
+
+    setFuelConsumption: (
+      state,
+      action: PayloadAction<{ fuel: string; value: number }>
+    ) => {
+      let { fuel, value } = action.payload;
+      //@ts-ignore
+      state.utilities[fuel].consumption = value;
+    },
+
+    setFuelRate: (
+      state,
+      action: PayloadAction<{ fuel: string; value: number }>
+    ) => {
+      let { fuel, value } = action.payload;
+      //@ts-ignore
+      state.utilities[fuel].rate = value;
+    },
+
+    removeBuildingType: (state, action: PayloadAction<{ id: number }>) => {
+      let { id } = action.payload;
+      state.building_types = state.building_types.filter(
+        (d) => d.building_id !== id
+      );
+    },
+
+    addBuildingType: (state, action: PayloadAction<{}>) => {
+      let building_ids = [
+        ...new Set(state.building_types.map((d) => d.building_id)),
+      ];
+      let new_id = Math.max(...building_ids) + 1;
+
+      let type_to_copy = { ...state.building_types[0], building_id: new_id };
+
+      state.building_types.push(type_to_copy);
     },
   },
 });
 
-export const { createDefaultBuilding, createDemoBuilding } = UiSlice.actions;
+export const buildingInputActions = buildingInputSlice.actions;
 
-export default UiSlice.reducer;
+export const {
+  setBuildingArea,
+  setBuildingType,
+  setFuelConsumption,
+  setFuelRate,
+  removeBuildingType,
+  addBuildingType,
+} = buildingInputSlice.actions;
+
+export default buildingInputSlice.reducer;
