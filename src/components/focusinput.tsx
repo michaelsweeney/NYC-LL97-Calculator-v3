@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, FormControl } from "@mui/material";
+import { OutlinedInput, Input, FormControl } from "@mui/material";
 
 type PropTypes = {
   value: string | number;
@@ -15,7 +15,7 @@ const FocusInput = (props: PropTypes) => {
   };
 
   return (
-    <FormControl size="small" fullWidth>
+    <FormControl variant="standard" size="small" fullWidth>
       <Input
         sx={{ paddingLeft: 1 }}
         type={input_type}

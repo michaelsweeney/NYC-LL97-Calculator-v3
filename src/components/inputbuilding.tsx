@@ -78,7 +78,6 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                   onClick={() =>
                     handleRemoveBuildingType(bldg_type.building_id)
                   }
-                  variant="outlined"
                 >
                   x
                 </Button>
