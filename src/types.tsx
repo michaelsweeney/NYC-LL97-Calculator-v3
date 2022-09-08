@@ -19,4 +19,10 @@ export type BuildingType = {
 export type BuildingInputTypes = {
   building_types: BuildingType[];
   utilities: UtilityConsumptionType;
+  is_default_rates: boolean;
+};
+
+export type UiSliceTypes = {
+  is_load_modal_open: boolean;
+  is_info_modal_open: boolean;
 };

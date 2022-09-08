@@ -4,9 +4,7 @@ import { Checkbox, TableCell, TableRow } from "@mui/material";
 import FocusInput from "./focusinput";
 
 import { fuel_keys_to_labels, fuel_keys_to_rate_labels } from "ll97/lookups";
-
 import { buildingInputActions } from "store/buildinginputslice";
-
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -16,7 +14,9 @@ const styles: { [key: string]: React.CSSProperties } = {
 interface IAppProps {}
 
 const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
-  const { utilities } = useAppSelector((state) => state.building_inputs);
+  const { utilities, is_default_rates } = useAppSelector(
+    (state) => state.building_inputs
+  );
 
   const dispatch = useAppDispatch();
 
@@ -25,6 +25,13 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
   };
   const handleFuelRateChange = (fuel: string, value: number) => {
     dispatch(buildingInputActions.setFuelRate({ fuel, value }));
+    dispatch(
+      buildingInputActions.setIsDefaultRates({ is_default_rates: false })
+    );
+  };
+
+  const handleSetIsDefaultRates = (is_default_rates: boolean) => {
+    dispatch(buildingInputActions.setIsDefaultRates({ is_default_rates }));
   };
 
   return (
@@ -75,11 +82,12 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
       })}
       <TableRow>
         <TableCell sx={{ textAlign: "left" }}>
-          <Checkbox></Checkbox>
+          <Checkbox
+            onClick={() => handleSetIsDefaultRates(!is_default_rates)}
+            checked={is_default_rates ? true : false}
+          ></Checkbox>
         </TableCell>
-        <TableCell sx={{ color: "red" }} colSpan={3}>
-          Use Default Rates
-        </TableCell>
+        <TableCell colSpan={3}>Use Default Rates</TableCell>
       </TableRow>
     </React.Fragment>
   );

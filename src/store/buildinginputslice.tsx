@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import * as types from "types";
 
+import { default_utility_rates } from "ll97/lookups";
+
 const initialState: types.BuildingInputTypes = {
   building_types: [
     {
@@ -18,25 +20,26 @@ const initialState: types.BuildingInputTypes = {
   utilities: {
     elec: {
       consumption: 750000,
-      rate: 0.193,
+      rate: default_utility_rates.elec,
     },
     gas: {
       consumption: 10000,
-      rate: 1.001,
+      rate: default_utility_rates.gas,
     },
     steam: {
       consumption: 250,
-      rate: 32.8,
+      rate: default_utility_rates.steam,
     },
     fuel_two: {
       consumption: 500,
-      rate: 1.43,
+      rate: default_utility_rates.fuel_two,
     },
     fuel_four: {
       consumption: 0,
-      rate: 1.43,
+      rate: default_utility_rates.fuel_four,
     },
   },
+  is_default_rates: true,
 };
 
 export const buildingInputSlice = createSlice({
@@ -101,6 +104,22 @@ export const buildingInputSlice = createSlice({
       let type_to_copy = { ...state.building_types[0], building_id: new_id };
 
       state.building_types.push(type_to_copy);
+    },
+
+    setIsDefaultRates: (
+      state,
+      action: PayloadAction<{ is_default_rates: boolean }>
+    ) => {
+      let { is_default_rates } = action.payload;
+      state.is_default_rates = is_default_rates;
+
+      if (is_default_rates) {
+        state.utilities.elec.rate = default_utility_rates.elec;
+        state.utilities.steam.rate = default_utility_rates.steam;
+        state.utilities.gas.rate = default_utility_rates.gas;
+        state.utilities.fuel_two.rate = default_utility_rates.fuel_two;
+        state.utilities.fuel_four.rate = default_utility_rates.fuel_four;
+      }
     },
   },
 });

@@ -1,11 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
+import uiSlice from "./uislice";
 import buildingInputSlice from "./buildinginputslice";
+
 // ...
 
 export const store = configureStore({
   reducer: {
     building_inputs: buildingInputSlice,
+    ui: uiSlice,
   },
 });
 

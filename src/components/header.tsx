@@ -1,5 +1,7 @@
 import * as React from "react";
-
+import { Button } from "@mui/material";
+import { uiActions } from "store/uislice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 interface IAppProps {}
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -10,31 +12,47 @@ const styles: { [key: string]: React.CSSProperties } = {
     boxSizing: "border-box",
   },
   left: {
-    width: "100px",
+    width: "200px",
     height: "100%",
     display: "inline-block",
     verticalAlign: "middle",
   },
   middle: {
-    width: "calc(100% - 200px",
+    width: "calc(100% - 600px",
     textAlign: "center",
     height: "100%",
     display: "inline-block",
     verticalAlign: "middle",
   },
   right: {
-    width: "100px",
+    width: "400px",
     display: "inline-block",
     verticalAlign: "middle",
   },
 };
 
-const Header: React.FunctionComponent<IAppProps> = (props) => {
+const Header: React.FunctionComponent<IAppProps> = () => {
+  const dispatch = useAppDispatch();
+  const handleOpenLoadModal = () => {
+    dispatch(uiActions.setIsLoadModalOpen(true));
+  };
+
+  const handleOpenInfoModal = () => {
+    dispatch(uiActions.setIsInfoModalOpen(true));
+  };
+
   return (
     <div style={styles.root}>
       <div style={styles.left}>BEEX Logo</div>
       <div style={styles.middle}>NYC LL97 Carbon Emissions Calculator</div>
-      <div style={styles.right}>Buttons</div>
+      <div style={styles.right}>
+        <Button onClick={handleOpenLoadModal} variant="contained">
+          Open Load Modal
+        </Button>
+        <Button variant="contained" onClick={handleOpenInfoModal}>
+          Open Info Modal
+        </Button>
+      </div>
     </div>
   );
 };
