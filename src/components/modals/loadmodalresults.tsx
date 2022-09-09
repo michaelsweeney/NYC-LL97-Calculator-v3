@@ -14,8 +14,6 @@ import {
 const LoadModalResults = () => {
   const { ll84_query_results } = useAppSelector((state) => state.ui);
 
-  console.log(ll84_query_results);
-
   return (
     <div>
       <Table>
@@ -24,7 +22,7 @@ const LoadModalResults = () => {
             return (
               <TableRow key={i}>
                 <TableCell>{result.property_name}</TableCell>
-                <TableCell>{result.property_id}</TableCell>
+                <TableCell>{result.electricity_use_kbtu}</TableCell>
               </TableRow>
             );
           })}

@@ -1,5 +1,8 @@
 import { LL84QueryObjTypes } from "types";
 
+/// BIG TODO: WHY ARE THERE MULTIPLE ELECTRIC GRID PURCHASE COLUMNS AND WHY ARE
+/// THEY DIFFERENT FOR EACH DATASET????
+
 export const ll84_building_type_lookups = {
   Office: "B (Business)",
   "K-12 School": "E (Educational)",
