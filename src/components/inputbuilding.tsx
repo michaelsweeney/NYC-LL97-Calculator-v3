@@ -5,7 +5,7 @@ import { TableCell, TableRow, Button } from "@mui/material";
 import SingleSelect from "./singleselect";
 import FocusInput from "./focusinput";
 
-import { building_type_tags, building_type_labels } from "ll97/lookups";
+import { building_type_tags, building_type_labels } from "locallaw/lookups";
 
 import { buildingInputActions } from "store/buildinginputslice";
 

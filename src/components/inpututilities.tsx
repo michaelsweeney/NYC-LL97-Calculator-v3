@@ -3,7 +3,10 @@ import * as React from "react";
 import { Checkbox, TableCell, TableRow } from "@mui/material";
 import FocusInput from "./focusinput";
 
-import { fuel_keys_to_labels, fuel_keys_to_rate_labels } from "ll97/lookups";
+import {
+  fuel_keys_to_labels,
+  fuel_keys_to_rate_labels,
+} from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 

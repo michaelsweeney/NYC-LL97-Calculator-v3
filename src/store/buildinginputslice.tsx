@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import * as types from "types";
 
-import { default_utility_rates } from "ll97/lookups";
+import { default_utility_rates } from "locallaw/lookups";
 
 const initialState: types.BuildingInputTypes = {
   building_types: [
