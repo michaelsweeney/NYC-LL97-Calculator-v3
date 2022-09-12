@@ -61,6 +61,8 @@ const handleLL84QueryResponse = (
   let query = `${endpoint}?$query=SELECT ${all_columns_string} WHERE ${column_query_string} LIMIT 8
     `;
 
+  console.log(query);
+
   let xmlhttp = new XMLHttpRequest();
 
   xmlhttp.open("GET", query, true);

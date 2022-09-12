@@ -22,7 +22,7 @@ const LoadModalResults = () => {
             return (
               <TableRow key={i}>
                 <TableCell>{result.property_name}</TableCell>
-                <TableCell>{result.electricity_use_kbtu}</TableCell>
+                <TableCell>{result.electricity_consumption_kbtu}</TableCell>
               </TableRow>
             );
           })}

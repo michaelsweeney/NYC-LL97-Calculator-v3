@@ -1,9 +1,6 @@
 import { LL84QueryObjTypes } from "types";
 
-/// BIG TODO: WHY ARE THERE MULTIPLE ELECTRIC GRID PURCHASE COLUMNS AND WHY ARE
-/// THEY DIFFERENT FOR EACH DATASET????
-
-export const ll84_building_type_lookups = {
+export const ll84_building_type_lookups: { [key: string]: string } = {
   Office: "B (Business)",
   "K-12 School": "E (Educational)",
   Hotel: "R-1 (Residential)",
@@ -169,6 +166,8 @@ export const default_utility_rates = {
 export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
     key: "ll84_2021_cal_2020",
+    documentation:
+      "https://dev.socrata.com/foundry/data.cityofnewyork.us/usc3-8zwd",
     endpoint: "https://data.cityofnewyork.us/resource/usc3-8zwd.json",
     label: "2021 (cal year 2020)",
     column_name_map: [
@@ -185,11 +184,18 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
         "3rd_property_use_sf",
         "_3rd_largest_property_use_type_gross_floor_area_ft",
       ],
-      ["fuel_oil_2_use_kbtu", "fuel_oil_2_use_kbtu"],
-      ["fuel_oil_4_use_kbtu", "fuel_oil_4_use_kbtu"],
-      ["district_steam_use_kbtu", "district_steam_use_kbtu"],
-      ["natural_gas_use_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_use_kbtu", "electricity_use_grid_purchase_kbtu"],
+      ["fuel_oil_2_consumption_kbtu", "fuel_oil_2_use_kbtu"],
+      ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
+      ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
+      ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
+      [
+        "electricity_consumption_kbtu",
+        "electricity_use_grid_purchase_and_generated_from_onsite_renewable_systems_kbtu",
+      ],
+      [
+        "electricity_onsite_generated_kbtu",
+        "electricity_use_generated_from_onsite_renewable_systems_and_used_onsite_kbtu",
+      ],
     ],
     query_columns: [
       "property_name",
@@ -201,6 +207,8 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
     key: "ll84_2020_cal_2019",
     endpoint: "https://data.cityofnewyork.us/resource/wcm8-aq5w.json",
+    documentation:
+      "https://dev.socrata.com/foundry/data.cityofnewyork.us/wcm8-aq5w",
     label: "2020 (cal year 2019)",
     column_name_map: [
       ["property_name", "property_name"],
@@ -213,11 +221,12 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["2nd_property_use_sf", "_2nd_largest_property_use_1"],
       ["3rd_property_use_type", "_3rd_largest_property_use"],
       ["3rd_property_use_sf", "_3rd_largest_property_use_1"],
-      ["fuel_oil_2_use_kbtu", "fuel_oil_2_use_kbtu"],
-      ["fuel_oil_4_use_kbtu", "fuel_oil_4_use_kbtu"],
-      ["district_steam_use_kbtu", "district_steam_use_kbtu"],
-      ["natural_gas_use_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_use_kbtu", "electricity_use_grid_purchase"],
+      ["fuel_oil_2_consumption_kbtu", "fuel_oil_2_use_kbtu"],
+      ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
+      ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
+      ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_2"],
+      ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
     ],
     query_columns: [
       "property_name",
@@ -230,6 +239,8 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
     key: "ll84_2019_cal_2018",
     endpoint: "https://data.cityofnewyork.us/resource/4tys-3tzj.json",
+    documentation:
+      "https://dev.socrata.com/foundry/data.cityofnewyork.us/4tys-3tzj",
     label: "2019 (cal year 2018)",
     column_name_map: [
       ["property_name", "property_name"],
@@ -242,11 +253,12 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["2nd_property_use_sf", "_2nd_largest_property_use_1"],
       ["3rd_property_use_type", "_3rd_largest_property_use"],
       ["3rd_property_use_sf", "_3rd_largest_property_use_1"],
-      ["fuel_oil_2_use_kbtu", "fuel_oil_2_use_kbtu"],
-      ["fuel_oil_4_use_kbtu", "fuel_oil_4_use_kbtu"],
-      ["district_steam_use_kbtu", "district_steam_use_kbtu"],
-      ["natural_gas_use_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_use_kbtu", "electricity_use_grid_purchase"],
+      ["fuel_oil_2_consumption_kbtu", "fuel_oil_2_use_kbtu"],
+      ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
+      ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
+      ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_2"],
+      ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
     ],
     query_columns: [
       "property_name",
@@ -259,6 +271,8 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
     key: "ll84_2018_cal_2017",
     endpoint: "https://data.cityofnewyork.us/resource/4t62-jm4m.json",
+    documentation:
+      "https://dev.socrata.com/foundry/data.cityofnewyork.us/4t62-jm4m",
     label: "2018 (cal year 2017)",
     column_name_map: [
       ["property_name", "property_name"],
@@ -271,11 +285,12 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["2nd_property_use_sf", "_2nd_largest_property_use_1"],
       ["3rd_property_use_type", "_3rd_largest_property_use"],
       ["3rd_property_use_sf", "_3rd_largest_property_use_1"],
-      ["fuel_oil_2_use_kbtu", "fuel_oil_2_use_kbtu"],
-      ["fuel_oil_4_use_kbtu", "fuel_oil_4_use_kbtu"],
-      ["district_steam_use_kbtu", "district_steam_use_kbtu"],
-      ["natural_gas_use_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_use_kbtu", "electricity_use_grid_purchase"],
+      ["fuel_oil_2_consumption_kbtu", "fuel_oil_2_use_kbtu"],
+      ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
+      ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
+      ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_2"],
+      ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
     ],
     query_columns: [
       "property_name",

@@ -33,6 +33,7 @@ export type UiSliceTypes = {
 export type LL84QueryObjTypes = {
   key: string;
   endpoint: string;
+  documentation?: string;
   label: string;
   query_columns: string[];
   column_name_map: ColumnNameMapType;
@@ -51,11 +52,12 @@ export type LL84QueryProperties = {
   "2nd_property_use_sf": string;
   "3rd_property_use_type": string;
   "3rd_property_use_sf": string;
-  fuel_oil_2_use_kbtu: string;
-  fuel_oil_4_use_kbtu: string;
-  district_steam_use_kbtu: string;
-  natural_gas_use_kbtu: string;
-  electricity_use_kbtu: string;
+  fuel_oil_2_consumption_kbtu: string;
+  fuel_oil_4_consumption_kbtu: string;
+  district_steam_consumption_kbtu: string;
+  natural_gas_consumption_kbtu: string;
+  electricity_consumption_kbtu: string;
+  electricity_onsite_generated_kbtu: string;
 };
 
 export type StringObjectType = { [key: string]: string };
