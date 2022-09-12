@@ -43,7 +43,6 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
           <React.Fragment key={i}>
             <TableRow>
               <TableCell></TableCell>
-
               <TableCell variant="head">
                 {fuel_keys_to_labels[fuel as keyof typeof fuel_keys_to_labels]}
               </TableCell>

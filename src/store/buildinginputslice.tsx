@@ -179,7 +179,7 @@ export const buildingInputSlice = createSlice({
       }
       if (ll97_inputs.bldg_type_three_type !== "Not Available") {
         let t3: types.BuildingType = {
-          building_id: 1,
+          building_id: 2,
           building_type: buildingTypeLongToShort(
             ll97_inputs.bldg_type_three_type
           ) as string,
