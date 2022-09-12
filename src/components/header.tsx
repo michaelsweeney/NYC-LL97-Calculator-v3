@@ -41,6 +41,10 @@ const Header: React.FunctionComponent<IAppProps> = () => {
     dispatch(uiActions.setIsInfoModalOpen(true));
   };
 
+  const handleOpenBuildingSummaryModal = () => {
+    dispatch(uiActions.setIsBuildingSummaryModalOpen(true));
+  };
+
   return (
     <div style={styles.root}>
       <div style={styles.left}>BEEX Logo</div>
@@ -51,6 +55,9 @@ const Header: React.FunctionComponent<IAppProps> = () => {
         </Button>
         <Button variant="contained" onClick={handleOpenInfoModal}>
           Open Info Modal
+        </Button>
+        <Button variant="contained" onClick={handleOpenBuildingSummaryModal}>
+          Open LL84 Summary Modal
         </Button>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { TableCell, TableRow, Button } from "@mui/material";
 import SingleSelect from "./singleselect";
 import FocusInput from "./focusinput";
 
-import { building_type_tags, building_type_labels } from "locallaw/lookups";
+import { building_type_abbreviation_array } from "locallaw/lookups";
 
 import { buildingInputActions } from "store/buildinginputslice";
 
@@ -57,8 +57,12 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                 callback={(v) => {
                   handleBuildingTypeChange(bldg_type.building_id, v as string);
                 }}
-                option_values={building_type_tags}
-                option_titles={building_type_labels}
+                option_values={building_type_abbreviation_array.map(
+                  (e) => e[1]
+                )}
+                option_titles={building_type_abbreviation_array.map(
+                  (e) => e[0]
+                )}
               />
             </TableCell>
             <TableCell>

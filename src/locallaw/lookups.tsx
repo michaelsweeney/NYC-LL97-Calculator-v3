@@ -1,6 +1,6 @@
-import { LL84QueryObjTypes } from "types";
+import { LL84QueryObjTypes, StringObjectType } from "types";
 
-export const ll84_building_type_lookups: { [key: string]: string } = {
+export const ll84_building_type_lookups: StringObjectType = {
   Office: "B (Business)",
   "K-12 School": "E (Educational)",
   Hotel: "R-1 (Residential)",
@@ -96,13 +96,6 @@ export const building_type_abbreviation_array = [
   ["U (Utility/Misc)", "U"],
 ];
 
-export const building_type_tags = building_type_abbreviation_array.map(
-  (d) => d[1]
-);
-export const building_type_labels = building_type_abbreviation_array.map(
-  (d) => d[0]
-);
-
 export const fuel_keys_to_labels = {
   elec: "Electricity (kWh)",
   steam: "Steam (mLbs)",
@@ -173,6 +166,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
     column_name_map: [
       ["property_name", "property_name"],
       ["property_id", "property_id"],
+      ["address_1", "address_1"],
       ["nyc_bbl", "nyc_borough_block_and_lot_bbl"],
       ["nyc_bin", "nyc_building_identification_number_bin"],
       ["1st_property_use_type", "largest_property_use_type"],
@@ -213,6 +207,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
     column_name_map: [
       ["property_name", "property_name"],
       ["property_id", "property_id"],
+      ["address_1", "address_1"],
       ["nyc_bbl", "nyc_borough_block_and_lot"],
       ["nyc_bin", "nyc_building_identification"],
       ["1st_property_use_type", "largest_property_use_type_1"],
@@ -244,9 +239,11 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
     label: "2019 (cal year 2018)",
     column_name_map: [
       ["property_name", "property_name"],
+
       ["property_id", "property_id"],
       ["nyc_bbl", "nyc_borough_block_and_lot"],
       ["nyc_bin", "nyc_building_identification"],
+      ["address_1", "address_1"],
       ["1st_property_use_type", "largest_property_use_type_1"],
       ["1st_property_use_sf", "largest_property_use_type"],
       ["2nd_property_use_type", "_2nd_largest_property_use"],
@@ -279,6 +276,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["property_id", "property_id"],
       ["nyc_bbl", "nyc_borough_block_and_lot"],
       ["nyc_bin", "nyc_building_identification"],
+      ["address_1", "address_1"],
       ["1st_property_use_type", "largest_property_use_type_1"],
       ["1st_property_use_sf", "largest_property_use_type"],
       ["2nd_property_use_type", "_2nd_largest_property_use"],

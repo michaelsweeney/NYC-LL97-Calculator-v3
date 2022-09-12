@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import { ll84_year_lookups } from "locallaw/lookups";
 import { handleLL84QueryResponse } from "locallaw/ll84query";
-import { StringObjectType, LL84QueryProperties } from "types";
+import { LL84QueryPropertyTypes, LL84YearTypes } from "types";
 
 const LoadModal = () => {
   const { is_load_modal_open, ll84_query_input, ll84_year_selection } =
@@ -29,12 +29,12 @@ const LoadModal = () => {
   };
 
   const handleYearSelection = (e: SelectChangeEvent) => {
-    let year = e.target.value;
+    let year = e.target.value as LL84YearTypes;
     dispatch(uiActions.setLL84YearSelection(year));
   };
 
   useEffect(() => {
-    const ll84QueryResponseCallback = (e: LL84QueryProperties[]) => {
+    const ll84QueryResponseCallback = (e: LL84QueryPropertyTypes[]) => {
       dispatch(uiActions.setLL84QueryResultsResponse(e));
     };
 

@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import * as types from "types";
-
+import { current } from "@reduxjs/toolkit";
+import { BuildingInputTypes } from "types";
 import { default_utility_rates } from "locallaw/lookups";
 
-const initialState: types.BuildingInputTypes = {
+const initialState: BuildingInputTypes = {
   building_types: [
     {
       building_id: 0,
@@ -37,6 +38,11 @@ const initialState: types.BuildingInputTypes = {
     fuel_four: {
       consumption: 0,
       rate: default_utility_rates.fuel_four,
+    },
+  },
+  electric_onsite_generation: {
+    photovoltaic: {
+      consumption: 0,
     },
   },
   is_default_rates: true,
@@ -121,18 +127,27 @@ export const buildingInputSlice = createSlice({
         state.utilities.fuel_four.rate = default_utility_rates.fuel_four;
       }
     },
+
+    setElectricOnsitePVConsumptionChange: (
+      state,
+      action: PayloadAction<number>
+    ) => {
+      state.electric_onsite_generation.photovoltaic.consumption =
+        action.payload;
+    },
+
+    setBuildingInputsFromLL84Results: (
+      state,
+      action: PayloadAction<types.LL97ConversionTypes>
+    ) => {
+      let ll97_inputs = action.payload;
+
+      console.log(ll97_inputs);
+      console.log(current(state));
+    },
   },
 });
 
 export const buildingInputActions = buildingInputSlice.actions;
-
-export const {
-  setBuildingArea,
-  setBuildingType,
-  setFuelConsumption,
-  setFuelRate,
-  removeBuildingType,
-  addBuildingType,
-} = buildingInputSlice.actions;
 
 export default buildingInputSlice.reducer;

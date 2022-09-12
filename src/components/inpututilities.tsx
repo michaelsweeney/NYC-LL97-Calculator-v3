@@ -83,6 +83,7 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
           </React.Fragment>
         );
       })}
+
       <TableRow>
         <TableCell sx={{ textAlign: "left" }}>
           <Checkbox
