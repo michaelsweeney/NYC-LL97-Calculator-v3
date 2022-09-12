@@ -1,11 +1,9 @@
-import { ll84_building_type_lookups } from "./lookups";
 import { ll84_year_lookups } from "./lookups";
 import {
   LL84QueryObjTypes,
   LL84QueryPropertyTypes,
   StringObjectType,
   ColumnNameMapType,
-  BuildingInputTypes,
 } from "types";
 
 const sanitizeLL84QueryResultsObject = (

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "App.css";
 

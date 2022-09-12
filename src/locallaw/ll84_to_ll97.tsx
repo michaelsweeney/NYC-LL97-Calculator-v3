@@ -1,13 +1,5 @@
 import { ll84_building_type_lookups } from "./lookups";
-import { ll84_year_lookups } from "./lookups";
-import {
-  LL84QueryObjTypes,
-  LL84QueryPropertyTypes,
-  LL97ConversionTypes,
-  StringObjectType,
-  ColumnNameMapType,
-  BuildingInputTypes,
-} from "types";
+import { LL84QueryPropertyTypes, LL97ConversionTypes } from "types";
 
 const roundNum = (n: string | number) => {
   if (isNaN(+n)) {
@@ -34,8 +26,8 @@ const LL84SelectionToLL97Inputs = (ll84obj: LL84QueryPropertyTypes) => {
     let ll84_bldg_type_one_area = ll84obj["1st_property_use_sf"];
     let ll84_bldg_type_two_type = ll84obj["2nd_property_use_type"];
     let ll84_bldg_type_two_area = ll84obj["2nd_property_use_sf"];
-    let ll84_bldg_type_three_type = ll84obj["1st_property_use_type"];
-    let ll84_bldg_type_three_area = ll84obj["1st_property_use_sf"];
+    let ll84_bldg_type_three_type = ll84obj["3rd_property_use_type"];
+    let ll84_bldg_type_three_area = ll84obj["3rd_property_use_sf"];
 
     // convert to building input // ll97-focused inputs
     let elec_kwh = roundNum(+ll84_elec_kbtu / 3.412);
@@ -46,6 +38,9 @@ const LL84SelectionToLL97Inputs = (ll84obj: LL84QueryPropertyTypes) => {
     let fuel_four_gal = roundNum(+ll84_fuel_four_kbtu / 146);
 
     const translateBuildingType = (ll84type: string) => {
+      if (ll84type === "Not Available") {
+        return "Not Available";
+      }
       if (ll84type in ll84_building_type_lookups) {
         return ll84_building_type_lookups[ll84type];
       } else {
@@ -65,7 +60,6 @@ const LL84SelectionToLL97Inputs = (ll84obj: LL84QueryPropertyTypes) => {
     let bldg_type_three_area = roundNum(ll84_bldg_type_three_area);
 
     ll97obj["bldg_type_one_area"] = bldg_type_one_area;
-    ll97obj["bldg_type_one_area"] = bldg_type_one_area;
     ll97obj["bldg_type_one_type"] = bldg_type_one_type;
     ll97obj["bldg_type_two_area"] = bldg_type_two_area;
     ll97obj["bldg_type_two_type"] = bldg_type_two_type;
@@ -78,7 +72,6 @@ const LL84SelectionToLL97Inputs = (ll84obj: LL84QueryPropertyTypes) => {
     ll97obj["fuel_two_gal"] = fuel_two_gal;
     ll97obj["fuel_four_gal"] = fuel_four_gal;
   }
-
   return ll97obj;
 };
 

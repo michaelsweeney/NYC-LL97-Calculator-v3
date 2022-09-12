@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@mui/material";
 import { uiActions } from "store/uislice";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppDispatch } from "store/hooks";
 interface IAppProps {}
 
 const styles: { [key: string]: React.CSSProperties } = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { OutlinedInput, Input, FormControl } from "@mui/material";
+import { Input, FormControl } from "@mui/material";
 
 type PropTypes = {
   value: string | number;

@@ -3,7 +3,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as types from "types";
 import { current } from "@reduxjs/toolkit";
 import { BuildingInputTypes } from "types";
-import { default_utility_rates } from "locallaw/lookups";
+import {
+  default_utility_rates,
+  building_type_abbreviation_array,
+} from "locallaw/lookups";
 
 const initialState: BuildingInputTypes = {
   building_types: [
@@ -144,6 +147,80 @@ export const buildingInputSlice = createSlice({
 
       console.log(ll97_inputs);
       console.log(current(state));
+
+      let new_building_types: types.BuildingType[] = [];
+
+      const buildingTypeLongToShort = (d: string) => {
+        let match = building_type_abbreviation_array.find((e) => e[0] === d);
+        if (match) {
+          return match[1];
+        }
+      };
+
+      if (ll97_inputs.bldg_type_one_type !== "Not Available") {
+        let t1: types.BuildingType = {
+          building_id: 0,
+          building_type: buildingTypeLongToShort(
+            ll97_inputs.bldg_type_one_type
+          ) as string,
+          building_area: ll97_inputs.bldg_type_one_area,
+        };
+        new_building_types.push(t1);
+      }
+      if (ll97_inputs.bldg_type_two_type !== "Not Available") {
+        let t2: types.BuildingType = {
+          building_id: 1,
+          building_type: buildingTypeLongToShort(
+            ll97_inputs.bldg_type_two_type
+          ) as string,
+          building_area: ll97_inputs.bldg_type_two_area,
+        };
+        new_building_types.push(t2);
+      }
+      if (ll97_inputs.bldg_type_three_type !== "Not Available") {
+        let t3: types.BuildingType = {
+          building_id: 1,
+          building_type: buildingTypeLongToShort(
+            ll97_inputs.bldg_type_three_type
+          ) as string,
+          building_area: ll97_inputs.bldg_type_three_area,
+        };
+        new_building_types.push(t3);
+      }
+
+      let new_state: BuildingInputTypes = {
+        building_types: new_building_types,
+        utilities: {
+          elec: {
+            consumption: ll97_inputs.elec_kwh,
+            rate: state.utilities.elec.rate,
+          },
+          steam: {
+            consumption: ll97_inputs.steam_mlbs,
+            rate: state.utilities.steam.rate,
+          },
+          gas: {
+            consumption: ll97_inputs.gas_therms,
+            rate: state.utilities.gas.rate,
+          },
+          fuel_four: {
+            consumption: ll97_inputs.fuel_four_gal,
+            rate: state.utilities.fuel_four.rate,
+          },
+          fuel_two: {
+            consumption: ll97_inputs.fuel_two_gal,
+            rate: state.utilities.fuel_two.rate,
+          },
+        },
+        electric_onsite_generation: {
+          photovoltaic: {
+            consumption: ll97_inputs.elec_onsite_gen_kwh,
+          },
+        },
+        is_default_rates: state.is_default_rates,
+      };
+
+      return new_state;
     },
   },
 });

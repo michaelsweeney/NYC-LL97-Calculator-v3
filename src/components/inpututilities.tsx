@@ -10,10 +10,6 @@ import {
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
-const styles: { [key: string]: React.CSSProperties } = {
-  root: {},
-};
-
 interface IAppProps {}
 
 const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
@@ -37,9 +33,10 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
     dispatch(buildingInputActions.setIsDefaultRates({ is_default_rates }));
   };
 
+  const utility_keys = ["elec", "gas", "steam", "fuel_two", "fuel_four"];
   return (
     <React.Fragment>
-      {Object.keys(utilities).map((fuel, i) => {
+      {utility_keys.map((fuel, i) => {
         let fuel_obj = utilities[fuel as keyof typeof utilities];
 
         return (

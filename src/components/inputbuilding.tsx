@@ -11,10 +11,6 @@ import { buildingInputActions } from "store/buildinginputslice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
-const styles: { [key: string]: React.CSSProperties } = {
-  root: {},
-};
-
 interface IAppProps {}
 
 const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
