@@ -1,6 +1,19 @@
 import InputOnsiteGeneration from "components/inputonsitegeneration";
-import { BuildingInputTypes, LL97ConversionTypes } from "types";
-import { co2_limits_by_building_type, fine_per_ton_co2 } from "./lookups";
+import {
+  BuildingInputTypes,
+  LL97ConversionTypes,
+  BuildingOutputSliceTypes,
+  YearFuelTypeObj,
+  YearValueObj,
+  UtilityConsumptionType,
+} from "types";
+import {
+  co2_limits_by_building_type,
+  fine_per_ton_co2,
+  elec_carbon_coefficients,
+  non_electric_kg_per_kbtu_coefficients, // todo check this: is it really kg per kbtu?? rename variable
+  ll84_year_lookups,
+} from "./lookups";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   console.log(ll97_in);
@@ -10,12 +23,18 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     utilities,
     is_default_rates,
     electric_onsite_generation,
+    electric_coefficient_method,
   } = ll97_in;
 
-  let area = 0;
+  let total_area = 0;
   let co2limit_2024 = 0;
   let co2limit_2030 = 0;
   let co2limit_2035 = 0;
+
+  let carbon_coefficient_array =
+    elec_carbon_coefficients[
+      electric_coefficient_method as keyof typeof elec_carbon_coefficients
+    ];
 
   Object.values(building_types).forEach((type) => {
     let limit_2024 =
@@ -33,22 +52,29 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     co2limit_2024 = co2limit_2024 + limit_2024;
     co2limit_2030 = co2limit_2030 + limit_2030;
     co2limit_2035 = co2limit_2035 + limit_2035;
-    area = area + +type.building_area;
+    total_area = total_area + +type.building_area;
   });
 
-  console.log(area, co2limit_2024, co2limit_2030, co2limit_2035);
+  let is_greater_than_25k_sf: boolean = total_area > 25e3 ? true : false;
 
-  let elec_consumption_with_pv_kwh =
+  console.log(total_area, co2limit_2024, co2limit_2030, co2limit_2035);
+
+  let elec_native =
     +utilities.elec.consumption -
     +electric_onsite_generation.photovoltaic.consumption;
 
-  let elec_kbtu = elec_consumption_with_pv_kwh * 3.412;
+  let gas_native = +utilities.gas.consumption;
+  let steam_native = +utilities.steam.consumption;
+  let fuel_two_native = +utilities.fuel_two.consumption;
+  let fuel_four_native = +utilities.fuel_four.consumption;
+
+  let elec_kbtu = elec_native * 3.412;
   let gas_kbtu = +utilities.gas.consumption * 100;
   let steam_kbtu = +utilities.steam.consumption * 1194;
   let fuel_two_kbtu = +utilities.fuel_two.consumption * 138;
   let fuel_four_kbtu = +utilities.fuel_four.consumption * 146;
 
-  let elec_cost = elec_consumption_with_pv_kwh * 3.412 * utilities.elec.rate;
+  let elec_cost = elec_native * 3.412 * utilities.elec.rate;
   let gas_cost = +utilities.gas.consumption * +utilities.gas.rate;
   let steam_cost = +utilities.steam.consumption * +utilities.steam.rate;
   let fuel_two_cost =
@@ -56,27 +82,151 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let fuel_four_cost =
     +utilities.fuel_four.consumption * +utilities.fuel_four.rate;
 
-  let elec_kbtu_norm = elec_kbtu / area;
-  let gas_kbtu_norm = gas_kbtu / area;
-  let steam_kbtu_norm = steam_kbtu / area;
-  let fuel_two_kbtu_norm = fuel_two_kbtu / area;
-  let fuel_four_kbtu_norm = fuel_four_kbtu / area;
+  let elec_kbtu_per_sf = elec_kbtu / total_area;
+  let gas_kbtu_per_sf = gas_kbtu / total_area;
+  let steam_kbtu_per_sf = steam_kbtu / total_area;
+  let fuel_two_kbtu_per_sf = fuel_two_kbtu / total_area;
+  let fuel_four_kbtu_per_sf = fuel_four_kbtu / total_area;
 
-  let elec_cost_norm = elec_cost / area;
-  let gas_cost_norm = gas_cost / area;
-  let steam_cost_norm = steam_cost / area;
-  let fuel_two_cost_norm = fuel_two_cost / area;
-  let fuel_four_cost_norm = fuel_four_cost / area;
+  let elec_cost_per_sf = elec_cost / total_area;
+  let gas_cost_per_sf = gas_cost / total_area;
+  let steam_cost_per_sf = steam_cost / total_area;
+  let fuel_two_cost_per_sf = fuel_two_cost / total_area;
+  let fuel_four_cost_per_sf = fuel_four_cost / total_area;
 
-  // do carbon regressions for each year
+  let elec_native_per_sf = elec_native / total_area;
+  let gas_native_per_sf = gas_native / total_area;
+  let steam_native_per_sf = steam_native / total_area;
+  let fuel_two_native_per_sf = fuel_two_native / total_area;
+  let fuel_four_native_per_sf = fuel_four_native / total_area;
 
-  // let elec_carbon = elec_kbtu * 0.000084689;
-  // let gas_carbon = gas_kbtu * 0.00005311;
-  // let steam_carbon = steam_kbtu * 0.00004493;
-  // let fuel_two_carbon = fuel_two_kbtu * 0.00007421;
-  // let fuel_four_carbon = fuel_four_kbtu * 0.00007529;
+  let annual_cost_by_fuel: UtilityConsumptionType = {
+    elec: elec_cost,
+    gas: gas_cost,
+    steam: steam_cost,
+    fuel_two: fuel_two_cost,
+    fuel_four: fuel_four_cost,
+  };
 
-  return;
+  let annual_site_energy_by_fuel: UtilityConsumptionType = {
+    elec: elec_kbtu,
+    gas: gas_kbtu,
+    steam: steam_kbtu,
+    fuel_two: fuel_two_kbtu,
+    fuel_four: fuel_four_kbtu,
+  };
+  let annual_native_energy_by_fuel: UtilityConsumptionType = {
+    elec: elec_native,
+    gas: gas_native,
+    steam: steam_native,
+    fuel_two: fuel_two_native,
+    fuel_four: fuel_four_native,
+  };
+
+  let annual_cost_per_sf_by_fuel: UtilityConsumptionType = {
+    elec: elec_cost_per_sf,
+    gas: gas_cost_per_sf,
+    steam: steam_cost_per_sf,
+    fuel_two: fuel_two_cost_per_sf,
+    fuel_four: fuel_four_cost_per_sf,
+  };
+  let annual_site_per_sf_by_fuel: UtilityConsumptionType = {
+    elec: elec_kbtu_per_sf,
+    gas: gas_kbtu_per_sf,
+    steam: steam_kbtu_per_sf,
+    fuel_two: fuel_two_kbtu_per_sf,
+    fuel_four: fuel_four_kbtu_per_sf,
+  };
+
+  let annual_native_energy_per_sf_by_fuel: UtilityConsumptionType = {
+    elec: elec_native_per_sf,
+    gas: gas_native_per_sf,
+    steam: steam_native_per_sf,
+    fuel_two: fuel_two_native_per_sf,
+    fuel_four: fuel_four_native_per_sf,
+  };
+
+  let annual_carbon_by_year_by_fuel = [] as YearFuelTypeObj[];
+  let annual_carbon_per_sf_by_year_by_fuel = [] as YearFuelTypeObj[];
+  let annual_carbon_fine_by_year = [] as YearValueObj[]; //todo: this should be more of an overall summary with totals thresholds etc
+
+  carbon_coefficient_array.forEach((yobj) => {
+    let { year, value } = yobj; // value is kg per mwh
+
+    let elec_tons = (elec_native / 1000) * value * 1000;
+    let gas_tons = gas_kbtu * non_electric_kg_per_kbtu_coefficients.gas;
+    let steam_tons = gas_kbtu * non_electric_kg_per_kbtu_coefficients.steam;
+    let fuel_two_tons =
+      fuel_two_kbtu * non_electric_kg_per_kbtu_coefficients.fuel_two;
+    let fuel_four_tons =
+      fuel_four_kbtu * non_electric_kg_per_kbtu_coefficients.fuel_four;
+
+    let threshold = 9e9;
+
+    let carbon_tons_total =
+      elec_tons + gas_tons + steam_tons + fuel_two_tons + fuel_four_tons;
+
+    if (year <= 2023) {
+      threshold = 9e9;
+    } else if (year <= 2029) {
+      threshold = co2limit_2024;
+    } else if (year <= 2034) {
+      threshold = co2limit_2030;
+    } else if (year <= 2050) {
+      threshold = co2limit_2035;
+    }
+
+    let excess_carbon = Math.max(carbon_tons_total - threshold, 0);
+    let fine = excess_carbon * fine_per_ton_co2;
+
+    annual_carbon_by_year_by_fuel.push({
+      year: year,
+      consumption: {
+        elec: elec_tons,
+        gas: gas_tons,
+        steam: steam_tons,
+        fuel_two: fuel_two_tons,
+        fuel_four: fuel_four_tons,
+      },
+    });
+    annual_carbon_per_sf_by_year_by_fuel.push({
+      year: year,
+      consumption: {
+        elec: elec_tons / total_area,
+        gas: gas_tons / total_area,
+        steam: steam_tons / total_area,
+        fuel_two: fuel_two_tons / total_area,
+        fuel_four: fuel_four_tons / total_area,
+      },
+    });
+    annual_carbon_fine_by_year.push({
+      year: year,
+      value: fine,
+    });
+  });
+
+  let ll97_output_obj: BuildingOutputSliceTypes = {
+    is_greater_than_25k_sf: is_greater_than_25k_sf,
+    total_area: total_area,
+
+    co2limit_2024_thru_2029: co2limit_2024,
+    co2limit_2030_thru_2034: co2limit_2030,
+    co2limit_2035_thru_2050: co2limit_2035,
+
+    elec_carbon_coefficients_by_year: carbon_coefficient_array,
+
+    annual_cost_by_fuel: annual_cost_by_fuel,
+    annual_site_energy_by_fuel: annual_site_energy_by_fuel,
+    annual_native_energy_by_fuel: annual_native_energy_by_fuel,
+    annual_cost_per_sf_by_fuel: annual_cost_per_sf_by_fuel,
+    annual_site_per_sf_by_fuel: annual_site_per_sf_by_fuel,
+    annual_native_energy_per_sf_by_fuel: annual_native_energy_per_sf_by_fuel,
+    annual_carbon_by_year_by_fuel: annual_carbon_by_year_by_fuel,
+    annual_carbon_per_sf_by_year_by_fuel: annual_carbon_per_sf_by_year_by_fuel,
+    annual_carbon_fine_by_year: annual_carbon_fine_by_year,
+  };
+
+  return ll97_output_obj;
 };
 
 export { LL97OutputsFromBuildingInputs };

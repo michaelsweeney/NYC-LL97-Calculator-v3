@@ -2,12 +2,21 @@ export type UtilityInputType = {
   consumption: number;
   rate: number;
 };
-export type UtilityConsumptionType = {
+
+export type UtilityConsumptionAndRateType = {
   elec: UtilityInputType;
   gas: UtilityInputType;
   steam: UtilityInputType;
   fuel_two: UtilityInputType;
   fuel_four: UtilityInputType;
+};
+
+export type UtilityConsumptionType = {
+  elec: number;
+  gas: number;
+  steam: number;
+  fuel_two: number;
+  fuel_four: number;
 };
 
 export type ElectricOnsiteGenerationType = {
@@ -24,10 +33,13 @@ export type BuildingType = {
 
 export type BuildingInputTypes = {
   building_types: BuildingType[];
-  utilities: UtilityConsumptionType;
+  utilities: UtilityConsumptionAndRateType;
   is_default_rates: boolean;
   electric_onsite_generation: ElectricOnsiteGenerationType;
+  electric_coefficient_method: CarbonCoefficients;
 };
+
+export type CarbonCoefficients = "cambium";
 
 export type LL84YearTypes =
   | "ll84_2021_cal_2020"
@@ -103,17 +115,18 @@ export type BuildingOutputSliceTypes = {
   total_area: number;
   co2limit_2024_thru_2029: number;
   co2limit_2030_thru_2034: number;
-  co2limit_2035_thru_2040: number;
+  co2limit_2035_thru_2050: number;
   elec_carbon_coefficients_by_year: YearValueObj[];
-  annual_cost: YearFuelTypeObj;
-  annual_site_energy: YearFuelTypeObj;
-  annual_native_energy: YearFuelTypeObj;
-  annual_cost_per_sf: YearFuelTypeObj;
-  annual_site_per_sf: YearFuelTypeObj;
-  annual_native_energy_per_sf: YearFuelTypeObj;
-  annual_carbon_by_fuel_by_year: YearFuelTypeObj[];
-  annual_carbon_per_sf_by_fuel_by_year: YearFuelTypeObj[];
+  annual_cost_by_fuel: UtilityConsumptionType;
+  annual_site_energy_by_fuel: UtilityConsumptionType;
+  annual_native_energy_by_fuel: UtilityConsumptionType;
+  annual_cost_per_sf_by_fuel: UtilityConsumptionType;
+  annual_site_per_sf_by_fuel: UtilityConsumptionType;
+  annual_native_energy_per_sf_by_fuel: UtilityConsumptionType;
+  annual_carbon_by_year_by_fuel: YearFuelTypeObj[];
+  annual_carbon_per_sf_by_year_by_fuel: YearFuelTypeObj[];
   annual_carbon_fine_by_year: YearValueObj[];
 };
 
 export type StringObjectType = { [key: string]: string };
+export type NumberObjectType = { [key: string]: number };

@@ -12,8 +12,11 @@ export const buildingOutputSlice = createSlice({
   name: "building_outputs",
   initialState: initialState,
   reducers: {
-    doSomething: (state, action: PayloadAction<any>) => {
-      return;
+    setBuildingOutputs: (
+      state,
+      action: PayloadAction<BuildingOutputSliceTypes>
+    ) => {
+      return action.payload;
     },
   },
 });

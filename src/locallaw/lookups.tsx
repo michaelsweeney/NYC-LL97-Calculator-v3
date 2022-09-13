@@ -1,4 +1,9 @@
-import { LL84QueryObjTypes, StringObjectType } from "types";
+import {
+  LL84QueryObjTypes,
+  StringObjectType,
+  YearValueObj,
+  NumberObjectType,
+} from "types";
 
 export const ll84_building_type_lookups: StringObjectType = {
   Office: "B (Business)",
@@ -304,3 +309,33 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
     ],
   },
 ];
+
+// todo check this: is it really kg per kbtu?? rename variable
+export const non_electric_kg_per_kbtu_coefficients: NumberObjectType = {
+  gas: 0.00005311,
+  steam: 0.00004493,
+  fuel_two: 0.00007421,
+  fuel_four: 0.00007529,
+};
+
+export const cambium_elec_coefficients: YearValueObj[] = [
+  { year: 2022, value: 397.5 },
+  { year: 2024, value: 360.4 },
+  { year: 2026, value: 305 },
+  { year: 2028, value: 235.8 },
+  { year: 2030, value: 193.8 },
+  { year: 2032, value: 157.2 },
+  { year: 2034, value: 136.5 },
+  { year: 2036, value: 104.5 },
+  { year: 2038, value: 90.3 },
+  { year: 2040, value: 99.7 },
+  { year: 2042, value: 110.6 },
+  { year: 2044, value: 108.2 },
+  { year: 2046, value: 90.9 },
+  { year: 2048, value: 81.2 },
+  { year: 2050, value: 74.2 },
+];
+
+export const elec_carbon_coefficients: { [key: string]: YearValueObj[] } = {
+  cambium: cambium_elec_coefficients,
+};

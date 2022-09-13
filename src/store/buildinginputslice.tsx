@@ -6,6 +6,7 @@ import { BuildingInputTypes } from "types";
 import {
   default_utility_rates,
   building_type_abbreviation_array,
+  elec_carbon_coefficients,
 } from "locallaw/lookups";
 
 const initialState: BuildingInputTypes = {
@@ -49,6 +50,7 @@ const initialState: BuildingInputTypes = {
     },
   },
   is_default_rates: true,
+  electric_coefficient_method: "cambium",
 };
 
 export const buildingInputSlice = createSlice({
@@ -186,6 +188,7 @@ export const buildingInputSlice = createSlice({
       }
 
       let new_state: BuildingInputTypes = {
+        electric_coefficient_method: state.electric_coefficient_method,
         building_types: new_building_types,
         utilities: {
           elec: {

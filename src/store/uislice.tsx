@@ -4,7 +4,7 @@ import { LL84QueryPropertyTypes, UiSliceTypes, LL84YearTypes } from "types";
 
 const initialState: UiSliceTypes = {
   is_info_modal_open: false,
-  is_load_modal_open: true,
+  is_load_modal_open: false,
   is_building_summary_modal_open: false,
   ll84_query_input: "",
   ll84_year_selection: "ll84_2020_cal_2019",
