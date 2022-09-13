@@ -2,12 +2,13 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import uiSlice from "./uislice";
 import buildingInputSlice from "./buildinginputslice";
-
+import buildingOutputSlice from "./buildingoutputslice";
 // ...
 
 export const store = configureStore({
   reducer: {
     building_inputs: buildingInputSlice,
+    building_outputs: buildingOutputSlice,
     ui: uiSlice,
   },
 });

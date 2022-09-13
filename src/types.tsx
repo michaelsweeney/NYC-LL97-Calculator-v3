@@ -41,7 +41,6 @@ export type UiSliceTypes = {
   is_building_summary_modal_open: boolean;
   ll84_query_input: string;
   ll84_year_selection: LL84YearTypes;
-
   ll84_query_results: LL84QueryPropertyTypes[];
   ll84_selected_property: LL84QueryPropertyTypes;
 };
@@ -90,6 +89,34 @@ export type LL97ConversionTypes = {
   gas_therms: number;
   fuel_two_gal: number;
   fuel_four_gal: number;
+};
+
+export type YearValueObj = { year: number; value: number };
+export type YearCarbonObj = {
+  year: number;
+  consumption: UtilityConsumptionType;
+};
+export type BuildingOutputSliceTypes = {
+  is_greater_than_25k_sf: boolean;
+
+  total_area: number;
+  co2limit_2024_thru_2029: number;
+  co2limit_2030_thru_2034: number;
+  co2limit_2035_thru_2040: number;
+
+  elec_coefficients: YearValueObj[];
+
+  annual_cost: YearCarbonObj;
+  annual_site_energy: YearCarbonObj;
+  annual_native_energy: YearCarbonObj;
+
+  annual_cost_per_sf: YearCarbonObj;
+  annual_site_per_sf: YearCarbonObj;
+  annual_native_energy_per_sf: YearCarbonObj;
+
+  annual_carbon_by_fuel_by_year: YearCarbonObj[];
+  annual_carbon_per_sf_by_fuel_by_year: YearCarbonObj[];
+  annual_carbon_fine_by_year: YearValueObj[];
 };
 
 export type StringObjectType = { [key: string]: string };
