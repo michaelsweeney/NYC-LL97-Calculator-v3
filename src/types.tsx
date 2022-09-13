@@ -1,6 +1,6 @@
 export type UtilityInputType = {
   consumption: number;
-  rate: number;
+  rate?: number;
 };
 export type UtilityConsumptionType = {
   elec: UtilityInputType;
