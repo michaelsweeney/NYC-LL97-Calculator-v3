@@ -1,6 +1,6 @@
 export type UtilityInputType = {
   consumption: number;
-  rate?: number;
+  rate: number;
 };
 export type UtilityConsumptionType = {
   elec: UtilityInputType;
@@ -92,30 +92,27 @@ export type LL97ConversionTypes = {
 };
 
 export type YearValueObj = { year: number; value: number };
-export type YearCarbonObj = {
+
+export type YearFuelTypeObj = {
   year: number;
   consumption: UtilityConsumptionType;
 };
+
 export type BuildingOutputSliceTypes = {
   is_greater_than_25k_sf: boolean;
-
   total_area: number;
   co2limit_2024_thru_2029: number;
   co2limit_2030_thru_2034: number;
   co2limit_2035_thru_2040: number;
-
-  elec_coefficients: YearValueObj[];
-
-  annual_cost: YearCarbonObj;
-  annual_site_energy: YearCarbonObj;
-  annual_native_energy: YearCarbonObj;
-
-  annual_cost_per_sf: YearCarbonObj;
-  annual_site_per_sf: YearCarbonObj;
-  annual_native_energy_per_sf: YearCarbonObj;
-
-  annual_carbon_by_fuel_by_year: YearCarbonObj[];
-  annual_carbon_per_sf_by_fuel_by_year: YearCarbonObj[];
+  elec_carbon_coefficients_by_year: YearValueObj[];
+  annual_cost: YearFuelTypeObj;
+  annual_site_energy: YearFuelTypeObj;
+  annual_native_energy: YearFuelTypeObj;
+  annual_cost_per_sf: YearFuelTypeObj;
+  annual_site_per_sf: YearFuelTypeObj;
+  annual_native_energy_per_sf: YearFuelTypeObj;
+  annual_carbon_by_fuel_by_year: YearFuelTypeObj[];
+  annual_carbon_per_sf_by_fuel_by_year: YearFuelTypeObj[];
   annual_carbon_fine_by_year: YearValueObj[];
 };
 

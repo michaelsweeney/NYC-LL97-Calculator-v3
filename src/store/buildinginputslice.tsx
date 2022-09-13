@@ -145,9 +145,6 @@ export const buildingInputSlice = createSlice({
     ) => {
       let ll97_inputs = action.payload;
 
-      console.log(ll97_inputs);
-      console.log(current(state));
-
       let new_building_types: types.BuildingType[] = [];
 
       const buildingTypeLongToShort = (d: string) => {

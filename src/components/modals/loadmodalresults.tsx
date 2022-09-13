@@ -1,7 +1,7 @@
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { LL84QueryPropertyTypes } from "types";
-import { LL84SelectionToLL97Inputs } from "locallaw/ll84_to_ll97";
+import { LL84SelectionToLL97Inputs } from "locallaw/ll84_query_to_ll97_inputs";
 import {
   Table,
   TableBody,

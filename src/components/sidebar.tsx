@@ -47,7 +47,6 @@ const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
                 Onsite Generation
               </TableCell>
             </TableRow>
-
             <InputOnsiteGeneration />
           </TableBody>
         </Table>
