@@ -11,13 +11,11 @@ import {
   co2_limits_by_building_type,
   fine_per_ton_co2,
   elec_carbon_coefficients,
-  non_electric_kg_per_kbtu_coefficients, // todo check this: is it really kg per kbtu?? rename variable
+  non_electric_tons_per_kbtu_coefficients, // todo check this: is it really kg per kbtu?? rename variable
   ll84_year_lookups,
 } from "./lookups";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
-  console.log(ll97_in);
-
   let {
     building_types,
     utilities,
@@ -56,8 +54,6 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   });
 
   let is_greater_than_25k_sf: boolean = total_area > 25e3 ? true : false;
-
-  console.log(total_area, co2limit_2024, co2limit_2030, co2limit_2035);
 
   let elec_native =
     +utilities.elec.consumption -
@@ -153,13 +149,17 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   carbon_coefficient_array.forEach((yobj) => {
     let { year, value } = yobj; // value is kg per mwh
 
-    let elec_tons = (elec_native / 1000) * value * 1000;
-    let gas_tons = gas_kbtu * non_electric_kg_per_kbtu_coefficients.gas;
-    let steam_tons = gas_kbtu * non_electric_kg_per_kbtu_coefficients.steam;
+    let elec_mwh = elec_native / 1000;
+    let elec_kg = elec_mwh * value;
+
+    let elec_tons = elec_kg / 1000;
+
+    let gas_tons = gas_kbtu * non_electric_tons_per_kbtu_coefficients.gas;
+    let steam_tons = gas_kbtu * non_electric_tons_per_kbtu_coefficients.steam;
     let fuel_two_tons =
-      fuel_two_kbtu * non_electric_kg_per_kbtu_coefficients.fuel_two;
+      fuel_two_kbtu * non_electric_tons_per_kbtu_coefficients.fuel_two;
     let fuel_four_tons =
-      fuel_four_kbtu * non_electric_kg_per_kbtu_coefficients.fuel_four;
+      fuel_four_kbtu * non_electric_tons_per_kbtu_coefficients.fuel_four;
 
     let threshold = 9e9;
 

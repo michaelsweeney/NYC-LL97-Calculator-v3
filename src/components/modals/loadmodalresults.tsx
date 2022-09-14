@@ -2,6 +2,8 @@ import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { LL84QueryPropertyTypes } from "types";
 import { LL84SelectionToLL97Inputs } from "locallaw/ll84_query_to_ll97_inputs";
+import { LL97OutputsFromBuildingInputs } from "locallaw/ll97_output_calcs";
+
 import {
   Table,
   TableBody,
@@ -11,10 +13,14 @@ import {
   Button,
 } from "@mui/material";
 import { buildingInputActions } from "store/buildinginputslice";
+import { buildingOutputActions } from "store/buildingoutputslice";
 
 const LoadModalResults = () => {
   const { ll84_query_results } = useAppSelector((state) => state.ui);
+
+  const { building_inputs } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
   const table_column_map: string[][] = [
     ["Property Name", "property_name"],
     ["Address", "address_1"],
@@ -29,6 +35,7 @@ const LoadModalResults = () => {
     dispatch(uiActions.setSelectedLL84Property(selected_ll84_data));
     dispatch(uiActions.setIsLoadModalOpen(false));
     let ll97_inputs = LL84SelectionToLL97Inputs(selected_ll84_data);
+
     dispatch(
       buildingInputActions.setBuildingInputsFromLL84Results(ll97_inputs)
     );

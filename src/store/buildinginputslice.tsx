@@ -14,29 +14,24 @@ const initialState: BuildingInputTypes = {
     {
       building_id: 0,
       building_type: "B_norm",
-      building_area: 50000,
-    },
-    {
-      building_id: 1,
-      building_type: "A",
-      building_area: 3000,
+      building_area: 0,
     },
   ],
   utilities: {
     elec: {
-      consumption: 750000,
+      consumption: 0,
       rate: default_utility_rates.elec,
     },
     gas: {
-      consumption: 10000,
+      consumption: 0,
       rate: default_utility_rates.gas,
     },
     steam: {
-      consumption: 250,
+      consumption: 0,
       rate: default_utility_rates.steam,
     },
     fuel_two: {
-      consumption: 500,
+      consumption: 0,
       rate: default_utility_rates.fuel_two,
     },
     fuel_four: {

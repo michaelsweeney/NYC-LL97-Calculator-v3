@@ -12,12 +12,11 @@ const TestComponent = () => {
   // testing component, can do anything in here
   // without rerendering unnecessary children.
 
-  const building_inputs = useAppSelector((state) => state.building_inputs);
-  const ll84_query_results = useAppSelector(
-    (state) => state.ui.ll84_query_results
-  );
+  // const ll84_query_results = useAppSelector(
+  //   (state) => state.ui.ll84_query_results
+  // );
 
-  const ll97_inputs = useAppSelector((state) => state.building_inputs);
+  // const ll97_inputs = useAppSelector((state) => state.building_inputs);
 
   const dispatch = useAppDispatch();
 
@@ -48,23 +47,16 @@ const TestComponent = () => {
     };
 
     dispatch(uiActions.setSelectedLL84Property(selected_ll84_data));
-    // dispatch(uiActions.setIsLoadModalOpen(false));
-
     let ll97_conversion = LL84SelectionToLL97Inputs(selected_ll84_data);
-    // console.log(selected_ll84_data);
 
     if (ll97_conversion.bldg_type_one_type !== undefined) {
       dispatch(
         buildingInputActions.setBuildingInputsFromLL84Results(ll97_conversion)
       );
-
-      let ll97_outputs = LL97OutputsFromBuildingInputs(ll97_inputs);
-
-      dispatch(buildingOutputActions.setBuildingOutputs(ll97_outputs));
     }
 
     // dispatch loaded inputs to building inputs.
-  }, [ll84_query_results]);
+  }, []);
 
   return <div style={{ display: "none" }}></div>;
 };

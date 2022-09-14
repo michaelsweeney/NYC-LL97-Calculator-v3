@@ -310,8 +310,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   },
 ];
 
-// todo check this: is it really kg per kbtu?? rename variable
-export const non_electric_kg_per_kbtu_coefficients: NumberObjectType = {
+export const non_electric_tons_per_kbtu_coefficients: NumberObjectType = {
   gas: 0.00005311,
   steam: 0.00004493,
   fuel_two: 0.00007421,
