@@ -3,6 +3,7 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import uiSlice from "./uislice";
 import buildingInputSlice from "./buildinginputslice";
 import buildingOutputSlice from "./buildingoutputslice";
+import ll84QuerySlice from "./ll84queryslice";
 // ...
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     building_inputs: buildingInputSlice,
     building_outputs: buildingOutputSlice,
     ui: uiSlice,
+    ll84_query: ll84QuerySlice,
   },
 });
 

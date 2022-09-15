@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {
-  LL84QueryPropertyTypes,
-  BuildingOutputSliceTypes,
-  LL84YearTypes,
-} from "types";
+import { BuildingOutputSliceTypes } from "types";
 
-const initialState: any = {}; //BuildingOutputSliceTypes = {};
+const initialState = {} as BuildingOutputSliceTypes;
 
 export const buildingOutputSlice = createSlice({
   name: "building_outputs",

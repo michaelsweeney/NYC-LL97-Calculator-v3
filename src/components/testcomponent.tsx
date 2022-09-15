@@ -8,6 +8,7 @@ import { LL84SelectionToLL97Inputs } from "locallaw/ll84_query_to_ll97_inputs";
 import { LL97OutputsFromBuildingInputs } from "locallaw/ll97_output_calcs";
 import { LL84QueryPropertyTypes } from "types";
 import { buildingOutputActions } from "store/buildingoutputslice";
+import { ll84QueryActions } from "store/ll84queryslice";
 const TestComponent = () => {
   // testing component, can do anything in here
   // without rerendering unnecessary children.
@@ -21,8 +22,8 @@ const TestComponent = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // dispatch(uiActions.setLL84QueryInput("On"));
-    // dispatch(uiActions.setLL84YearSelection("ll84_2021_cal_2020"));
+    // dispatch(ll84QueryActions.setLL84QueryInput("On"));
+    // dispatch(ll84QueryActions.setLL84YearSelection("ll84_2021_cal_2020"));
 
     // let selected_ll84_data = ll84_query_results[0];
 
@@ -46,7 +47,7 @@ const TestComponent = () => {
       electricity_onsite_generated_kbtu: "Not Available",
     };
 
-    dispatch(uiActions.setSelectedLL84Property(selected_ll84_data));
+    dispatch(ll84QueryActions.setSelectedLL84Property(selected_ll84_data));
     let ll97_conversion = LL84SelectionToLL97Inputs(selected_ll84_data);
 
     if (ll97_conversion.bldg_type_one_type !== undefined) {

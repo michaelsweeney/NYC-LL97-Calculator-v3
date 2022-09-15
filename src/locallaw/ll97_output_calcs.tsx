@@ -1,7 +1,5 @@
-import InputOnsiteGeneration from "components/inputonsitegeneration";
 import {
   BuildingInputTypes,
-  LL97ConversionTypes,
   BuildingOutputSliceTypes,
   YearFuelTypeObj,
   YearValueObj,
@@ -12,14 +10,12 @@ import {
   fine_per_ton_co2,
   elec_carbon_coefficients,
   non_electric_tons_per_kbtu_coefficients, // todo check this: is it really kg per kbtu?? rename variable
-  ll84_year_lookups,
 } from "./lookups";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let {
     building_types,
     utilities,
-    is_default_rates,
     electric_onsite_generation,
     electric_coefficient_method,
   } = ll97_in;

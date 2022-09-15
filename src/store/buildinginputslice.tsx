@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import * as types from "types";
-import { current } from "@reduxjs/toolkit";
 import { BuildingInputTypes } from "types";
 import {
   default_utility_rates,
   building_type_abbreviation_array,
-  elec_carbon_coefficients,
 } from "locallaw/lookups";
 
 const initialState: BuildingInputTypes = {

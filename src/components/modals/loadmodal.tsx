@@ -7,6 +7,8 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import ModalWrapper from "./modalwrapper";
 import LoadModalResults from "./loadmodalresults";
 import { uiActions } from "store/uislice";
+import { ll84QueryActions } from "store/ll84queryslice";
+
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import { ll84_year_lookups } from "locallaw/lookups";
@@ -14,8 +16,10 @@ import { handleLL84QueryResponse } from "locallaw/ll84_query";
 import { LL84QueryPropertyTypes, LL84YearTypes } from "types";
 
 const LoadModal = () => {
-  const { is_load_modal_open, ll84_query_input, ll84_year_selection } =
-    useAppSelector((state) => state.ui);
+  const { is_load_modal_open } = useAppSelector((state) => state.ui);
+  const { ll84_query_input, ll84_year_selection } = useAppSelector(
+    (state) => state.ll84_query
+  );
 
   const dispatch = useAppDispatch();
 
@@ -25,17 +29,17 @@ const LoadModal = () => {
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     let querytext = e.target.value;
-    dispatch(uiActions.setLL84QueryInput(querytext));
+    dispatch(ll84QueryActions.setLL84QueryInput(querytext));
   };
 
   const handleYearSelection = (e: SelectChangeEvent) => {
     let year = e.target.value as LL84YearTypes;
-    dispatch(uiActions.setLL84YearSelection(year));
+    dispatch(ll84QueryActions.setLL84YearSelection(year));
   };
 
   useEffect(() => {
     const ll84QueryResponseCallback = (e: LL84QueryPropertyTypes[]) => {
-      dispatch(uiActions.setLL84QueryResultsResponse(e));
+      dispatch(ll84QueryActions.setLL84QueryResultsResponse(e));
     };
 
     handleLL84QueryResponse(

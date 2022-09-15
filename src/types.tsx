@@ -51,6 +51,9 @@ export type UiSliceTypes = {
   is_load_modal_open: boolean;
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
+};
+
+export type LL84QuerySliceTypes = {
   ll84_query_input: string;
   ll84_year_selection: LL84YearTypes;
   ll84_query_results: LL84QueryPropertyTypes[];
