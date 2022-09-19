@@ -13,13 +13,7 @@ import InputUtilities from "./inpututilities";
 import InputOnsiteGeneration from "./inputonsitegeneration";
 
 const styles: { [key: string]: React.CSSProperties } = {
-  root: {
-    width: 500,
-    height: "100%",
-    border: "1px solid black",
-    display: "inline-block",
-    boxSizing: "border-box",
-  },
+  root: {},
 };
 
 interface IAppProps {}

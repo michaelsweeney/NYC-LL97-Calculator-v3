@@ -39,7 +39,7 @@ export type BuildingInputTypes = {
   electric_coefficient_method: CarbonCoefficients;
 };
 
-export type CarbonCoefficients = "cambium";
+export type CarbonCoefficients = "cambium" | "ll97_current" | "something_else";
 
 export type LL84YearTypes =
   | "ll84_2021_cal_2020"
@@ -47,10 +47,13 @@ export type LL84YearTypes =
   | "ll84_2019_cal_2018"
   | "ll84_2018_cal_2017";
 
+export type ViewTypes = "carbon" | "cost" | "fuel_summary" | "table";
+
 export type UiSliceTypes = {
   is_load_modal_open: boolean;
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
+  active_view: ViewTypes;
 };
 
 export type LL84QuerySliceTypes = {
