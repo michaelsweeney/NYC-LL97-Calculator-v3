@@ -49,11 +49,18 @@ export type LL84YearTypes =
 
 export type ViewTypes = "carbon" | "cost" | "fuel_summary" | "table";
 
+export type WidthHeightDimensionTypes = {
+  width: number;
+  height: number;
+};
+
 export type UiSliceTypes = {
   is_load_modal_open: boolean;
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
   active_view: ViewTypes;
+  active_view_dimensions: WidthHeightDimensionTypes;
+  are_dimensions_initialized: boolean;
 };
 
 export type LL84QuerySliceTypes = {

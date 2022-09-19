@@ -9,6 +9,7 @@ import CarbonView from "./views/carbonview";
 import CostView from "./views/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
+import D3Wrapper from "./views/d3wrapper";
 
 interface IAppProps {}
 const styles: { [key: string]: React.CSSProperties } = {
@@ -61,17 +62,8 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
   };
 
   const { active_view } = useAppSelector((state) => state.ui);
-  const CurrentComponent = view_selector.find((d) => d.key === active_view)
+  const CurrentViewComponent = view_selector.find((d) => d.key === active_view)
     ?.component as React.FunctionComponent;
-
-  // useEffect(() => {
-
-  //   const handleResize = () => {
-
-  //   }
-
-  //   return () => window.removeEventListener(handleResize)
-  // })
 
   return (
     <div style={styles.root}>
@@ -89,7 +81,7 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
         })}
       </div>
       <div style={styles.bottom}>
-        <CurrentComponent />
+        <CurrentViewComponent />
       </div>
     </div>
   );

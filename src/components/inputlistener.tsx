@@ -9,8 +9,6 @@ const InputListener = () => {
 
   useEffect(() => {
     let ll97_outputs = LL97OutputsFromBuildingInputs(building_inputs);
-    console.log("updating");
-    console.log(ll97_outputs);
     dispatch(buildingOutputActions.setBuildingOutputs(ll97_outputs));
   }, [building_inputs, dispatch]);
 
