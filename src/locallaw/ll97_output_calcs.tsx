@@ -4,12 +4,13 @@ import {
   YearFuelTypeObj,
   YearValueObj,
   UtilityConsumptionType,
+  CarbonSummaryByYearObj,
 } from "types";
 import {
   co2_limits_by_building_type,
   fine_per_ton_co2,
   elec_carbon_coefficients,
-  non_electric_tons_per_kbtu_coefficients, // todo check this: is it really kg per kbtu?? rename variable
+  non_electric_tons_per_kbtu_coefficients,
 } from "./lookups";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
@@ -140,7 +141,7 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
 
   let annual_carbon_by_year_by_fuel = [] as YearFuelTypeObj[];
   let annual_carbon_per_sf_by_year_by_fuel = [] as YearFuelTypeObj[];
-  let annual_carbon_fine_by_year = [] as YearValueObj[]; //todo: this should be more of an overall summary with totals thresholds etc
+  let annual_carbon_summary_by_year = [] as CarbonSummaryByYearObj[];
 
   carbon_coefficient_array.forEach((yobj) => {
     let { year, value } = yobj; // value is kg per mwh
@@ -157,13 +158,13 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     let fuel_four_tons =
       fuel_four_kbtu * non_electric_tons_per_kbtu_coefficients.fuel_four;
 
-    let threshold = 9e9;
+    let threshold = null;
 
     let carbon_tons_total =
       elec_tons + gas_tons + steam_tons + fuel_two_tons + fuel_four_tons;
 
     if (year <= 2023) {
-      threshold = 9e9;
+      threshold = null;
     } else if (year <= 2029) {
       threshold = co2limit_2024;
     } else if (year <= 2034) {
@@ -172,7 +173,13 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
       threshold = co2limit_2035;
     }
 
-    let excess_carbon = Math.max(carbon_tons_total - threshold, 0);
+    let excess_carbon;
+    if (threshold !== null) {
+      excess_carbon = Math.max(carbon_tons_total - threshold, 0);
+    } else {
+      excess_carbon = 0;
+    }
+
     let fine = excess_carbon * fine_per_ton_co2;
 
     annual_carbon_by_year_by_fuel.push({
@@ -195,9 +202,14 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
         fuel_four: fuel_four_tons / total_area,
       },
     });
-    annual_carbon_fine_by_year.push({
+    annual_carbon_summary_by_year.push({
       year: year,
-      value: fine,
+      threshold_absolute: threshold,
+      threshold_by_sf: threshold ? threshold / total_area : null,
+      fine: fine,
+      fine_by_sf: fine / total_area,
+      carbon_total_absolute: carbon_tons_total,
+      carbon_total_by_sf: carbon_tons_total / total_area,
     });
   });
 
@@ -219,8 +231,10 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     annual_native_energy_per_sf_by_fuel: annual_native_energy_per_sf_by_fuel,
     annual_carbon_by_year_by_fuel: annual_carbon_by_year_by_fuel,
     annual_carbon_per_sf_by_year_by_fuel: annual_carbon_per_sf_by_year_by_fuel,
-    annual_carbon_fine_by_year: annual_carbon_fine_by_year,
+    annual_carbon_summary_by_year: annual_carbon_summary_by_year,
   };
+
+  console.log(ll97_output_obj);
 
   return ll97_output_obj;
 };

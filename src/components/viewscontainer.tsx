@@ -13,7 +13,7 @@ import D3Wrapper from "./views/d3wrapper";
 
 interface IAppProps {}
 const styles: { [key: string]: React.CSSProperties } = {
-  root: { height: "100%", width: "100%" },
+  root: {},
   top: {
     height: "50px",
     width: "100%",
@@ -66,7 +66,7 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
     ?.component as React.FunctionComponent;
 
   return (
-    <div style={styles.root}>
+    <React.Fragment>
       <div style={styles.top}>
         {view_selector.map((d, i) => {
           return (
@@ -83,7 +83,7 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
       <div style={styles.bottom}>
         <CurrentViewComponent />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

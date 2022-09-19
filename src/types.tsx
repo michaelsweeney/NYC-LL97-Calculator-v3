@@ -123,6 +123,16 @@ export type YearFuelTypeObj = {
   consumption: UtilityConsumptionType;
 };
 
+export type CarbonSummaryByYearObj = {
+  year: number;
+  threshold_absolute: number | null;
+  threshold_by_sf: number | null;
+  fine: number;
+  fine_by_sf: number;
+  carbon_total_absolute: number;
+  carbon_total_by_sf: number;
+};
+
 export type BuildingOutputSliceTypes = {
   is_greater_than_25k_sf: boolean;
   total_area: number;
@@ -138,7 +148,7 @@ export type BuildingOutputSliceTypes = {
   annual_native_energy_per_sf_by_fuel: UtilityConsumptionType;
   annual_carbon_by_year_by_fuel: YearFuelTypeObj[];
   annual_carbon_per_sf_by_year_by_fuel: YearFuelTypeObj[];
-  annual_carbon_fine_by_year: YearValueObj[];
+  annual_carbon_summary_by_year: CarbonSummaryByYearObj[];
 };
 
 export type StringObjectType = { [key: string]: string };

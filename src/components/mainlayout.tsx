@@ -30,7 +30,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     boxSizing: "border-box",
   },
   sidebar: {
-    width: "300px",
+    width: "450px",
     height: "100%",
     border: "1px solid black",
     display: "inline-block",
@@ -38,7 +38,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     overflowY: "scroll",
   },
   viewContainer: {
-    width: "calc(100% - 300px)",
+    width: "calc(100% - 450px)",
     height: "100%",
     display: "inline-block",
     border: "1px solid black",
