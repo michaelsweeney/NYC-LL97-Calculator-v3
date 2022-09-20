@@ -11,8 +11,9 @@ import * as React from "react";
 import InputBuilding from "./inputbuilding";
 import InputUtilities from "./inpututilities";
 import InputOnsiteGeneration from "./inputonsitegeneration";
+import { InlineStylesType } from "types";
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles: InlineStylesType = {
   root: {},
 };
 

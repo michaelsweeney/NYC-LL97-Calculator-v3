@@ -3,10 +3,11 @@ import Header from "./header";
 import Footer from "./footer";
 import ViewsContainer from "./viewscontainer";
 import Sidebar from "./sidebar";
+import { InlineStylesType } from "types";
 
 interface IAppProps {}
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles: InlineStylesType = {
   root: {
     width: "100vw",
     height: "100vh",

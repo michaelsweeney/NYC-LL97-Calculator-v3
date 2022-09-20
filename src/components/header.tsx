@@ -2,9 +2,11 @@ import * as React from "react";
 import { Button } from "@mui/material";
 import { uiActions } from "store/uislice";
 import { useAppDispatch } from "store/hooks";
+import { colors } from "styles/colors";
+import { InlineStylesType } from "types";
 interface IAppProps {}
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles: InlineStylesType = {
   root: {},
   left: {
     width: "200px",
@@ -23,6 +25,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: "400px",
     display: "inline-block",
     verticalAlign: "middle",
+  },
+  buttons: {
+    color: "white",
+    backgroundColor: colors.main.secondary,
+    border: "black",
+    "&:hover": {
+      backgroundColor: colors.grays.dark,
+      border: "black",
+    },
   },
 };
 
@@ -45,13 +56,28 @@ const Header: React.FunctionComponent<IAppProps> = () => {
       <div style={styles.left}>BEEX Logo</div>
       <div style={styles.middle}>NYC LL97 Carbon Emissions Calculator</div>
       <div style={styles.right}>
-        <Button onClick={handleOpenLoadModal} variant="contained">
+        <Button
+          size="small"
+          sx={styles.buttons}
+          onClick={handleOpenLoadModal}
+          variant="outlined"
+        >
           Open Load Modal
         </Button>
-        <Button variant="contained" onClick={handleOpenInfoModal}>
+        <Button
+          sx={styles.buttons}
+          size="small"
+          variant="outlined"
+          onClick={handleOpenInfoModal}
+        >
           Open Info Modal
         </Button>
-        <Button variant="contained" onClick={handleOpenBuildingSummaryModal}>
+        <Button
+          sx={styles.buttons}
+          size="small"
+          variant="outlined"
+          onClick={handleOpenBuildingSummaryModal}
+        >
           Open LL84 Summary Modal
         </Button>
       </div>

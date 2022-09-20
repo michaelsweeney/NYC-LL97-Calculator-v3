@@ -153,3 +153,15 @@ export type BuildingOutputSliceTypes = {
 
 export type StringObjectType = { [key: string]: string };
 export type NumberObjectType = { [key: string]: number };
+
+export type InlineStylesType = {
+  [key: string]:
+    | React.CSSProperties
+    | {
+        [key: string]:
+          | React.CSSProperties
+          | {
+              [key: string]: React.CSSProperties;
+            };
+      };
+};

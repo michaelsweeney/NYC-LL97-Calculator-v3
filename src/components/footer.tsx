@@ -1,8 +1,8 @@
 import * as React from "react";
-
+import { InlineStylesType } from "types";
 interface IAppProps {}
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles: InlineStylesType = {
   root: {},
   left: {
     display: "inline-block",

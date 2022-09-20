@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { Button } from "@mui/material";
-import { ViewTypes } from "types";
+import { ViewTypes, InlineStylesType } from "types";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
@@ -12,7 +12,7 @@ import TableView from "./views/tableview";
 import D3Wrapper from "./views/d3wrapper";
 
 interface IAppProps {}
-const styles: { [key: string]: React.CSSProperties } = {
+const styles: InlineStylesType = {
   root: {},
   top: {
     height: "50px",

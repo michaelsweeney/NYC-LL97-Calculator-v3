@@ -89,9 +89,14 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
       <TableRow>
         <TableCell sx={{ textAlign: "center" }}></TableCell>
         <TableCell variant="head" colSpan={3}>
-          <Button onClick={() => handleAddBuildingType()} variant="contained">
-            Add Building Type
+          <Button
+            size="small"
+            onClick={() => handleAddBuildingType()}
+            variant="contained"
+          >
+            +
           </Button>
+          <span style={{ marginLeft: 10 }}>Add Building Type</span>
         </TableCell>
       </TableRow>
     </React.Fragment>

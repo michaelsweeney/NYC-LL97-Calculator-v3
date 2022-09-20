@@ -34,7 +34,7 @@ const TestComponent = () => {
       nyc_bbl: "1-00062-7501",
       nyc_bin: "1001068",
       "1st_property_use_type": "Office",
-      "1st_property_use_sf": "2281918",
+      "1st_property_use_sf": "281918",
       "2nd_property_use_type": "Social/Meeting Hall",
       "2nd_property_use_sf": "41501",
       "3rd_property_use_type": "Data Center",
@@ -43,7 +43,7 @@ const TestComponent = () => {
       fuel_oil_4_consumption_kbtu: "Not Available",
       district_steam_consumption_kbtu: "65234835.7",
       natural_gas_consumption_kbtu: "317548.4",
-      electricity_consumption_kbtu: "92303403",
+      electricity_consumption_kbtu: "25303403",
       electricity_onsite_generated_kbtu: "Not Available",
     };
 

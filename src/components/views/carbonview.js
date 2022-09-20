@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
 import { CarbonSummaryByYearObj } from "types";
 
+import { colors } from "styles/colors";
+
 const CarbonView = () => {
   const { active_view_dimensions } = useAppSelector((state) => state.ui);
 
@@ -31,7 +33,6 @@ const CarbonView = () => {
       };
 
       let ypaddingtop = 1.15;
-      let barwidth = plot_dims.width / data.length - 10;
 
       /* -- PULL OUT AND PROCESS DATA ARRAYS -- */
       let svg = bindD3Element(ref, "svg", "carbonview-svg")
@@ -43,14 +44,19 @@ const CarbonView = () => {
 
       /* -- SETUP SCALES AND AXES -- */
 
+      let bar_carbon_g = bindD3Element(plot_g, "g", "bar-carbon-g");
+      let bar_excess_g = bindD3Element(plot_g, "g", "bar-excess-g");
+
+      let line_threshold_g = bindD3Element(plot_g, "g", "line-threshold-g");
+
       let x_axis_g = bindD3Element(plot_g, "g", "x-axis-g").attr(
         "transform",
         `translate(${0}, ${plot_dims.height})`
       );
 
       let y_axis_g = bindD3Element(plot_g, "g", "y-axis-g");
-      let bar_carbon_g = bindD3Element(plot_g, "g", "bar-carbon-g");
-      let line_threshold_g = bindD3Element(plot_g, "g", "line-threshold-g");
+      let right_axis_g = bindD3Element(plot_g, "g", "right-axis-g");
+      let top_axis_g = bindD3Element(plot_g, "g", "top-axis-g");
 
       let xScale = d3
         .scaleBand()
@@ -80,36 +86,70 @@ const CarbonView = () => {
         .range([plot_dims.height, 0]);
 
       y_axis_g.call(d3.axisLeft(yScale).ticks(5).tickSizeOuter(0));
-      x_axis_g.call(d3.axisBottom(xScale));
+      x_axis_g.call(d3.axisBottom(xScale).tickSizeOuter(0));
+
+      x_axis_g
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("x", -10)
+        .attr("y", -3)
+        .attr("transform", "rotate(-90)");
+
+      right_axis_g
+        .attr("transform", `translate(${plot_dims.width},${0})`)
+        .call(d3.axisRight(yScale).ticks(0).tickSizeInner(0).tickSizeOuter(0));
+
+      top_axis_g
+        .attr("transform", `translate(${0},${0})`)
+        .call(d3.axisTop(xScale).ticks(0).tickSizeInner(0).tickSizeOuter(0));
+
+      right_axis_g.selectAll(".tick").remove();
+      top_axis_g.selectAll(".tick").remove();
 
       /* -- DATA LINES AND RECTANGLES -- */
 
       bar_carbon_g
-        .selectAll("rect")
+        .selectAll(".carbon-rect")
         .data(data)
         .join("rect")
         .attr("class", "carbon-rect")
-        .attr("fill", "#595954")
+        .attr("fill", colors.main.secondary)
         .attr("x", (d) => xScale(d.year.toString()))
-        .attr("y", (d) => yScale(d.carbon_total_absolute))
         .attr("width", xScale.bandwidth())
+        .attr("y", (d) => yScale(d.carbon_total_absolute))
         .attr("height", (d) => yScale(0) - yScale(d.carbon_total_absolute));
 
+      bar_excess_g
+        .selectAll(".carbon-excess-rect")
+        .data(data)
+        .join("rect")
+        .attr("class", "carbon-excess-rect")
+        .attr("fill", colors.reds.light)
+        .attr("x", (d) => xScale(d.year.toString()))
+        .attr("width", xScale.bandwidth())
+        .attr("y", (d) => yScale(d.carbon_total_absolute))
+        .attr(
+          "height",
+          (d) => yScale(d.threshold_absolute) - yScale(d.carbon_total_absolute)
+        );
+
+      let threshold_line_thickness = 3;
       let createThresholdLine = d3
         .line()
         .curve(d3.curveStepAfter)
-        .x(
-          (d) =>
-            xScale(d.threshold_absolute ? d.year.toString() : "2024") +
-            xScale.bandwidth() / 2
-        )
-        .y((d) =>
-          yScale(
-            d.threshold_absolute
-              ? d.threshold_absolute
-              : data.find((d) => d.year === 2024).threshold_absolute
-          )
-        );
+        .x((d) => {
+          if (d.year === 2050) {
+            return plot_dims.width;
+          } else {
+            return xScale(d.threshold_absolute ? d.year.toString() : "2024");
+          }
+        })
+
+        .y((d) => {
+          return yScale(
+            d.threshold_absolute ? d.threshold_absolute : yScale.domain()[1]
+          );
+        });
 
       let threshold_path = bindD3Element(
         line_threshold_g,
@@ -121,8 +161,8 @@ const CarbonView = () => {
         .datum(data)
         .attr("d", createThresholdLine)
         .style("fill", "none")
-        .style("stroke", "#BAD636")
-        .style("stroke-width", 3);
+        .style("stroke", colors.reds.medium)
+        .style("stroke-width", threshold_line_thickness);
     }
   };
 
