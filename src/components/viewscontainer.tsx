@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { Button } from "@mui/material";
 import { ViewTypes, InlineStylesType } from "types";
 import { uiActions } from "store/uislice";
@@ -9,7 +8,6 @@ import CarbonView from "./views/carbonview";
 import CostView from "./views/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
-import D3Wrapper from "./views/d3wrapper";
 import V2TestComponent from "./v2testcomponent";
 
 interface IAppProps {}
