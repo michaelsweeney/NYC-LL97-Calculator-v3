@@ -47,7 +47,7 @@ const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
 
             <TableRow>
               <TableCell variant="head" colSpan={4}>
-                Cambium Coefficients
+                Carbon Coefficients
               </TableCell>
             </TableRow>
             <CoefficientSelector />
