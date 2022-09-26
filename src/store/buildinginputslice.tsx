@@ -50,6 +50,13 @@ export const buildingInputSlice = createSlice({
   name: "building_inputs",
   initialState: initialState,
   reducers: {
+    setElectricCoefficientMethod: (
+      state,
+      action: PayloadAction<types.CarbonCoefficientTypes>
+    ) => {
+      state.electric_coefficient_method = action.payload;
+    },
+
     setBuildingType: (
       state,
       action: PayloadAction<{ id: number; value: string }>

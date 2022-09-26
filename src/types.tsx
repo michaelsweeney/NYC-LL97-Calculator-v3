@@ -36,10 +36,13 @@ export type BuildingInputTypes = {
   utilities: UtilityConsumptionAndRateType;
   is_default_rates: boolean;
   electric_onsite_generation: ElectricOnsiteGenerationType;
-  electric_coefficient_method: CarbonCoefficients;
+  electric_coefficient_method: CarbonCoefficientTypes;
 };
 
-export type CarbonCoefficients = "cambium" | "ll97_current" | "something_else";
+export type CarbonCoefficientTypes =
+  | "cambium"
+  | "ll97_current"
+  | "something_else";
 
 export type LL84YearTypes =
   | "ll84_2021_cal_2020"

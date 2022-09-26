@@ -11,6 +11,7 @@ import * as React from "react";
 import InputBuilding from "./inputbuilding";
 import InputUtilities from "./inpututilities";
 import InputOnsiteGeneration from "./inputonsitegeneration";
+import CoefficientSelector from "./coefficientselector";
 import { InlineStylesType } from "types";
 
 const styles: InlineStylesType = {
@@ -43,6 +44,13 @@ const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
               </TableCell>
             </TableRow>
             <InputOnsiteGeneration />
+
+            <TableRow>
+              <TableCell variant="head" colSpan={4}>
+                Cambium Coefficients
+              </TableCell>
+            </TableRow>
+            <CoefficientSelector />
           </TableBody>
         </Table>
       </TableContainer>

@@ -145,14 +145,12 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
 
   carbon_coefficient_array.forEach((yobj) => {
     let { year, value } = yobj; // value is kg per mwh
+    // value is tons per kbtu
 
-    let elec_mwh = elec_native / 1000;
-    let elec_kg = elec_mwh * value;
-
-    let elec_tons = elec_kg / 1000;
+    let elec_tons = elec_kbtu * value;
 
     let gas_tons = gas_kbtu * non_electric_tons_per_kbtu_coefficients.gas;
-    let steam_tons = gas_kbtu * non_electric_tons_per_kbtu_coefficients.steam;
+    let steam_tons = steam_kbtu * non_electric_tons_per_kbtu_coefficients.steam;
     let fuel_two_tons =
       fuel_two_kbtu * non_electric_tons_per_kbtu_coefficients.fuel_two;
     let fuel_four_tons =

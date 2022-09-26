@@ -10,6 +10,7 @@ import CostView from "./views/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
 import D3Wrapper from "./views/d3wrapper";
+import V2TestComponent from "./v2testcomponent";
 
 interface IAppProps {}
 const styles: InlineStylesType = {
@@ -62,6 +63,7 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
   };
 
   const { active_view } = useAppSelector((state) => state.ui);
+
   const CurrentViewComponent = view_selector.find((d) => d.key === active_view)
     ?.component as React.FunctionComponent;
 
@@ -81,6 +83,7 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
         })}
       </div>
       <div style={styles.bottom}>
+        {/* {<V2TestComponent />} */}
         <CurrentViewComponent />
       </div>
     </React.Fragment>
