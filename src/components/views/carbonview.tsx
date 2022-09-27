@@ -7,16 +7,19 @@ import { CarbonSummaryByYearObj } from "types";
 
 import { colors } from "styles/colors";
 
+type DType = CarbonSummaryByYearObj;
+
 const CarbonView = () => {
   const { active_view_dimensions } = useAppSelector((state) => state.ui);
 
   const { building_outputs } = useAppSelector((state) => state);
   let { annual_carbon_summary_by_year } = building_outputs;
 
-  const createChart = (ref) => {
+  const createChart = (ref: HTMLDivElement) => {
     if (annual_carbon_summary_by_year) {
       /* -- DEFINE DATA AND CONSTANTS -- */
       let data = annual_carbon_summary_by_year;
+
       let container_width = active_view_dimensions.width;
       let container_height = active_view_dimensions.height;
 
@@ -70,7 +73,7 @@ const CarbonView = () => {
         .scaleLinear()
         .domain([
           0,
-          d3.max([
+          (d3.max([
             ...data.map((d) => d.carbon_total_absolute),
             ...data
               .map((d) => d.threshold_absolute)
@@ -81,7 +84,7 @@ const CarbonView = () => {
                   return d;
                 }
               }),
-          ]) * ypaddingtop,
+          ]) as number) * ypaddingtop,
         ])
         .range([plot_dims.height, 0]);
 
@@ -114,10 +117,13 @@ const CarbonView = () => {
         .join("rect")
         .attr("class", "carbon-rect")
         .attr("fill", colors.main.secondary)
-        .attr("x", (d) => xScale(d.year.toString()))
+        .attr("x", (d: DType) => xScale(d.year.toString()))
         .attr("width", xScale.bandwidth())
-        .attr("y", (d) => yScale(d.carbon_total_absolute))
-        .attr("height", (d) => yScale(0) - yScale(d.carbon_total_absolute));
+        .attr("y", (d: DType) => yScale(d.carbon_total_absolute))
+        .attr(
+          "height",
+          (d: DType) => yScale(0) - yScale(d.carbon_total_absolute)
+        );
 
       bar_excess_g
         .selectAll(".carbon-excess-rect")
@@ -125,23 +131,27 @@ const CarbonView = () => {
         .join("rect")
         .attr("class", "carbon-excess-rect")
         .attr("fill", colors.reds.light)
-        .attr("x", (d) => xScale(d.year.toString()))
+        .attr("x", (d: DType) => xScale(d.year.toString()))
         .attr("width", xScale.bandwidth())
-        .attr("y", (d) => yScale(d.carbon_total_absolute))
+        .attr("y", (d: DType) => yScale(d.carbon_total_absolute))
         .attr(
           "height",
-          (d) => yScale(d.threshold_absolute) - yScale(d.carbon_total_absolute)
+          (d: DType) =>
+            yScale(d.threshold_absolute as number) -
+            yScale(d.carbon_total_absolute)
         );
 
       let threshold_line_thickness = 3;
       let createThresholdLine = d3
-        .line()
+        .line<DType>()
         .curve(d3.curveStepAfter)
         .x((d) => {
           if (d.year === 2050) {
             return plot_dims.width;
           } else {
-            return xScale(d.threshold_absolute ? d.year.toString() : "2024");
+            return xScale(
+              d.threshold_absolute ? d.year.toString() : "2024"
+            ) as number;
           }
         })
 

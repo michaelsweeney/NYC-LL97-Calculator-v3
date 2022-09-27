@@ -6,7 +6,7 @@ import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 type D3WrapperProps = {
-  createChartCallback: (d: HTMLElement) => void;
+  createChartCallback: (d: HTMLDivElement) => void;
 };
 const D3Wrapper = (props: D3WrapperProps) => {
   const dispatch = useAppDispatch();

@@ -43,7 +43,7 @@ const initialState: BuildingInputTypes = {
     },
   },
   is_default_rates: true,
-  electric_coefficient_method: "cambium",
+  electric_coefficient_method: "ll97_current",
 };
 
 export const buildingInputSlice = createSlice({

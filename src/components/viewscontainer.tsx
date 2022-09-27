@@ -8,7 +8,7 @@ import CarbonView from "./views/carbonview";
 import CostView from "./views/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
-import V2TestComponent from "./v2testcomponent";
+import V2ComparisonComponent from "./v2comparisoncomponent";
 
 interface IAppProps {}
 const styles: InlineStylesType = {

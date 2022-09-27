@@ -67,7 +67,7 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let fuel_two_kbtu = +utilities.fuel_two.consumption * 138;
   let fuel_four_kbtu = +utilities.fuel_four.consumption * 146;
 
-  let elec_cost = elec_native * 3.412 * utilities.elec.rate;
+  let elec_cost = elec_native * utilities.elec.rate;
   let gas_cost = +utilities.gas.consumption * +utilities.gas.rate;
   let steam_cost = +utilities.steam.consumption * +utilities.steam.rate;
   let fuel_two_cost =
@@ -231,8 +231,6 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     annual_carbon_per_sf_by_year_by_fuel: annual_carbon_per_sf_by_year_by_fuel,
     annual_carbon_summary_by_year: annual_carbon_summary_by_year,
   };
-
-  console.log(ll97_output_obj);
 
   return ll97_output_obj;
 };
