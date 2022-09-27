@@ -75,6 +75,14 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                 <span></span>
               ) : (
                 <Button
+                  disableRipple={true}
+                  sx={{
+                    "&:hover": {
+                      color: "secondary.dark",
+                      backgroundColor: "white",
+                    },
+                  }}
+                  size="small"
                   onClick={() =>
                     handleRemoveBuildingType(bldg_type.building_id)
                   }
@@ -90,9 +98,16 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
         <TableCell sx={{ textAlign: "center" }}></TableCell>
         <TableCell variant="head" colSpan={3}>
           <Button
+            disableRipple={true}
             size="small"
             onClick={() => handleAddBuildingType()}
             variant="contained"
+            sx={{
+              boxShadow: 0,
+              "&:hover": {
+                boxShadow: 0,
+              },
+            }}
           >
             +
           </Button>

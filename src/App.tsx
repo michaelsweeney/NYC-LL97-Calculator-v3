@@ -10,8 +10,21 @@ import InputListener from "components/inputlistener";
 
 import { colors } from "styles/colors";
 import { useEffect } from "react";
+import { Shadows } from "@mui/material/styles/shadows";
 
 const theme = createTheme({
+  shadows: Array(25).fill("none") as Shadows,
+  components: {
+    MuiButtonBase: {
+      styleOverrides: {},
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+    MuiSelect: {
+      defaultProps: {},
+    },
+  },
   palette: {
     secondary: {
       main: colors.main.secondary,
