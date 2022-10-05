@@ -24,3 +24,11 @@ export const colors = {
     dark: "rgb(153,153,153)",
   },
 };
+
+export const fuel_colors = {
+  elec: "#358FB4",
+  gas: "#6EB12C",
+  steam: "#B23232",
+  fuel_two: "#A644E2",
+  fuel_four: "#62009E",
+};

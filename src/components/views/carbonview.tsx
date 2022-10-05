@@ -9,7 +9,7 @@ import { colors } from "styles/colors";
 
 type DType = CarbonSummaryByYearObj;
 
-const CarbonView = () => {
+const CarbonView: React.FunctionComponent = () => {
   const { active_view_dimensions } = useAppSelector((state) => state.ui);
 
   const { building_outputs } = useAppSelector((state) => state);
