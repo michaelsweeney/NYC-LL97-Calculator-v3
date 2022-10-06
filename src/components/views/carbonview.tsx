@@ -1,13 +1,51 @@
 import * as React from "react";
 import * as d3 from "d3";
+
+import { Button } from "@mui/material";
 import D3Wrapper from "./d3wrapper";
+import { formatNumber, formatCurrency } from "./d3helpers";
+
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
-import { CarbonSummaryByYearObj, D3WrapperCallbackPropTypes } from "types";
+import {
+  CarbonSummaryByYearObj,
+  D3WrapperCallbackPropTypes,
+  InlineStylesType,
+} from "types";
 
 import { colors } from "styles/colors";
 
+import YearBox from "./yearbox";
+
 type DType = CarbonSummaryByYearObj;
+
+const styles: InlineStylesType = {
+  root: {},
+  upper: { height: "100px", padding: 10, boxSizing: "border-box" },
+  lower: { height: "calc(100% - 100px)", boxSizing: "border-box" },
+  yearBox: {
+    borderRadius: "5px",
+    display: "inline-block",
+    margin: "5px",
+    padding: "15px",
+    textAlign: "center",
+    backgroundColor: colors.grays.light,
+  },
+  yearBoxYearText: {
+    fontWeight: 600,
+  },
+  yearLabels: {
+    marginLeft: 10,
+    fontWeight: 600,
+    textAlign: "left",
+    display: "inline-block",
+  },
+  chartTitle: {
+    color: colors.main.secondary,
+    fontWeight: 500,
+    fontSize: "1.5em",
+  },
+};
 
 const CarbonView: React.FunctionComponent = () => {
   const { building_outputs } = useAppSelector((state) => state);
@@ -24,7 +62,7 @@ const CarbonView: React.FunctionComponent = () => {
       let container_height = container_dimensions.height;
 
       let margins = {
-        t: 150,
+        t: 50,
         l: 100,
         r: 150,
         b: 100,
@@ -176,7 +214,81 @@ const CarbonView: React.FunctionComponent = () => {
     }
   };
 
-  return <D3Wrapper createChartCallback={createChart} />;
+  const year_box_array = [
+    {
+      year: "2024",
+      consumption: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2024)
+          ?.carbon_total_absolute as number
+      ),
+      threshold: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2024)
+          ?.threshold_absolute as number
+      ),
+    },
+    {
+      year: "2030",
+      consumption: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2030)
+          ?.carbon_total_absolute as number
+      ),
+      threshold: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2030)
+          ?.threshold_absolute as number
+      ),
+    },
+    {
+      year: "2035",
+      consumption: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2035)
+          ?.carbon_total_absolute as number
+      ),
+      threshold: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2035)
+          ?.threshold_absolute as number
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <div style={styles.upper}>
+        <div style={styles.chartTitle}>
+          <span>Carbon Threshold Summary</span>
+          <span>
+            <Button
+              color="secondary"
+              variant="contained"
+              // sx={{ color: colors.main.secondary }}
+            >
+              TOGGLE (not implemented)
+            </Button>
+          </span>
+        </div>
+        {year_box_array.map((d, i) => {
+          return (
+            <YearBox
+              header={d.year}
+              is_active={d.consumption > d.threshold}
+              value_array={[d.consumption, d.threshold]}
+            />
+          );
+        })}
+        <div style={styles.yearLabels}>
+          <div>
+            {" "}
+            <br></br>
+          </div>
+          <div>Consumption (tCO2e/yr)</div>
+          <div>Threshold (tCO2e/yr)</div>
+          <div>Est Penalty ($)</div>
+        </div>
+      </div>
+      <div style={styles.lower}>
+        <D3Wrapper createChartCallback={createChart} />
+      </div>
+    </>
+  );
 };
 
 export default CarbonView;
