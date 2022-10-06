@@ -1,17 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UiSliceTypes, ViewTypes, WidthHeightDimensionTypes } from "types";
+import { UiSliceTypes, ViewTypes } from "types";
 
 const initialState: UiSliceTypes = {
   is_info_modal_open: false,
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
-  active_view: "fuel_summary",
-  active_view_dimensions: {
-    width: 50,
-    height: 50,
-  },
-  are_dimensions_initialized: false,
+  active_view: "table",
 };
 
 export const uiSlice = createSlice({
@@ -29,14 +24,6 @@ export const uiSlice = createSlice({
     },
     setActiveView: (state, action: PayloadAction<ViewTypes>) => {
       state.active_view = action.payload;
-    },
-
-    setActiveWindowDimensions: (
-      state,
-      action: PayloadAction<WidthHeightDimensionTypes>
-    ) => {
-      state.active_view_dimensions = action.payload;
-      state.are_dimensions_initialized = true;
     },
   },
 });

@@ -3,25 +3,25 @@ import * as d3 from "d3";
 import D3Wrapper from "./d3wrapper";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
-import { CarbonSummaryByYearObj } from "types";
+import { CarbonSummaryByYearObj, D3WrapperCallbackPropTypes } from "types";
 
 import { colors } from "styles/colors";
 
 type DType = CarbonSummaryByYearObj;
 
 const CarbonView: React.FunctionComponent = () => {
-  const { active_view_dimensions } = useAppSelector((state) => state.ui);
-
   const { building_outputs } = useAppSelector((state) => state);
   let { annual_carbon_summary_by_year } = building_outputs;
 
-  const createChart = (ref: HTMLDivElement) => {
+  const createChart = (container: D3WrapperCallbackPropTypes) => {
+    const { container_ref, container_dimensions } = container;
+
     if (annual_carbon_summary_by_year) {
       /* -- DEFINE DATA AND CONSTANTS -- */
       let data = annual_carbon_summary_by_year;
 
-      let container_width = active_view_dimensions.width;
-      let container_height = active_view_dimensions.height;
+      let container_width = container_dimensions.width;
+      let container_height = container_dimensions.height;
 
       let margins = {
         t: 150,
@@ -38,7 +38,7 @@ const CarbonView: React.FunctionComponent = () => {
       let ypaddingtop = 1.15;
 
       /* -- PULL OUT AND PROCESS DATA ARRAYS -- */
-      let svg = bindD3Element(ref, "svg", "carbonview-svg")
+      let svg = bindD3Element(container_ref, "svg", "carbonview-svg")
         .attr("height", container_height)
         .attr("width", container_width);
 

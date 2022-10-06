@@ -62,8 +62,6 @@ export type UiSliceTypes = {
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
   active_view: ViewTypes;
-  active_view_dimensions: WidthHeightDimensionTypes;
-  are_dimensions_initialized: boolean;
 };
 
 export type LL84QuerySliceTypes = {
@@ -167,4 +165,13 @@ export type InlineStylesType = {
               [key: string]: React.CSSProperties;
             };
       };
+};
+
+export type D3WrapperCallbackPropTypes = {
+  container_ref: HTMLDivElement;
+  container_dimensions: WidthHeightDimensionTypes;
+};
+
+export type D3WrapperPropTypes = {
+  createChartCallback: (d: D3WrapperCallbackPropTypes) => void;
 };

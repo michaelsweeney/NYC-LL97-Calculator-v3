@@ -1,39 +1,39 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
-import { WidthHeightDimensionTypes } from "types";
+import { WidthHeightDimensionTypes, D3WrapperPropTypes } from "types";
 import { uiActions } from "store/uislice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
-type D3WrapperProps = {
-  createChartCallback: (d: HTMLDivElement) => void;
-};
-const D3Wrapper = (props: D3WrapperProps) => {
-  const dispatch = useAppDispatch();
+const D3Wrapper = (props: D3WrapperPropTypes) => {
+  const [containerDimensions, setContainerDimensions] = useState({
+    width: 50,
+    height: 50,
+  });
+
+  const [dimensionsInitialized, setDimensionsInitialized] = useState(false);
 
   const { createChartCallback } = props;
 
-  const { are_dimensions_initialized } = useAppSelector((state) => state.ui);
   const ref = useRef<HTMLDivElement>(null);
 
   const dispatchDimensions = () => {
     if (ref.current) {
       const { width, height } = ref.current.getBoundingClientRect();
-      dispatch(
-        uiActions.setActiveWindowDimensions({
-          width: width,
-          height: height,
-        } as WidthHeightDimensionTypes)
-      );
+      setContainerDimensions({ width, height });
+      setDimensionsInitialized(true);
     }
   };
 
   // recreate chart
   useEffect(() => {
     if (ref.current) {
-      createChartCallback(ref.current);
+      createChartCallback({
+        container_ref: ref.current,
+        container_dimensions: containerDimensions,
+      });
     }
-  }, [createChartCallback]);
+  }, [createChartCallback, containerDimensions]);
 
   // handle resize
   useEffect(() => {
@@ -46,7 +46,7 @@ const D3Wrapper = (props: D3WrapperProps) => {
 
   // initial dimensions
   useEffect(() => {
-    if (!are_dimensions_initialized) {
+    if (!dimensionsInitialized) {
       dispatchDimensions();
     }
   });

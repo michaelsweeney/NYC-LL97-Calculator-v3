@@ -4,6 +4,11 @@ import { bindD3Element } from "./d3helpers";
 import D3Wrapper from "./d3wrapper";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { fuel_colors } from "styles/colors";
+import {
+  D3WrapperCallbackPropTypes,
+  InlineStylesType,
+  UtilityConsumptionType,
+} from "types";
 
 type PieDataType = {
   key: string;
@@ -11,48 +16,92 @@ type PieDataType = {
   fill: string;
 };
 
+const styles: InlineStylesType = {
+  root: {
+    display: "inline-block",
+    height: "100%",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  top: {
+    display: "inline-block",
+    height: "50%",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  bottom: {
+    display: "inline-block",
+    height: "50%",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  left: {
+    display: "inline-block",
+    width: "50%",
+    height: "100%",
+    boxSizing: "border-box",
+  },
+  right: {
+    display: "inline-block",
+    width: "50%",
+    height: "100%",
+    boxSizing: "border-box",
+  },
+};
+
 const FuelSummaryView: React.FunctionComponent = () => {
-  const { active_view_dimensions } = useAppSelector((state) => state.ui);
-
-  const { building_outputs } = useAppSelector((state) => state);
-
   const {
-    annual_cost_by_fuel,
-    annual_site_energy_by_fuel,
-    annual_native_energy_by_fuel,
-    annual_cost_per_sf_by_fuel,
-    annual_site_per_sf_by_fuel,
-    annual_native_energy_per_sf_by_fuel,
-    annual_carbon_by_year_by_fuel,
-    annual_carbon_per_sf_by_year_by_fuel,
-  } = building_outputs;
+    building_outputs: {
+      annual_cost_per_sf_by_fuel,
+      annual_site_per_sf_by_fuel,
+      annual_carbon_per_sf_by_year_by_fuel,
+    },
+  } = useAppSelector((state) => state);
 
-  const createChart = (ref: HTMLDivElement) => {
-    if (annual_cost_by_fuel) {
+  const cost_data = annual_cost_per_sf_by_fuel;
+  const eui_data = annual_site_per_sf_by_fuel;
+
+  const carbon_2022_data = annual_carbon_per_sf_by_year_by_fuel?.find(
+    (d) => d.year === 2022
+  )?.consumption as UtilityConsumptionType;
+
+  const carbon_2050_data = annual_carbon_per_sf_by_year_by_fuel?.find(
+    (d) => d.year === 2050
+  )?.consumption as UtilityConsumptionType;
+
+  const createChart = (config: {
+    container: D3WrapperCallbackPropTypes;
+    data_obj: UtilityConsumptionType;
+    title: string;
+  }) => {
+    const {
+      container: { container_ref, container_dimensions },
+      data_obj,
+      title,
+    } = config;
+
+    if (data_obj) {
       /* -- DEFINE DATA AND CONSTANTS -- */
 
-      let data: PieDataType[] = Object.keys(annual_cost_per_sf_by_fuel)
+      let data: PieDataType[] = Object.keys(data_obj)
         .map((key) => {
           let d: PieDataType = {
             key: key,
-            value:
-              annual_cost_per_sf_by_fuel[
-                key as keyof typeof annual_cost_per_sf_by_fuel
-              ],
+            value: data_obj[key as keyof typeof data_obj],
             fill: fuel_colors[key as keyof typeof fuel_colors],
           };
           return d;
         })
         .filter((d) => d.value !== 0);
 
-      let container_width = active_view_dimensions.width;
-      let container_height = active_view_dimensions.height;
+      let container_width = container_dimensions.width;
+      let container_height = container_dimensions.height;
 
       let margins = {
-        t: 150,
-        l: 100,
-        r: 150,
-        b: 100,
+        t: 10,
+        l: 10,
+        r: 10,
+        b: 10,
       };
 
       let plot_dims = {
@@ -71,9 +120,15 @@ const FuelSummaryView: React.FunctionComponent = () => {
         .domain(Object.keys(fuel_colors))
         .range(Object.values(fuel_colors));
 
-      let svg = bindD3Element(ref, "svg", "fuel-summary-svg")
+      let svg = bindD3Element(container_ref, "svg", "fuel-summary-svg")
         .attr("height", container_height)
         .attr("width", container_width);
+
+      let titletext = bindD3Element(svg, "text", "title-text")
+        .attr("x", container_width / 2)
+        .attr("y", 20)
+        .attr("text-anchor", "middle")
+        .text(title);
 
       let pieFunc = d3
         .pie()
@@ -87,7 +142,7 @@ const FuelSummaryView: React.FunctionComponent = () => {
         .innerRadius((radius - margin) * 0.7)
         .outerRadius(radius - margin);
 
-      const cost_g = bindD3Element(svg, "g", "cost-donut-g").attr(
+      const donut_g = bindD3Element(svg, "g", "donut-g").attr(
         "transform",
         `translate(${margins.l + plot_dims.width / 2}, ${
           margins.t + plot_dims.height / 2
@@ -96,11 +151,11 @@ const FuelSummaryView: React.FunctionComponent = () => {
 
       let arcs = pieFunc(data.map((e) => e.value));
 
-      cost_g
-        .selectAll(".cost-donut-g-path")
+      donut_g
+        .selectAll(".donut-g-path")
         .data(arcs)
         .join("path")
-        .attr("class", "cost-donut-g-path")
+        .attr("class", "donut-g-path")
         .attr("d", arcFunc)
         .attr("fill", (d: d3.PieArcDatum<any>) => {
           return fuel_colors[data[d.index].key as keyof typeof fuel_colors];
@@ -108,7 +163,58 @@ const FuelSummaryView: React.FunctionComponent = () => {
     }
   };
 
-  return <D3Wrapper createChartCallback={createChart} />;
+  return (
+    <div style={styles.root}>
+      <div style={styles.top}>
+        <div style={styles.left}>
+          <D3Wrapper
+            createChartCallback={(d) =>
+              createChart({
+                container: d,
+                data_obj: cost_data,
+                title: "Annual Cost Summary",
+              })
+            }
+          />
+        </div>
+        <div style={styles.right}>
+          <D3Wrapper
+            createChartCallback={(d) =>
+              createChart({
+                container: d,
+                data_obj: eui_data,
+                title: "Annual Site EUI Summary",
+              })
+            }
+          />{" "}
+        </div>
+      </div>
+      <div style={styles.bottom}>
+        <div style={styles.left}>
+          <D3Wrapper
+            createChartCallback={(d) =>
+              createChart({
+                container: d,
+                data_obj: carbon_2022_data,
+                title: "Carbon Intensity - 2022",
+              })
+            }
+          />
+        </div>
+        <div style={styles.right}>
+          <D3Wrapper
+            createChartCallback={(d) =>
+              createChart({
+                container: d,
+                data_obj: carbon_2050_data,
+                title: "Carbon Intensity - 2050",
+              })
+            }
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default FuelSummaryView;
