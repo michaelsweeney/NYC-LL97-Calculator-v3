@@ -101,6 +101,24 @@ export const building_type_abbreviation_array = [
   ["U (Utility/Misc)", "U"],
 ];
 
+export const buildingTypeLongToShort = (d: string) => {
+  let match = building_type_abbreviation_array.find((e) => e[0] === d);
+  if (match) {
+    return match[1];
+  } else {
+    return "unknown";
+  }
+};
+
+export const buildingTypeShortToLong = (d: string) => {
+  let match = building_type_abbreviation_array.find((e) => e[1] === d);
+  if (match) {
+    return match[0];
+  } else {
+    return "unknown";
+  }
+};
+
 export const fuel_keys_to_labels = {
   elec: "Electricity (kWh)",
   steam: "Steam (mLbs)",

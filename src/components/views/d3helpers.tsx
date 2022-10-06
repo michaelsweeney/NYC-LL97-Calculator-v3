@@ -19,3 +19,9 @@ export const bindD3Element = (
     .join(childtype)
     .attr("class", classname);
 };
+
+export const formatNumber = (val: number, decimals = 0) =>
+  d3.format(`,.${decimals}f`)(val);
+
+export const formatCurrency = (val: number, decimals = 0) =>
+  d3.format(`$,.${decimals}f`)(val);

@@ -4,7 +4,7 @@ import * as types from "types";
 import { BuildingInputTypes } from "types";
 import {
   default_utility_rates,
-  building_type_abbreviation_array,
+  buildingTypeLongToShort,
 } from "locallaw/lookups";
 
 const initialState: BuildingInputTypes = {
@@ -148,13 +148,6 @@ export const buildingInputSlice = createSlice({
       let ll97_inputs = action.payload;
 
       let new_building_types: types.BuildingType[] = [];
-
-      const buildingTypeLongToShort = (d: string) => {
-        let match = building_type_abbreviation_array.find((e) => e[0] === d);
-        if (match) {
-          return match[1];
-        }
-      };
 
       if (ll97_inputs.bldg_type_one_type !== "Not Available") {
         let t1: types.BuildingType = {
