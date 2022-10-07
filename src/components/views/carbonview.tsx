@@ -226,6 +226,9 @@ const CarbonView: React.FunctionComponent = () => {
         annual_carbon_summary_by_year?.find((d) => d.year === 2024)
           ?.fine as number
       ),
+      is_fine:
+        (annual_carbon_summary_by_year?.find((d) => d.year === 2024)
+          ?.fine as number) > 0,
     },
     {
       year: "2030",
@@ -241,6 +244,9 @@ const CarbonView: React.FunctionComponent = () => {
         annual_carbon_summary_by_year?.find((d) => d.year === 2030)
           ?.fine as number
       ),
+      is_fine:
+        (annual_carbon_summary_by_year?.find((d) => d.year === 2030)
+          ?.fine as number) > 0,
     },
     {
       year: "2035",
@@ -256,8 +262,31 @@ const CarbonView: React.FunctionComponent = () => {
         annual_carbon_summary_by_year?.find((d) => d.year === 2035)
           ?.fine as number
       ),
+      is_fine:
+        (annual_carbon_summary_by_year?.find((d) => d.year === 2035)
+          ?.fine as number) > 0,
+    },
+    {
+      year: "2040",
+      consumption: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2040)
+          ?.carbon_total_absolute as number
+      ),
+      threshold: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2040)
+          ?.threshold_absolute as number
+      ),
+      fine: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2040)
+          ?.fine as number
+      ),
+      is_fine:
+        (annual_carbon_summary_by_year?.find((d) => d.year === 2040)
+          ?.fine as number) > 0,
     },
   ];
+
+  console.log(year_box_array);
 
   return (
     <>
@@ -282,7 +311,7 @@ const CarbonView: React.FunctionComponent = () => {
                 <YearBox
                   key={i}
                   header={d.year}
-                  is_active={d.consumption > d.threshold}
+                  is_active={d.is_fine}
                   value_array={[d.consumption, d.threshold, d.fine]}
                 />
               </React.Fragment>

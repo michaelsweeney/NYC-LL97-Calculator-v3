@@ -61,12 +61,12 @@ const FuelSummaryView: React.FunctionComponent = () => {
   const cost_data = annual_cost_per_sf_by_fuel;
   const eui_data = annual_site_per_sf_by_fuel;
 
-  const carbon_2022_data = annual_carbon_per_sf_by_year_by_fuel?.find(
-    (d) => d.year === 2022
+  const carbon_2024_data = annual_carbon_per_sf_by_year_by_fuel?.find(
+    (d) => d.year === 2024
   )?.consumption as UtilityConsumptionType;
 
-  const carbon_2050_data = annual_carbon_per_sf_by_year_by_fuel?.find(
-    (d) => d.year === 2050
+  const carbon_2040_data = annual_carbon_per_sf_by_year_by_fuel?.find(
+    (d) => d.year === 2040
   )?.consumption as UtilityConsumptionType;
 
   const createChart = (config: {
@@ -195,8 +195,8 @@ const FuelSummaryView: React.FunctionComponent = () => {
             createChartCallback={(d) =>
               createChart({
                 container: d,
-                data_obj: carbon_2022_data,
-                title: "Carbon Intensity - 2022",
+                data_obj: carbon_2024_data,
+                title: "Carbon Intensity - 2024",
               })
             }
           />
@@ -206,8 +206,8 @@ const FuelSummaryView: React.FunctionComponent = () => {
             createChartCallback={(d) =>
               createChart({
                 container: d,
-                data_obj: carbon_2050_data,
-                title: "Carbon Intensity - 2050",
+                data_obj: carbon_2040_data,
+                title: "Carbon Intensity - 2040",
               })
             }
           />
