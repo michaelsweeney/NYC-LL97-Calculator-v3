@@ -7,7 +7,7 @@ import {
   CarbonSummaryByYearObj,
 } from "types";
 import {
-  co2_limits_by_building_type,
+  building_type_co2_coefficients,
   fine_per_ton_co2,
   elec_carbon_coefficients,
   non_electric_tons_per_kbtu_coefficients,
@@ -25,28 +25,28 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let co2limit_2024 = 0;
   let co2limit_2030 = 0;
   let co2limit_2035 = 0;
+  let co2limit_2040 = 0;
 
   let carbon_coefficient_array =
     elec_carbon_coefficients[
       electric_coefficient_method as keyof typeof elec_carbon_coefficients
     ];
 
-  Object.values(building_types).forEach((type) => {
-    let limit_2024 =
-      +co2_limits_by_building_type[
-        type.building_type as keyof typeof co2_limits_by_building_type
-      ][0] * +type.building_area;
-    let limit_2030 =
-      +co2_limits_by_building_type[
-        type.building_type as keyof typeof co2_limits_by_building_type
-      ][1] * +type.building_area;
-    let limit_2035 =
-      +co2_limits_by_building_type[
-        type.building_type as keyof typeof co2_limits_by_building_type
-      ][2] * +type.building_area;
+  building_types.forEach((type) => {
+    let coefficients = building_type_co2_coefficients.find(
+      (t) => t.building_type === type.building_type
+    ) as typeof building_type_co2_coefficients[0];
+
+    let limit_2024 = coefficients["2024-2029"] * +type.building_area;
+    let limit_2030 = coefficients["2030-2034"] * +type.building_area;
+    let limit_2035 = coefficients["2035-2039"] * +type.building_area;
+    let limit_2040 = coefficients["2040-2049"] * +type.building_area;
+
     co2limit_2024 = co2limit_2024 + limit_2024;
     co2limit_2030 = co2limit_2030 + limit_2030;
     co2limit_2035 = co2limit_2035 + limit_2035;
+    co2limit_2040 = co2limit_2040 + limit_2040;
+
     total_area = total_area + +type.building_area;
   });
 
@@ -144,13 +144,18 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let annual_carbon_summary_by_year = [] as CarbonSummaryByYearObj[];
 
   carbon_coefficient_array.forEach((yobj) => {
-    let { year, value } = yobj; // value is kg per mwh
-    // value is tons per kbtu
+    let { year, value } = yobj;
 
     let elec_tons = elec_kbtu * value;
 
     let gas_tons = gas_kbtu * non_electric_tons_per_kbtu_coefficients.gas;
-    let steam_tons = steam_kbtu * non_electric_tons_per_kbtu_coefficients.steam;
+
+    let steam_coefficient =
+      year < 2030
+        ? non_electric_tons_per_kbtu_coefficients.steam_2024_2029
+        : non_electric_tons_per_kbtu_coefficients.steam_2030_2050;
+    let steam_tons = steam_kbtu * steam_coefficient;
+
     let fuel_two_tons =
       fuel_two_kbtu * non_electric_tons_per_kbtu_coefficients.fuel_two;
     let fuel_four_tons =
@@ -167,8 +172,10 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
       threshold = co2limit_2024;
     } else if (year <= 2034) {
       threshold = co2limit_2030;
-    } else if (year <= 2050) {
+    } else if (year <= 2039) {
       threshold = co2limit_2035;
+    } else if (year <= 2050) {
+      threshold = co2limit_2040;
     }
 
     let excess_carbon;
@@ -217,7 +224,8 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
 
     co2limit_2024_thru_2029: co2limit_2024,
     co2limit_2030_thru_2034: co2limit_2030,
-    co2limit_2035_thru_2050: co2limit_2035,
+    co2limit_2035_thru_2039: co2limit_2035,
+    co2limit_2040_thru_2050: co2limit_2035,
 
     elec_carbon_coefficients_by_year: carbon_coefficient_array,
 

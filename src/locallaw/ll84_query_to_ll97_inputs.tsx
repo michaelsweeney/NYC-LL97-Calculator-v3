@@ -1,4 +1,3 @@
-import { ll84_building_type_lookups } from "./lookups";
 import { LL84QueryPropertyTypes, LL97ConversionTypes } from "types";
 
 const roundNum = (n: string | number) => {
@@ -37,23 +36,9 @@ const LL84SelectionToLL97Inputs = (ll84obj: LL84QueryPropertyTypes) => {
     let fuel_two_gal = roundNum(+ll84_fuel_two_kbtu / 138);
     let fuel_four_gal = roundNum(+ll84_fuel_four_kbtu / 146);
 
-    const translateBuildingType = (ll84type: string) => {
-      if (ll84type === "Not Available") {
-        return "Not Available";
-      }
-      if (ll84type in ll84_building_type_lookups) {
-        return ll84_building_type_lookups[ll84type];
-      } else {
-        console.error(ll84type);
-        console.error(ll84_building_type_lookups);
-        let err = new Error("LL84 Building Translation Error");
-        throw err;
-      }
-    };
-
-    let bldg_type_one_type = translateBuildingType(ll84_bldg_type_one_type);
-    let bldg_type_two_type = translateBuildingType(ll84_bldg_type_two_type);
-    let bldg_type_three_type = translateBuildingType(ll84_bldg_type_three_type);
+    let bldg_type_one_type = ll84_bldg_type_one_type;
+    let bldg_type_two_type = ll84_bldg_type_two_type;
+    let bldg_type_three_type = ll84_bldg_type_three_type;
 
     let bldg_type_one_area = roundNum(ll84_bldg_type_one_area);
     let bldg_type_two_area = roundNum(ll84_bldg_type_two_area);

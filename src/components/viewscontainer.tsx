@@ -8,7 +8,6 @@ import CarbonView from "./views/carbonview";
 import CostView from "./views/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
-import V2ComparisonComponent from "./v2comparisoncomponent";
 
 interface IAppProps {}
 const styles: InlineStylesType = {
@@ -81,7 +80,6 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
         })}
       </div>
       <div style={styles.bottom}>
-        {/* {<V2TestComponent />} */}
         <CurrentViewComponent />
       </div>
     </React.Fragment>

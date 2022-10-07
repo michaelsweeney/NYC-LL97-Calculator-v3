@@ -2,16 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import * as types from "types";
 import { BuildingInputTypes } from "types";
-import {
-  default_utility_rates,
-  buildingTypeLongToShort,
-} from "locallaw/lookups";
+import { default_utility_rates } from "locallaw/lookups";
 
 const initialState: BuildingInputTypes = {
   building_types: [
     {
       building_id: 0,
-      building_type: "B_norm",
+      building_type: "Office",
       building_area: 0,
     },
   ],
@@ -43,7 +40,7 @@ const initialState: BuildingInputTypes = {
     },
   },
   is_default_rates: true,
-  electric_coefficient_method: "cambium",
+  electric_coefficient_method: "ll97_current",
 };
 
 export const buildingInputSlice = createSlice({
@@ -152,9 +149,7 @@ export const buildingInputSlice = createSlice({
       if (ll97_inputs.bldg_type_one_type !== "Not Available") {
         let t1: types.BuildingType = {
           building_id: 0,
-          building_type: buildingTypeLongToShort(
-            ll97_inputs.bldg_type_one_type
-          ) as string,
+          building_type: ll97_inputs.bldg_type_one_type,
           building_area: ll97_inputs.bldg_type_one_area,
         };
         new_building_types.push(t1);
@@ -162,9 +157,7 @@ export const buildingInputSlice = createSlice({
       if (ll97_inputs.bldg_type_two_type !== "Not Available") {
         let t2: types.BuildingType = {
           building_id: 1,
-          building_type: buildingTypeLongToShort(
-            ll97_inputs.bldg_type_two_type
-          ) as string,
+          building_type: ll97_inputs.bldg_type_two_type,
           building_area: ll97_inputs.bldg_type_two_area,
         };
         new_building_types.push(t2);
@@ -172,9 +165,7 @@ export const buildingInputSlice = createSlice({
       if (ll97_inputs.bldg_type_three_type !== "Not Available") {
         let t3: types.BuildingType = {
           building_id: 2,
-          building_type: buildingTypeLongToShort(
-            ll97_inputs.bldg_type_three_type
-          ) as string,
+          building_type: ll97_inputs.bldg_type_three_type,
           building_area: ll97_inputs.bldg_type_three_area,
         };
         new_building_types.push(t3);

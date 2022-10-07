@@ -21,29 +21,26 @@ type DType = CarbonSummaryByYearObj;
 
 const styles: InlineStylesType = {
   root: {},
-  upper: { height: "100px", padding: 10, boxSizing: "border-box" },
-  lower: { height: "calc(100% - 100px)", boxSizing: "border-box" },
-  yearBox: {
-    borderRadius: "5px",
-    display: "inline-block",
-    margin: "5px",
-    padding: "15px",
-    textAlign: "center",
-    backgroundColor: colors.grays.light,
+  upper: {
+    height: "175px",
+    padding: 10,
+    boxSizing: "border-box",
   },
-  yearBoxYearText: {
-    fontWeight: 600,
+  lower: {
+    height: "calc(100% - 175px)",
+    boxSizing: "border-box",
   },
-  yearLabels: {
-    marginLeft: 10,
-    fontWeight: 600,
-    textAlign: "left",
-    display: "inline-block",
-  },
+
   chartTitle: {
     color: colors.main.secondary,
     fontWeight: 500,
     fontSize: "1.5em",
+  },
+  yearBoxContainer: {
+    display: "inline-block",
+  },
+  yearBoxTextLabels: {
+    display: "inline-block",
   },
 };
 
@@ -225,6 +222,10 @@ const CarbonView: React.FunctionComponent = () => {
         annual_carbon_summary_by_year?.find((d) => d.year === 2024)
           ?.threshold_absolute as number
       ),
+      fine: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2024)
+          ?.fine as number
+      ),
     },
     {
       year: "2030",
@@ -236,6 +237,10 @@ const CarbonView: React.FunctionComponent = () => {
         annual_carbon_summary_by_year?.find((d) => d.year === 2030)
           ?.threshold_absolute as number
       ),
+      fine: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2030)
+          ?.fine as number
+      ),
     },
     {
       year: "2035",
@@ -246,6 +251,10 @@ const CarbonView: React.FunctionComponent = () => {
       threshold: formatNumber(
         annual_carbon_summary_by_year?.find((d) => d.year === 2035)
           ?.threshold_absolute as number
+      ),
+      fine: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2035)
+          ?.fine as number
       ),
     },
   ];
@@ -265,23 +274,29 @@ const CarbonView: React.FunctionComponent = () => {
             </Button>
           </span>
         </div>
-        {year_box_array.map((d, i) => {
-          return (
-            <YearBox
-              header={d.year}
-              is_active={d.consumption > d.threshold}
-              value_array={[d.consumption, d.threshold]}
-            />
-          );
-        })}
-        <div style={styles.yearLabels}>
-          <div>
-            {" "}
-            <br></br>
+
+        <div style={styles.yearBoxContainer}>
+          {year_box_array.map((d, i) => {
+            return (
+              <React.Fragment key={i}>
+                <YearBox
+                  key={i}
+                  header={d.year}
+                  is_active={d.consumption > d.threshold}
+                  value_array={[d.consumption, d.threshold, d.fine]}
+                />
+              </React.Fragment>
+            );
+          })}
+          <div style={styles.yearBoxTextLabels}>
+            <div>
+              {" "}
+              <br></br>
+            </div>
+            <div>Consumption (tCO2e/yr)</div>
+            <div>Threshold (tCO2e/yr)</div>
+            <div>Est Penalty ($)</div>
           </div>
-          <div>Consumption (tCO2e/yr)</div>
-          <div>Threshold (tCO2e/yr)</div>
-          <div>Est Penalty ($)</div>
         </div>
       </div>
       <div style={styles.lower}>

@@ -12,10 +12,13 @@ import { colors } from "styles/colors";
 const styles: InlineStylesType = {
   root: {},
   yearBox: {
+    minWidth: 70,
     borderRadius: "5px",
     display: "inline-block",
     margin: "5px",
     padding: "15px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
     textAlign: "center",
     backgroundColor: colors.grays.medium,
   },
@@ -24,6 +27,7 @@ const styles: InlineStylesType = {
   },
   headerText: {
     fontWeight: 600,
+    marginBottom: 5,
   },
 };
 
@@ -45,8 +49,8 @@ const YearBox = (props: YearBoxPropTypes) => {
       }
     >
       <div style={styles.headerText}>{header}</div>
-      {value_array.map((e) => (
-        <div>{e}</div>
+      {value_array.map((e, i) => (
+        <div key={i}>{e}</div>
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { buildingTypeShortToLong, fuel_keys_to_labels } from "locallaw/lookups";
+import { fuel_keys_to_labels } from "locallaw/lookups";
 import { formatNumber, formatCurrency } from "./d3helpers";
 import { InlineStylesType } from "types";
 import {
@@ -122,9 +122,7 @@ const TableView: React.FunctionComponent = () => {
               {building_types.map((t, i) => {
                 return (
                   <TableRow key={i}>
-                    <TableCell>
-                      {buildingTypeShortToLong(t.building_type)}
-                    </TableCell>
+                    <TableCell>t.building_type)</TableCell>
                     <TableCell>{formatNumber(t.building_area)}</TableCell>
                   </TableRow>
                 );

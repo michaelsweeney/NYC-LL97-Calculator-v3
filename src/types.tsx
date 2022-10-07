@@ -39,6 +39,14 @@ export type BuildingInputTypes = {
   electric_coefficient_method: CarbonCoefficientTypes;
 };
 
+export type PropertyTypeCoefficientsTypes = {
+  building_type: string;
+  "2024-2029": number;
+  "2030-2034": number;
+  "2035-2039": number;
+  "2040-2049": number;
+};
+
 export type CarbonCoefficientTypes =
   | "cambium"
   | "ll97_current"
@@ -139,7 +147,8 @@ export type BuildingOutputSliceTypes = {
   total_area: number;
   co2limit_2024_thru_2029: number;
   co2limit_2030_thru_2034: number;
-  co2limit_2035_thru_2050: number;
+  co2limit_2035_thru_2039: number;
+  co2limit_2040_thru_2050: number;
   elec_carbon_coefficients_by_year: YearValueObj[];
   annual_cost_by_fuel: UtilityConsumptionType;
   annual_site_energy_by_fuel: UtilityConsumptionType;
