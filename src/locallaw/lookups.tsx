@@ -13,6 +13,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003565528,
     "2035-2039": 0.002674146,
     "2040-2049": 0.001782764,
+    "2050-": 0,
   },
   {
     building_type: "Ambulatory Surgical Center",
@@ -20,6 +21,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.008980612,
     "2035-2039": 0.006735459,
     "2040-2049": 0.004490306,
+    "2050-": 0,
   },
   {
     building_type: "Automobile Dealership",
@@ -27,6 +29,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002824097,
     "2035-2039": 0.002118072,
     "2040-2049": 0.001412048,
+    "2050-": 0,
   },
   {
     building_type: "Bank Branch",
@@ -34,6 +37,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004036172,
     "2035-2039": 0.003027129,
     "2040-2049": 0.002018086,
+    "2050-": 0,
   },
   {
     building_type: "Bowling Alley",
@@ -41,6 +45,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003103815,
     "2035-2039": 0.002327861,
     "2040-2049": 0.001551907,
+    "2050-": 0,
   },
   {
     building_type: "College/University",
@@ -48,6 +53,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002099748,
     "2035-2039": 0.001236322,
     "2040-2049": 0.000180818,
+    "2050-": 0,
   },
   {
     building_type: "Convenience Store without Gas Station",
@@ -55,6 +61,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003540032,
     "2035-2039": 0.002655024,
     "2040-2049": 0.001770016,
+    "2050-": 0,
   },
   {
     building_type: "Courthouse",
@@ -62,6 +69,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.001480533,
     "2035-2039": 0.0011104,
     "2040-2049": 0.000740266,
+    "2050-": 0,
   },
   {
     building_type: "Data Center",
@@ -69,6 +77,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.014791131,
     "2035-2039": 0.011093348,
     "2040-2049": 0.007395565,
+    "2050-": 0,
   },
   {
     building_type: "Distribution Center",
@@ -76,6 +85,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.0009916,
     "2035-2039": 0.000549637,
     "2040-2049": 0.000123568,
+    "2050-": 0,
   },
   {
     building_type: "Enclosed Mall",
@@ -83,6 +93,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003983803,
     "2035-2039": 0.002987852,
     "2040-2049": 0.001991901,
+    "2050-": 0,
   },
   {
     building_type: "Financial Office",
@@ -90,6 +101,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003697004,
     "2035-2039": 0.002772753,
     "2040-2049": 0.001848502,
+    "2050-": 0,
   },
   {
     building_type: "Fitness Center/Health Club/Gym",
@@ -97,6 +109,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003946728,
     "2035-2039": 0.002960046,
     "2040-2049": 0.001973364,
+    "2050-": 0,
   },
   {
     building_type: "Food Sales",
@@ -104,6 +117,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00520888,
     "2035-2039": 0.00390666,
     "2040-2049": 0.00260444,
+    "2050-": 0,
   },
   {
     building_type: "Food Service",
@@ -111,6 +125,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.007749414,
     "2035-2039": 0.00581206,
     "2040-2049": 0.003874707,
+    "2050-": 0,
   },
   {
     building_type: "Hospital (General Medical & Surgical)",
@@ -118,6 +133,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.007335204,
     "2035-2039": 0.004654044,
     "2040-2049": 0.002997851,
+    "2050-": 0,
   },
   {
     building_type: "Hotel",
@@ -125,6 +141,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003850668,
     "2035-2039": 0.002640017,
     "2040-2049": 0.001465772,
+    "2050-": 0,
   },
   {
     building_type: "K-12 School",
@@ -132,6 +149,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002230588,
     "2035-2039": 0.001488109,
     "2040-2049": 0.000809607,
+    "2050-": 0,
   },
   {
     building_type: "Laboratory",
@@ -139,6 +157,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.026029868,
     "2035-2039": 0.019522401,
     "2040-2049": 0.013014934,
+    "2050-": 0,
   },
   {
     building_type: "Library",
@@ -146,6 +165,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002218412,
     "2035-2039": 0.001663809,
     "2040-2049": 0.001109206,
+    "2050-": 0,
   },
   {
     building_type: "Lifestyle Center",
@@ -153,6 +173,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00470585,
     "2035-2039": 0.003529387,
     "2040-2049": 0.002352925,
+    "2050-": 0,
   },
   {
     building_type: "Mailing Center/Post Office",
@@ -160,6 +181,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00198044,
     "2035-2039": 0.00148533,
     "2040-2049": 0.00099022,
+    "2050-": 0,
   },
   {
     building_type: "Manufacturing/Industrial Plant",
@@ -167,6 +189,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00141703,
     "2035-2039": 0.000975993,
     "2040-2049": 0.000508346,
+    "2050-": 0,
   },
   {
     building_type: "Medical Office",
@@ -174,6 +197,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002912778,
     "2035-2039": 0.001683565,
     "2040-2049": 0.000407851,
+    "2050-": 0,
   },
   {
     building_type: "Movie Theater",
@@ -181,6 +205,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.005395268,
     "2035-2039": 0.004046451,
     "2040-2049": 0.002697634,
+    "2050-": 0,
   },
   {
     building_type: "Multifamily Housing",
@@ -188,6 +213,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00334664,
     "2035-2039": 0.002692183,
     "2040-2049": 0.002052731,
+    "2050-": 0,
   },
   {
     building_type: "Museum",
@@ -195,6 +221,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.0053958,
     "2035-2039": 0.00404685,
     "2040-2049": 0.0026979,
+    "2050-": 0,
   },
   {
     building_type: "Non-Refrigerated Warehouse",
@@ -202,6 +229,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.000883187,
     "2035-2039": 0.000568051,
     "2040-2049": 0.000163152,
+    "2050-": 0,
   },
   {
     building_type: "Office",
@@ -209,6 +237,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002690852,
     "2035-2039": 0.00165234,
     "2040-2049": 0.000581893,
+    "2050-": 0,
   },
   {
     building_type: "Other - Education",
@@ -216,6 +245,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002934006,
     "2035-2039": 0.001867699,
     "2040-2049": 0.000839571,
+    "2050-": 0,
   },
   {
     building_type: "Other - Entertainment/Public Assembly",
@@ -223,6 +253,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002956738,
     "2035-2039": 0.002250122,
     "2040-2049": 0.00135561,
+    "2050-": 0,
   },
   {
     building_type: "Other - Lodging/Residential",
@@ -230,6 +261,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.001901982,
     "2035-2039": 0.001329089,
     "2040-2049": 0.000762093,
+    "2050-": 0,
   },
   {
     building_type: "Other - Mall",
@@ -237,6 +269,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.001928226,
     "2035-2039": 0.001006426,
     "2040-2049": 0.000067983,
+    "2050-": 0,
   },
   {
     building_type: "Other - Public Services",
@@ -244,6 +277,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003808033,
     "2035-2039": 0.002856025,
     "2040-2049": 0.001904017,
+    "2050-": 0,
   },
   {
     building_type: "Other - Recreation",
@@ -251,6 +285,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00447957,
     "2035-2039": 0.003359678,
     "2040-2049": 0.002239785,
+    "2050-": 0,
   },
   {
     building_type: "Other - Restaurant/Bar",
@@ -258,6 +293,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.008505075,
     "2035-2039": 0.006378806,
     "2040-2049": 0.004252537,
+    "2050-": 0,
   },
   {
     building_type: "Other - Services",
@@ -265,6 +301,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.001823381,
     "2035-2039": 0.001367536,
     "2040-2049": 0.000911691,
+    "2050-": 0,
   },
   {
     building_type: "Other - Specialty Hospital",
@@ -272,6 +309,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.006321819,
     "2035-2039": 0.004741365,
     "2040-2049": 0.00316091,
+    "2050-": 0,
   },
   {
     building_type: "Other - Technolog/Science",
@@ -279,6 +317,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.010446456,
     "2035-2039": 0.007834842,
     "2040-2049": 0.005223228,
+    "2050-": 0,
   },
   {
     building_type: "Outpatient Rehabilitation/Physical Therapy",
@@ -286,6 +325,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.006018323,
     "2035-2039": 0.004513742,
     "2040-2049": 0.003009161,
+    "2050-": 0,
   },
   {
     building_type: "Parking",
@@ -293,6 +333,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.000214421,
     "2035-2039": 0.000104943,
     "2040-2049": 0.0,
+    "2050-": 0,
   },
   {
     building_type: "Performing Arts",
@@ -300,6 +341,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002472539,
     "2035-2039": 0.001399345,
     "2040-2049": 0.0,
+    "2050-": 0,
   },
   {
     building_type: "Personal Services (Health/Beauty, Dry Cleaning, etc.)",
@@ -307,6 +349,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004843037,
     "2035-2039": 0.003632278,
     "2040-2049": 0.002421519,
+    "2050-": 0,
   },
   {
     building_type: "Pre-school/Daycare",
@@ -314,6 +357,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002362874,
     "2035-2039": 0.001772155,
     "2040-2049": 0.001181437,
+    "2050-": 0,
   },
   {
     building_type: "Refrigerated Warehouse",
@@ -321,6 +365,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002852131,
     "2035-2039": 0.002139098,
     "2040-2049": 0.001426066,
+    "2050-": 0,
   },
   {
     building_type: "Repair Services (Vehicle, Shoe, Locksmith, etc.)",
@@ -328,6 +373,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002210699,
     "2035-2039": 0.001658024,
     "2040-2049": 0.001105349,
+    "2050-": 0,
   },
   {
     building_type: "Residence Hall/Dormitory",
@@ -335,6 +381,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.002464089,
     "2035-2039": 0.001332459,
     "2040-2049": 0.000528616,
+    "2050-": 0,
   },
   {
     building_type: "Residential Care Facility",
@@ -342,6 +389,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004893124,
     "2035-2039": 0.004027812,
     "2040-2049": 0.002272629,
+    "2050-": 0,
   },
   {
     building_type: "Restaurant",
@@ -349,6 +397,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004038374,
     "2035-2039": 0.00302878,
     "2040-2049": 0.002019187,
+    "2050-": 0,
   },
   {
     building_type: "Retail Store",
@@ -356,6 +405,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00210449,
     "2035-2039": 0.00121605,
     "2040-2049": 0.00017604,
+    "2050-": 0,
   },
   {
     building_type: "Self-Storage Facility",
@@ -363,6 +413,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00061183,
     "2035-2039": 0.000404901,
     "2040-2049": 0.000132282,
+    "2050-": 0,
   },
   {
     building_type: "Senior Care Community",
@@ -370,6 +421,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004410123,
     "2035-2039": 0.003336443,
     "2040-2049": 0.002277912,
+    "2050-": 0,
   },
   {
     building_type: "Social/Meeting Hall",
@@ -377,6 +429,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.003833108,
     "2035-2039": 0.002874831,
     "2040-2049": 0.001916554,
+    "2050-": 0,
   },
   {
     building_type: "Strip Mall",
@@ -384,6 +437,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.001361842,
     "2035-2039": 0.000600493,
     "2040-2049": 0.000038512,
+    "2050-": 0,
   },
   {
     building_type: "Supermarket/Grocery Store",
@@ -391,6 +445,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.00675519,
     "2035-2039": 0.004256103,
     "2040-2049": 0.002030027,
+    "2050-": 0,
   },
   {
     building_type: "Transportation Terminal/Station",
@@ -398,6 +453,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.000571669,
     "2035-2039": 0.000428752,
     "2040-2049": 0.000285834,
+    "2050-": 0,
   },
   {
     building_type: "Urgent Care/Clinic/Other Outpatient",
@@ -405,6 +461,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.005772375,
     "2035-2039": 0.004329281,
     "2040-2049": 0.002886187,
+    "2050-": 0,
   },
   {
     building_type: "Vocational School",
@@ -412,6 +469,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004613122,
     "2035-2039": 0.003459842,
     "2040-2049": 0.002306561,
+    "2050-": 0,
   },
   {
     building_type: "Wholesale Club/Supercenter",
@@ -419,6 +477,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.004264962,
     "2035-2039": 0.003198721,
     "2040-2049": 0.002132481,
+    "2050-": 0,
   },
   {
     building_type: "Worship Facility",
@@ -426,6 +485,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2030-2034": 0.001230602,
     "2035-2039": 0.000866921,
     "2040-2049": 0.000549306,
+    "2050-": 0,
   },
 ];
 

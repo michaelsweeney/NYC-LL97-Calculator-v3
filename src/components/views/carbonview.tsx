@@ -176,23 +176,22 @@ const CarbonView: React.FunctionComponent = () => {
             yScale(d.carbon_total_absolute)
         );
 
+      console.log(data);
       let threshold_line_thickness = 3;
       let createThresholdLine = d3
         .line<DType>()
         .curve(d3.curveStepAfter)
         .x((d) => {
-          if (d.year === 2050) {
-            return plot_dims.width;
-          } else {
-            return xScale(
-              d.threshold_absolute ? d.year.toString() : "2024"
-            ) as number;
-          }
+          return xScale(
+            d.threshold_absolute !== null ? d.year.toString() : "2024"
+          ) as number;
         })
 
         .y((d) => {
           return yScale(
-            d.threshold_absolute ? d.threshold_absolute : yScale.domain()[1]
+            d.threshold_absolute !== null
+              ? d.threshold_absolute
+              : yScale.domain()[1]
           );
         });
 
@@ -206,8 +205,9 @@ const CarbonView: React.FunctionComponent = () => {
         .datum(data)
         .attr("d", createThresholdLine)
         .style("fill", "none")
-        .style("stroke", colors.reds.medium)
-        .style("stroke-width", threshold_line_thickness);
+        .style("stroke", colors.reds.dark)
+        .style("stroke-width", threshold_line_thickness)
+        .style("stroke-dasharray", "5");
     }
   };
 

@@ -65,8 +65,8 @@ const FuelSummaryView: React.FunctionComponent = () => {
     (d) => d.year === 2024
   )?.consumption as UtilityConsumptionType;
 
-  const carbon_2040_data = annual_carbon_per_sf_by_year_by_fuel?.find(
-    (d) => d.year === 2040
+  const carbon_2050_data = annual_carbon_per_sf_by_year_by_fuel?.find(
+    (d) => d.year === 2050
   )?.consumption as UtilityConsumptionType;
 
   const createChart = (config: {
@@ -206,8 +206,8 @@ const FuelSummaryView: React.FunctionComponent = () => {
             createChartCallback={(d) =>
               createChart({
                 container: d,
-                data_obj: carbon_2040_data,
-                title: "Carbon Intensity - 2040",
+                data_obj: carbon_2050_data,
+                title: "Carbon Intensity - 2050",
               })
             }
           />

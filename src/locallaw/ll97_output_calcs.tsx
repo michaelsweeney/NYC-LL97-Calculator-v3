@@ -26,6 +26,7 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let co2limit_2030 = 0;
   let co2limit_2035 = 0;
   let co2limit_2040 = 0;
+  let co2limit_2050 = 0;
 
   let carbon_coefficient_array =
     elec_carbon_coefficients[
@@ -41,11 +42,13 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     let limit_2030 = coefficients["2030-2034"] * +type.building_area;
     let limit_2035 = coefficients["2035-2039"] * +type.building_area;
     let limit_2040 = coefficients["2040-2049"] * +type.building_area;
+    let limit_2050 = coefficients["2050-"] * +type.building_area;
 
     co2limit_2024 = co2limit_2024 + limit_2024;
     co2limit_2030 = co2limit_2030 + limit_2030;
     co2limit_2035 = co2limit_2035 + limit_2035;
     co2limit_2040 = co2limit_2040 + limit_2040;
+    co2limit_2050 = co2limit_2050 + limit_2050;
 
     total_area = total_area + +type.building_area;
   });
@@ -174,8 +177,10 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
       threshold = co2limit_2030;
     } else if (year <= 2039) {
       threshold = co2limit_2035;
-    } else if (year <= 2050) {
+    } else if (year <= 2049) {
       threshold = co2limit_2040;
+    } else if (year === 2050) {
+      threshold = co2limit_2050;
     }
 
     let excess_carbon;
@@ -210,7 +215,7 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     annual_carbon_summary_by_year.push({
       year: year,
       threshold_absolute: threshold,
-      threshold_by_sf: threshold ? threshold / total_area : null,
+      threshold_by_sf: threshold !== null ? threshold / total_area : null,
       fine: fine,
       fine_by_sf: fine / total_area,
       carbon_total_absolute: carbon_tons_total,
@@ -225,7 +230,8 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     co2limit_2024_thru_2029: co2limit_2024,
     co2limit_2030_thru_2034: co2limit_2030,
     co2limit_2035_thru_2039: co2limit_2035,
-    co2limit_2040_thru_2050: co2limit_2035,
+    co2limit_2040_thru_2049: co2limit_2040,
+    co2limit_2050: co2limit_2050,
 
     elec_carbon_coefficients_by_year: carbon_coefficient_array,
 

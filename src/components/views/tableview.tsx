@@ -64,12 +64,6 @@ const TableView: React.FunctionComponent = () => {
   return (
     <div style={{ overflowX: "scroll", height: "100%", overflowY: "scroll" }}>
       <Box>
-        <Typography variant="h6">Carbon Coefficient Method</Typography>
-        <div>{electric_coefficient_method}</div>
-        <Divider />
-      </Box>
-
-      <Box>
         <Typography variant="h6">Utility Inputs</Typography>
         <TableContainer>
           <Table sx={styles.table} size="small">
@@ -122,7 +116,7 @@ const TableView: React.FunctionComponent = () => {
               {building_types.map((t, i) => {
                 return (
                   <TableRow key={i}>
-                    <TableCell>t.building_type)</TableCell>
+                    <TableCell>{t.building_type}</TableCell>
                     <TableCell>{formatNumber(t.building_area)}</TableCell>
                   </TableRow>
                 );
