@@ -29,7 +29,9 @@ const CarbonView: React.FunctionComponent = () => {
 
       /* -- DEFINE DATA AND CONSTANTS -- */
       let data = annual_carbon_summary_by_year;
-
+      // data = data.filter((d) =>
+      //   [2024, 2030, 2035, 2040, 2050].includes(d.year)
+      // );
       let container_width = container_dimensions.width;
       let container_height = container_dimensions.height;
 
@@ -127,7 +129,6 @@ const CarbonView: React.FunctionComponent = () => {
         .attr("fill", colors.reds.light)
         .attr("x", (d: DType) => xScale(d.year.toString()))
         .attr("width", xScale.bandwidth())
-
         .attr("y", (d: DType) => yScale(d.fine + total_annual_utility_cost))
         .attr("height", (d: DType) => yScale(0) - yScale(d.fine));
     }

@@ -55,6 +55,10 @@ const CarbonView: React.FunctionComponent = () => {
       /* -- DEFINE DATA AND CONSTANTS -- */
       let data = annual_carbon_summary_by_year;
 
+      // data = data.filter((d) =>
+      //   [2024, 2030, 2035, 2040, 2050].includes(d.year)
+      // );
+
       let container_width = container_dimensions.width;
       let container_height = container_dimensions.height;
 
@@ -284,9 +288,25 @@ const CarbonView: React.FunctionComponent = () => {
         (annual_carbon_summary_by_year?.find((d) => d.year === 2040)
           ?.fine as number) > 0,
     },
+    {
+      year: "2050",
+      consumption: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2050)
+          ?.carbon_total_absolute as number
+      ),
+      threshold: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2050)
+          ?.threshold_absolute as number
+      ),
+      fine: formatNumber(
+        annual_carbon_summary_by_year?.find((d) => d.year === 2050)
+          ?.fine as number
+      ),
+      is_fine:
+        (annual_carbon_summary_by_year?.find((d) => d.year === 2050)
+          ?.fine as number) > 0,
+    },
   ];
-
-  console.log(year_box_array);
 
   return (
     <>

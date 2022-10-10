@@ -4,9 +4,11 @@ import Footer from "./footer";
 import ViewsContainer from "./viewscontainer";
 import Sidebar from "./sidebar";
 import { InlineStylesType } from "types";
+import { colors } from "styles/colors";
 
 interface IAppProps {}
 
+const borderWidth = "4px";
 const styles: InlineStylesType = {
   root: {
     width: "100vw",
@@ -16,33 +18,34 @@ const styles: InlineStylesType = {
   header: {
     width: "100%",
     height: "100px",
-    border: "1px solid black",
+    borderBottom: `${borderWidth} solid ${colors.main.primary}`,
     boxSizing: "border-box",
   },
   middle: {
     width: "100%",
-    height: "calc(100% - 200px)",
+    height: "calc(100% - 190px)",
     boxSizing: "border-box",
   },
   footer: {
     width: "100%",
-    height: "100px",
-    border: "1px solid black",
+    height: "90px",
+    borderTop: `${borderWidth} solid ${colors.main.primary}`,
     boxSizing: "border-box",
   },
   sidebar: {
     width: "450px",
     height: "100%",
-    border: "1px solid black",
+    borderRight: `${borderWidth} solid ${colors.grays.medium}`,
+    padding: "10px",
     display: "inline-block",
     boxSizing: "border-box",
     overflowY: "scroll",
   },
   viewContainer: {
+    padding: "10px",
     width: "calc(100% - 450px)",
     height: "100%",
     display: "inline-block",
-    border: "1px solid black",
     boxSizing: "border-box",
     verticalAlign: "top",
   },

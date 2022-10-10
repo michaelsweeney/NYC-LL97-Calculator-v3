@@ -1,85 +1,87 @@
 import * as React from "react";
 import { Button } from "@mui/material";
 import { uiActions } from "store/uislice";
-import { useAppDispatch } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { colors } from "styles/colors";
 import { InlineStylesType } from "types";
+import NavMenu from "./navmenu";
+import BeExLogo from "./beexlogo";
+
 interface IAppProps {}
 
 const styles: InlineStylesType = {
   root: {},
   left: {
-    width: "200px",
+    width: "225px",
     height: "100%",
     display: "inline-block",
     verticalAlign: "middle",
+    paddingLeft: "25px",
+    paddingRight: "15px",
+    boxSizing: "border-box",
   },
   middle: {
-    width: "calc(100% - 600px)",
+    width: "calc(100% - 325px)",
     textAlign: "center",
     height: "100%",
     display: "inline-block",
     verticalAlign: "middle",
+    boxSizing: "border-box",
+    paddingLeft: "15px",
+    paddingRight: "15px",
   },
   right: {
-    width: "400px",
+    width: "100px",
+    paddingRight: "25px",
     display: "inline-block",
     verticalAlign: "middle",
+    textAlign: "right",
+    boxSizing: "border-box",
   },
-  buttons: {
-    color: "white",
-    backgroundColor: colors.main.secondary,
-    border: "black",
+
+  headerTitleText: {
+    color: colors.main.secondary,
+    fontSize: "26px",
+    fontFamily: "CircularStd-Black",
+  },
+  loadedBuildingTitle: {
+    color: colors.main.secondary,
+    fontSize: "20px",
+
+    fontFamily: "CircularStd-Medium",
+    cursor: "pointer",
     "&:hover": {
-      backgroundColor: colors.grays.dark,
-      border: "black",
+      backgroundColor: "red",
+      fontSize: "30px",
     },
   },
 };
 
 const Header: React.FunctionComponent<IAppProps> = () => {
   const dispatch = useAppDispatch();
-  const handleOpenLoadModal = () => {
-    dispatch(uiActions.setIsLoadModalOpen(true));
-  };
+  const { property_name, address_1 } = useAppSelector(
+    (state) => state.ll84_query.ll84_selected_property
+  );
 
-  const handleOpenInfoModal = () => {
-    dispatch(uiActions.setIsInfoModalOpen(true));
-  };
-
-  const handleOpenBuildingSummaryModal = () => {
+  const handleLL84NameClick = () => {
     dispatch(uiActions.setIsBuildingSummaryModalOpen(true));
   };
 
   return (
     <div style={styles.root}>
-      <div style={styles.left}>BEEX Logo</div>
-      <div style={styles.middle}>NYC LL97 Carbon Emissions Calculator</div>
+      <div style={styles.left}>
+        <BeExLogo width="200" height="100" />
+      </div>
+      <div style={styles.middle}>
+        <div style={styles.headerTitleText}>
+          NYC LL97 Carbon Emissions Calculator
+        </div>
+        <div onClick={handleLL84NameClick} style={styles.loadedBuildingTitle}>
+          {property_name}
+        </div>
+      </div>
       <div style={styles.right}>
-        <Button
-          size="small"
-          sx={styles.buttons}
-          onClick={handleOpenLoadModal}
-          variant="outlined"
-        >
-          Open Load Modal
-        </Button>
-        <Button
-          sx={styles.buttons}
-          size="small"
-          variant="outlined"
-          onClick={handleOpenInfoModal}
-        >
-          Open Info Modal
-        </Button>
-        <Button
-          sx={styles.buttons}
-          size="small"
-          variant="outlined"
-          onClick={handleOpenBuildingSummaryModal}
-        >
-          Open LL84 Summary Modal
-        </Button>
+        <NavMenu />
       </div>
     </div>
   );

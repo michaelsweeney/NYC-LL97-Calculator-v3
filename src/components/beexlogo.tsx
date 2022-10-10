@@ -1,8 +1,8 @@
 import React from "react";
 
 type PropTypes = {
-  width: number;
-  height: number;
+  width: number | string;
+  height: number | string;
 };
 
 const BeExLogo = (props: PropTypes) => {
@@ -69,7 +69,7 @@ const BeExLogo = (props: PropTypes) => {
         </g>
         <g>
           <g style={{ clipPath: "url(#clip-path)" }}>
-            <line
+            {/* <line
               y1="204.69"
               x2="156.67"
               y2="204.69"
@@ -78,7 +78,7 @@ const BeExLogo = (props: PropTypes) => {
                 stroke: "#595954",
                 strokeWidth: 16.24107190096539,
               }}
-            ></line>
+            ></line> */}
           </g>
           <path
             d="M116,205.07c.4-6,5.46-13,14.71-13,10.16,0,14.44,6.41,14.71,13Zm31.14,17.11c-2.14,5.88-6.68,10-15,10-8.82,0-16.17-6.28-16.57-15h47.08c0-.27.27-2.94.27-5.46,0-21.12-12.17-34.08-32.48-34.08-16.84,0-32.34,13.65-32.34,34.62,0,22.19,15.91,35.16,33.95,35.16,16.17,0,26.61-9.49,29.94-20.85l-14.83-4.41Zm19.6,23.26h20c2.27-3.61,11.1-16.58,13.5-20.18L214,245.43H234.9L211.1,211.88l23-32.18H213.89l-13,19.52c-2.27-3.61-10.83-15.91-13.1-19.52H166.73l23.39,32.75-23.39,33Z"
@@ -96,4 +96,4 @@ const BeExLogo = (props: PropTypes) => {
   );
 };
 
-export { BeExLogo };
+export default BeExLogo;

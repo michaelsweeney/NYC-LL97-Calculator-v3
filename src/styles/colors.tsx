@@ -1,7 +1,7 @@
 export const colors = {
   main: {
     primary: "rgb(184,215,52)",
-    secondary: "rgb(89,90,84)",
+    secondary: "#595954",
   },
   reds: {
     light: "rgb(178,50,50)",

@@ -36,7 +36,7 @@ const TableView: React.FunctionComponent = () => {
     building_outputs: { annual_carbon_summary_by_year, annual_cost_by_fuel },
   } = useAppSelector((state) => state);
 
-  let year_filter = [2024, 2030, 2035, 2050];
+  let year_filter = [2024, 2030, 2035, 2040, 2050];
 
   const utility_array = Object.keys(utilities)
     .map((k) => {
