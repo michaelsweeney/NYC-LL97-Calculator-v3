@@ -36,7 +36,6 @@ const FocusInput = () => {
       <Table size="small">
         <TableBody>
           <TableRow>
-            <TableCell></TableCell>
             <TableCell variant="head">Electric Coefficients</TableCell>
             <TableCell>
               <SingleSelect
