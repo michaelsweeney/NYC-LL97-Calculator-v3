@@ -5,7 +5,7 @@ import { colors } from "styles/colors";
 interface IAppProps {}
 
 const styles: InlineStylesType = {
-  root: { padding: "20px" },
+  root: { padding: "20px", boxSizing: "border-box" },
   acceleratorText: {
     fontFamily: "CircularStd-Black",
     color: colors.main.primary,
@@ -25,15 +25,19 @@ const styles: InlineStylesType = {
   },
   left: {
     display: "inline-block",
-    width: "60%",
+    width: "600px",
     textAlign: "left",
     verticalAlign: "middle",
+    paddingRight: "10px",
+    boxSizing: "border-box",
   },
   right: {
     display: "inline-block",
-    width: "40%",
+    width: "calc(100% - 600px)",
     textAlign: "right",
     verticalAlign: "middle",
+    paddingLeft: "10px",
+    boxSizing: "border-box",
   },
 };
 

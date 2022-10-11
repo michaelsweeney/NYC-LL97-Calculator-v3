@@ -33,7 +33,7 @@ const styles: InlineStylesType = {
     boxSizing: "border-box",
   },
   sidebar: {
-    width: "450px",
+    width: "420px",
     height: "100%",
     borderRight: `${borderWidth} solid ${colors.grays.medium}`,
     padding: "10px",
@@ -43,7 +43,7 @@ const styles: InlineStylesType = {
   },
   viewContainer: {
     padding: "10px",
-    width: "calc(100% - 450px)",
+    width: "calc(100% - 420px)",
     height: "100%",
     display: "inline-block",
     boxSizing: "border-box",

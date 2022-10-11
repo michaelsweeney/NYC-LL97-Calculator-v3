@@ -1,17 +1,11 @@
 import React from "react";
 
 import SingleSelect from "./singleselect";
-import {
-  TableCell,
-  TableRow,
-  Table,
-  TableBody,
-  TableContainer,
-} from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CarbonCoefficientTypes } from "types";
 import { buildingInputActions } from "store/buildinginputslice";
+import { InlineStylesType } from "types";
 
 const FocusInput = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +13,17 @@ const FocusInput = () => {
   const { electric_coefficient_method } = useAppSelector(
     (state) => state.building_inputs
   );
+
+  const styles: InlineStylesType = {
+    text: {
+      width: "150px",
+      display: "inline-block",
+    },
+    select_container: {
+      width: "175px",
+      display: "inline-block",
+    },
+  };
 
   const handleChangeElectricCoefficientMethod = (e: string | number) => {
     dispatch(
@@ -32,23 +37,17 @@ const FocusInput = () => {
   const option_titles: string[] = ["Cambium", "LL97 Current Rate"];
 
   return (
-    <TableContainer>
-      <Table size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell variant="head">Electric Coefficients</TableCell>
-            <TableCell>
-              <SingleSelect
-                callback={handleChangeElectricCoefficientMethod}
-                value={electric_coefficient_method}
-                option_values={option_values}
-                option_titles={option_titles}
-              />
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <div style={styles.text}>Electric Coefficients</div>
+      <div style={styles.select_container}>
+        <SingleSelect
+          callback={handleChangeElectricCoefficientMethod}
+          value={electric_coefficient_method}
+          option_values={option_values}
+          option_titles={option_titles}
+        />
+      </div>
+    </div>
   );
 };
 export default FocusInput;
