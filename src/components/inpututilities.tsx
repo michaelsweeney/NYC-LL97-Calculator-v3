@@ -1,6 +1,13 @@
 import * as React from "react";
 
-import { Checkbox, TableCell, TableRow } from "@mui/material";
+import {
+  TableCell,
+  TableRow,
+  Table,
+  TableBody,
+  TableContainer,
+  Checkbox,
+} from "@mui/material";
 import FocusInput from "./focusinput";
 
 import {
@@ -35,61 +42,69 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
 
   const utility_keys = ["elec", "gas", "steam", "fuel_two", "fuel_four"];
   return (
-    <React.Fragment>
-      {utility_keys.map((fuel, i) => {
-        let fuel_obj = utilities[fuel as keyof typeof utilities];
+    <TableContainer>
+      <Table size="small">
+        <TableBody>
+          {utility_keys.map((fuel, i) => {
+            let fuel_obj = utilities[fuel as keyof typeof utilities];
 
-        return (
-          <React.Fragment key={i}>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell variant="head">
-                {fuel_keys_to_labels[fuel as keyof typeof fuel_keys_to_labels]}
-              </TableCell>
-              <TableCell variant="head">
-                {
-                  fuel_keys_to_rate_labels[
-                    fuel as keyof typeof fuel_keys_to_rate_labels
-                  ]
-                }
-              </TableCell>
-            </TableRow>
+            return (
+              <React.Fragment key={i}>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell variant="head">
+                    {
+                      fuel_keys_to_labels[
+                        fuel as keyof typeof fuel_keys_to_labels
+                      ]
+                    }
+                  </TableCell>
+                  <TableCell variant="head">
+                    {
+                      fuel_keys_to_rate_labels[
+                        fuel as keyof typeof fuel_keys_to_rate_labels
+                      ]
+                    }
+                  </TableCell>
+                </TableRow>
 
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>
-                <FocusInput
-                  value={fuel_obj.consumption}
-                  callback={(v) => {
-                    handleFuelConsumptionChange(fuel, v as number);
-                  }}
-                  input_type="number"
-                />
-              </TableCell>
-              <TableCell>
-                <FocusInput
-                  value={fuel_obj.rate}
-                  callback={(v) => {
-                    handleFuelRateChange(fuel, v as number);
-                  }}
-                  input_type="number"
-                />
-              </TableCell>
-            </TableRow>
-          </React.Fragment>
-        );
-      })}
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>
+                    <FocusInput
+                      value={fuel_obj.consumption}
+                      callback={(v) => {
+                        handleFuelConsumptionChange(fuel, v as number);
+                      }}
+                      input_type="number"
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <FocusInput
+                      value={fuel_obj.rate}
+                      callback={(v) => {
+                        handleFuelRateChange(fuel, v as number);
+                      }}
+                      input_type="number"
+                    />
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+            );
+          })}
 
-      <TableRow>
-        <TableCell sx={{ textAlign: "left" }}>
-          <Checkbox
-            onClick={() => handleSetIsDefaultRates(!is_default_rates)}
-            checked={is_default_rates ? true : false}
-          ></Checkbox>
-        </TableCell>
-        <TableCell colSpan={3}>Use Default Rates</TableCell>
-      </TableRow>
-    </React.Fragment>
+          <TableRow>
+            <TableCell sx={{ textAlign: "left" }}>
+              <Checkbox
+                onClick={() => handleSetIsDefaultRates(!is_default_rates)}
+                checked={is_default_rates ? true : false}
+              ></Checkbox>
+            </TableCell>
+            <TableCell colSpan={3}>Use Default Rates</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

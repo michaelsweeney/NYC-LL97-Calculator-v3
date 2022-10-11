@@ -3,7 +3,7 @@ import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+// import CloseIcon from "@mui/icons-material/Close";
 
 type PropTypes = {
   isOpen: boolean;
@@ -23,7 +23,8 @@ const ModalWrapper = (props: PropTypes) => {
       <div>
         Title{" "}
         <IconButton onClick={hideModal}>
-          <CloseIcon></CloseIcon>
+          <div>x</div>
+          {/* <CloseIcon></CloseIcon> */}
         </IconButton>
       </div>
       <div>{children}</div>

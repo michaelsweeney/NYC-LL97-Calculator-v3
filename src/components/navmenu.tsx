@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
 import { useAppDispatch } from "store/hooks";
 import { uiActions } from "store/uislice";
 import { colors } from "styles/colors";
@@ -60,7 +60,8 @@ const NavMenu = () => {
         sx={open ? { ...styles.button, ...styles.buttonActive } : styles.button}
         onClick={handleClick}
       >
-        <MenuIcon sx={{ width: 35, height: 35 }} />
+        <div>===</div>
+        {/* <MenuIcon sx={{ width: 35, height: 35 }} /> */}
       </Button>
       <Menu
         sx={styles.nav}

@@ -1,5 +1,11 @@
 import * as React from "react";
-import { TableCell, TableRow } from "@mui/material";
+import {
+  TableCell,
+  TableRow,
+  Table,
+  TableBody,
+  TableContainer,
+} from "@mui/material";
 import FocusInput from "./focusinput";
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -14,25 +20,27 @@ const InputOnsiteGeneration: React.FunctionComponent<IAppProps> = () => {
     dispatch(buildingInputActions.setElectricOnsitePVConsumptionChange(v));
   };
   return (
-    <React.Fragment>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell variant="head">Solar PV (kWh)</TableCell>
-
-        <TableCell>
-          <FocusInput
-            value={
-              building_inputs.electric_onsite_generation.photovoltaic
-                .consumption
-            }
-            input_type="number"
-            callback={(v) => {
-              handleElectricOnsitePVConsumptionChange(v as number);
-            }}
-          ></FocusInput>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
+    <TableContainer>
+      <Table size="small">
+        <TableBody>
+          <TableRow>
+            <TableCell variant="head">Solar PV (kWh)</TableCell>
+            <TableCell>
+              <FocusInput
+                value={
+                  building_inputs.electric_onsite_generation.photovoltaic
+                    .consumption
+                }
+                input_type="number"
+                callback={(v) => {
+                  handleElectricOnsitePVConsumptionChange(v as number);
+                }}
+              ></FocusInput>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

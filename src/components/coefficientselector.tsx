@@ -1,7 +1,13 @@
 import React from "react";
 
 import SingleSelect from "./singleselect";
-import { TableCell, TableRow } from "@mui/material";
+import {
+  TableCell,
+  TableRow,
+  Table,
+  TableBody,
+  TableContainer,
+} from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CarbonCoefficientTypes } from "types";
@@ -26,20 +32,24 @@ const FocusInput = () => {
   const option_titles: string[] = ["Cambium", "LL97 Current Rate"];
 
   return (
-    <React.Fragment>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell variant="head">Electric Coefficients</TableCell>
-        <TableCell>
-          <SingleSelect
-            callback={handleChangeElectricCoefficientMethod}
-            value={electric_coefficient_method}
-            option_values={option_values}
-            option_titles={option_titles}
-          />
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
+    <TableContainer>
+      <Table size="small">
+        <TableBody>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell variant="head">Electric Coefficients</TableCell>
+            <TableCell>
+              <SingleSelect
+                callback={handleChangeElectricCoefficientMethod}
+                value={electric_coefficient_method}
+                option_values={option_values}
+                option_titles={option_titles}
+              />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 export default FocusInput;
