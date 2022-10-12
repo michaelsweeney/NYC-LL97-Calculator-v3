@@ -1,6 +1,5 @@
 import {
   LL84QueryObjTypes,
-  StringObjectType,
   YearValueObj,
   NumberObjectType,
   PropertyTypeCoefficientsTypes,

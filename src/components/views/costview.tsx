@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
 import D3Wrapper from "./d3wrapper";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
 import { CarbonSummaryByYearObj, D3WrapperCallbackPropTypes } from "types";
 
@@ -112,7 +112,7 @@ const CarbonView: React.FunctionComponent = () => {
         .data(data)
         .join("rect")
         .attr("class", "utility-rect")
-        .attr("fill", colors.main.secondary)
+        .attr("fill", colors.secondary.main)
         .attr("x", (d: DType) => xScale(d.year.toString()))
         .attr("width", xScale.bandwidth())
         .attr("y", (d: DType) => yScale(total_annual_utility_cost))

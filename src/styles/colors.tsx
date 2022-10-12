@@ -1,7 +1,28 @@
-export const colors = {
-  main: {
-    primary: "rgb(184,215,52)",
-    secondary: "#595954",
+type ColorGroupTypes = {
+  [key: string]: string;
+};
+
+type ColorTypes = {
+  primary: ColorGroupTypes;
+  secondary: ColorGroupTypes;
+  reds: ColorGroupTypes;
+  greens: ColorGroupTypes;
+  blues: ColorGroupTypes;
+  grays: ColorGroupTypes;
+  whites: ColorGroupTypes;
+  akf: ColorGroupTypes;
+};
+
+export const colors: ColorTypes = {
+  primary: {
+    light: "#dcea9a",
+    main: "#BAD636",
+    dark: "#9CB62A",
+  },
+  secondary: {
+    light: "#878787",
+    main: "#595954",
+    dark: "#282826",
   },
   reds: {
     light: "rgb(178,50,50)",
@@ -19,9 +40,16 @@ export const colors = {
     dark: "rgb(35,103,133)",
   },
   grays: {
-    light: "rgb(225,225,225)",
-    medium: "rgb(210,210,210)",
-    dark: "rgb(153,153,153)",
+    light: "#878787",
+    medium: "#595954",
+    dark: "#3B3B3B",
+  },
+  whites: {
+    medium: "#fff",
+  },
+  akf: {
+    red: "#cf202e",
+    gray: "gray",
   },
 };
 

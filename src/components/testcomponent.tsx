@@ -1,32 +1,18 @@
 import { useEffect } from "react";
 
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppDispatch } from "store/hooks";
 
-import { uiActions } from "store/uislice";
 import { buildingInputActions } from "store/buildinginputslice";
 import { LL84SelectionToLL97Inputs } from "locallaw/ll84_query_to_ll97_inputs";
-import { LL97OutputsFromBuildingInputs } from "locallaw/ll97_output_calcs";
 import { LL84QueryPropertyTypes } from "types";
-import { buildingOutputActions } from "store/buildingoutputslice";
 import { ll84QueryActions } from "store/ll84queryslice";
 const TestComponent = () => {
   // testing component, can do anything in here
   // without rerendering unnecessary children.
 
-  // const ll84_query_results = useAppSelector(
-  //   (state) => state.ui.ll84_query_results
-  // );
-
-  // const ll97_inputs = useAppSelector((state) => state.building_inputs);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // dispatch(ll84QueryActions.setLL84QueryInput("On"));
-    // dispatch(ll84QueryActions.setLL84YearSelection("ll84_2021_cal_2020"));
-
-    // let selected_ll84_data = ll84_query_results[0];
-
     let selected_ll84_data: LL84QueryPropertyTypes = {
       property_name: "One Liberty Plaza",
       property_id: "1261446",
@@ -57,7 +43,7 @@ const TestComponent = () => {
     }
 
     // dispatch loaded inputs to building inputs.
-  }, []);
+  }, [dispatch]);
 
   return <div style={{ display: "none" }}></div>;
 };

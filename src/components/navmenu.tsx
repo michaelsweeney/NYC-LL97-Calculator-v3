@@ -1,12 +1,10 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-
+import { NavBarButton } from "styles/components";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-// import MenuIcon from "@mui/icons-material/Menu";
+
 import { useAppDispatch } from "store/hooks";
 import { uiActions } from "store/uislice";
-import { colors } from "styles/colors";
 
 import { InlineStylesType } from "types";
 
@@ -18,12 +16,6 @@ const styles: InlineStylesType = {
       paddingRight: "10px",
       border: "gray 1px solid",
     },
-  },
-  button: {
-    "&:hover": { color: colors.main.secondary },
-  },
-  buttonActive: {
-    color: colors.main.secondary,
   },
 };
 
@@ -56,13 +48,10 @@ const NavMenu = () => {
 
   return (
     <div>
-      <Button
-        sx={open ? { ...styles.button, ...styles.buttonActive } : styles.button}
-        onClick={handleClick}
-      >
+      <NavBarButton $active={open} onClick={handleClick}>
         <div>===</div>
-        {/* <MenuIcon sx={{ width: 35, height: 35 }} /> */}
-      </Button>
+      </NavBarButton>
+
       <Menu
         sx={styles.nav}
         anchorEl={anchorEl}

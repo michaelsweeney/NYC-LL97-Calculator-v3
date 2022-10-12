@@ -3,6 +3,7 @@ import { ll84QueryActions } from "store/ll84queryslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { LL84QueryPropertyTypes } from "types";
 import { LL84SelectionToLL97Inputs } from "locallaw/ll84_query_to_ll97_inputs";
+import { ButtonSecondary } from "styles/components";
 
 import {
   Table,
@@ -37,6 +38,7 @@ const LoadModalResults = () => {
     dispatch(
       buildingInputActions.setBuildingInputsFromLL84Results(ll97_inputs)
     );
+    dispatch(uiActions.setIsBuildingSummaryModalOpen(true));
   };
 
   return (
@@ -54,12 +56,13 @@ const LoadModalResults = () => {
             return (
               <TableRow key={i}>
                 <TableCell>
-                  <Button
+                  <ButtonSecondary
+                    variant="contained"
+                    color="secondary"
                     onClick={() => handleLoadBuilding(result)}
-                    variant="outlined"
                   >
                     Load
-                  </Button>
+                  </ButtonSecondary>
                 </TableCell>
                 {table_column_map.map((e, si) => (
                   <TableCell key={si}>

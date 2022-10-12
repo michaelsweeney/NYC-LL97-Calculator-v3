@@ -8,6 +8,7 @@ import CarbonView from "./views/carbonview";
 import CostView from "./views/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
+import { ButtonPrimary } from "styles/components";
 
 interface IAppProps {}
 const styles: InlineStylesType = {
@@ -21,6 +22,9 @@ const styles: InlineStylesType = {
     height: "calc(100% - 50px)",
     width: "100%",
     display: "inline-block",
+  },
+  button: {
+    marginRight: "5px",
   },
 };
 
@@ -69,13 +73,14 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
       <div style={styles.top}>
         {view_selector.map((d, i) => {
           return (
-            <Button
+            <ButtonPrimary
+              sx={styles.button}
               onClick={() => handleSetActiveView(d.key)}
               key={i}
               variant={d.key === active_view ? "contained" : "outlined"}
             >
               {d.label}
-            </Button>
+            </ButtonPrimary>
           );
         })}
       </div>

@@ -9,7 +9,6 @@ import TestComponent from "components/testcomponent";
 import InputListener from "components/inputlistener";
 
 import { colors } from "styles/colors";
-import { useEffect } from "react";
 import { Shadows } from "@mui/material/styles/shadows";
 
 const theme = createTheme({
@@ -27,10 +26,10 @@ const theme = createTheme({
   },
   palette: {
     secondary: {
-      main: colors.main.secondary,
+      main: colors.secondary.main as string,
     },
     primary: {
-      main: colors.main.primary,
+      main: colors.primary.main as string,
     },
   },
 });

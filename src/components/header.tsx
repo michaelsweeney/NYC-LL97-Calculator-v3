@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Button } from "@mui/material";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { colors } from "styles/colors";
+
+import { HeaderTitle, HeaderBuildingTitle } from "styles/typography";
 import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
 import BeExLogo from "./beexlogo";
@@ -38,28 +38,11 @@ const styles: InlineStylesType = {
     textAlign: "right",
     boxSizing: "border-box",
   },
-
-  headerTitleText: {
-    color: colors.main.secondary,
-    fontSize: "26px",
-    fontFamily: "CircularStd-Black",
-  },
-  loadedBuildingTitle: {
-    color: colors.main.secondary,
-    fontSize: "20px",
-
-    fontFamily: "CircularStd-Medium",
-    cursor: "pointer",
-    "&:hover": {
-      backgroundColor: "red",
-      fontSize: "30px",
-    },
-  },
 };
 
 const Header: React.FunctionComponent<IAppProps> = () => {
   const dispatch = useAppDispatch();
-  const { property_name, address_1 } = useAppSelector(
+  const { property_name } = useAppSelector(
     (state) => state.ll84_query.ll84_selected_property
   );
 
@@ -73,12 +56,11 @@ const Header: React.FunctionComponent<IAppProps> = () => {
         <BeExLogo width="200" height="100" />
       </div>
       <div style={styles.middle}>
-        <div style={styles.headerTitleText}>
-          NYC LL97 Carbon Emissions Calculator
-        </div>
-        <div onClick={handleLL84NameClick} style={styles.loadedBuildingTitle}>
+        <HeaderTitle>NYC LL97 Carbon Emissions Calculator</HeaderTitle>
+
+        <HeaderBuildingTitle onClick={handleLL84NameClick}>
           {property_name}
-        </div>
+        </HeaderBuildingTitle>
       </div>
       <div style={styles.right}>
         <NavMenu />

@@ -3,9 +3,9 @@ import * as d3 from "d3";
 
 import { Button } from "@mui/material";
 import D3Wrapper from "./d3wrapper";
-import { formatNumber, formatCurrency } from "./d3helpers";
+import { formatNumber } from "./d3helpers";
 
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
 import {
   CarbonSummaryByYearObj,
@@ -32,7 +32,7 @@ const styles: InlineStylesType = {
   },
 
   chartTitle: {
-    color: colors.main.secondary,
+    color: colors.secondary.main,
     fontWeight: 500,
     fontSize: "1.5em",
   },
@@ -155,7 +155,7 @@ const CarbonView: React.FunctionComponent = () => {
         .data(data)
         .join("rect")
         .attr("class", "carbon-rect")
-        .attr("fill", colors.main.secondary)
+        .attr("fill", colors.secondary.main as string)
         .attr("x", (d: DType) => xScale(d.year.toString()))
         .attr("width", xScale.bandwidth())
         .attr("y", (d: DType) => yScale(d.carbon_total_absolute))
@@ -180,7 +180,6 @@ const CarbonView: React.FunctionComponent = () => {
             yScale(d.carbon_total_absolute)
         );
 
-      console.log(data);
       let threshold_line_thickness = 3;
       let createThresholdLine = d3
         .line<DType>()
@@ -314,12 +313,8 @@ const CarbonView: React.FunctionComponent = () => {
         <div style={styles.chartTitle}>
           <span>Carbon Threshold Summary</span>
           <span>
-            <Button
-              color="secondary"
-              variant="contained"
-              // sx={{ color: colors.main.secondary }}
-            >
-              TOGGLE (not implemented)
+            <Button color="secondary" variant="contained">
+              T
             </Button>
           </span>
         </div>

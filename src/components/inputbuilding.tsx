@@ -6,12 +6,10 @@ import {
   Table,
   TableBody,
   TableContainer,
-  Checkbox,
-  Button,
-  getSelectUtilityClasses,
 } from "@mui/material";
 import { InlineStylesType } from "types";
-import styled from "styled-components";
+
+import { ButtonPrimary } from "styles/components";
 import SingleSelect from "./singleselect";
 import FocusInput from "./focusinput";
 
@@ -32,26 +30,22 @@ const styles: InlineStylesType = {
 
   bldg_id_col: {
     width: "10px",
-    // backgroundColor: "red",
     paddingLeft: "5px",
     paddingRight: "5px",
     textAlign: "center",
   },
 
   input_select_col: {
-    // backgroundColor: "blue",
     width: "70px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
   input_area_col: {
-    // backgroundColor: "yellow",
     width: "50px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
   rm_btn_col: {
-    // backgroundColor: "black",
     width: "10px",
     textAlign: "center",
     paddingLeft: 0,
@@ -64,18 +58,11 @@ const styles: InlineStylesType = {
     paddingRight: 0,
   },
   add_button_container: {
-    marginLeft: "30px",
-    marginTop: "10px",
+    marginLeft: "40px",
+    marginTop: "0px",
     marginBottom: "15px",
   },
 };
-
-const StyledButton = styled(Button)`
-    box-shadow: 0,
-    &:hover: {
-      box-hadow: 0,
-    }
-`;
 
 interface IAppProps {}
 
@@ -153,8 +140,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                     {building_types.length === 1 ? (
                       <span></span>
                     ) : (
-                      <StyledButton
-                        disableRipple={true}
+                      <ButtonPrimary
                         sx={{
                           paddingLeft: 0,
                           paddingRight: 0,
@@ -165,7 +151,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                         }
                       >
                         x
-                      </StyledButton>
+                      </ButtonPrimary>
                     )}
                   </TableCell>
                 </TableRow>
@@ -175,15 +161,14 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
         </Table>
       </TableContainer>
       <div style={styles.add_button_container}>
-        <StyledButton
-          disableRipple={true}
+        <ButtonPrimary
           size="small"
           onClick={() => handleAddBuildingType()}
           variant="contained"
           sx={styles.add_button}
         >
           +
-        </StyledButton>
+        </ButtonPrimary>
         <span style={{ marginLeft: 10 }}>Add Building Type</span>
       </div>
     </div>

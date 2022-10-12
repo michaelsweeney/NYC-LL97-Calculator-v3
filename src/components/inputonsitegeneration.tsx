@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  TableCell,
-  TableRow,
-  Table,
-  TableBody,
-  TableContainer,
-} from "@mui/material";
+
 import FocusInput from "./focusinput";
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -15,10 +9,18 @@ interface IAppProps {}
 const styles: InlineStylesType = {
   text: {
     width: "100px",
+    verticalAlign: "middle",
+    position: "relative",
+    top: "5px",
+    marginLeft: "45px",
+    fontFamily: "CircularStd-Book",
+    fontSize: "14px",
+    fontWeight: "400",
     display: "inline-block",
   },
   input_container: {
-    width: "100px",
+    marginLeft: "15px",
+    // width: "100px",
     display: "inline-block",
   },
 };

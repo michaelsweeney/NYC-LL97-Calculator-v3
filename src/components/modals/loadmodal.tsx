@@ -1,6 +1,6 @@
-import { useEffect, ChangeEvent } from "react";
+import { useEffect, ChangeEvent, useRef } from "react";
 
-import { Button, TextField, MenuItem } from "@mui/material";
+import { TextField, MenuItem, TextFieldProps } from "@mui/material";
 
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
@@ -37,6 +37,16 @@ const LoadModal = () => {
     dispatch(ll84QueryActions.setLL84YearSelection(year));
   };
 
+  const inputref = useRef<TextFieldProps>(null);
+
+  useEffect(() => {
+    if (inputref) {
+      if (inputref.current) {
+        console.log(inputref.current);
+      }
+    }
+  }, [is_load_modal_open]);
+
   useEffect(() => {
     const ll84QueryResponseCallback = (e: LL84QueryPropertyTypes[]) => {
       dispatch(ll84QueryActions.setLL84QueryResultsResponse(e));
@@ -50,13 +60,11 @@ const LoadModal = () => {
   }, [ll84_query_input, ll84_year_selection, dispatch]);
 
   return (
-    <ModalWrapper isOpen={is_load_modal_open} exitCallback={handleCloseModal}>
-      <div>
-        <div>Building Utility Info Loader</div>
-        <Button variant="contained" onClick={handleCloseModal}>
-          Close
-        </Button>
-      </div>
+    <ModalWrapper
+      modalTitle="Building Utility Info Loader"
+      isOpen={is_load_modal_open}
+      exitCallback={handleCloseModal}
+    >
       <div>
         This form allows for querying NYC's "Energy and Water Data Disclosure"
         database for multiple years. The form loads and translates building
@@ -77,7 +85,12 @@ const LoadModal = () => {
             );
           })}
         </Select>
-        <TextField onChange={handleSearchChange} value={ll84_query_input} />
+        <TextField
+          autoFocus
+          inputRef={inputref}
+          onChange={handleSearchChange}
+          value={ll84_query_input}
+        />
       </div>
 
       <div>

@@ -1,9 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
-import { WidthHeightDimensionTypes, D3WrapperPropTypes } from "types";
-import { uiActions } from "store/uislice";
-
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { D3WrapperPropTypes } from "types";
 
 const D3Wrapper = (props: D3WrapperPropTypes) => {
   const [containerDimensions, setContainerDimensions] = useState({

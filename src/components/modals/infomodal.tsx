@@ -1,10 +1,8 @@
-import * as React from "react";
-import { Button } from "@mui/material";
-
 import ModalWrapper from "./modalwrapper";
 
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { SubHeaderLined } from "styles/typography";
 
 const InfoModal = () => {
   const { is_info_modal_open } = useAppSelector((state) => state.ui);
@@ -15,11 +13,13 @@ const InfoModal = () => {
   };
 
   return (
-    <ModalWrapper isOpen={is_info_modal_open} exitCallback={handleCloseModal}>
-      <div>NYC LL97 Carbon Emissions Calculator (v3)</div>
-
+    <ModalWrapper
+      modalTitle="NYC LL97 Carbon Emissions Calculator"
+      isOpen={is_info_modal_open}
+      exitCallback={handleCloseModal}
+    >
       <div>
-        <div>About</div>
+        <SubHeaderLined>About</SubHeaderLined>
         <div>
           <p>
             This calculator estimates a building's carbon penalty as a result of{" "}
@@ -58,7 +58,7 @@ const InfoModal = () => {
       </div>
 
       <div>
-        <div> Instructions</div>
+        <SubHeaderLined> Instructions</SubHeaderLined>
 
         <div>
           Users can either load building data or enter manually, following the
@@ -90,7 +90,7 @@ const InfoModal = () => {
         </ul>
       </div>
       <div>
-        <div>Notes and Clarifications</div>
+        <SubHeaderLined>Notes and Clarifications</SubHeaderLined>
         <ul>
           <li>
             This calculator is based on interpretation of NYC Local Law 97 –
@@ -117,9 +117,6 @@ const InfoModal = () => {
           </li>
         </ul>
       </div>
-      <Button variant="contained" onClick={handleCloseModal}>
-        Close
-      </Button>
     </ModalWrapper>
   );
 };

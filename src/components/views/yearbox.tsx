@@ -1,11 +1,4 @@
-import * as react from "react";
-
-import { formatNumber, formatCurrency } from "./d3helpers";
-import {
-  CarbonSummaryByYearObj,
-  D3WrapperCallbackPropTypes,
-  InlineStylesType,
-} from "types";
+import { InlineStylesType } from "types";
 
 import { colors } from "styles/colors";
 
@@ -20,10 +13,10 @@ const styles: InlineStylesType = {
     paddingLeft: "20px",
     paddingRight: "20px",
     textAlign: "center",
-    backgroundColor: colors.grays.medium,
+    backgroundColor: colors.grays.medium as string,
   },
   yearBoxActive: {
-    backgroundColor: colors.main.primary,
+    backgroundColor: colors.primary.main as string,
   },
   headerText: {
     fontWeight: 600,

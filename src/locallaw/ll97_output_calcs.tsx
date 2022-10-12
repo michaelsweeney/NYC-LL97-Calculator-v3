@@ -2,7 +2,6 @@ import {
   BuildingInputTypes,
   BuildingOutputSliceTypes,
   YearFuelTypeObj,
-  YearValueObj,
   UtilityConsumptionType,
   CarbonSummaryByYearObj,
 } from "types";

@@ -1,11 +1,10 @@
-import { Table, TableBody, TableContainer } from "@mui/material";
-
 import * as React from "react";
 
 import InputBuilding from "./inputbuilding";
 import InputUtilities from "./inpututilities";
 import InputOnsiteGeneration from "./inputonsitegeneration";
-import CoefficientSelector from "./coefficientselector";
+// import CoefficientSelector from "./coefficientselector";
+import { SubHeaderLined } from "styles/typography";
 import { InlineStylesType } from "types";
 import styled from "styled-components";
 const styles: InlineStylesType = {
@@ -14,31 +13,21 @@ const styles: InlineStylesType = {
 
 interface IAppProps {}
 
-const SidebarHeaderText = styled("div")`
-  font-family: CircularStd-Black;
-  font-size: 16px;
-  margin-left: 20px;
-  &:after {
-    width: 50px;
-    display: block;
-    height: 4px;
-    margin-top: 4px;
-    background-color: rgb(186, 214, 54);
-    content: "";
-  }
+const SidebarSubHeader = styled(SubHeaderLined)`
+  margin-left: 15px;
 `;
 
 const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
   return (
     <div style={styles.root}>
-      <SidebarHeaderText>Building Inputs</SidebarHeaderText>
+      <SidebarSubHeader>Building Inputs</SidebarSubHeader>
       <InputBuilding />
-      <SidebarHeaderText>Utility Inputs</SidebarHeaderText>
+      <SidebarSubHeader>Utility Inputs</SidebarSubHeader>
       <InputUtilities />
-      <SidebarHeaderText>Onsite Generation</SidebarHeaderText>
+      <SidebarSubHeader>Onsite Generation</SidebarSubHeader>
       <InputOnsiteGeneration />
-      <SidebarHeaderText>Carbon Coefficients</SidebarHeaderText>
-      <CoefficientSelector />
+      {/* <SidebarHeader>Carbon Coefficients</SidebarHeader> */}
+      {/* <CoefficientSelector /> */}
     </div>
   );
 };

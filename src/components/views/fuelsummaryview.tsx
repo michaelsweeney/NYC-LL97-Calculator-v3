@@ -2,7 +2,7 @@ import * as React from "react";
 import * as d3 from "d3";
 import { bindD3Element } from "./d3helpers";
 import D3Wrapper from "./d3wrapper";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import { fuel_colors } from "styles/colors";
 import {
   D3WrapperCallbackPropTypes,
@@ -115,10 +115,10 @@ const FuelSummaryView: React.FunctionComponent = () => {
       let margin = Math.max(pieheight * 0.05, 10);
       let radius = Math.min(piewidth, pieheight) / 2;
 
-      let colorScale = d3
-        .scaleOrdinal()
-        .domain(Object.keys(fuel_colors))
-        .range(Object.values(fuel_colors));
+      // let colorScale = d3
+      //   .scaleOrdinal()
+      //   .domain(Object.keys(fuel_colors))
+      //   .range(Object.values(fuel_colors));
 
       let svg = bindD3Element(container_ref, "svg", "fuel-summary-svg")
         .attr("height", container_height)
@@ -127,8 +127,9 @@ const FuelSummaryView: React.FunctionComponent = () => {
       let titletext = bindD3Element(svg, "text", "title-text")
         .attr("x", container_width / 2)
         .attr("y", 20)
-        .attr("text-anchor", "middle")
-        .text(title);
+        .attr("text-anchor", "middle");
+
+      titletext.text(title);
 
       let pieFunc = d3
         .pie()

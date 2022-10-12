@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as d3 from "d3";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import { fuel_keys_to_labels } from "locallaw/lookups";
 import { formatNumber, formatCurrency } from "./d3helpers";
 import { InlineStylesType } from "types";
@@ -11,9 +11,6 @@ import {
   TableContainer,
   TableRow,
   Box,
-  List,
-  ListItem,
-  ListItemText,
   Divider,
   Typography,
 } from "@mui/material";
@@ -27,13 +24,8 @@ const styles: InlineStylesType = {
 
 const TableView: React.FunctionComponent = () => {
   const {
-    building_inputs: {
-      building_types,
-      electric_coefficient_method,
-      electric_onsite_generation,
-      utilities,
-    },
-    building_outputs: { annual_carbon_summary_by_year, annual_cost_by_fuel },
+    building_inputs: { building_types, electric_onsite_generation, utilities },
+    building_outputs: { annual_carbon_summary_by_year },
   } = useAppSelector((state) => state);
 
   let year_filter = [2024, 2030, 2035, 2040, 2050];

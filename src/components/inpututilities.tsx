@@ -6,7 +6,6 @@ import {
   Table,
   TableBody,
   TableContainer,
-  Checkbox,
 } from "@mui/material";
 import FocusInput from "./focusinput";
 
@@ -16,21 +15,21 @@ import {
 } from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { StyledCheckbox } from "styles/components";
 
 interface IAppProps {}
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
   root: {},
-  table: { marginLeft: "15px", tableLayout: "fixed", width: "325px" },
+  table: { marginLeft: "35px", tableLayout: "fixed", width: "325px" },
   fuel_col: {
-    width: "calc(325px - 200px)",
-
+    width: "150px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
   rate_col: {
-    width: "70px",
+    // width: "70px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
@@ -113,10 +112,10 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
       </TableContainer>
 
       <div>
-        <Checkbox
+        <StyledCheckbox
           onClick={() => handleSetIsDefaultRates(!is_default_rates)}
           checked={is_default_rates ? true : false}
-        ></Checkbox>
+        ></StyledCheckbox>
         Use Default Rates
       </div>
     </div>

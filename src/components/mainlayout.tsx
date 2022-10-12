@@ -18,7 +18,7 @@ const styles: InlineStylesType = {
   header: {
     width: "100%",
     height: "100px",
-    borderBottom: `${borderWidth} solid ${colors.main.primary}`,
+    borderBottom: `${borderWidth} solid ${colors.primary.main as string}`,
     boxSizing: "border-box",
   },
   middle: {
@@ -29,7 +29,7 @@ const styles: InlineStylesType = {
   footer: {
     width: "100%",
     height: "90px",
-    borderTop: `${borderWidth} solid ${colors.main.primary}`,
+    borderTop: `${borderWidth} solid ${colors.primary.main as string}`,
     boxSizing: "border-box",
   },
   sidebar: {

@@ -1,28 +1,12 @@
 import * as React from "react";
 import { InlineStylesType } from "types";
 
-import { colors } from "styles/colors";
+import { FooterTextAccelerator, FooterTextAKF } from "styles/typography";
 interface IAppProps {}
 
 const styles: InlineStylesType = {
-  root: { padding: "20px", boxSizing: "border-box" },
-  acceleratorText: {
-    fontFamily: "CircularStd-Black",
-    color: colors.main.primary,
-    fontSize: "16px",
-    fontWeight: "700",
-  },
-  acceleratorLink: {
-    color: "black",
-    textDecoration: "none",
-  },
-  akfText: {
-    textDecoration: "none",
-    fontFamily: "CircularStd-Black",
-    color: colors.main.primary,
-    fontSize: "16px",
-    fontWeight: "700",
-  },
+  root: { boxSizing: "border-box" },
+
   left: {
     display: "inline-block",
     width: "600px",
@@ -30,14 +14,18 @@ const styles: InlineStylesType = {
     verticalAlign: "middle",
     paddingRight: "10px",
     boxSizing: "border-box",
+    paddingLeft: "20px",
+    paddingTop: "20px",
   },
   right: {
     display: "inline-block",
     width: "calc(100% - 600px)",
     textAlign: "right",
     verticalAlign: "middle",
-    paddingLeft: "10px",
+    paddingLeft: "15px",
     boxSizing: "border-box",
+    paddingRight: "20px",
+    paddingTop: "20px",
   },
 };
 
@@ -49,7 +37,7 @@ const Footer: React.FunctionComponent<IAppProps> = (props) => {
   return (
     <div style={styles.root}>
       <div style={styles.left}>
-        <div style={styles.acceleratorText}>
+        <FooterTextAccelerator>
           What Now? Visit{" "}
           <a
             style={styles.acceleratorLink}
@@ -61,18 +49,20 @@ const Footer: React.FunctionComponent<IAppProps> = (props) => {
           </a>{" "}
           for free, personalized advisory services to improve building energy
           efficiency and lower carbon emissions
-        </div>
+        </FooterTextAccelerator>
       </div>
       <div style={styles.right}>
-        {" "}
-        <a
-          style={styles.akfText}
-          href={akfurl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Calculator engine by AKF Group LLC
-        </a>
+        <FooterTextAKF>
+          Calculator engine by{" "}
+          <a
+            style={styles.akfText}
+            href={akfurl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            AKF Group LLC
+          </a>
+        </FooterTextAKF>
       </div>
     </div>
   );
