@@ -30,4 +30,12 @@ export const ButtonSecondary = styled(Button)<{}>`
   }
 `;
 
+export const RemoveTypeButton = styled(Button)`
+  font-family: CircularStd-Bold;
+  &:hover {
+    background-color: white;
+    color: ${colors.secondary.dark};
+  }
+`;
+
 export const StyledCheckbox = styled(Checkbox)``;

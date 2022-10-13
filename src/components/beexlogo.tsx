@@ -3,10 +3,11 @@ import React from "react";
 type PropTypes = {
   width: number | string;
   height: number | string;
+  small?: boolean;
 };
 
 const BeExLogo = (props: PropTypes) => {
-  let { width, height } = props;
+  let { width, height, small } = props;
 
   return (
     <React.Fragment>
@@ -29,44 +30,49 @@ const BeExLogo = (props: PropTypes) => {
             ></rect>
           </clipPath>
         </defs>
-        <g className="logo-words">
-          <text
-            transform="translate(220.47 98.75)"
-            style={{
-              isolation: "isolate",
-              fontSize: 56.509544372558594,
-              fill: "#595954",
-              fontFamily: "CircularStd-Bold",
-              letterSpacing: "-0.011993272685615782em",
-            }}
-          >
-            building
-          </text>
-          <text
-            transform="translate(444.43 98.75)"
-            style={{
-              isolation: "isolate",
-              fontSize: 56.509544372558594,
-              fill: "#595954",
-              fontFamily: "CircularStd-Bold",
-              letterSpacing: "-0.005996636342807891em",
-            }}
-          >
-            energy
-          </text>
-          <text
-            transform="translate(220.47 153.51)"
-            style={{
-              isolation: "isolate",
-              fontSize: 56.509544372558594,
-              fill: "#bad636",
-              fontFamily: "CircularStd-Bold",
-              letterSpacing: "-0.027995823848267386em",
-            }}
-          >
-            exchange
-          </text>
-        </g>
+
+        {small ? (
+          <g></g>
+        ) : (
+          <g className="logo-words">
+            <text
+              transform="translate(220.47 98.75)"
+              style={{
+                isolation: "isolate",
+                fontSize: 56.509544372558594,
+                fill: "#595954",
+                fontFamily: "CircularStd-Bold",
+                letterSpacing: "-0.011993272685615782em",
+              }}
+            >
+              building
+            </text>
+            <text
+              transform="translate(444.43 98.75)"
+              style={{
+                isolation: "isolate",
+                fontSize: 56.509544372558594,
+                fill: "#595954",
+                fontFamily: "CircularStd-Bold",
+                letterSpacing: "-0.005996636342807891em",
+              }}
+            >
+              energy
+            </text>
+            <text
+              transform="translate(220.47 153.51)"
+              style={{
+                isolation: "isolate",
+                fontSize: 56.509544372558594,
+                fill: "#bad636",
+                fontFamily: "CircularStd-Bold",
+                letterSpacing: "-0.027995823848267386em",
+              }}
+            >
+              exchange
+            </text>
+          </g>
+        )}
         <g>
           <g style={{ clipPath: "url(#clip-path)" }}>
             {/* <line

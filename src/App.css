@@ -21,3 +21,21 @@
 div {
     font-family: 'CircularStd-Book';
 }
+
+
+.print-container {
+	display: none;
+} 
+
+
+@media print {
+	.layout-container {
+		display: none !important;
+	}
+	.print-container {
+		display: block !important;
+	}
+	.MuiPopover-root {
+		display: none !important;
+	}
+}

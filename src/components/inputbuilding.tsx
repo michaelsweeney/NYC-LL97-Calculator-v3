@@ -6,9 +6,10 @@ import {
   Table,
   TableBody,
   TableContainer,
+  Button,
 } from "@mui/material";
 import { InlineStylesType } from "types";
-
+import { RemoveTypeButton } from "styles/components";
 import { ButtonPrimary } from "styles/components";
 import SingleSelect from "./singleselect";
 import FocusInput from "./focusinput";
@@ -146,7 +147,9 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                     {building_types.length === 1 ? (
                       <span></span>
                     ) : (
-                      <ButtonPrimary
+                      <RemoveTypeButton
+                        color="secondary"
+                        variant="text"
                         sx={{
                           paddingLeft: 0,
                           paddingRight: 0,
@@ -157,7 +160,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                         }
                       >
                         x
-                      </ButtonPrimary>
+                      </RemoveTypeButton>
                     )}
                   </TableCell>
                 </TableRow>

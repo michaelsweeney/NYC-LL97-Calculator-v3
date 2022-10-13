@@ -48,7 +48,8 @@ const NavMenu = () => {
   };
 
   const handleTogglePrintMode = () => {
-    dispatch(uiActions.setIsPrintMode(true));
+    window.print();
+    // dispatch(uiActions.setIsPrintMode(true));
   };
 
   return (
@@ -71,7 +72,9 @@ const NavMenu = () => {
         <MenuItem onClick={handleOpenBuildingSummaryModal}>
           About Loaded Building
         </MenuItem>
-        <MenuItem onClick={handleTogglePrintMode}>View Report</MenuItem>
+        <MenuItem onClick={handleTogglePrintMode}>
+          Print Summary Report
+        </MenuItem>
       </Menu>
     </div>
   );

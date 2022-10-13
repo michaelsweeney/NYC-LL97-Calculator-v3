@@ -7,7 +7,7 @@ const initialState: UiSliceTypes = {
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
   active_view: "carbon",
-  is_print_mode: false,
+  is_print_mode: true,
 };
 
 export const uiSlice = createSlice({

@@ -7,10 +7,11 @@ import LoadModal from "components/modals/loadmodal";
 import BuildingSummaryModal from "components/modals/buildingsummarymodal";
 import TestComponent from "components/testcomponent";
 import InputListener from "components/inputlistener";
-import PrintLayout from "components/printlayout";
+import PrintLayout from "components/printlayout/printlayout";
 
 import { colors } from "styles/colors";
 import { Shadows } from "@mui/material/styles/shadows";
+import { useAppSelector } from "store/hooks";
 
 const theme = createTheme({
   shadows: Array(25).fill("none") as Shadows,
@@ -36,6 +37,7 @@ const theme = createTheme({
 });
 
 const App = () => {
+  const { is_print_mode } = useAppSelector((state) => state.ui);
   return (
     <ThemeProvider theme={theme}>
       <InputListener />
@@ -43,8 +45,19 @@ const App = () => {
       <InfoModal />
       <LoadModal />
       <BuildingSummaryModal />
-      <MainLayout />
-      <PrintLayout />
+      <div
+        className="layout-container"
+        style={{ display: !is_print_mode ? "block" : "none" }}
+      >
+        <MainLayout />
+      </div>
+
+      <div
+        className="print-container"
+        style={{ display: is_print_mode ? "block" : "none" }}
+      >
+        <PrintLayout />
+      </div>
     </ThemeProvider>
   );
 };
