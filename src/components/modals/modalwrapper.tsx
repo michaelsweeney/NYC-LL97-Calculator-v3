@@ -2,11 +2,12 @@ import * as React from "react";
 
 import Dialog from "@mui/material/Dialog";
 
-import IconButton from "@mui/material/IconButton";
-// import CloseIcon from "@mui/icons-material/Close";
+import { CloseIconButton } from "../icons";
 import { ButtonPrimary } from "styles/components";
 import { MenuTitle } from "styles/typography";
 import { InlineStylesType } from "types";
+import { colors } from "styles/colors";
+
 type PropTypes = {
   isOpen: boolean;
   exitCallback: (b: boolean) => void;
@@ -28,7 +29,7 @@ const styles: InlineStylesType = {
   xCornerButton: {
     position: "absolute",
     right: "40px",
-    top: "33px",
+    top: "35px",
   },
   childrenContainer: {
     paddingLeft: "20px",
@@ -56,10 +57,7 @@ const ModalWrapper = (props: PropTypes) => {
             <MenuTitle>{modalTitle}</MenuTitle>
           </div>
           <div style={styles.xCornerButton}>
-            <IconButton onClick={hideModal}>
-              <div>x</div>
-              {/* <CloseIcon></CloseIcon> */}
-            </IconButton>
+            <CloseIconButton clickCallback={hideModal} width={30} height={30} />
           </div>
         </div>
         <div style={styles.childrenContainer}>{children}</div>

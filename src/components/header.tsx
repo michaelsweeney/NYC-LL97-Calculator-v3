@@ -13,7 +13,6 @@ const styles: InlineStylesType = {
   root: {},
   left: {
     width: "225px",
-    height: "100%",
     display: "inline-block",
     verticalAlign: "middle",
     paddingLeft: "25px",
@@ -23,7 +22,6 @@ const styles: InlineStylesType = {
   middle: {
     width: "calc(100% - 325px)",
     textAlign: "center",
-    height: "100%",
     display: "inline-block",
     verticalAlign: "middle",
     boxSizing: "border-box",
@@ -51,21 +49,24 @@ const Header: React.FunctionComponent<IAppProps> = () => {
   };
 
   return (
-    <div style={styles.root}>
+    <React.Fragment>
       <div style={styles.left}>
         <BeExLogo width="200" height="100" />
       </div>
       <div style={styles.middle}>
-        <HeaderTitle>NYC LL97 Carbon Emissions Calculator</HeaderTitle>
-
-        <HeaderBuildingTitle onClick={handleLL84NameClick}>
-          {property_name}
-        </HeaderBuildingTitle>
+        <div>
+          <HeaderTitle>NYC LL97 Carbon Emissions Calculator</HeaderTitle>
+        </div>
+        <div>
+          <HeaderBuildingTitle onClick={handleLL84NameClick}>
+            {property_name}
+          </HeaderBuildingTitle>
+        </div>
       </div>
       <div style={styles.right}>
         <NavMenu />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

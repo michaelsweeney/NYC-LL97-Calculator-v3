@@ -71,6 +71,7 @@ export type UiSliceTypes = {
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
   active_view: ViewTypes;
+  is_print_mode: boolean;
 };
 
 export type LL84QuerySliceTypes = {

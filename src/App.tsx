@@ -7,6 +7,7 @@ import LoadModal from "components/modals/loadmodal";
 import BuildingSummaryModal from "components/modals/buildingsummarymodal";
 import TestComponent from "components/testcomponent";
 import InputListener from "components/inputlistener";
+import PrintLayout from "components/printlayout";
 
 import { colors } from "styles/colors";
 import { Shadows } from "@mui/material/styles/shadows";
@@ -43,6 +44,7 @@ const App = () => {
       <LoadModal />
       <BuildingSummaryModal />
       <MainLayout />
+      <PrintLayout />
     </ThemeProvider>
   );
 };

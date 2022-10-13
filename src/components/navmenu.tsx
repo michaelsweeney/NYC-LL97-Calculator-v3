@@ -1,13 +1,14 @@
 import * as React from "react";
-import { NavBarButton } from "styles/components";
+
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
+import { BurgerMenuIconButton } from "./icons";
 import { useAppDispatch } from "store/hooks";
 import { uiActions } from "store/uislice";
 
 import { InlineStylesType } from "types";
 
+import { colors } from "styles/colors";
 const styles: InlineStylesType = {
   nav: {
     border: "1px solid black",
@@ -46,11 +47,18 @@ const NavMenu = () => {
     handleClose();
   };
 
+  const handleTogglePrintMode = () => {
+    dispatch(uiActions.setIsPrintMode(true));
+  };
+
   return (
     <div>
-      <NavBarButton $active={open} onClick={handleClick}>
-        <div>===</div>
-      </NavBarButton>
+      <BurgerMenuIconButton
+        active={open}
+        clickCallback={handleClick}
+        width={40}
+        height={40}
+      />
 
       <Menu
         sx={styles.nav}
@@ -63,6 +71,7 @@ const NavMenu = () => {
         <MenuItem onClick={handleOpenBuildingSummaryModal}>
           About Loaded Building
         </MenuItem>
+        <MenuItem onClick={handleTogglePrintMode}>View Report</MenuItem>
       </Menu>
     </div>
   );

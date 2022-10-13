@@ -18,6 +18,7 @@ import { building_type_co2_coefficients } from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { relative } from "node:path/win32";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
@@ -58,9 +59,14 @@ const styles: InlineStylesType = {
     paddingRight: 0,
   },
   add_button_container: {
-    marginLeft: "40px",
+    marginLeft: "15px",
     marginTop: "0px",
     marginBottom: "15px",
+  },
+  add_button_text: {
+    position: "relative",
+    marginLeft: 10,
+    top: 1,
   },
 };
 
@@ -169,7 +175,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
         >
           +
         </ButtonPrimary>
-        <span style={{ marginLeft: 10 }}>Add Building Type</span>
+        <span style={styles.add_button_text}>Add Building Type</span>
       </div>
     </div>
   );

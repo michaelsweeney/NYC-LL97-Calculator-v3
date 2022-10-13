@@ -31,12 +31,16 @@ export const MenuTitle = styled("div")`
 `;
 
 export const HeaderTitle = styled("div")`
+  display: inline-block;
+  text-align: center;
   color: ${colors.secondary.main};
   font-size: 26px;
   font-family: "CircularStd-Black";
 `;
 
 export const HeaderBuildingTitle = styled("div")`
+  display: inline-block;
+  text-align: center;
   color: ${colors.secondary.main};
   font-size: 20px;
   font-family: CircularStd-Medium;

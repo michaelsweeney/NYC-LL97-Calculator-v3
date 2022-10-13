@@ -7,6 +7,7 @@ const initialState: UiSliceTypes = {
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
   active_view: "carbon",
+  is_print_mode: true,
 };
 
 export const uiSlice = createSlice({
@@ -24,6 +25,9 @@ export const uiSlice = createSlice({
     },
     setActiveView: (state, action: PayloadAction<ViewTypes>) => {
       state.active_view = action.payload;
+    },
+    setIsPrintMode: (state, action: PayloadAction<boolean>) => {
+      state.is_print_mode = action.payload;
     },
   },
 });
