@@ -52,7 +52,6 @@ export const BurgerMenuIconButton = (props: IconPropTypes) => {
     setCurrentColor(colors.primary.main);
   };
 
-  console.log(active);
   return (
     <Button
       onMouseOver={handleMouseOver}

@@ -1,9 +1,11 @@
 import * as React from "react";
 import * as d3 from "d3";
 import { bindD3Element } from "./d3helpers";
-import D3Wrapper from "./d3wrapper";
+import SVGWrapper from "./svgwrapper";
 import { useAppSelector } from "store/hooks";
 import { fuel_colors } from "styles/colors";
+import { ChartHeaderLined } from "styles/typography";
+
 import {
   D3WrapperCallbackPropTypes,
   InlineStylesType,
@@ -17,9 +19,16 @@ type PieDataType = {
 };
 
 const styles: InlineStylesType = {
-  root: {
+  root: { height: "100%", width: "100%" },
+  header: {
+    height: "50px",
+    padding: 10,
+    boxSizing: "border-box",
+  },
+
+  main: {
     display: "inline-block",
-    height: "100%",
+    height: "calc(100% - 50px)",
     width: "100%",
     boxSizing: "border-box",
   },
@@ -166,52 +175,58 @@ const FuelSummaryView: React.FunctionComponent = () => {
 
   return (
     <div style={styles.root}>
-      <div style={styles.top}>
-        <div style={styles.left}>
-          <D3Wrapper
-            createChartCallback={(d) =>
-              createChart({
-                container: d,
-                data_obj: cost_data,
-                title: "Annual Cost Summary",
-              })
-            }
-          />
-        </div>
-        <div style={styles.right}>
-          <D3Wrapper
-            createChartCallback={(d) =>
-              createChart({
-                container: d,
-                data_obj: eui_data,
-                title: "Annual Site EUI Summary",
-              })
-            }
-          />{" "}
-        </div>
+      <div style={styles.header}>
+        <ChartHeaderLined>Fuel Breakdown Summary</ChartHeaderLined>
       </div>
-      <div style={styles.bottom}>
-        <div style={styles.left}>
-          <D3Wrapper
-            createChartCallback={(d) =>
-              createChart({
-                container: d,
-                data_obj: carbon_2024_data,
-                title: "Carbon Intensity - 2024",
-              })
-            }
-          />
+
+      <div style={styles.main}>
+        <div style={styles.top}>
+          <div style={styles.left}>
+            <SVGWrapper
+              createChartCallback={(d) =>
+                createChart({
+                  container: d,
+                  data_obj: cost_data,
+                  title: "Annual Cost Summary",
+                })
+              }
+            />
+          </div>
+          <div style={styles.right}>
+            <SVGWrapper
+              createChartCallback={(d) =>
+                createChart({
+                  container: d,
+                  data_obj: eui_data,
+                  title: "Annual Site EUI Summary",
+                })
+              }
+            />{" "}
+          </div>
         </div>
-        <div style={styles.right}>
-          <D3Wrapper
-            createChartCallback={(d) =>
-              createChart({
-                container: d,
-                data_obj: carbon_2050_data,
-                title: "Carbon Intensity - 2050",
-              })
-            }
-          />
+        <div style={styles.bottom}>
+          <div style={styles.left}>
+            <SVGWrapper
+              createChartCallback={(d) =>
+                createChart({
+                  container: d,
+                  data_obj: carbon_2024_data,
+                  title: "Carbon Intensity - 2024",
+                })
+              }
+            />
+          </div>
+          <div style={styles.right}>
+            <SVGWrapper
+              createChartCallback={(d) =>
+                createChart({
+                  container: d,
+                  data_obj: carbon_2050_data,
+                  title: "Carbon Intensity - 2050",
+                })
+              }
+            />
+          </div>
         </div>
       </div>
     </div>

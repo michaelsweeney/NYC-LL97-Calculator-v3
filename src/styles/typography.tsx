@@ -17,6 +17,22 @@ export const SubHeaderLined = styled("div")`
   }
 `;
 
+export const ChartHeaderLined = styled("div")`
+  display: inline-block;
+  font-family: CircularStd-Black;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  &:after {
+    width: 50px;
+    display: block;
+    height: 4px;
+    margin-top: 4px;
+    background-color: rgb(186, 214, 54);
+    content: "";
+  }
+`;
+
 export const MenuTitle = styled("div")`
   font-size: 20px;
   font-family: CircularStd-Bold;

@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 
 import { D3WrapperPropTypes } from "types";
 
-const D3Wrapper = (props: D3WrapperPropTypes) => {
+const SVGWrapper = (props: D3WrapperPropTypes) => {
   const [containerDimensions, setContainerDimensions] = useState({
     width: 50,
     height: 50,
@@ -51,4 +51,4 @@ const D3Wrapper = (props: D3WrapperPropTypes) => {
   return <div style={{ height: "100%", width: "100%" }} ref={ref}></div>;
 };
 
-export default D3Wrapper;
+export default SVGWrapper;

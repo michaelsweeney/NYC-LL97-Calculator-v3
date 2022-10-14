@@ -2,11 +2,12 @@ import * as React from "react";
 import * as d3 from "d3";
 
 import { Button } from "@mui/material";
-import D3Wrapper from "./d3wrapper";
+import SVGWrapper from "./svgwrapper";
 import { formatNumber } from "./d3helpers";
 
 import { useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
+import { ChartHeaderLined } from "styles/typography";
 import {
   CarbonSummaryByYearObj,
   D3WrapperCallbackPropTypes,
@@ -15,81 +16,101 @@ import {
 
 import { colors } from "styles/colors";
 
-import YearBox from "./yearbox";
-
 type DType = CarbonSummaryByYearObj;
 
 const styles: InlineStylesType = {
   root: {},
-  upper: {
-    height: "175px",
+  header: {
+    height: "50px",
     padding: 10,
     boxSizing: "border-box",
   },
-  lower: {
-    height: "calc(100% - 175px)",
+  main: {
+    height: "calc(100% - 50px)",
     boxSizing: "border-box",
-  },
-
-  chartTitle: {
-    color: colors.secondary.main,
-    fontWeight: 500,
-    fontSize: "1.5em",
-  },
-  yearBoxContainer: {
-    display: "inline-block",
-  },
-  yearBoxTextLabels: {
-    display: "inline-block",
   },
 };
 
 const CarbonView: React.FunctionComponent = () => {
-  const { building_outputs } = useAppSelector((state) => state);
-  let { annual_carbon_summary_by_year } = building_outputs;
+  const { annual_carbon_summary_by_year } = useAppSelector(
+    (state) => state.building_outputs
+  );
 
-  const createChart = (container: D3WrapperCallbackPropTypes) => {
+  const createCarbonLayout = (container: D3WrapperCallbackPropTypes) => {
     const { container_ref, container_dimensions } = container;
 
-    if (annual_carbon_summary_by_year) {
-      /* -- DEFINE DATA AND CONSTANTS -- */
-      let data = annual_carbon_summary_by_year;
+    // make svg and establish dimensions / groups for chart vs table.
+    let container_width = container_dimensions.width;
+    let container_height = container_dimensions.height;
 
-      // data = data.filter((d) =>
-      //   [2024, 2030, 2035, 2040, 2050].includes(d.year)
-      // );
+    let table_height = 100;
 
-      let container_width = container_dimensions.width;
-      let container_height = container_dimensions.height;
+    let table_margins = {
+      t: 15,
+      l: 100,
+      r: 100,
+      b: 15,
+    };
 
-      let margins = {
-        t: 50,
-        l: 100,
-        r: 150,
-        b: 100,
-      };
+    let plot_margins = {
+      t: 0,
+      l: 100,
+      r: 100,
+      b: 40,
+    };
 
-      let plot_dims = {
-        width: container_width - margins.l - margins.r,
-        height: container_height - margins.t - margins.b,
-      };
+    let table_dims = {
+      width: container_width - table_margins.l - table_margins.r,
+      height: table_height,
+    };
+
+    let plot_dims = {
+      width: container_width - plot_margins.l - plot_margins.r,
+      height: container_height - plot_margins.t - plot_margins.b - table_height,
+    };
+
+    let svg = bindD3Element(container_ref, "svg", "carbonview-svg")
+      .attr("height", container_height)
+      .attr("width", container_width);
+
+    let table_g = bindD3Element(svg, "g", "table-g");
+    table_g.attr(
+      "transform",
+      `translate(${table_margins.l},${table_margins.t})`
+    );
+
+    let plot_g = bindD3Element(svg, "g", "plot-g");
+    plot_g.attr(
+      "transform",
+      `translate(${plot_margins.l},${plot_margins.t + table_height})`
+    );
+
+    let data = annual_carbon_summary_by_year;
+
+    if (data) {
+      /* ---------------------------- */
+      /* -------- CARBON PLOT VIEW ------- */
+      /* ---------------------------- */
 
       let ypaddingtop = 1.15;
-
-      /* -- PULL OUT AND PROCESS DATA ARRAYS -- */
-      let svg = bindD3Element(container_ref, "svg", "carbonview-svg")
-        .attr("height", container_height)
-        .attr("width", container_width);
-
-      let plot_g = bindD3Element(svg, "g", "plot-g");
-      plot_g.attr("transform", `translate(${margins.l},${margins.t})`);
-
-      /* -- SETUP SCALES AND AXES -- */
 
       let bar_carbon_g = bindD3Element(plot_g, "g", "bar-carbon-g");
       let bar_excess_g = bindD3Element(plot_g, "g", "bar-excess-g");
 
       let line_threshold_g = bindD3Element(plot_g, "g", "line-threshold-g");
+
+      let text_g = bindD3Element(plot_g, "g", "text-g");
+
+      let y_label = bindD3Element(text_g, "text", "y-label-text");
+
+      y_label
+        .text("Tons Carbon per Year (tCO2e)")
+        .attr("transform", "rotate(270)")
+        .attr("y", -plot_margins.l / 2 - 10)
+        .attr("x", -plot_margins.t + -plot_dims.height / 2)
+        .attr("text-anchor", "middle")
+        .style("font-family", "CircularStd-Medium")
+        .style("font-size", "14px");
 
       let x_axis_g = bindD3Element(plot_g, "g", "x-axis-g").attr(
         "transform",
@@ -147,8 +168,6 @@ const CarbonView: React.FunctionComponent = () => {
 
       right_axis_g.selectAll(".tick").remove();
       top_axis_g.selectAll(".tick").remove();
-
-      /* -- DATA LINES AND RECTANGLES -- */
 
       bar_carbon_g
         .selectAll(".carbon-rect")
@@ -211,143 +230,177 @@ const CarbonView: React.FunctionComponent = () => {
         .style("stroke", colors.reds.dark)
         .style("stroke-width", threshold_line_thickness)
         .style("stroke-dasharray", "5");
+
+      /* ---------------------------- */
+      /* -------- TABLE VIEW -------- */
+      /* ---------------------------- */
+      const summary_years = [2024, 2030, 2035, 2040, 2050];
+
+      const text_vertical_spacing = 20;
+
+      const index_width = 180;
+
+      const col_width = Math.max(70, (table_dims.width - index_width) / 6);
+
+      const font_size = 12;
+
+      const summary_array = summary_years.map((yr) => {
+        return {
+          year: yr.toString(),
+          consumption: formatNumber(
+            data?.find((d) => d.year === yr)?.carbon_total_absolute as number
+          ),
+          threshold: formatNumber(
+            data?.find((d) => d.year === yr)?.threshold_absolute as number
+          ),
+          fine: formatNumber(data?.find((d) => d.year === yr)?.fine as number),
+          is_fine: (data?.find((d) => d.year === yr)?.fine as number) > 0,
+        };
+      });
+
+      const table_rect = bindD3Element(table_g, "rect", "table-outline");
+
+      table_rect
+        .attr("y", -font_size)
+        .attr("width", table_dims.width)
+        .attr("height", table_dims.height)
+        .attr("fill", "none")
+        .attr("stroke", "black");
+
+      let table_columns = table_g
+        .selectAll(".summary-column-g")
+        .data(summary_array)
+        .join("g")
+        .attr("class", "summary-column-g")
+        .attr(
+          "transform",
+          (d: any, i: number) => `translate(${col_width * i},0)`
+        )
+        .attr("data-array-index", (d: any, i: number) => i)
+        .attr("data-year", (d: any) => d.year)
+        .attr("data-threshold", (d: any) => d.threshold)
+        .attr("data-consumption", (d: any) => d.consumption)
+        .attr("data-fine", (d: any) => d.fine)
+        .attr("data-isfine", (d: any) => d.is_fine);
+
+      let table_row_labels = [
+        "Year",
+        "Consumption (tCO2e/yr)",
+        "Threshold (tCO2e/yr)",
+        "Fine ($/yr)",
+      ];
+
+      let table_row_keys = ["year", "consumption", "threshold", "fine"];
+
+      const getKeyValObj = (d: string, el: any) => {
+        //@ts-ignore
+        let key = d;
+        let obj =
+          summary_array[+el.parentNode.getAttribute("data-array-index")];
+        let val = [obj[d as keyof typeof obj]];
+        return { key, val, obj };
+      };
+
+      let table_index = table_g
+        .selectAll(".summary-column-row-g")
+        .data(table_row_labels)
+        .join("text")
+        .attr("class", "summary-column-row-g")
+        .attr("y", (d: any, i: number) => i * text_vertical_spacing);
+
+      table_index
+        .text((d: any) => d)
+        .style("font-size", font_size)
+        .style("font-family", "CircularStd-Black");
+
+      let table_data = table_columns
+        .selectAll(".summary-table-text")
+        .data(table_row_keys)
+        .join("text")
+        .attr("class", "summary-table-text");
+
+      table_data
+        .attr("x", index_width)
+        .attr("y", (d: any, i: number) => i * text_vertical_spacing)
+        .style("font-family", (d: any) =>
+          d === "year" ? "CircularStd-Black" : "CircularStd-Book"
+        )
+        .style("fill", function (d: any) {
+          //@ts-ignore
+          let { key, val, obj } = getKeyValObj(d, this);
+          return obj.is_fine ? colors.reds.medium : "black";
+        })
+        .style("font-size", "12px")
+        .style("text-anchor", "middle")
+        .style("cursor", "pointer")
+        .text(function (d: any) {
+          //@ts-ignore
+          let { val } = getKeyValObj(d, this);
+          return val;
+        });
+
+      /* ---------------------------- */
+      /* ---- HOVER INTERACTIONS ---- */
+      /* ---------------------------- */
+
+      table_columns.on("mouseover", function (d: any) {
+        console.log(d);
+        //@ts-ignore
+        console.log(this);
+        //@ts-ignore
+        // let { key, val, obj } = getKeyValObj(d, this);
+        // console.log(key, val, obj);
+      });
     }
   };
 
-  const year_box_array = [
-    {
-      year: "2024",
-      consumption: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2024)
-          ?.carbon_total_absolute as number
-      ),
-      threshold: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2024)
-          ?.threshold_absolute as number
-      ),
-      fine: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2024)
-          ?.fine as number
-      ),
-      is_fine:
-        (annual_carbon_summary_by_year?.find((d) => d.year === 2024)
-          ?.fine as number) > 0,
-    },
-    {
-      year: "2030",
-      consumption: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2030)
-          ?.carbon_total_absolute as number
-      ),
-      threshold: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2030)
-          ?.threshold_absolute as number
-      ),
-      fine: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2030)
-          ?.fine as number
-      ),
-      is_fine:
-        (annual_carbon_summary_by_year?.find((d) => d.year === 2030)
-          ?.fine as number) > 0,
-    },
-    {
-      year: "2035",
-      consumption: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2035)
-          ?.carbon_total_absolute as number
-      ),
-      threshold: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2035)
-          ?.threshold_absolute as number
-      ),
-      fine: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2035)
-          ?.fine as number
-      ),
-      is_fine:
-        (annual_carbon_summary_by_year?.find((d) => d.year === 2035)
-          ?.fine as number) > 0,
-    },
-    {
-      year: "2040",
-      consumption: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2040)
-          ?.carbon_total_absolute as number
-      ),
-      threshold: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2040)
-          ?.threshold_absolute as number
-      ),
-      fine: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2040)
-          ?.fine as number
-      ),
-      is_fine:
-        (annual_carbon_summary_by_year?.find((d) => d.year === 2040)
-          ?.fine as number) > 0,
-    },
-    {
-      year: "2050",
-      consumption: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2050)
-          ?.carbon_total_absolute as number
-      ),
-      threshold: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2050)
-          ?.threshold_absolute as number
-      ),
-      fine: formatNumber(
-        annual_carbon_summary_by_year?.find((d) => d.year === 2050)
-          ?.fine as number
-      ),
-      is_fine:
-        (annual_carbon_summary_by_year?.find((d) => d.year === 2050)
-          ?.fine as number) > 0,
-    },
-  ];
-
   return (
     <>
-      <div style={styles.upper}>
-        <div style={styles.chartTitle}>
-          <span>Carbon Threshold Summary</span>
-          <span>
-            <Button color="secondary" variant="contained">
-              T
-            </Button>
-          </span>
-        </div>
-
-        <div style={styles.yearBoxContainer}>
-          {year_box_array.map((d, i) => {
-            return (
-              <React.Fragment key={i}>
-                <YearBox
-                  key={i}
-                  header={d.year}
-                  is_active={d.is_fine}
-                  value_array={[d.consumption, d.threshold, d.fine]}
-                />
-              </React.Fragment>
-            );
-          })}
-          <div style={styles.yearBoxTextLabels}>
-            <div>
-              {" "}
-              <br></br>
-            </div>
-            <div>Consumption (tCO2e/yr)</div>
-            <div>Threshold (tCO2e/yr)</div>
-            <div>Est Penalty ($)</div>
-          </div>
-        </div>
+      <div style={styles.header}>
+        <span>
+          <ChartHeaderLined>Carbon Threshold Summary</ChartHeaderLined>
+        </span>
+        <span>
+          <Button size="small" color="secondary" variant="contained">
+            T
+          </Button>
+        </span>
       </div>
-      <div style={styles.lower}>
-        <D3Wrapper createChartCallback={createChart} />
+      <div style={styles.main}>
+        <SVGWrapper createChartCallback={createCarbonLayout} />
       </div>
     </>
   );
 };
 
 export default CarbonView;
+
+export const a = () => {
+  return (
+    <div></div>
+    //       <div style={styles.yearBoxContainer}>
+    //         {year_box_array.map((d, i) => {
+    //           return (
+    //             <React.Fragment key={i}>
+    //               <YearBox
+    //                 key={i}
+    //                 header={d.year}
+    //                 is_active={d.is_fine}
+    //                 value_array={[d.consumption, d.threshold, d.fine]}
+    //               />
+    //             </React.Fragment>
+    //           );
+    //         })}
+    //         <div style={styles.yearBoxTextLabels}>
+    //           <div>
+    //             {" "}
+    //             <br></br>
+    //           </div>
+    //           <div>Consumption (tCO2e/yr)</div>
+    //           <div>Threshold (tCO2e/yr)</div>
+    //           <div>Est Penalty ($)</div>
+    //         </div>
+    //       </div>
+    //     </div>
+  );
+};

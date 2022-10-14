@@ -1,14 +1,32 @@
 import * as React from "react";
 import * as d3 from "d3";
-import D3Wrapper from "./d3wrapper";
+import SVGWrapper from "./svgwrapper";
+import { Button } from "@mui/material";
 import { useAppSelector } from "store/hooks";
 import { bindD3Element } from "./d3helpers";
-import { CarbonSummaryByYearObj, D3WrapperCallbackPropTypes } from "types";
+import {
+  CarbonSummaryByYearObj,
+  D3WrapperCallbackPropTypes,
+  InlineStylesType,
+} from "types";
+import { ChartHeaderLined } from "styles/typography";
 
 import { colors } from "styles/colors";
 
 type DType = CarbonSummaryByYearObj;
 
+const styles: InlineStylesType = {
+  root: {},
+  header: {
+    height: "50px",
+    padding: 10,
+    boxSizing: "border-box",
+  },
+  main: {
+    height: "calc(100% - 50px)",
+    boxSizing: "border-box",
+  },
+};
 const CarbonView: React.FunctionComponent = () => {
   const { building_outputs } = useAppSelector((state) => state);
   const { annual_carbon_summary_by_year } = building_outputs;
@@ -134,7 +152,25 @@ const CarbonView: React.FunctionComponent = () => {
     }
   };
 
-  return <D3Wrapper createChartCallback={createChart} />;
+  return (
+    <>
+      <div style={styles.header}>
+        <div style={styles.chartTitle}>
+          <span>
+            <ChartHeaderLined>Cost Summary</ChartHeaderLined>
+          </span>
+          <span>
+            <Button size="small" color="secondary" variant="contained">
+              T
+            </Button>
+          </span>
+        </div>
+      </div>
+      <div style={styles.main}>
+        <SVGWrapper createChartCallback={createChart} />
+      </div>
+    </>
+  );
 };
 
 export default CarbonView;

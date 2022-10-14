@@ -14,12 +14,12 @@ interface IAppProps {}
 const styles: InlineStylesType = {
   root: {},
   top: {
-    height: "50px",
+    height: "40px",
     width: "100%",
     display: "inline-block",
   },
   bottom: {
-    height: "calc(100% - 50px)",
+    height: "calc(100% - 40px)",
     width: "100%",
     display: "inline-block",
   },
