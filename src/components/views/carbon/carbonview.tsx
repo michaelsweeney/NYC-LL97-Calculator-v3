@@ -28,10 +28,15 @@ const styles: InlineStylesType = {
     boxSizing: "border-box",
   },
   tableContainer: {
-    height: "150px",
+    height: "125px",
+    paddingTop: "15px",
+    paddingLeft: "105px",
+    paddingRight: "125px",
+    width: "100%",
+    boxSizing: "border-box",
   },
   chartContainer: {
-    height: "calc(100% - 150px)",
+    height: "calc(100% - 125px)",
   },
 };
 

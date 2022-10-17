@@ -28,9 +28,41 @@ const styles: InlineStylesType = {
   },
   td: {
     cursor: "pointer",
+    fontSize: "12px",
+    padding: "0px",
+  },
+  tdhead: {
+    fontWeight: "700",
   },
 };
+const getCellStyle = (obj: CarbonSummaryByYearObj, focused_years: number[]) => {
+  let { is_fine, year } = obj;
+  let cellStyle: InlineStylesType = {};
 
+  let year_array = yearToYearArray(year);
+
+  let is_focused = false;
+  if (focused_years.includes(year) || year_array.includes(focused_years[0])) {
+    is_focused = true;
+  }
+
+  if (is_fine && !is_focused) {
+    cellStyle.color = colors.reds.medium;
+  }
+  if (is_fine && is_focused) {
+    cellStyle.color = colors.reds.dark;
+  }
+
+  if (!is_fine && !is_focused) {
+    cellStyle.color = colors.secondary.main;
+  }
+
+  if (!is_fine && is_focused) {
+    cellStyle.color = colors.grays.dark;
+  }
+
+  return cellStyle;
+};
 const CarbonSummaryTable = (props: PropTypes) => {
   const { yearBlurCallback, yearFocusCallback, focused_years } = props;
   const { annual_carbon_summary_by_year } = useAppSelector(
@@ -78,25 +110,6 @@ const CarbonSummaryTable = (props: PropTypes) => {
     { key: "fine", label: "Fine ($/yr)" },
   ];
 
-  const getCellStyle = (obj: CarbonSummaryByYearObj) => {
-    let { is_fine, year } = obj;
-
-    let year_array = yearToYearArray(year);
-
-    let is_focused = false;
-    if (focused_years.includes(year) || year_array.includes(focused_years[0])) {
-      is_focused = true;
-    }
-
-    let cellStyle: InlineStylesType = {
-      color: is_fine ? colors.reds.medium : "black",
-      fontWeight: is_focused ? "700" : "500",
-      backgroundColor: is_focused ? "gray" : "white",
-    };
-
-    return cellStyle;
-  };
-
   const handleMouseOverCell = (yr: number) => {
     yearFocusCallback(yearToYearArray(yr));
   };
@@ -110,13 +123,30 @@ const CarbonSummaryTable = (props: PropTypes) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell></TableCell>
+            <TableCell sx={{ ...styles.td, ...styles.tdhead }}>
+              Summary
+            </TableCell>
             {col_array.map((d, i) => {
               let obj = data_array?.find((obj) => obj.year === d.key);
 
               if (obj) {
                 return (
-                  <TableCell sx={getCellStyle(obj)} key={i}>
+                  <TableCell
+                    onMouseOver={() =>
+                      //@ts-ignore
+                      handleMouseOverCell(d.key as number)
+                    }
+                    onMouseOut={() =>
+                      //@ts-ignore
+                      handleMouseOutCell(d.key as number)
+                    }
+                    sx={{
+                      ...getCellStyle(obj, focused_years),
+                      ...styles.td,
+                      ...styles.tdhead,
+                    }}
+                    key={i}
+                  >
                     {d.label}
                   </TableCell>
                 );
@@ -131,7 +161,7 @@ const CarbonSummaryTable = (props: PropTypes) => {
           {row_array.map((r, ri) => {
             return (
               <TableRow key={ri}>
-                <TableCell>{r.label}</TableCell>
+                <TableCell style={styles.td}>{r.label}</TableCell>
                 {col_array.map((c, ci) => {
                   let val;
                   let obj = data_array?.find((d) => d.year === c.key);
@@ -155,7 +185,10 @@ const CarbonSummaryTable = (props: PropTypes) => {
                           //@ts-ignore
                           handleMouseOutCell(obj?.year as number)
                         }
-                        sx={{ ...getCellStyle(obj), ...styles.td }}
+                        sx={{
+                          ...getCellStyle(obj, focused_years),
+                          ...styles.td,
+                        }}
                         key={ci}
                       >
                         {val}
