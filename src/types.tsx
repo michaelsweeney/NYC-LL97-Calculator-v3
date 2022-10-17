@@ -1,3 +1,5 @@
+import React from "react";
+
 export type UtilityInputType = {
   consumption: number;
   rate: number;
@@ -140,6 +142,7 @@ export type CarbonSummaryByYearObj = {
   threshold_by_sf: number | null;
   fine: number;
   fine_by_sf: number;
+  is_fine: boolean;
   carbon_total_absolute: number;
   carbon_total_by_sf: number;
 };
@@ -167,17 +170,19 @@ export type BuildingOutputSliceTypes = {
 export type StringObjectType = { [key: string]: string };
 export type NumberObjectType = { [key: string]: number };
 
-export type InlineStylesType = {
-  [key: string]:
-    | React.CSSProperties
-    | {
-        [key: string]:
-          | React.CSSProperties
-          | {
-              [key: string]: React.CSSProperties;
-            };
-      };
-};
+export type InlineStylesType =
+  | React.CSSProperties
+  | {
+      [key: string]:
+        | React.CSSProperties
+        | {
+            [key: string]:
+              | React.CSSProperties
+              | {
+                  [key: string]: React.CSSProperties;
+                };
+          };
+    };
 
 export type D3WrapperCallbackPropTypes = {
   container_ref: HTMLDivElement;

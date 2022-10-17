@@ -216,6 +216,7 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
       threshold_absolute: threshold,
       threshold_by_sf: threshold !== null ? threshold / total_area : null,
       fine: fine,
+      is_fine: fine > 0,
       fine_by_sf: fine / total_area,
       carbon_total_absolute: carbon_tons_total,
       carbon_total_by_sf: carbon_tons_total / total_area,
