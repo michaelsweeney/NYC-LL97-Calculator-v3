@@ -4,8 +4,8 @@ import { ViewTypes, InlineStylesType } from "types";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
-import CarbonView from "./views/carbonview";
-import CostView from "./views/costview";
+import CarbonView from "./views/carbon/carbonview";
+import CostView from "./views/cost/costview";
 import FuelSummaryView from "./views/fuelsummaryview";
 import TableView from "./views/tableview";
 import { ButtonPrimary } from "styles/components";

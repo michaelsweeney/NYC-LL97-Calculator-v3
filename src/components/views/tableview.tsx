@@ -14,6 +14,7 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
+import { SubHeaderLined } from "styles/typography";
 
 const styles: InlineStylesType = {
   root: {},
@@ -56,7 +57,7 @@ const TableView: React.FunctionComponent = () => {
   return (
     <div style={{ overflowX: "scroll", height: "100%", overflowY: "scroll" }}>
       <Box>
-        <Typography variant="h6">Utility Inputs</Typography>
+        <SubHeaderLined>Utility Inputs</SubHeaderLined>
         <TableContainer>
           <Table sx={styles.table} size="small">
             <TableBody>
@@ -96,7 +97,7 @@ const TableView: React.FunctionComponent = () => {
       </Box>
 
       <Box>
-        <Typography variant="h6">Building Areas</Typography>
+        <SubHeaderLined>Building Areas</SubHeaderLined>
 
         <TableContainer>
           <Table sx={styles.table} size="small">
@@ -128,8 +129,9 @@ const TableView: React.FunctionComponent = () => {
       <Divider />
 
       <Box>
+        <SubHeaderLined>LL97 Summary</SubHeaderLined>
+
         <TableContainer>
-          <Typography variant="h6">LL97 Summary</Typography>
           <Table sx={styles.table} size="small">
             <TableBody>
               <TableRow>

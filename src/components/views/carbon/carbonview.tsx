@@ -1,12 +1,17 @@
 import * as React from "react";
+import { useState } from "react";
 import * as d3 from "d3";
 
 import { Button } from "@mui/material";
-import SVGWrapper from "./svgwrapper";
+import SVGWrapper from "../svgwrapper";
 
 import { useAppSelector } from "store/hooks";
 import { ChartHeaderLined } from "styles/typography";
-import { D3WrapperCallbackPropTypes, InlineStylesType } from "types";
+import {
+  CarbonSummaryByYearObj,
+  D3WrapperCallbackPropTypes,
+  InlineStylesType,
+} from "types";
 
 import CarbonSummaryTable from "./carbonsummarytable";
 import createCarbonGraph from "./createcarbongraph";
@@ -35,8 +40,26 @@ const CarbonView: React.FunctionComponent = () => {
     (state) => state.building_outputs
   );
 
+  const [focusedYears, setFocusedYears] = useState([0]);
+
+  console.log(focusedYears);
+
   const createCarbonLayout = (container: D3WrapperCallbackPropTypes) => {
-    createCarbonGraph(container, annual_carbon_summary_by_year);
+    createCarbonGraph({
+      container: container,
+      data: annual_carbon_summary_by_year,
+      focused_years: focusedYears,
+      yearBlurCallback: handleYearsBlur,
+      yearFocusCallback: handleYearsFocus,
+    });
+  };
+
+  const handleYearsFocus = (e: number[]) => {
+    setFocusedYears(e);
+  };
+
+  const handleYearsBlur = (e: number[]) => {
+    setFocusedYears(e);
   };
 
   return (
@@ -53,7 +76,11 @@ const CarbonView: React.FunctionComponent = () => {
       </div>
       <div style={styles.main}>
         <div style={styles.tableContainer}>
-          <CarbonSummaryTable />
+          <CarbonSummaryTable
+            yearFocusCallback={handleYearsFocus}
+            yearBlurCallback={handleYearsBlur}
+            focused_years={focusedYears}
+          />
         </div>
         <div style={styles.chartContainer}>
           <SVGWrapper createChartCallback={createCarbonLayout} />

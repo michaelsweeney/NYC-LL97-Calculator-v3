@@ -1,14 +1,27 @@
 import { CarbonSummaryByYearObj, D3WrapperCallbackPropTypes } from "types";
 import * as d3 from "d3";
+import { yearToYearArray } from "locallaw/lookups";
 
-import { bindD3Element } from "./d3helpers";
+import { bindD3Element } from "../d3helpers";
 import { colors } from "styles/colors";
 type DType = CarbonSummaryByYearObj;
 
-const createCarbonGraph = (
-  container: D3WrapperCallbackPropTypes,
-  data: CarbonSummaryByYearObj[]
-) => {
+type PropTypes = {
+  container: D3WrapperCallbackPropTypes;
+  data: CarbonSummaryByYearObj[];
+  focused_years: number[];
+  yearBlurCallback: (yr: number[]) => void;
+  yearFocusCallback: (yr: number[]) => void;
+};
+
+const createCarbonGraph = (props: PropTypes) => {
+  const {
+    container,
+    data,
+    focused_years,
+    yearBlurCallback,
+    yearFocusCallback,
+  } = props;
   const { container_ref, container_dimensions } = container;
 
   // make svg and establish dimensions / groups for chart vs table.
@@ -121,21 +134,29 @@ const createCarbonGraph = (
       .data(data)
       .join("rect")
       .attr("class", "carbon-rect")
-      .attr("fill", colors.secondary.main as string)
+      .attr("fill", (d: DType) =>
+        focused_years.includes(d.year)
+          ? colors.grays.dark
+          : colors.secondary.main
+      )
       .attr("x", (d: DType) => xScale(d.year.toString()))
       .attr("width", xScale.bandwidth())
       .attr("y", (d: DType) => yScale(d.carbon_total_absolute))
-      .attr(
-        "height",
-        (d: DType) => yScale(0) - yScale(d.carbon_total_absolute)
-      );
+      .attr("height", (d: DType) => yScale(0) - yScale(d.carbon_total_absolute))
+      .on("mouseover", (e: any, d: DType) => yearFocusCallback([d.year]))
+      .on("mouseleave", (e: any, d: DType) => {
+        return yearBlurCallback([d.year]);
+      })
+      .style("cursor", "pointer");
 
     bar_excess_g
       .selectAll(".carbon-excess-rect")
       .data(data)
       .join("rect")
       .attr("class", "carbon-excess-rect")
-      .attr("fill", colors.reds.light)
+      .attr("fill", (d: DType) =>
+        focused_years.includes(d.year) ? colors.reds.dark : colors.reds.light
+      )
       .attr("x", (d: DType) => xScale(d.year.toString()))
       .attr("width", xScale.bandwidth())
       .attr("y", (d: DType) => yScale(d.carbon_total_absolute))
@@ -144,7 +165,12 @@ const createCarbonGraph = (
         (d: DType) =>
           yScale(d.threshold_absolute as number) -
           yScale(d.carbon_total_absolute)
-      );
+      )
+      .on("mouseover", (e: any, d: DType) => yearFocusCallback([d.year]))
+      .on("mouseleave", (e: any, d: DType) => {
+        return yearBlurCallback([d.year]);
+      })
+      .style("cursor", "pointer");
 
     let threshold_line_thickness = 3;
     let createThresholdLine = d3

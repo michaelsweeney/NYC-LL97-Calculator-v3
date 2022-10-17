@@ -10,16 +10,29 @@ import {
   TableBody,
   TableContainer,
 } from "@mui/material";
-import { formatNumber, formatCurrency } from "./d3helpers";
+import { formatNumber, formatCurrency } from "../d3helpers";
+import { yearToYearArray } from "locallaw/lookups";
+type PropTypes = {
+  yearFocusCallback: (yr: number[]) => void;
+  yearBlurCallback: (yr: number[]) => void;
+  focused_years: number[];
+};
 
 const styles: InlineStylesType = {
   root: {},
   fineCell: {
     color: colors.reds.medium,
   },
+  focusedCell: {
+    backgroundColor: "gray",
+  },
+  td: {
+    cursor: "pointer",
+  },
 };
 
-const CarbonSummaryTable = () => {
+const CarbonSummaryTable = (props: PropTypes) => {
+  const { yearBlurCallback, yearFocusCallback, focused_years } = props;
   const { annual_carbon_summary_by_year } = useAppSelector(
     (state) => state.building_outputs
   );
@@ -65,21 +78,31 @@ const CarbonSummaryTable = () => {
     { key: "fine", label: "Fine ($/yr)" },
   ];
 
-  const getColStyle = (k: any) => {
-    let { key } = k;
-    let style: InlineStylesType = {};
+  const getCellStyle = (obj: CarbonSummaryByYearObj) => {
+    let { is_fine, year } = obj;
 
-    let obj = data_array?.find((d) => d.year === key) as CarbonSummaryByYearObj;
+    let year_array = yearToYearArray(year);
 
-    if (obj) {
-      let { is_fine } = obj;
-
-      if (is_fine) {
-        style = { color: colors.reds.medium };
-      }
+    let is_focused = false;
+    if (focused_years.includes(year) || year_array.includes(focused_years[0])) {
+      is_focused = true;
     }
 
-    return style;
+    let cellStyle: InlineStylesType = {
+      color: is_fine ? colors.reds.medium : "black",
+      fontWeight: is_focused ? "700" : "500",
+      backgroundColor: is_focused ? "gray" : "white",
+    };
+
+    return cellStyle;
+  };
+
+  const handleMouseOverCell = (yr: number) => {
+    yearFocusCallback(yearToYearArray(yr));
+  };
+
+  const handleMouseOutCell = (yr: number) => {
+    yearBlurCallback([0]);
   };
 
   return (
@@ -88,11 +111,19 @@ const CarbonSummaryTable = () => {
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            {col_array.map((d, i) => (
-              <TableCell sx={getColStyle(d)} key={i}>
-                {d.label}
-              </TableCell>
-            ))}
+            {col_array.map((d, i) => {
+              let obj = data_array?.find((obj) => obj.year === d.key);
+
+              if (obj) {
+                return (
+                  <TableCell sx={getCellStyle(obj)} key={i}>
+                    {d.label}
+                  </TableCell>
+                );
+              } else {
+                return <TableCell key={i}></TableCell>;
+              }
+            })}
           </TableRow>
         </TableHead>
 
@@ -104,10 +135,7 @@ const CarbonSummaryTable = () => {
                 {col_array.map((c, ci) => {
                   let val;
                   let obj = data_array?.find((d) => d.year === c.key);
-                  let cellstyle: InlineStylesType = {};
                   if (obj) {
-                    cellstyle = obj.is_fine ? styles.fineCell : {};
-
                     let key = r.key as keyof typeof data_array[0];
                     val = obj[key] as number;
                     if (key === "carbon_total_absolute") {
@@ -117,12 +145,25 @@ const CarbonSummaryTable = () => {
                     } else if (key === "fine") {
                       val = formatCurrency(val);
                     }
+                    return (
+                      <TableCell
+                        onMouseOver={() =>
+                          //@ts-ignore
+                          handleMouseOverCell(obj?.year as number)
+                        }
+                        onMouseOut={() =>
+                          //@ts-ignore
+                          handleMouseOutCell(obj?.year as number)
+                        }
+                        sx={{ ...getCellStyle(obj), ...styles.td }}
+                        key={ci}
+                      >
+                        {val}
+                      </TableCell>
+                    );
+                  } else {
+                    return <TableCell key={ci}></TableCell>;
                   }
-                  return (
-                    <TableCell sx={cellstyle} key={ci}>
-                      {val}
-                    </TableCell>
-                  );
                 })}
               </TableRow>
             );

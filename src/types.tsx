@@ -192,3 +192,10 @@ export type D3WrapperCallbackPropTypes = {
 export type D3WrapperPropTypes = {
   createChartCallback: (d: D3WrapperCallbackPropTypes) => void;
 };
+
+export type YearRangeTypes =
+  | "2024-2029"
+  | "2030-2034"
+  | "2035-2039"
+  | "2040-2049"
+  | "2050-";

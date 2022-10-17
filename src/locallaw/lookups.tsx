@@ -3,6 +3,7 @@ import {
   YearValueObj,
   NumberObjectType,
   PropertyTypeCoefficientsTypes,
+  YearRangeTypes,
 } from "types";
 
 export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
@@ -746,4 +747,28 @@ export const ll97_current_elec_coefficients: YearValueObj[] = [
 export const elec_carbon_coefficients: { [key: string]: YearValueObj[] } = {
   cambium: cambium_elec_coefficients,
   ll97_current: ll97_current_elec_coefficients,
+};
+
+export const year_range_to_year_array: { [key: string]: number[] } = {
+  "2024-2029": [2024, 2025, 2026, 2027, 2028, 2029],
+  "2030-2034": [2030, 2031, 2032, 2033, 2034],
+  "2035-2039": [2035, 2036, 2037, 2038, 2039],
+  "2040-2049": [2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049],
+  "2050-": [2050],
+};
+
+export const yearToYearArray = (year: number) => {
+  if (year < 2024) {
+    return [0];
+  } else if (year <= 2029) {
+    return year_range_to_year_array["2024-2029"];
+  } else if (year <= 2034) {
+    return year_range_to_year_array["2030-2034"];
+  } else if (year <= 2039) {
+    return year_range_to_year_array["2035-2039"];
+  } else if (year <= 2049) {
+    return year_range_to_year_array["2040-2049"];
+  } else {
+    return year_range_to_year_array["2050-"];
+  }
 };

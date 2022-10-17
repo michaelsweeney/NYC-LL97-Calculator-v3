@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as d3 from "d3";
-import SVGWrapper from "./svgwrapper";
+import SVGWrapper from "../svgwrapper";
 import { Button } from "@mui/material";
 import { useAppSelector } from "store/hooks";
-import { bindD3Element } from "./d3helpers";
+import { bindD3Element } from "../d3helpers";
 import {
   CarbonSummaryByYearObj,
   D3WrapperCallbackPropTypes,
