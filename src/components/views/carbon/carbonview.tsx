@@ -28,15 +28,21 @@ const styles: InlineStylesType = {
     boxSizing: "border-box",
   },
   tableContainer: {
+    position: "relative",
+    left: "105px",
     height: "125px",
+    marginBottom: "10px",
     paddingTop: "15px",
-    paddingLeft: "105px",
-    paddingRight: "125px",
-    width: "100%",
+
+    width: "calc(100% - 105px - 105px)",
+
     boxSizing: "border-box",
+    // overflow: "hidden",
   },
   chartContainer: {
-    height: "calc(100% - 125px)",
+    minWidth: "800px",
+    overflow: "hidden",
+    height: "calc(100% - 100px - 10px)",
   },
 };
 

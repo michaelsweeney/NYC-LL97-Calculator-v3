@@ -19,7 +19,7 @@ type PropTypes = {
 };
 
 const styles: InlineStylesType = {
-  root: {},
+  root: { overflow: "hidden" },
   fineCell: {
     color: colors.reds.medium,
   },
@@ -28,11 +28,15 @@ const styles: InlineStylesType = {
   },
   td: {
     cursor: "pointer",
-    fontSize: "12px",
+    fontSize: "14px",
     padding: "0px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    whiteSpace: "nowrap",
   },
   tdhead: {
     fontWeight: "700",
+    whiteSpace: "nowrap",
   },
 };
 const getCellStyle = (obj: CarbonSummaryByYearObj, focused_years: number[]) => {
@@ -119,7 +123,7 @@ const CarbonSummaryTable = (props: PropTypes) => {
   };
 
   return (
-    <TableContainer>
+    <TableContainer sx={styles.root}>
       <Table size="small">
         <TableHead>
           <TableRow>
