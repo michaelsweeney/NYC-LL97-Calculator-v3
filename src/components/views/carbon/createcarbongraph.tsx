@@ -1,14 +1,22 @@
-import { CarbonSummaryByYearObj, D3WrapperCallbackPropTypes } from "types";
+import {
+  CarbonSummaryByYearObj,
+  D3WrapperCallbackPropTypes,
+  YearFuelTypeObj,
+} from "types";
 import * as d3 from "d3";
 import { yearToYearArray } from "locallaw/lookups";
 
 import { bindD3Element } from "../d3helpers";
-import { colors } from "styles/colors";
+import { colors, fuel_colors } from "styles/colors";
+import { color } from "d3";
 type DType = CarbonSummaryByYearObj;
+type SType = YearFuelTypeObj;
 
 type PropTypes = {
   container: D3WrapperCallbackPropTypes;
-  data: CarbonSummaryByYearObj[];
+  bar_data: CarbonSummaryByYearObj[];
+  stacked_bar_data: YearFuelTypeObj[];
+  is_stacked: boolean;
   focused_years: number[];
   yearBlurCallback: (yr: number[]) => void;
   yearFocusCallback: (yr: number[]) => void;
@@ -17,8 +25,10 @@ type PropTypes = {
 const createCarbonGraph = (props: PropTypes) => {
   const {
     container,
-    data,
+    bar_data,
+    stacked_bar_data,
     focused_years,
+    is_stacked,
     yearBlurCallback,
     yearFocusCallback,
   } = props;
@@ -47,17 +57,12 @@ const createCarbonGraph = (props: PropTypes) => {
   let plot_g = bindD3Element(svg, "g", "plot-g");
   plot_g.attr("transform", `translate(${plot_margins.l},${plot_margins.t})`);
 
-  if (data) {
+  if (bar_data) {
     /* ---------------------------- */
     /* -------- CARBON PLOT VIEW ------- */
     /* ---------------------------- */
 
     let ypaddingtop = 1.15;
-
-    let bar_carbon_g = bindD3Element(plot_g, "g", "bar-carbon-g");
-    let bar_excess_g = bindD3Element(plot_g, "g", "bar-excess-g");
-
-    let line_threshold_g = bindD3Element(plot_g, "g", "line-threshold-g");
 
     let text_g = bindD3Element(plot_g, "g", "text-g");
 
@@ -83,7 +88,7 @@ const createCarbonGraph = (props: PropTypes) => {
 
     let xScale = d3
       .scaleBand()
-      .domain(data.map((d) => d.year.toString()))
+      .domain(bar_data.map((d) => d.year.toString()))
       .range([0, plot_dims.width])
       .align(0.5)
       .paddingInner(0.2)
@@ -94,8 +99,8 @@ const createCarbonGraph = (props: PropTypes) => {
       .domain([
         0,
         (d3.max([
-          ...data.map((d) => d.carbon_total_absolute),
-          ...data
+          ...bar_data.map((d) => d.carbon_total_absolute),
+          ...bar_data
             .map((d) => d.threshold_absolute)
             .map((d) => {
               if (d === null) {
@@ -129,9 +134,16 @@ const createCarbonGraph = (props: PropTypes) => {
     right_axis_g.selectAll(".tick").remove();
     top_axis_g.selectAll(".tick").remove();
 
+    /* ---------------------------- */
+    /* ----- SINGLE BAR VIEW ------ */
+    /* ---------------------------- */
+
+    let bar_carbon_g = bindD3Element(plot_g, "g", "bar-carbon-g");
+    let bar_excess_g = bindD3Element(plot_g, "g", "bar-excess-g");
+
     bar_carbon_g
       .selectAll(".carbon-rect")
-      .data(data)
+      .data(bar_data)
       .join("rect")
       .attr("class", "carbon-rect")
       .attr("fill", (d: DType) =>
@@ -151,7 +163,7 @@ const createCarbonGraph = (props: PropTypes) => {
 
     bar_excess_g
       .selectAll(".carbon-excess-rect")
-      .data(data)
+      .data(bar_data)
       .join("rect")
       .attr("class", "carbon-excess-rect")
       .attr("fill", (d: DType) =>
@@ -172,7 +184,58 @@ const createCarbonGraph = (props: PropTypes) => {
       })
       .style("cursor", "pointer");
 
+    /* ---------------------------- */
+    /* -----  STACKED VIEW   ------ */
+    /* ---------------------------- */
+
+    let stacked_bar_g = bindD3Element(plot_g, "g", "stacked-bar-g");
+
+    let to_stack = stacked_bar_data.map((d) => {
+      return {
+        year: d.year,
+        elec: d.consumption.elec,
+        steam: d.consumption.steam,
+        gas: d.consumption.gas,
+        fuel_two: d.consumption.fuel_two,
+        fuel_four: d.consumption.fuel_four,
+      };
+    });
+
+    let subgroups = ["fuel_four", "fuel_two", "gas", "steam", "elec"];
+    let colormap = subgroups.map(
+      (d) => fuel_colors[d as keyof typeof fuel_colors]
+    );
+    let stacked_data = d3.stack().keys(subgroups)(to_stack);
+
+    let colorScale = d3.scaleOrdinal().domain(subgroups).range(colormap);
+
+    let stacked_year_g = stacked_bar_g
+      .selectAll(".stacked-year-g")
+      .data(stacked_data)
+      .join("g")
+      .attr("class", "stacked-year-g")
+      .attr("fill", (d: any) => {
+        return colorScale(d.key);
+      });
+
+    stacked_year_g
+      .selectAll(".stacked-rect")
+      .data((d: any) => d)
+      .join("rect")
+      .attr("class", "stacked-rect")
+      .attr("x", (d: any) => xScale(d.data.year.toString()))
+      .attr("y", (d: any) => yScale(d[1]))
+      .attr("height", (d: any) => yScale(d[0]) - yScale(d[1]))
+      .attr("width", xScale.bandwidth());
+
+    /* ---------------------------- */
+    /* ----  THRESHOLD LINE   ----- */
+    /* ---------------------------- */
+
+    let line_threshold_g = bindD3Element(plot_g, "g", "line-threshold-g");
+
     let threshold_line_thickness = 3;
+
     let createThresholdLine = d3
       .line<DType>()
       .curve(d3.curveStepAfter)
@@ -197,12 +260,22 @@ const createCarbonGraph = (props: PropTypes) => {
     );
 
     threshold_path
-      .datum(data)
+      .datum(bar_data)
       .attr("d", createThresholdLine)
       .style("fill", "none")
       .style("stroke", colors.reds.dark)
       .style("stroke-width", threshold_line_thickness)
       .style("stroke-dasharray", "5");
+
+    /* ---------------------------- */
+    /* ----  VIEW LOGIC  ---------- */
+    /* ---------------------------- */
+    if (is_stacked) {
+      bar_carbon_g.remove();
+      bar_excess_g.remove();
+    } else {
+      stacked_bar_g.remove();
+    }
   }
 };
 

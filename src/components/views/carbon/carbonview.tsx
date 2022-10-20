@@ -7,11 +7,7 @@ import SVGWrapper from "../svgwrapper";
 
 import { useAppSelector } from "store/hooks";
 import { ChartHeaderLined } from "styles/typography";
-import {
-  CarbonSummaryByYearObj,
-  D3WrapperCallbackPropTypes,
-  InlineStylesType,
-} from "types";
+import { D3WrapperCallbackPropTypes, InlineStylesType } from "types";
 
 import CarbonSummaryTable from "./carbonsummarytable";
 import createCarbonGraph from "./createcarbongraph";
@@ -47,19 +43,20 @@ const styles: InlineStylesType = {
 };
 
 const CarbonView: React.FunctionComponent = () => {
-  const { annual_carbon_summary_by_year } = useAppSelector(
-    (state) => state.building_outputs
-  );
+  const { annual_carbon_summary_by_year, annual_carbon_by_year_by_fuel } =
+    useAppSelector((state) => state.building_outputs);
 
   const [focusedYears, setFocusedYears] = useState([0]);
 
-  console.log(focusedYears);
+  const [isStacked, setIsStacked] = useState(false);
 
   const createCarbonLayout = (container: D3WrapperCallbackPropTypes) => {
     createCarbonGraph({
       container: container,
-      data: annual_carbon_summary_by_year,
+      bar_data: annual_carbon_summary_by_year,
+      stacked_bar_data: annual_carbon_by_year_by_fuel,
       focused_years: focusedYears,
+      is_stacked: isStacked,
       yearBlurCallback: handleYearsBlur,
       yearFocusCallback: handleYearsFocus,
     });
@@ -73,6 +70,10 @@ const CarbonView: React.FunctionComponent = () => {
     setFocusedYears(e);
   };
 
+  const handleToggleStacked = () => {
+    setIsStacked(!isStacked);
+  };
+
   return (
     <>
       <div style={styles.header}>
@@ -80,7 +81,12 @@ const CarbonView: React.FunctionComponent = () => {
           <ChartHeaderLined>Carbon Threshold Summary</ChartHeaderLined>
         </span>
         <span>
-          <Button size="small" color="secondary" variant="contained">
+          <Button
+            onClick={handleToggleStacked}
+            size="small"
+            color={isStacked ? "primary" : "secondary"}
+            variant="contained"
+          >
             T
           </Button>
         </span>

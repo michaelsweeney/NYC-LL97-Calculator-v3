@@ -45,11 +45,11 @@ const view_selector: ViewSelectorType[] = [
     key: "cost",
     component: CostView,
   },
-  {
-    label: "Fuel Breakdown",
-    key: "fuel_summary",
-    component: FuelSummaryView,
-  },
+  // {
+  //   label: "Fuel Breakdown",
+  //   key: "fuel_summary",
+  //   component: FuelSummaryView,
+  // },
   {
     label: "Table",
     key: "table",
