@@ -1,7 +1,7 @@
 import { CarbonSummaryByYearObj, InlineStylesType } from "types";
 
 import { colors } from "styles/colors";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import {
   Table,
   TableRow,

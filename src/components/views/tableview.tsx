@@ -12,7 +12,6 @@ import {
   TableRow,
   Box,
   Divider,
-  Typography,
 } from "@mui/material";
 import { SubHeaderLined } from "styles/typography";
 

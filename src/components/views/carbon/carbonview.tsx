@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import * as d3 from "d3";
 
 import { Button } from "@mui/material";
 import SVGWrapper from "../svgwrapper";
@@ -53,8 +52,8 @@ const CarbonView: React.FunctionComponent = () => {
   const createCarbonLayout = (container: D3WrapperCallbackPropTypes) => {
     createCarbonGraph({
       container: container,
-      bar_data: annual_carbon_summary_by_year,
-      stacked_bar_data: annual_carbon_by_year_by_fuel,
+      annual_carbon_summary_by_year: annual_carbon_summary_by_year,
+      annual_carbon_by_year_by_fuel: annual_carbon_by_year_by_fuel,
       focused_years: focusedYears,
       is_stacked: isStacked,
       yearBlurCallback: handleYearsBlur,

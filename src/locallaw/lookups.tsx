@@ -3,7 +3,6 @@ import {
   YearValueObj,
   NumberObjectType,
   PropertyTypeCoefficientsTypes,
-  YearRangeTypes,
 } from "types";
 
 export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [

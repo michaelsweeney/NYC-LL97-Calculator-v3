@@ -8,7 +8,6 @@ import { uiActions } from "store/uislice";
 
 import { InlineStylesType } from "types";
 
-import { colors } from "styles/colors";
 const styles: InlineStylesType = {
   nav: {
     border: "1px solid black",

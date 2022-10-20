@@ -1,10 +1,6 @@
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { uiActions } from "store/uislice";
-
 import PrintContent from "./printcontent";
 import PrintHeader from "./printheader";
 import PrintFooter from "./printfooter";
-import { Dialog } from "@mui/material";
 
 import { InlineStylesType } from "types";
 
@@ -30,13 +26,6 @@ const styles: InlineStylesType = {
 };
 
 const PrintLayout = () => {
-  const { is_print_mode } = useAppSelector((state) => state.ui);
-  const dispatch = useAppDispatch();
-
-  const exitPrintMode = () => {
-    dispatch(uiActions.setIsPrintMode(false));
-  };
-
   return (
     <div>
       <table>

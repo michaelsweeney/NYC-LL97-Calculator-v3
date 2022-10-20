@@ -6,7 +6,6 @@ import { CloseIconButton } from "../icons";
 import { ButtonPrimary } from "styles/components";
 import { MenuTitle } from "styles/typography";
 import { InlineStylesType } from "types";
-import { colors } from "styles/colors";
 
 type PropTypes = {
   isOpen: boolean;

@@ -1,6 +1,4 @@
-import * as react from "react";
-
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 
 import * as React from "react";
 import * as d3 from "d3";
@@ -16,13 +14,7 @@ import {
   TableRow,
   Box,
   Divider,
-  Typography,
-  Dialog,
 } from "@mui/material";
-import { uiActions } from "store/uislice";
-
-import styled from "styled-components";
-import { style } from "d3";
 
 const styles: InlineStylesType = {
   root: { marginTop: "0px", marginBottom: "0px" },

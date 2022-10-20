@@ -6,7 +6,6 @@ import {
   Table,
   TableBody,
   TableContainer,
-  Button,
 } from "@mui/material";
 import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";
@@ -19,7 +18,6 @@ import { building_type_co2_coefficients } from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { relative } from "node:path/win32";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {

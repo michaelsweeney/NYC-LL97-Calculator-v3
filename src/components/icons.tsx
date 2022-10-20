@@ -9,7 +9,7 @@ type IconPropTypes = {
 };
 
 export const CloseIconButton = (props: IconPropTypes) => {
-  const { width, height, active, clickCallback } = props;
+  const { width, height, clickCallback } = props;
 
   const [currentColor, setCurrentColor] = useState(colors.primary.main);
 

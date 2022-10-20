@@ -1,6 +1,3 @@
-import styled from "styled-components";
-
-import {} from "styles/typography";
 import { InlineStylesType } from "types";
 import BeExLogo from "components/beexlogo";
 import { useAppSelector } from "store/hooks";

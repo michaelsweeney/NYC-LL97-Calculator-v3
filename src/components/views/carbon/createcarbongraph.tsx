@@ -4,18 +4,16 @@ import {
   YearFuelTypeObj,
 } from "types";
 import * as d3 from "d3";
-import { yearToYearArray } from "locallaw/lookups";
 
 import { bindD3Element } from "../d3helpers";
 import { colors, fuel_colors } from "styles/colors";
-import { color } from "d3";
+
 type DType = CarbonSummaryByYearObj;
-type SType = YearFuelTypeObj;
 
 type PropTypes = {
   container: D3WrapperCallbackPropTypes;
-  bar_data: CarbonSummaryByYearObj[];
-  stacked_bar_data: YearFuelTypeObj[];
+  annual_carbon_summary_by_year: CarbonSummaryByYearObj[];
+  annual_carbon_by_year_by_fuel: YearFuelTypeObj[];
   is_stacked: boolean;
   focused_years: number[];
   yearBlurCallback: (yr: number[]) => void;
@@ -25,8 +23,8 @@ type PropTypes = {
 const createCarbonGraph = (props: PropTypes) => {
   const {
     container,
-    bar_data,
-    stacked_bar_data,
+    annual_carbon_summary_by_year: bar_data,
+    annual_carbon_by_year_by_fuel: stacked_bar_data,
     focused_years,
     is_stacked,
     yearBlurCallback,
@@ -34,7 +32,6 @@ const createCarbonGraph = (props: PropTypes) => {
   } = props;
   const { container_ref, container_dimensions } = container;
 
-  // make svg and establish dimensions / groups for chart vs table.
   let container_width = container_dimensions.width;
   let container_height = container_dimensions.height;
 
@@ -59,7 +56,7 @@ const createCarbonGraph = (props: PropTypes) => {
 
   if (bar_data) {
     /* ---------------------------- */
-    /* -------- CARBON PLOT VIEW ------- */
+    /* ---- SETUP ----------------- */
     /* ---------------------------- */
 
     let ypaddingtop = 1.15;
@@ -202,11 +199,11 @@ const createCarbonGraph = (props: PropTypes) => {
     });
 
     let subgroups = ["fuel_four", "fuel_two", "gas", "steam", "elec"];
+
+    let stacked_data = d3.stack().keys(subgroups)(to_stack);
     let colormap = subgroups.map(
       (d) => fuel_colors[d as keyof typeof fuel_colors]
     );
-    let stacked_data = d3.stack().keys(subgroups)(to_stack);
-
     let colorScale = d3.scaleOrdinal().domain(subgroups).range(colormap);
 
     let stacked_year_g = stacked_bar_g
