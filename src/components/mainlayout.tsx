@@ -1,10 +1,26 @@
 import * as React from "react";
+
+import { useRef, useEffect } from "react";
 import Header from "./header";
 import Footer from "./footer";
 import ViewsContainer from "./viewscontainer";
 import Sidebar from "./sidebar";
+import TooSmallDialogue from "./toosmalldialogue";
+import NoFineDialogue from "./toosmalldialogue";
+import NoInputDialogue from "./noinputdialogue";
+
 import { InlineStylesType } from "types";
 import { colors } from "styles/colors";
+
+/* 
+ status dialogues to implement:
+ TooSmall
+ NoFine
+ NoInputDialogue
+ 
+ - Add a Load Demo Button
+
+*/
 
 interface IAppProps {}
 

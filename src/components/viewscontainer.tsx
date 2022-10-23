@@ -48,11 +48,11 @@ const view_selector: ViewSelectorType[] = [
   //   key: "fuel_summary",
   //   component: FuelSummaryView,
   // },
-  {
-    label: "Table",
-    key: "table",
-    component: TableView,
-  },
+  // {
+  //   label: "Table",
+  //   key: "table",
+  //   component: TableView,
+  // },
 ];
 
 const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
