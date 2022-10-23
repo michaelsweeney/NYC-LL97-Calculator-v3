@@ -14,11 +14,11 @@ import { colors } from "styles/colors";
 
 /* 
  status dialogues to implement:
- TooSmall
- NoFine
- NoInputDialogue
+ TooSmall -- modal
+ NoFine -- within container
+ NoInputDialogue -- within container
  
- - Add a Load Demo Button
+ - Add a Load Demo Button to context menu.
 
 */
 
