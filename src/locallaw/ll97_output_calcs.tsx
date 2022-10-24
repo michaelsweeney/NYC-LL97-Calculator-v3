@@ -8,17 +8,12 @@ import {
 import {
   building_type_co2_coefficients,
   fine_per_ton_co2,
-  elec_carbon_coefficients,
+  ll97_current_elec_coefficients,
   non_electric_tons_per_kbtu_coefficients,
 } from "./lookups";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
-  let {
-    building_types,
-    utilities,
-    electric_onsite_generation,
-    electric_coefficient_method,
-  } = ll97_in;
+  let { building_types, utilities, electric_onsite_generation } = ll97_in;
 
   let total_area = 0;
   let co2limit_2024 = 0;
@@ -27,10 +22,7 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let co2limit_2040 = 0;
   let co2limit_2050 = 0;
 
-  let carbon_coefficient_array =
-    elec_carbon_coefficients[
-      electric_coefficient_method as keyof typeof elec_carbon_coefficients
-    ];
+  let carbon_coefficient_array = ll97_current_elec_coefficients;
 
   building_types.forEach((type) => {
     let coefficients = building_type_co2_coefficients.find(

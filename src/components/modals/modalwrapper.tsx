@@ -12,6 +12,7 @@ type PropTypes = {
   exitCallback: (b: boolean) => void;
   children: React.ReactNode;
   modalTitle: string;
+  closable: boolean;
 };
 
 const styles: InlineStylesType = {
@@ -41,8 +42,12 @@ const styles: InlineStylesType = {
   },
 };
 
+const defaultProps = {
+  closable: true,
+};
+
 const ModalWrapper = (props: PropTypes) => {
-  const { isOpen, exitCallback, children, modalTitle } = props;
+  const { isOpen, exitCallback, children, modalTitle, closable } = props;
 
   const hideModal = () => {
     exitCallback(false);
@@ -55,19 +60,34 @@ const ModalWrapper = (props: PropTypes) => {
           <div style={styles.headerLeft}>
             <MenuTitle>{modalTitle}</MenuTitle>
           </div>
-          <div style={styles.xCornerButton}>
-            <CloseIconButton clickCallback={hideModal} width={30} height={30} />
-          </div>
+
+          {!closable ? (
+            <></>
+          ) : (
+            <div style={styles.xCornerButton}>
+              <CloseIconButton
+                clickCallback={hideModal}
+                width={30}
+                height={30}
+              />
+            </div>
+          )}
         </div>
         <div style={styles.childrenContainer}>{children}</div>
         <div style={styles.closeContainer}>
-          <ButtonPrimary onClick={hideModal} variant="contained">
-            Close
-          </ButtonPrimary>
+          {!closable ? (
+            <></>
+          ) : (
+            <ButtonPrimary onClick={hideModal} variant="contained">
+              Close
+            </ButtonPrimary>
+          )}
         </div>
       </div>
     </Dialog>
   );
 };
+
+ModalWrapper.defaultProps = defaultProps;
 
 export default ModalWrapper;

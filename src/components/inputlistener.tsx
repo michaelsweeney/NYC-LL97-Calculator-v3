@@ -7,6 +7,7 @@ const InputListener = () => {
   const dispatch = useAppDispatch();
   const { building_inputs } = useAppSelector((state) => state);
 
+  // listener for building inputs
   useEffect(() => {
     let ll97_outputs = LL97OutputsFromBuildingInputs(building_inputs);
     dispatch(buildingOutputActions.setBuildingOutputs(ll97_outputs));

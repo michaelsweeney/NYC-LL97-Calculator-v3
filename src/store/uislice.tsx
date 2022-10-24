@@ -1,6 +1,7 @@
+import { height } from "@mui/system";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UiSliceTypes, ViewTypes } from "types";
+import { UiSliceTypes, ViewTypes, WindowDimensionTypes } from "types";
 
 const initialState: UiSliceTypes = {
   is_info_modal_open: false,
@@ -8,6 +9,11 @@ const initialState: UiSliceTypes = {
   is_building_summary_modal_open: false,
   active_view: "cost",
   is_print_mode: false,
+  window_dimensions: {
+    width: 0,
+    height: 0,
+  },
+  small_window: false,
 };
 
 export const uiSlice = createSlice({
@@ -28,6 +34,15 @@ export const uiSlice = createSlice({
     },
     setIsPrintMode: (state, action: PayloadAction<boolean>) => {
       state.is_print_mode = action.payload;
+    },
+    setWindowDimensions: (
+      state,
+      action: PayloadAction<WindowDimensionTypes>
+    ) => {
+      state.window_dimensions = action.payload;
+    },
+    setSmallWindow: (state, action: PayloadAction<boolean>) => {
+      state.small_window = action.payload;
     },
   },
 });

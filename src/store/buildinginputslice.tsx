@@ -40,20 +40,12 @@ const initialState: BuildingInputTypes = {
     },
   },
   is_default_rates: true,
-  electric_coefficient_method: "ll97_current",
 };
 
 export const buildingInputSlice = createSlice({
   name: "building_inputs",
   initialState: initialState,
   reducers: {
-    setElectricCoefficientMethod: (
-      state,
-      action: PayloadAction<types.CarbonCoefficientTypes>
-    ) => {
-      state.electric_coefficient_method = action.payload;
-    },
-
     setBuildingType: (
       state,
       action: PayloadAction<{ id: number; value: string }>
@@ -172,7 +164,6 @@ export const buildingInputSlice = createSlice({
       }
 
       let new_state: BuildingInputTypes = {
-        electric_coefficient_method: state.electric_coefficient_method,
         building_types: new_building_types,
         utilities: {
           elec: {

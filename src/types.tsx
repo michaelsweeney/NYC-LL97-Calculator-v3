@@ -38,7 +38,6 @@ export type BuildingInputTypes = {
   utilities: UtilityConsumptionAndRateType;
   is_default_rates: boolean;
   electric_onsite_generation: ElectricOnsiteGenerationType;
-  electric_coefficient_method: CarbonCoefficientTypes;
 };
 
 export type PropertyTypeCoefficientsTypes = {
@@ -68,12 +67,19 @@ export type WidthHeightDimensionTypes = {
   height: number;
 };
 
+export type WindowDimensionTypes = {
+  height: number;
+  width: number;
+};
+
 export type UiSliceTypes = {
   is_load_modal_open: boolean;
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
   active_view: ViewTypes;
   is_print_mode: boolean;
+  window_dimensions: WindowDimensionTypes;
+  small_window: boolean;
 };
 
 export type LL84QuerySliceTypes = {

@@ -743,11 +743,6 @@ export const ll97_current_elec_coefficients: YearValueObj[] = [
   { year: 2050, value: 0.0000425 },
 ];
 
-export const elec_carbon_coefficients: { [key: string]: YearValueObj[] } = {
-  cambium: cambium_elec_coefficients,
-  ll97_current: ll97_current_elec_coefficients,
-};
-
 export const year_range_to_year_array: { [key: string]: number[] } = {
   "2024-2029": [2024, 2025, 2026, 2027, 2028, 2029],
   "2030-2034": [2030, 2031, 2032, 2033, 2034],
