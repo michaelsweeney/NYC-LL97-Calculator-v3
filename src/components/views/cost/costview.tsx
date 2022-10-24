@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import SVGWrapper from "../svgwrapper";
 import { Button } from "@mui/material";
+import { ButtonSecondary } from "styles/components";
 import { useAppSelector } from "store/hooks";
 import { D3WrapperCallbackPropTypes, InlineStylesType } from "types";
 import { ChartHeaderLined } from "styles/typography";
@@ -48,14 +49,14 @@ const CostView: React.FunctionComponent = () => {
             <ChartHeaderLined>Cost Summary</ChartHeaderLined>
           </span>
           <span>
-            <Button
+            <ButtonSecondary
+              color="secondary"
               onClick={handleToggleStacked}
               size="small"
-              color={isStacked ? "primary" : "secondary"}
-              variant="contained"
+              variant={isStacked ? "contained" : "outlined"}
             >
-              T
-            </Button>
+              Stack by Fuel Type
+            </ButtonSecondary>
           </span>
         </div>
       </div>

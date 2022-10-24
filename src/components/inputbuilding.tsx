@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";
-import { ButtonPrimary } from "styles/components";
+import { ButtonPrimary, ButtonSecondary } from "styles/components";
 import SingleSelect from "./singleselect";
 import FocusInput from "./focusinput";
 
@@ -168,14 +168,15 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
         </Table>
       </TableContainer>
       <div style={styles.add_button_container}>
-        <ButtonPrimary
+        <ButtonSecondary
+          color="secondary"
           size="small"
           onClick={() => handleAddBuildingType()}
           variant="contained"
           sx={styles.add_button}
         >
           +
-        </ButtonPrimary>
+        </ButtonSecondary>
         <span style={styles.add_button_text}>Add Building Type</span>
       </div>
     </div>

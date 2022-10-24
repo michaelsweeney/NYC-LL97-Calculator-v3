@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import CarbonView from "./views/carbon/carbonview";
 import CostView from "./views/cost/costview";
 
-import { ButtonPrimary } from "styles/components";
+import { ButtonPrimary, ButtonSecondary } from "styles/components";
 
 interface IAppProps {}
 const styles: InlineStylesType = {
@@ -61,14 +61,15 @@ const ViewsContainer: React.FunctionComponent<IAppProps> = () => {
       <div style={styles.top}>
         {view_selector.map((d, i) => {
           return (
-            <ButtonPrimary
+            <ButtonSecondary
+              color="secondary"
               sx={styles.button}
               onClick={() => handleSetActiveView(d.key)}
               key={i}
               variant={d.key === active_view ? "contained" : "outlined"}
             >
               {d.label}
-            </ButtonPrimary>
+            </ButtonSecondary>
           );
         })}
       </div>

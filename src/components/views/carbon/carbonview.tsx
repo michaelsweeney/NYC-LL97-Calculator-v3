@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 
 import { Button } from "@mui/material";
+import { ButtonSecondary } from "styles/components";
 import SVGWrapper from "../svgwrapper";
 
 import { useAppSelector } from "store/hooks";
@@ -10,7 +11,6 @@ import { D3WrapperCallbackPropTypes, InlineStylesType } from "types";
 
 import CarbonSummaryTable from "./carbonsummarytable";
 import createCarbonGraph from "./createcarbongraph";
-
 const styles: InlineStylesType = {
   root: {},
   header: {
@@ -80,14 +80,14 @@ const CarbonView: React.FunctionComponent = () => {
           <ChartHeaderLined>Carbon Threshold Summary</ChartHeaderLined>
         </span>
         <span>
-          <Button
+          <ButtonSecondary
+            color="secondary"
             onClick={handleToggleStacked}
             size="small"
-            color={isStacked ? "primary" : "secondary"}
-            variant="contained"
+            variant={isStacked ? "contained" : "outlined"}
           >
-            T
-          </Button>
+            Stack by Fuel Type
+          </ButtonSecondary>
         </span>
       </div>
       <div style={styles.main}>
