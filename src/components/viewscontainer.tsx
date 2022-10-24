@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import CarbonView from "./views/carbon/carbonview";
 import CostView from "./views/cost/costview";
-import TableView from "./views/tableview";
+
 import { ButtonPrimary } from "styles/components";
 
 interface IAppProps {}
@@ -43,16 +43,6 @@ const view_selector: ViewSelectorType[] = [
     key: "cost",
     component: CostView,
   },
-  // {
-  //   label: "Fuel Breakdown",
-  //   key: "fuel_summary",
-  //   component: FuelSummaryView,
-  // },
-  // {
-  //   label: "Table",
-  //   key: "table",
-  //   component: TableView,
-  // },
 ];
 
 const ViewsContainer: React.FunctionComponent<IAppProps> = () => {

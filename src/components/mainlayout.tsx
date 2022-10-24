@@ -5,16 +5,14 @@ import Header from "./header";
 import Footer from "./footer";
 import ViewsContainer from "./viewscontainer";
 import Sidebar from "./sidebar";
-import NoFineDialogue from "./modals/toosmallmodal";
-import NoInputDialogue from "./noinputdialogue";
-
+import { useAppSelector } from "store/hooks";
 import { InlineStylesType } from "types";
 import { colors } from "styles/colors";
-
+import NoFineDialogue from "./nofinedialogue";
+import NoInputDialogue from "./noinputdialogue";
 /* 
 
  status dialogues to implement:
- TooSmall -- modal
  NoFine -- within container
  NoInputDialogue -- within container
  
@@ -68,6 +66,10 @@ const styles: InlineStylesType = {
 };
 
 const MainContainer: React.FunctionComponent<IAppProps> = () => {
+  const { is_greater_than_25k_sf, is_input_info_missing } = useAppSelector(
+    (state) => state.building_outputs
+  );
+
   return (
     <div style={styles.root}>
       <div style={styles.header}>
@@ -78,7 +80,13 @@ const MainContainer: React.FunctionComponent<IAppProps> = () => {
           <Sidebar />
         </div>
         <div style={styles.viewContainer}>
-          <ViewsContainer />
+          {is_input_info_missing ? (
+            <NoInputDialogue />
+          ) : !is_greater_than_25k_sf ? (
+            <NoFineDialogue />
+          ) : (
+            <ViewsContainer />
+          )}
         </div>
       </div>
       <div style={styles.footer}>

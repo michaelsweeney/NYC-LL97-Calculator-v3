@@ -3,6 +3,7 @@ import {
   YearValueObj,
   NumberObjectType,
   PropertyTypeCoefficientsTypes,
+  LL84QueryPropertyTypes,
 } from "types";
 
 export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
@@ -765,4 +766,24 @@ export const yearToYearArray = (year: number) => {
   } else {
     return year_range_to_year_array["2050-"];
   }
+};
+
+export const sample_ll84_data: LL84QueryPropertyTypes = {
+  property_name: "Sample Building",
+  property_id: "1261446",
+  address_1: "125 Broadway",
+  nyc_bbl: "1-00072-7201",
+  nyc_bin: "1001068",
+  "1st_property_use_type": "Office",
+  "1st_property_use_sf": "2281918",
+  "2nd_property_use_type": "Social/Meeting Hall",
+  "2nd_property_use_sf": "41501",
+  "3rd_property_use_type": "Data Center",
+  "3rd_property_use_sf": "18000",
+  fuel_oil_2_consumption_kbtu: "Not Available",
+  fuel_oil_4_consumption_kbtu: "Not Available",
+  district_steam_consumption_kbtu: (70702 * 1194).toString(),
+  natural_gas_consumption_kbtu: (18293 * 100).toString(),
+  electricity_consumption_kbtu: (35678343 * 3.412).toString(),
+  electricity_onsite_generated_kbtu: "Not Available",
 };

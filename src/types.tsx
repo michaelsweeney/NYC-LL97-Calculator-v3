@@ -155,6 +155,7 @@ export type CarbonSummaryByYearObj = {
 
 export type BuildingOutputSliceTypes = {
   is_greater_than_25k_sf: boolean;
+  is_input_info_missing: boolean;
   total_area: number;
   co2limit_2024_thru_2029: number;
   co2limit_2030_thru_2034: number;

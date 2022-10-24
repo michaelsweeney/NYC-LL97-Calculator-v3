@@ -11,6 +11,7 @@ import {
   ll97_current_elec_coefficients,
   non_electric_tons_per_kbtu_coefficients,
 } from "./lookups";
+import * as d3 from "d3";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let { building_types, utilities, electric_onsite_generation } = ll97_in;
@@ -43,8 +44,6 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
 
     total_area = total_area + +type.building_area;
   });
-
-  let is_greater_than_25k_sf: boolean = total_area > 25e3 ? true : false;
 
   let elec_native =
     +utilities.elec.consumption -
@@ -215,8 +214,16 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
     });
   });
 
+  let is_greater_than_25k_sf: boolean = total_area > 25e3 ? true : false;
+
+  let is_input_info_missing =
+    total_area === 0 ||
+    d3.sum(Object.values(annual_cost_by_fuel)) === 0 ||
+    d3.sum(Object.values(annual_site_energy_by_fuel)) === 0;
+
   let ll97_output_obj: BuildingOutputSliceTypes = {
     is_greater_than_25k_sf: is_greater_than_25k_sf,
+    is_input_info_missing: is_input_info_missing,
     total_area: total_area,
 
     co2limit_2024_thru_2029: co2limit_2024,
