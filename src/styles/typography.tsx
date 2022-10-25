@@ -41,12 +41,12 @@ export const HeaderTitle = styled("div")`
 export const HeaderBuildingTitle = styled("div")`
   display: inline-block;
   text-align: center;
-  color: "black";
+  color: ${colors.grays.dark};
   font-size: 48px;
   font-family: CircularStd-Medium;
   cursor: pointer;
   &:hover {
-    color: ${colors.grays.dark};
+    color: ${colors.grays.light};
   }
 `;
 
