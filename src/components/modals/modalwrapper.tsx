@@ -78,13 +78,13 @@ const ModalWrapper = (props: PropTypes) => {
           {!closable ? (
             <></>
           ) : (
-            <ButtonPrimary
-              color="primary"
+            <ButtonSecondary
+              color="secondary"
               onClick={hideModal}
               variant="contained"
             >
               Close
-            </ButtonPrimary>
+            </ButtonSecondary>
           )}
         </div>
       </div>

@@ -76,6 +76,7 @@ export type UiSliceTypes = {
   is_load_modal_open: boolean;
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
+
   active_view: ViewTypes;
   is_print_mode: boolean;
   window_dimensions: WindowDimensionTypes;
