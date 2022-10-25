@@ -7,14 +7,6 @@ export const SubHeaderLined = styled("div")`
   margin-top: 10px;
   /* margin-left: 10px; */
   margin-bottom: 10px;
-  &:after {
-    width: 50px;
-    display: block;
-    height: 4px;
-    margin-top: 4px;
-    background-color: rgb(186, 214, 54);
-    content: "";
-  }
 `;
 
 export const ChartHeaderLined = styled("div")`
@@ -23,14 +15,6 @@ export const ChartHeaderLined = styled("div")`
   font-size: 16px;
   margin-bottom: 10px;
   margin-right: 10px;
-  &:after {
-    width: 50px;
-    display: block;
-    height: 4px;
-    margin-top: 4px;
-    background-color: rgb(186, 214, 54);
-    content: "";
-  }
 `;
 
 export const MenuTitle = styled("div")`
@@ -57,8 +41,8 @@ export const HeaderTitle = styled("div")`
 export const HeaderBuildingTitle = styled("div")`
   display: inline-block;
   text-align: center;
-  color: ${colors.secondary.main};
-  font-size: 20px;
+  color: "black";
+  font-size: 48px;
   font-family: CircularStd-Medium;
   cursor: pointer;
   &:hover {

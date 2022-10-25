@@ -1,5 +1,5 @@
 import { InlineStylesType } from "types";
-import BeExLogo from "components/beexlogo";
+import BeExLogo from "components/svgbeexlogo";
 import { useAppSelector } from "store/hooks";
 
 const styles: InlineStylesType = {

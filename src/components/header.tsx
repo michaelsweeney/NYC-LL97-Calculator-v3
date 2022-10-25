@@ -5,14 +5,18 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { HeaderTitle, HeaderBuildingTitle } from "styles/typography";
 import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
-import BeExLogo from "./beexlogo";
+
+import CalcLogo from "./calclogo";
 
 interface IAppProps {}
+
+const left_width = "400px";
+const right_width = "100px";
 
 const styles: InlineStylesType = {
   root: {},
   left: {
-    width: "225px",
+    width: left_width,
     display: "inline-block",
     verticalAlign: "middle",
     paddingLeft: "25px",
@@ -20,8 +24,8 @@ const styles: InlineStylesType = {
     boxSizing: "border-box",
   },
   middle: {
-    width: "calc(100% - 325px)",
-    textAlign: "center",
+    width: `calc(100% - ${left_width} - ${right_width})`,
+    textAlign: "left",
     display: "inline-block",
     verticalAlign: "middle",
     boxSizing: "border-box",
@@ -29,7 +33,7 @@ const styles: InlineStylesType = {
     paddingRight: "15px",
   },
   right: {
-    width: "100px",
+    width: right_width,
     paddingRight: "25px",
     display: "inline-block",
     verticalAlign: "middle",
@@ -51,12 +55,9 @@ const Header: React.FunctionComponent<IAppProps> = () => {
   return (
     <React.Fragment>
       <div style={styles.left}>
-        <BeExLogo width="200" height="100" />
+        <CalcLogo />
       </div>
       <div style={styles.middle}>
-        <div>
-          <HeaderTitle>NYC LL97 Carbon Emissions Calculator</HeaderTitle>
-        </div>
         <div>
           <HeaderBuildingTitle onClick={handleLL84NameClick}>
             {property_name}

@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
+  root: { overflowX: "hidden" },
   table: {
     tableLayout: "fixed",
     width: "325px",
@@ -94,7 +95,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
 
   return (
     <div>
-      <TableContainer>
+      <TableContainer sx={styles.root}>
         <Table sx={styles.table} size="small">
           <TableBody>
             <TableRow>
@@ -172,7 +173,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
           color="secondary"
           size="small"
           onClick={() => handleAddBuildingType()}
-          variant="contained"
+          variant="outlined"
           sx={styles.add_button}
         >
           +

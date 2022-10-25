@@ -6,6 +6,7 @@ import {
   Table,
   TableBody,
   TableContainer,
+  Checkbox,
 } from "@mui/material";
 import FocusInput from "./focusinput";
 
@@ -15,13 +16,12 @@ import {
 } from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { StyledCheckbox } from "styles/components";
 
 interface IAppProps {}
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
-  root: {},
+  root: { overflowX: "hidden" },
   table: { marginLeft: "35px", tableLayout: "fixed", width: "325px" },
   fuel_col: {
     width: "150px",
@@ -59,7 +59,7 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
   const utility_keys = ["elec", "gas", "steam", "fuel_two", "fuel_four"];
   return (
     <div>
-      <TableContainer>
+      <TableContainer sx={styles.root}>
         <Table size="small" sx={styles.table}>
           <TableBody>
             {utility_keys.map((fuel, i) => {
@@ -112,10 +112,12 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
       </TableContainer>
 
       <div>
-        <StyledCheckbox
-          onClick={() => handleSetIsDefaultRates(!is_default_rates)}
-          checked={is_default_rates ? true : false}
-        ></StyledCheckbox>
+        <span>
+          <Checkbox
+            onClick={() => handleSetIsDefaultRates(!is_default_rates)}
+            checked={is_default_rates ? true : false}
+          ></Checkbox>
+        </span>
         Use Default Rates
       </div>
     </div>

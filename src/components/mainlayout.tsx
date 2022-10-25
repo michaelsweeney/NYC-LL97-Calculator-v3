@@ -20,9 +20,12 @@ import NoInputDialogue from "./noinputdialogue";
 
 */
 
+const sidebar_width = "400px";
+
 interface IAppProps {}
 
 const borderWidth = "4px";
+
 const styles: InlineStylesType = {
   root: {
     width: "100vw",
@@ -32,7 +35,7 @@ const styles: InlineStylesType = {
   header: {
     width: "100%",
     height: "100px",
-    borderBottom: `${borderWidth} solid ${colors.primary.main as string}`,
+    borderBottom: `${borderWidth} solid ${colors.grays.light}`,
     boxSizing: "border-box",
   },
   middle: {
@@ -43,13 +46,13 @@ const styles: InlineStylesType = {
   footer: {
     width: "100%",
     height: "90px",
-    borderTop: `${borderWidth} solid ${colors.primary.main as string}`,
+    borderTop: `${borderWidth} solid ${colors.grays.light}`,
     boxSizing: "border-box",
   },
   sidebar: {
-    width: "420px",
+    width: sidebar_width,
     height: "100%",
-    borderRight: `${borderWidth} solid ${colors.grays.medium}`,
+    borderRight: `${borderWidth} solid ${colors.grays.light}`,
     padding: "10px",
     display: "inline-block",
     boxSizing: "border-box",
@@ -57,15 +60,16 @@ const styles: InlineStylesType = {
   },
   viewContainer: {
     padding: "10px",
-    width: "calc(100% - 420px)",
+    width: `calc(100% - ${sidebar_width})`,
     height: "100%",
     display: "inline-block",
     boxSizing: "border-box",
     verticalAlign: "top",
+    backgroundColor: "rgba(230,230,230)",
   },
 };
 
-const MainContainer: React.FunctionComponent<IAppProps> = () => {
+const MainLayout: React.FunctionComponent<IAppProps> = () => {
   const { is_greater_than_25k_sf, is_input_info_missing } = useAppSelector(
     (state) => state.building_outputs
   );
@@ -96,4 +100,4 @@ const MainContainer: React.FunctionComponent<IAppProps> = () => {
   );
 };
 
-export default MainContainer;
+export default MainLayout;

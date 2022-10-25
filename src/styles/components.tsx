@@ -37,5 +37,3 @@ export const RemoveTypeButton = styled(Button)`
     color: ${colors.secondary.dark};
   }
 `;
-
-export const StyledCheckbox = styled(Checkbox)``;
