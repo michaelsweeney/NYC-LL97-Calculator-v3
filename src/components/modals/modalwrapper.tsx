@@ -3,7 +3,7 @@ import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 
 import { CloseIconButton } from "../icons";
-import { ButtonPrimary } from "styles/components";
+import { ButtonPrimary, ButtonSecondary } from "styles/components";
 import { MenuTitle } from "styles/typography";
 import { InlineStylesType } from "types";
 
@@ -78,7 +78,11 @@ const ModalWrapper = (props: PropTypes) => {
           {!closable ? (
             <></>
           ) : (
-            <ButtonPrimary onClick={hideModal} variant="contained">
+            <ButtonPrimary
+              color="primary"
+              onClick={hideModal}
+              variant="contained"
+            >
               Close
             </ButtonPrimary>
           )}

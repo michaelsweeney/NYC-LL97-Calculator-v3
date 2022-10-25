@@ -14,7 +14,7 @@ export const CloseIconButton = (props: IconPropTypes) => {
   const [currentColor, setCurrentColor] = useState("black");
 
   const handleMouseOver = () => {
-    setCurrentColor(colors.grays.dark);
+    setCurrentColor(colors.grays.medium);
   };
 
   const handleMouseLeave = () => {
@@ -45,7 +45,7 @@ export const BurgerMenuIconButton = (props: IconPropTypes) => {
   const [currentColor, setCurrentColor] = useState("black");
 
   const handleMouseOver = () => {
-    setCurrentColor(colors.grays.dark);
+    setCurrentColor(colors.grays.light);
   };
 
   const handleMouseLeave = () => {
@@ -54,6 +54,7 @@ export const BurgerMenuIconButton = (props: IconPropTypes) => {
 
   return (
     <Button
+      color="secondary"
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       onClick={clickCallback}

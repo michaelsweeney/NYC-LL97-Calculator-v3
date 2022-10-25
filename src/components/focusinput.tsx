@@ -23,6 +23,7 @@ const FocusInput = (props: PropTypes) => {
   return (
     <FormControl variant="standard" size="small" fullWidth>
       <StyledInput
+        color="secondary"
         sx={styles.input}
         type={input_type}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

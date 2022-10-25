@@ -2,7 +2,10 @@ import * as React from "react";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
-import { HeaderTitle, HeaderBuildingTitle } from "styles/typography";
+import {
+  HeaderBuildingTitle,
+  HeaderBuildingTitleGray,
+} from "styles/typography";
 import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
 
@@ -10,7 +13,7 @@ import CalcLogo from "./calclogo";
 
 interface IAppProps {}
 
-const left_width = "400px";
+const left_width = "375px";
 const right_width = "100px";
 
 const styles: InlineStylesType = {
@@ -29,8 +32,6 @@ const styles: InlineStylesType = {
     display: "inline-block",
     verticalAlign: "middle",
     boxSizing: "border-box",
-    paddingLeft: "15px",
-    paddingRight: "15px",
   },
   right: {
     width: right_width,
@@ -48,8 +49,10 @@ const Header: React.FunctionComponent<IAppProps> = () => {
     (state) => state.ll84_query.ll84_selected_property
   );
 
+  const { is_ll84_loaded } = useAppSelector((state) => state.ll84_query);
+
   const handleLL84NameClick = () => {
-    dispatch(uiActions.setIsBuildingSummaryModalOpen(true));
+    dispatch(uiActions.setIsLoadModalOpen(true));
   };
 
   return (
@@ -59,9 +62,15 @@ const Header: React.FunctionComponent<IAppProps> = () => {
       </div>
       <div style={styles.middle}>
         <div>
-          <HeaderBuildingTitle onClick={handleLL84NameClick}>
-            {property_name}
-          </HeaderBuildingTitle>
+          {is_ll84_loaded ? (
+            <HeaderBuildingTitle onClick={handleLL84NameClick}>
+              {property_name}
+            </HeaderBuildingTitle>
+          ) : (
+            <HeaderBuildingTitleGray onClick={handleLL84NameClick}>
+              find your building
+            </HeaderBuildingTitleGray>
+          )}
         </div>
       </div>
       <div style={styles.right}>

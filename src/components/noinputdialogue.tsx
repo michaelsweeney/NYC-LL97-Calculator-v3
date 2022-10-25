@@ -11,10 +11,11 @@ const styles: InlineStylesType = {
 const NoInputDialogue = () => {
   return (
     <div style={styles.root}>
-      <SubHeaderLined>Incomplete Building Input Information</SubHeaderLined>
+      <SubHeaderLined>Enter or Load Building Information</SubHeaderLined>
       Building and/or Utility Inputs have not been completed. Enter information
-      manually using the panel on the left, or search for your building with the
-      "Search LL84 Database" option on the upper-right menu.
+      manually using the panel on the left or clicking "find your building", or
+      search for your building with the "Search LL84 Database" option on the
+      upper-right menu.
     </div>
   );
 };

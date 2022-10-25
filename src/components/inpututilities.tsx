@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import FocusInput from "./focusinput";
 
+import { colors } from "styles/colors";
 import {
   fuel_keys_to_labels,
   fuel_keys_to_rate_labels,
@@ -22,16 +23,19 @@ interface IAppProps {}
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
   root: { overflowX: "hidden" },
-  table: { marginLeft: "35px", tableLayout: "fixed", width: "325px" },
+  table: { marginLeft: "24px", tableLayout: "fixed", width: "275px" },
   fuel_col: {
     width: "150px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
   rate_col: {
-    // width: "70px",
+    width: "70px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
+  },
+  default_rate_container: {
+    paddingLeft: 25,
   },
 };
 
@@ -111,9 +115,10 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
         </Table>
       </TableContainer>
 
-      <div>
+      <div style={styles.default_rate_container}>
         <span>
           <Checkbox
+            color="secondary"
             onClick={() => handleSetIsDefaultRates(!is_default_rates)}
             checked={is_default_rates ? true : false}
           ></Checkbox>

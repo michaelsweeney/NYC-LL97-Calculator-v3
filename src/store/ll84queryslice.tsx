@@ -11,6 +11,7 @@ const initialState: LL84QuerySliceTypes = {
   ll84_year_selection: "ll84_2020_cal_2019",
   ll84_query_results: [] as LL84QueryPropertyTypes[],
   ll84_selected_property: {} as LL84QueryPropertyTypes,
+  is_ll84_loaded: false,
 };
 
 export const ll84QuerySlice = createSlice({
@@ -34,6 +35,7 @@ export const ll84QuerySlice = createSlice({
       action: PayloadAction<LL84QueryPropertyTypes>
     ) => {
       state.ll84_selected_property = action.payload;
+      state.is_ll84_loaded = true;
     },
   },
 });

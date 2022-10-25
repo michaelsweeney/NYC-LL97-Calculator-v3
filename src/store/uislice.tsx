@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UiSliceTypes, ViewTypes, WindowDimensionTypes } from "types";
 
 const initialState: UiSliceTypes = {
-  is_info_modal_open: false,
+  is_info_modal_open: true,
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
   active_view: "cost",

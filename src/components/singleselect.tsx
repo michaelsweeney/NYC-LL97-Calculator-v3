@@ -22,11 +22,11 @@ const SingleSelect = (props: PropTypes) => {
 
   return (
     <div>
-      <FormControl variant="standard" size="small" fullWidth>
-        <Select value={value} onChange={handleChange}>
+      <FormControl color="secondary" variant="standard" size="small" fullWidth>
+        <Select color="secondary" value={value} onChange={handleChange}>
           {option_values.map((d, i) => {
             return (
-              <MenuItem key={i} value={d}>
+              <MenuItem color="secondary" key={i} value={d}>
                 {option_titles[i]}
               </MenuItem>
             );

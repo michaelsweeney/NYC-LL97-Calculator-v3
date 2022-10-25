@@ -50,6 +50,14 @@ export const HeaderBuildingTitle = styled("div")`
   }
 `;
 
+export const HeaderBuildingTitleGray = styled(HeaderBuildingTitle)`
+  font-family: CircularStd-Book;
+  color: rgb(180, 180, 180);
+  &:hover {
+    color: ${colors.grays.medium};
+  }
+`;
+
 export const FooterTextAccelerator = styled("div")`
   font-family: CircularStd-Black;
   color: ${colors.primary.main};

@@ -37,7 +37,7 @@ const Footer: React.FunctionComponent<IAppProps> = (props) => {
   return (
     <div style={styles.root}>
       <div style={styles.left}>
-        <FooterTextAccelerator>
+        {/* <FooterTextAccelerator>
           What Now? Visit{" "}
           <a
             style={styles.acceleratorLink}
@@ -49,7 +49,7 @@ const Footer: React.FunctionComponent<IAppProps> = (props) => {
           </a>{" "}
           for free, personalized advisory services to improve building energy
           efficiency and lower carbon emissions
-        </FooterTextAccelerator>
+        </FooterTextAccelerator> */}
       </div>
       <div style={styles.right}>
         <FooterTextAKF>

@@ -20,8 +20,8 @@ import NoInputDialogue from "./noinputdialogue";
 
 */
 
-const sidebar_width = "400px";
-
+const sidebar_width = "375px";
+const border_color = colors.secondary.main;
 interface IAppProps {}
 
 const borderWidth = "4px";
@@ -35,24 +35,24 @@ const styles: InlineStylesType = {
   header: {
     width: "100%",
     height: "100px",
-    borderBottom: `${borderWidth} solid ${colors.grays.light}`,
+    borderBottom: `${borderWidth} solid ${border_color}`,
     boxSizing: "border-box",
   },
   middle: {
     width: "100%",
-    height: "calc(100% - 190px)",
+    height: "calc(100% - 175px)",
     boxSizing: "border-box",
   },
   footer: {
     width: "100%",
-    height: "90px",
-    borderTop: `${borderWidth} solid ${colors.grays.light}`,
+    height: "75px",
+    borderTop: `${borderWidth} solid ${border_color}`,
     boxSizing: "border-box",
   },
   sidebar: {
     width: sidebar_width,
     height: "100%",
-    borderRight: `${borderWidth} solid ${colors.grays.light}`,
+    borderRight: `${borderWidth} solid ${border_color}`,
     padding: "10px",
     display: "inline-block",
     boxSizing: "border-box",
@@ -65,7 +65,7 @@ const styles: InlineStylesType = {
     display: "inline-block",
     boxSizing: "border-box",
     verticalAlign: "top",
-    backgroundColor: "rgba(230,230,230)",
+    backgroundColor: "rgba(240,240,240)",
   },
 };
 

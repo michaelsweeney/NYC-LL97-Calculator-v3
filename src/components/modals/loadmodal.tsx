@@ -76,16 +76,21 @@ const LoadModal = () => {
       <div>Input BBL ID Number, Property Name, or Address (case sensitive)</div>
 
       <div>
-        <Select onChange={handleYearSelection} value={ll84_year_selection}>
+        <Select
+          color="secondary"
+          onChange={handleYearSelection}
+          value={ll84_year_selection}
+        >
           {ll84_year_lookups.map((e, i) => {
             return (
-              <MenuItem key={i} value={e.key}>
+              <MenuItem color="secondary" key={i} value={e.key}>
                 {e.label}
               </MenuItem>
             );
           })}
         </Select>
         <TextField
+          color="secondary"
           autoFocus
           inputRef={inputref}
           onChange={handleSearchChange}

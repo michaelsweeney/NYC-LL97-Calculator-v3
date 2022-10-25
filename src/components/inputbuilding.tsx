@@ -6,13 +6,13 @@ import {
   Table,
   TableBody,
   TableContainer,
+  Button,
 } from "@mui/material";
 import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";
-import { ButtonPrimary, ButtonSecondary } from "styles/components";
 import SingleSelect from "./singleselect";
 import FocusInput from "./focusinput";
-
+import { ButtonSecondary } from "styles/components";
 import { building_type_co2_coefficients } from "locallaw/lookups";
 
 import { buildingInputActions } from "store/buildinginputslice";
@@ -21,18 +21,19 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
-  root: { overflowX: "hidden" },
+  root: { marginBottom: "30px" },
+  table_container: { overflowX: "hidden", marginBottom: "10px" },
   table: {
     tableLayout: "fixed",
-    width: "325px",
+    width: "300px",
     marginTop: "5px",
     marginBottom: "10px",
   },
 
   bldg_id_col: {
     width: "10px",
-    paddingLeft: "5px",
-    paddingRight: "5px",
+    paddingLeft: defaultPadding,
+    paddingRight: defaultPadding,
     textAlign: "center",
   },
 
@@ -59,7 +60,7 @@ const styles: InlineStylesType = {
     paddingRight: 0,
   },
   add_button_container: {
-    marginLeft: "15px",
+    marginLeft: "40px",
     marginTop: "0px",
     marginBottom: "15px",
   },
@@ -94,8 +95,8 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
   };
 
   return (
-    <div>
-      <TableContainer sx={styles.root}>
+    <div style={styles.root}>
+      <TableContainer sx={styles.table_container}>
         <Table sx={styles.table} size="small">
           <TableBody>
             <TableRow>

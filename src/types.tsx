@@ -87,6 +87,7 @@ export type LL84QuerySliceTypes = {
   ll84_year_selection: LL84YearTypes;
   ll84_query_results: LL84QueryPropertyTypes[];
   ll84_selected_property: LL84QueryPropertyTypes;
+  is_ll84_loaded: boolean;
 };
 
 export type LL84QueryObjTypes = {
