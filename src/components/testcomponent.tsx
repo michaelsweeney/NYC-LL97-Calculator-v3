@@ -12,18 +12,18 @@ const TestComponent = () => {
 
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(ll84QueryActions.setSelectedLL84Property(sample_ll84_data));
-  //   let ll97_conversion = LL84SelectionToLL97Inputs(sample_ll84_data);
+  useEffect(() => {
+    dispatch(ll84QueryActions.setSelectedLL84Property(sample_ll84_data));
+    let ll97_conversion = LL84SelectionToLL97Inputs(sample_ll84_data);
 
-  //   if (ll97_conversion.bldg_type_one_type !== undefined) {
-  //     dispatch(
-  //       buildingInputActions.setBuildingInputsFromLL84Results(ll97_conversion)
-  //     );
-  //   }
+    if (ll97_conversion.bldg_type_one_type !== undefined) {
+      dispatch(
+        buildingInputActions.setBuildingInputsFromLL84Results(ll97_conversion)
+      );
+    }
 
-  //   // dispatch loaded inputs to building inputs.
-  // }, [dispatch]);
+    // dispatch loaded inputs to building inputs.
+  }, [dispatch]);
 
   return <div style={{ display: "none" }}></div>;
 };

@@ -102,6 +102,7 @@ export const buildingInputSlice = createSlice({
       let new_id = Math.max(...building_ids) + 1;
 
       let type_to_copy = { ...state.building_types[0], building_id: new_id };
+      type_to_copy.building_area = 0;
 
       state.building_types.push(type_to_copy);
     },

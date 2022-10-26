@@ -10,15 +10,6 @@ import { InlineStylesType } from "types";
 import { colors } from "styles/colors";
 import NoFineDialogue from "./nofinedialogue";
 import NoInputDialogue from "./noinputdialogue";
-/* 
-
- status dialogues to implement:
- NoFine -- within container
- NoInputDialogue -- within container
- 
- - Add a Load Demo Button to context menu.
-
-*/
 
 const sidebar_width = "375px";
 const border_color = colors.secondary.main;
@@ -40,12 +31,12 @@ const styles: InlineStylesType = {
   },
   middle: {
     width: "100%",
-    height: "calc(100% - 175px)",
+    height: "calc(100% - 100px - 50px)",
     boxSizing: "border-box",
   },
   footer: {
     width: "100%",
-    height: "75px",
+    height: "50px",
     borderTop: `${borderWidth} solid ${border_color}`,
     boxSizing: "border-box",
   },

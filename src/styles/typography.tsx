@@ -20,8 +20,8 @@ export const ChartHeaderLined = styled("div")`
 export const MenuTitle = styled("div")`
   font-size: 20px;
   font-family: CircularStd-Bold;
-  border-top: 4px solid ${colors.primary.main};
-  border-bottom: 4px solid ${colors.primary.main};
+  border-top: 4px solid ${colors.secondary.main};
+  border-bottom: 4px solid ${colors.secondary.main};
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 10px;
@@ -54,7 +54,7 @@ export const HeaderBuildingTitleGray = styled(HeaderBuildingTitle)`
   font-family: CircularStd-Book;
   color: rgb(180, 180, 180);
   &:hover {
-    color: ${colors.grays.medium};
+    color: ${colors.grays.light};
   }
 `;
 

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { BurgerMenuIconButton } from "./icons";
+import { BurgerMenuIconButton } from "./iconbuttons";
 import { useAppDispatch } from "store/hooks";
 import { ll84QueryActions } from "store/ll84queryslice";
 import { buildingInputActions } from "store/buildinginputslice";

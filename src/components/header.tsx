@@ -31,6 +31,7 @@ const styles: InlineStylesType = {
     textAlign: "left",
     display: "inline-block",
     verticalAlign: "middle",
+    paddingLeft: "15px",
     boxSizing: "border-box",
   },
   right: {
