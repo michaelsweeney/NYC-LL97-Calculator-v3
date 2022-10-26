@@ -752,6 +752,22 @@ export const year_range_to_year_array: { [key: string]: number[] } = {
   "2050-": [2050],
 };
 
+export const yearToYearRangeString = (year: number) => {
+  if (year < 2024) {
+    return "2022-2024";
+  } else if (year <= 2029) {
+    return "2024-2029";
+  } else if (year <= 2034) {
+    return "2030-2034";
+  } else if (year <= 2039) {
+    return "2035-2039";
+  } else if (year <= 2049) {
+    return "2040-2049";
+  } else {
+    return "2050-";
+  }
+};
+
 export const yearToYearArray = (year: number) => {
   if (year < 2024) {
     return [0];
@@ -786,4 +802,13 @@ export const sample_ll84_data: LL84QueryPropertyTypes = {
   natural_gas_consumption_kbtu: (18293 * 100).toString(),
   electricity_consumption_kbtu: (35678343 * 3.412).toString(),
   electricity_onsite_generated_kbtu: "Not Available",
+};
+
+export const range_year_lengths: { [key: string]: number } = {
+  "2022-2024": 2,
+  "2024-2029": 6,
+  "2030-2034": 5,
+  "2035-2039": 5,
+  "2040-2049": 10,
+  "2050-": 2,
 };

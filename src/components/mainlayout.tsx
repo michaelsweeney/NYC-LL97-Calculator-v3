@@ -3,7 +3,7 @@ import * as React from "react";
 import { useRef, useEffect } from "react";
 import Header from "./header";
 import Footer from "./footer";
-import ViewsContainer from "./viewscontainer";
+import ViewContainer from "./viewcontainer";
 import Sidebar from "./sidebar";
 import { useAppSelector } from "store/hooks";
 import { InlineStylesType } from "types";
@@ -80,7 +80,7 @@ const MainLayout: React.FunctionComponent<IAppProps> = () => {
           ) : !is_greater_than_25k_sf ? (
             <NoFineDialogue />
           ) : (
-            <ViewsContainer />
+            <ViewContainer />
           )}
         </div>
       </div>

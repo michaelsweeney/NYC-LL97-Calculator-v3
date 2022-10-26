@@ -1,19 +1,25 @@
 import { height } from "@mui/system";
+import { current } from "@reduxjs/toolkit";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UiSliceTypes, ViewTypes, WindowDimensionTypes } from "types";
+import { UiSliceTypes, WindowDimensionTypes, ChartViewTypes } from "types";
 
 const initialState: UiSliceTypes = {
   is_info_modal_open: false,
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
-  active_view: "cost",
+
   is_print_mode: false,
   window_dimensions: {
     width: 0,
     height: 0,
   },
   small_window: false,
+  chart_view: {
+    view_type: "carbon",
+    unit_type: "absolute",
+    stack_type: "summary",
+  },
 };
 
 export const uiSlice = createSlice({
@@ -29,9 +35,7 @@ export const uiSlice = createSlice({
     setIsBuildingSummaryModalOpen: (state, action: PayloadAction<boolean>) => {
       state.is_building_summary_modal_open = action.payload;
     },
-    setActiveView: (state, action: PayloadAction<ViewTypes>) => {
-      state.active_view = action.payload;
-    },
+
     setIsPrintMode: (state, action: PayloadAction<boolean>) => {
       state.is_print_mode = action.payload;
     },
@@ -43,6 +47,14 @@ export const uiSlice = createSlice({
     },
     setSmallWindow: (state, action: PayloadAction<boolean>) => {
       state.small_window = action.payload;
+    },
+    setChartView: (
+      state,
+      action: PayloadAction<{ view_key: string; view_value: string }>
+    ) => {
+      const { view_key, view_value } = action.payload;
+      //@ts-ignore
+      state.chart_view[view_key] = view_value;
     },
   },
 });

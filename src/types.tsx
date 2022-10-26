@@ -60,8 +60,6 @@ export type LL84YearTypes =
   | "ll84_2019_cal_2018"
   | "ll84_2018_cal_2017";
 
-export type ViewTypes = "carbon" | "cost" | "fuel_summary" | "table";
-
 export type WidthHeightDimensionTypes = {
   width: number;
   height: number;
@@ -72,15 +70,24 @@ export type WindowDimensionTypes = {
   width: number;
 };
 
+export type ChartViewViewType = "cost" | "carbon";
+export type ChartViewUnitType = "absolute" | "normalized";
+export type ChartViewStackType = "summary" | "enduse";
+
+export type ChartViewTypes = {
+  view_type: ChartViewViewType;
+  unit_type: ChartViewUnitType;
+  stack_type: ChartViewStackType;
+};
+
 export type UiSliceTypes = {
   is_load_modal_open: boolean;
   is_info_modal_open: boolean;
   is_building_summary_modal_open: boolean;
-
-  active_view: ViewTypes;
   is_print_mode: boolean;
   window_dimensions: WindowDimensionTypes;
   small_window: boolean;
+  chart_view: ChartViewTypes;
 };
 
 export type LL84QuerySliceTypes = {
@@ -139,43 +146,6 @@ export type LL97ConversionTypes = {
 
 export type YearValueObj = { year: number; value: number };
 
-export type YearFuelTypeObj = {
-  year: number;
-  consumption: UtilityConsumptionType;
-};
-
-export type CarbonSummaryByYearObj = {
-  year: number;
-  threshold_absolute: number | null;
-  threshold_by_sf: number | null;
-  fine: number;
-  fine_by_sf: number;
-  is_fine: boolean;
-  carbon_total_absolute: number;
-  carbon_total_by_sf: number;
-};
-
-export type BuildingOutputSliceTypes = {
-  is_greater_than_25k_sf: boolean;
-  is_input_info_missing: boolean;
-  total_area: number;
-  co2limit_2024_thru_2029: number;
-  co2limit_2030_thru_2034: number;
-  co2limit_2035_thru_2039: number;
-  co2limit_2040_thru_2049: number;
-  co2limit_2050: number;
-  elec_carbon_coefficients_by_year: YearValueObj[];
-  annual_cost_by_fuel: UtilityConsumptionType;
-  annual_site_energy_by_fuel: UtilityConsumptionType;
-  annual_native_energy_by_fuel: UtilityConsumptionType;
-  annual_cost_per_sf_by_fuel: UtilityConsumptionType;
-  annual_site_per_sf_by_fuel: UtilityConsumptionType;
-  annual_native_energy_per_sf_by_fuel: UtilityConsumptionType;
-  annual_carbon_by_year_by_fuel: YearFuelTypeObj[];
-  annual_carbon_per_sf_by_year_by_fuel: YearFuelTypeObj[];
-  annual_carbon_summary_by_year: CarbonSummaryByYearObj[];
-};
-
 export type StringObjectType = { [key: string]: string };
 export type NumberObjectType = { [key: string]: number };
 
@@ -208,3 +178,76 @@ export type YearRangeTypes =
   | "2035-2039"
   | "2040-2049"
   | "2050-";
+
+export type ControlToggleTypes = {
+  toggle_key: string;
+  label: string;
+  options: string[];
+  value: string;
+};
+
+export type ResultsPeriodFuelTypes = {
+  elec: number;
+  gas: number;
+  steam: number;
+  fuel_two: number;
+  fuel_four: number;
+  total?: number;
+};
+
+export type ResultsPeriodType = {
+  period: string;
+  year: number;
+  threshold: {
+    absolute: number | null;
+    per_sf: number | null;
+  };
+  is_fine: boolean;
+  fine: {
+    absolute: number;
+    per_sf: number;
+  };
+  utility_cost: {
+    absolute: ResultsPeriodFuelTypes;
+    per_sf: ResultsPeriodFuelTypes;
+  };
+  excess_carbon: {
+    absolute: number;
+    per_sf: number;
+  };
+  carbon: {
+    absolute: ResultsPeriodFuelTypes;
+    per_sf: ResultsPeriodFuelTypes;
+  };
+  site_energy: {
+    absolute: ResultsPeriodFuelTypes;
+    per_sf: ResultsPeriodFuelTypes;
+  };
+  native_energy: {
+    absolute: ResultsPeriodFuelTypes;
+    per_sf: ResultsPeriodFuelTypes;
+  };
+};
+
+export type BuildingOutputSliceTypes = {
+  is_greater_than_25k_sf: boolean;
+  is_input_info_missing: boolean;
+  total_area: number;
+  co2limit_2024_thru_2029: number;
+  co2limit_2030_thru_2034: number;
+  co2limit_2035_thru_2039: number;
+  co2limit_2040_thru_2049: number;
+  co2limit_2050: number;
+  annual_result_array: ResultsPeriodType[];
+};
+
+export type BarKeyTypes =
+  | "elec"
+  | "gas"
+  | "steam"
+  | "fuel_two"
+  | "fuel_four"
+  | "fine"
+  | "total"
+  | "threshold"
+  | "excess";

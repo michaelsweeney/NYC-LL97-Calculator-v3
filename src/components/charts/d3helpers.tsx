@@ -25,3 +25,21 @@ export const formatNumber = (val: number, decimals = 0) =>
 
 export const formatCurrency = (val: number, decimals = 0) =>
   d3.format(`$,.${decimals}f`)(val);
+
+export const getMinValFromStack = (data: any) => {
+  let min_val = 9e9;
+  data.forEach((e: any) => {
+    min_val = d3.min([min_val, d3.min([e[0], e[1]])]);
+  });
+  return min_val;
+};
+
+export const getMaxValFromStack = (data: any) => {
+  let max_val = 0;
+  data.forEach((p: any) => {
+    p.forEach((e: any) => {
+      max_val = d3.max([max_val, d3.max([e[0], e[1]])]);
+    });
+  });
+  return max_val;
+};

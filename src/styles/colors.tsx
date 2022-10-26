@@ -53,10 +53,15 @@ export const colors: ColorTypes = {
   },
 };
 
-export const fuel_colors = {
+export const bar_colors = {
   elec: "#358FB4",
   gas: "#6EB12C",
   steam: "#B23232",
   fuel_two: "#A644E2",
   fuel_four: "#62009E",
+  fine: colors.grays.medium,
+  threshold: colors.primary.main,
+  under: colors.primary.main,
+  excess: colors.grays.medium,
+  total: colors.primary.main,
 };

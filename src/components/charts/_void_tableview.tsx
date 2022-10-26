@@ -1,36 +1,28 @@
-import { useAppSelector } from "store/hooks";
+// import * as React from "react";
+// import * as d3 from "d3";
+// import { useAppSelector } from "store/hooks";
+// import { fuel_keys_to_labels } from "locallaw/lookups";
+// import { formatNumber, formatCurrency } from "./d3helpers";
+// import { InlineStylesType } from "types";
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableContainer,
+//   TableRow,
+//   Box,
+//   Divider,
+// } from "@mui/material";
+// import { SubHeaderLined } from "styles/typography";
 
-import * as React from "react";
-import * as d3 from "d3";
-import { fuel_keys_to_labels } from "locallaw/lookups";
-import { formatNumber, formatCurrency } from "../charts/d3helpers";
-import { SubHeaderLined } from "styles/typography";
-import { InlineStylesType } from "types";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Box,
-  Divider,
-} from "@mui/material";
+// const styles: InlineStylesType = {
+//   root: {},
+//   table: {
+//     maxWidth: 600,
+//   },
+// };
 
-const styles: InlineStylesType = {
-  root: { marginTop: "0px", marginBottom: "0px" },
-  table: {
-    maxWidth: 600,
-  },
-  box: {
-    breakInside: "avoid",
-    marginBottom: "50px",
-  },
-  p: {
-    margin: "20px",
-  },
-};
-
-// const PrintContent = () => {
+// const TableView: React.FunctionComponent = () => {
 //   const {
 //     building_inputs: { building_types, electric_onsite_generation, utilities },
 //     building_outputs: { annual_carbon_summary_by_year },
@@ -62,19 +54,8 @@ const styles: InlineStylesType = {
 //   }
 
 //   return (
-//     <div style={styles.root}>
-//       <p style={styles.p}>
-//         This report provides a summary of this property’s standing related to
-//         NYC Local Law 97. Building inputs should be checked for accuracy, and
-//         the calculator assumes that the entered utility inputs will remain the
-//         same for every year from 2024 to 2035. The following tables summarize
-//         input information, output summaries, and additional graphics are
-//         provided on the second page. Visit be-exchange.org/calculator for more
-//         information, and refer to the “Notes and Clarifications” section of this
-//         report for additional context.
-//       </p>
-
-//       <Box sx={styles.box}>
+//     <div style={{ overflowX: "scroll", height: "100%", overflowY: "scroll" }}>
+//       <Box>
 //         <SubHeaderLined>Utility Inputs</SubHeaderLined>
 //         <TableContainer>
 //           <Table sx={styles.table} size="small">
@@ -114,7 +95,7 @@ const styles: InlineStylesType = {
 //         <Divider />
 //       </Box>
 
-//       <Box sx={styles.box}>
+//       <Box>
 //         <SubHeaderLined>Building Areas</SubHeaderLined>
 
 //         <TableContainer>
@@ -146,7 +127,7 @@ const styles: InlineStylesType = {
 //       </Box>
 //       <Divider />
 
-//       <Box sx={styles.box}>
+//       <Box>
 //         <SubHeaderLined>LL97 Summary</SubHeaderLined>
 
 //         <TableContainer>
@@ -189,6 +170,8 @@ const styles: InlineStylesType = {
 //   );
 // };
 
-const PrintContent = () => <div>pending</div>;
+const TableView = () => {
+  return <div>void</div>;
+};
 
-export default PrintContent;
+export default TableView;
