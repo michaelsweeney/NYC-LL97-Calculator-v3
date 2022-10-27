@@ -10,6 +10,7 @@ import { InlineStylesType } from "types";
 import { colors } from "styles/colors";
 import NoFineDialogue from "./nofinedialogue";
 import NoInputDialogue from "./noinputdialogue";
+import { chart_background_color } from "styles/colors";
 
 const sidebar_width = "375px";
 const border_color = colors.secondary.main;
@@ -56,7 +57,7 @@ const styles: InlineStylesType = {
     display: "inline-block",
     boxSizing: "border-box",
     verticalAlign: "top",
-    backgroundColor: "rgba(240,240,240)",
+    backgroundColor: chart_background_color,
   },
 };
 

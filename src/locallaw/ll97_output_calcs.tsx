@@ -124,7 +124,12 @@ const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
       year: year,
       threshold: {
         absolute: threshold,
-        per_sf: threshold ? threshold / total_area : null,
+        per_sf:
+          threshold === 0
+            ? threshold / total_area
+            : threshold
+            ? threshold / total_area
+            : null,
       },
       is_fine: fine_absolute > 0,
       fine: {

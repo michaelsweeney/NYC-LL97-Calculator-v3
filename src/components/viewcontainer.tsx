@@ -12,6 +12,8 @@ const styles: InlineStylesType = {
     height: "85px",
     width: "100%",
     display: "inline-block",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
   },
   chart_container: {
     height: "calc(100% - 85px)",

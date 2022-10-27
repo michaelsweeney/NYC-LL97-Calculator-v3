@@ -16,13 +16,13 @@ const TooSmallDialogue = () => {
   return (
     <ModalWrapper
       isOpen={small_window}
-      modalTitle="NYC LL97 Carbon Calculator"
+      modalTitle="Browser Too Small"
       exitCallback={dummyCallback}
       closable={false}
     >
       <div>
-        Browser too small to view app. please view on a larger device, increase
-        window size or decrease browser zoom.
+        Browser is too small to view app. please view on a larger device,
+        increase window size or decrease browser zoom.
       </div>
     </ModalWrapper>
   );

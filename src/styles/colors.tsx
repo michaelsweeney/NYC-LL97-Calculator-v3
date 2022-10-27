@@ -65,3 +65,5 @@ export const bar_colors = {
   excess: colors.grays.medium,
   total: colors.primary.main,
 };
+
+export const chart_background_color = "rgb(240,240,240)";

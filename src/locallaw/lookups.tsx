@@ -810,5 +810,5 @@ export const range_year_lengths: { [key: string]: number } = {
   "2030-2034": 5,
   "2035-2039": 5,
   "2040-2049": 10,
-  "2050-": 2,
+  "2050-": 5,
 };
