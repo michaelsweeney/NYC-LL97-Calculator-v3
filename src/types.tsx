@@ -173,6 +173,7 @@ export type D3WrapperPropTypes = {
 };
 
 export type YearRangeTypes =
+  | "2022-2024"
   | "2024-2029"
   | "2030-2034"
   | "2035-2039"
@@ -251,3 +252,55 @@ export type BarKeyTypes =
   | "total"
   | "threshold"
   | "excess";
+
+export type CostSummaryChartDataTypes = {
+  total: number;
+  fine: number;
+  year: number;
+  period: YearRangeTypes;
+  period_length: number;
+  is_fine: boolean;
+  stack_keys: BarKeyTypes[];
+};
+
+export type CarbonSummaryChartDataTypes = {
+  total: number;
+  excess: number;
+  threshold: number | null;
+  under: number;
+  fine: number;
+  year: number;
+  period: YearRangeTypes;
+  period_length: number;
+  is_fine: boolean;
+  stack_keys: BarKeyTypes[];
+};
+
+export type CostEnduseChartDataTypes = {
+  elec: number;
+  gas: number;
+  steam: number;
+  fuel_two: number;
+  fuel_four: number;
+  fine: number;
+  year: number;
+  period: YearRangeTypes;
+  period_length: number;
+  is_fine: boolean;
+  stack_keys: BarKeyTypes[];
+};
+
+export type CarbonEnduseChartDataTypes = {
+  elec: number;
+  gas: number;
+  steam: number;
+  fuel_two: number;
+  fuel_four: number;
+  fine: number;
+  threshold: number | null;
+  year: number;
+  period: YearRangeTypes;
+  period_length: number;
+  is_fine: boolean;
+  stack_keys: BarKeyTypes[];
+};

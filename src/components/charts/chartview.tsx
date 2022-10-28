@@ -1,6 +1,6 @@
 import SVGWrapper from "./svgwrapper";
 import { bindD3Element } from "./d3helpers";
-import { BarKeyTypes, D3WrapperCallbackPropTypes } from "types";
+import { D3WrapperCallbackPropTypes } from "types";
 import { useAppSelector } from "store/hooks";
 import { transformChartData } from "./transformchartdata";
 import * as d3 from "d3";
@@ -15,8 +15,6 @@ const ChartView = () => {
   );
   const { building_outputs } = useAppSelector((state) => state);
 
-  //@ts-ignore
-
   const createLayout = (props: D3WrapperCallbackPropTypes) => {
     let data = transformChartData(
       building_outputs,
@@ -24,10 +22,9 @@ const ChartView = () => {
       stack_type,
       unit_type
     );
-    console.log(building_outputs);
-
+    let stack_keys = data[0].stack_keys;
     //@ts-ignore
-    let stacked_data = d3.stack().keys(data[0].stack_keys)(data);
+    let stacked_data = d3.stack().keys(stack_keys)(data);
 
     if (data && data[0]) {
       const { container_dimensions, container_ref } = props;
@@ -104,7 +101,6 @@ const ChartView = () => {
 
       let width_per_year =
         plot_dims.width / (xScale.domain()[1] - xScale.domain()[0]);
-      console.log(data);
       //@ts-ignore
       let threshold_max = d3.max(data.map((d) => d.threshold));
       let yScale = d3
@@ -122,7 +118,6 @@ const ChartView = () => {
       let colorScale = d3
         .scaleOrdinal()
         .domain(data[0].stack_keys)
-        //@ts-ignore
         .range(data[0].stack_keys.map((d) => bar_colors[d]));
 
       /* ------------------------------------------ */
@@ -140,10 +135,11 @@ const ChartView = () => {
       gridlines_g.selectAll("text").remove();
       gridlines_g.selectAll(".domain").remove();
 
+      //@ts-ignore
       let vline_data = data.filter((d) =>
-        //@ts-ignore
         [2024, 2030, 2035, 2040, 2050].includes(d.year)
       );
+
       vertical_line_g
         .selectAll(".vertical-line-white")
         .data(vline_data)
@@ -195,7 +191,6 @@ const ChartView = () => {
         .data(stacked_data)
         .join("g")
         .attr("class", "stacked-group-g")
-
         //@ts-ignore
         .attr("fill", (d, i) => {
           return colorScale(d.key);
@@ -255,8 +250,23 @@ const ChartView = () => {
       /* ------------------------------------------ */
 
       let legend_text = legend_g.selectAll(".legend-text-").data(data);
+      console.log(building_outputs);
 
-      console.log(data);
+      let carbon_legend_data = data
+        .map((d) => {
+          return {
+            year: d?.year,
+            //@ts-ignore
+            threshold: d?.threshold,
+            //@ts-ignore
+            total: d?.total,
+            fine: d?.fine,
+            is_fine: d?.is_fine,
+          };
+        })
+        .filter((d) => d.threshold !== null);
+
+      console.log(carbon_legend_data);
 
       /* ------------------------------------------ */
       /* ------ CREATE LEGEND --------------------- */
