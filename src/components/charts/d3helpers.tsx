@@ -12,7 +12,6 @@ export const bindD3Element = (
   } else {
     selection = parent;
   }
-
   return selection
     .selectAll(`.${classname}`)
     .data([0])

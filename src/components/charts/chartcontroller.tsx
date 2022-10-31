@@ -21,7 +21,6 @@ const ChartController = () => {
         options={["absolute", "normalized"]}
         value={unit_type}
       />
-
       <ControlToggle
         label="Stack By"
         toggle_key="stack_type"

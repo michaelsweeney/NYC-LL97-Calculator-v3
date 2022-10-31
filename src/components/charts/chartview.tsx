@@ -2,7 +2,7 @@ import SVGWrapper from "./svgwrapper";
 import { bindD3Element } from "./d3helpers";
 import { D3WrapperCallbackPropTypes } from "types";
 import { useAppSelector } from "store/hooks";
-import { transformChartData } from "./transformchartdata";
+import { getCarbonChartData, getCostChartData } from "./transformchartdata";
 import * as d3 from "d3";
 import { bar_colors, colors } from "styles/colors";
 import { getMaxValFromStack, getMinValFromStack } from "./d3helpers";
@@ -16,12 +16,8 @@ const ChartView = () => {
   const { building_outputs } = useAppSelector((state) => state);
 
   const createLayout = (props: D3WrapperCallbackPropTypes) => {
-    let data = transformChartData(
-      building_outputs,
-      view_type,
-      stack_type,
-      unit_type
-    );
+    let data = getCostChartData(building_outputs, stack_type, unit_type);
+
     let stack_keys = data[0].stack_keys;
     //@ts-ignore
     let stacked_data = d3.stack().keys(stack_keys)(data);
@@ -214,6 +210,16 @@ const ChartView = () => {
       /* ------ CARBON THRESHOLD FOR CARBON  ------ */
       /* ------------------------------------------ */
       if (view_type === "carbon") {
+        console.log(data);
+        console.log(building_outputs);
+        // let threshold_data = data.map(d => {
+
+        //   //@ts-ignore
+        //   x: d.threshold !== null ? d.year : 2024,
+        //   y:
+
+        // })
+
         let threshold_line_thickness = 6;
 
         let createThresholdLine = d3
@@ -250,7 +256,6 @@ const ChartView = () => {
       /* ------------------------------------------ */
 
       let legend_text = legend_g.selectAll(".legend-text-").data(data);
-      console.log(building_outputs);
 
       let carbon_legend_data = data
         .map((d) => {
@@ -265,8 +270,6 @@ const ChartView = () => {
           };
         })
         .filter((d) => d.threshold !== null);
-
-      console.log(carbon_legend_data);
 
       /* ------------------------------------------ */
       /* ------ CREATE LEGEND --------------------- */

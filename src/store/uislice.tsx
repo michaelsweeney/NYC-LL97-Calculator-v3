@@ -1,5 +1,5 @@
 import { height } from "@mui/system";
-import { current } from "@reduxjs/toolkit";
+import { current, StateFromReducersMapObject } from "@reduxjs/toolkit";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { UiSliceTypes, WindowDimensionTypes, ChartViewTypes } from "types";
@@ -53,6 +53,7 @@ export const uiSlice = createSlice({
       action: PayloadAction<{ view_key: string; view_value: string }>
     ) => {
       const { view_key, view_value } = action.payload;
+
       //@ts-ignore
       state.chart_view[view_key] = view_value;
     },

@@ -250,10 +250,16 @@ export type BarKeyTypes =
   | "fuel_four"
   | "fine"
   | "total"
+  | "under"
   | "threshold"
   | "excess";
 
-export type CostSummaryChartDataTypes = {
+export type CostChartDataTypes = {
+  elec: number;
+  gas: number;
+  steam: number;
+  fuel_two: number;
+  fuel_four: number;
   total: number;
   fine: number;
   year: number;
@@ -263,44 +269,20 @@ export type CostSummaryChartDataTypes = {
   stack_keys: BarKeyTypes[];
 };
 
-export type CarbonSummaryChartDataTypes = {
+export type CarbonChartDataTypes = {
+  elec: number;
+  gas: number;
+  steam: number;
+  fuel_two: number;
+  fuel_four: number;
+  fine: number;
+  threshold: number | null;
+  year: number;
+  period: YearRangeTypes;
+  period_length: number;
+  is_fine: boolean;
   total: number;
   excess: number;
-  threshold: number | null;
   under: number;
-  fine: number;
-  year: number;
-  period: YearRangeTypes;
-  period_length: number;
-  is_fine: boolean;
-  stack_keys: BarKeyTypes[];
-};
-
-export type CostEnduseChartDataTypes = {
-  elec: number;
-  gas: number;
-  steam: number;
-  fuel_two: number;
-  fuel_four: number;
-  fine: number;
-  year: number;
-  period: YearRangeTypes;
-  period_length: number;
-  is_fine: boolean;
-  stack_keys: BarKeyTypes[];
-};
-
-export type CarbonEnduseChartDataTypes = {
-  elec: number;
-  gas: number;
-  steam: number;
-  fuel_two: number;
-  fuel_four: number;
-  fine: number;
-  threshold: number | null;
-  year: number;
-  period: YearRangeTypes;
-  period_length: number;
-  is_fine: boolean;
   stack_keys: BarKeyTypes[];
 };
