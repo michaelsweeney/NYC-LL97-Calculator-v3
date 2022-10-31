@@ -1,13 +1,14 @@
 import {
   BuildingOutputSliceTypes,
-  ChartViewViewType,
   ChartViewUnitType,
   ChartViewStackType,
   CarbonChartDataTypes,
   CostChartDataTypes,
-  BarKeyTypes,
   YearRangeTypes,
+  ChartViewViewType,
+  BarKeyTypes,
 } from "types";
+
 import * as d3 from "d3";
 import { range_year_lengths } from "locallaw/lookups";
 
@@ -21,7 +22,12 @@ export const getCostChartData = (
   );
   let unit_key = unit_type === "absolute" ? "absolute" : "per_sf";
 
-  let cost_chart_data: CostChartDataTypes[] = data_year_filter.map((d) => {
+  let keys =
+    stack_type === "enduse"
+      ? ["fuel_four", "fuel_two", "steam", "gas", "elec", "fine"]
+      : ["total", "fine"];
+
+  let chart_data: CostChartDataTypes[] = data_year_filter.map((d) => {
     return {
       elec: d.utility_cost[unit_key as keyof typeof d.utility_cost].elec,
       gas: d.utility_cost[unit_key as keyof typeof d.utility_cost].gas,
@@ -37,14 +43,14 @@ export const getCostChartData = (
       period: d.period as YearRangeTypes,
       period_length: range_year_lengths[d.period],
       is_fine: d.is_fine,
-      stack_keys:
-        stack_type === "enduse"
-          ? ["fuel_four", "fuel_two", "steam", "gas", "elec", "fine"]
-          : ["total", "fine"],
+      stack_keys: keys as BarKeyTypes[],
     };
   });
 
-  return cost_chart_data;
+  //@ts-ignore
+  let stack_data = d3.stack().keys(chart_data[0].stack_keys)(chart_data);
+  let legend_data = keys;
+  return { chart_data, stack_data, legend_data };
 };
 
 export const getCarbonChartData = (
@@ -57,7 +63,12 @@ export const getCarbonChartData = (
   );
   let unit_key = unit_type === "absolute" ? "absolute" : "per_sf";
 
-  let carbon_chart_data: CarbonChartDataTypes[] = data_year_filter.map((d) => {
+  let keys =
+    stack_type === "enduse"
+      ? ["fuel_four", "fuel_two", "steam", "gas", "elec"]
+      : ["under", "excess"];
+
+  let chart_data: CarbonChartDataTypes[] = data_year_filter.map((d) => {
     return {
       elec: d.carbon[unit_key as keyof typeof d.carbon].elec,
       gas: d.carbon[unit_key as keyof typeof d.carbon].gas,
@@ -76,11 +87,22 @@ export const getCarbonChartData = (
         d.carbon[unit_key as keyof typeof d.carbon].total as number,
       ]) as number,
       excess: d.excess_carbon[unit_key as keyof typeof d.excess_carbon],
-      stack_keys:
-        stack_type === "enduse"
-          ? ["fuel_four", "fuel_two", "steam", "gas", "elec"]
-          : ["under", "excess"],
+      stack_keys: keys as BarKeyTypes[],
     };
   });
-  return carbon_chart_data;
+
+  let legend_data: any = [];
+  keys.forEach((key) => {
+    let keysum = d3.sum(
+      chart_data.map((d) => d[key as keyof typeof d]) as number[]
+    );
+    if (keysum > 0) {
+      legend_data.push(key);
+    }
+
+    console.log(chart_data[key as keyof typeof chart_data]);
+  });
+  //@ts-ignore
+  let stack_data = d3.stack().keys(chart_data[0].stack_keys)(chart_data);
+  return { chart_data, stack_data, legend_data };
 };

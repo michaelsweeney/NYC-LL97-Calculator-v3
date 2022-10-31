@@ -10,8 +10,6 @@ const styles: InlineStylesType = {
   root: {
     display: "inline-block",
     marginRight: "15px",
-    padding: "10px",
-    border: "black solid 1px",
     boxSizing: "border-box",
   },
 };

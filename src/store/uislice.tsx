@@ -18,7 +18,7 @@ const initialState: UiSliceTypes = {
   chart_view: {
     view_type: "carbon",
     unit_type: "absolute",
-    stack_type: "summary",
+    stack_type: "enduse",
   },
 };
 

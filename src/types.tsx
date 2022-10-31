@@ -1,5 +1,5 @@
 import React from "react";
-
+import * as d3 from "d3";
 export type UtilityInputType = {
   consumption: number;
   rate: number;
@@ -286,3 +286,14 @@ export type CarbonChartDataTypes = {
   under: number;
   stack_keys: BarKeyTypes[];
 };
+
+export type D3StackType = d3.Series<
+  {
+    [key: string]: number;
+  },
+  string
+>[];
+
+export type D3SelectionType = d3.Selection<any, any, any, any>;
+
+export type D3ScaleLinearType = d3.ScaleLinear<number, number, never>;

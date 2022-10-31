@@ -498,6 +498,19 @@ export const fuel_keys_to_labels = {
   gas: "Natural Gas (therms)",
 };
 
+export const bar_keys_to_labels = {
+  elec: "Electricity",
+  gas: "Gas",
+  steam: "Steam",
+  fuel_two: "Fuel Oil 2",
+  fuel_four: "Fuel Oil 4",
+  fine: "Fine",
+  threshold: "Carbon Threshold",
+  under: "Carbon Under Threshold",
+  excess: "Carbon Over Threshold",
+  total: "Total",
+};
+
 export const fuel_keys_to_rate_labels = {
   elec: "$/kWh",
   steam: "$/mlb",
