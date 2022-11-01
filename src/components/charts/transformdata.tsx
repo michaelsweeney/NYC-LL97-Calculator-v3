@@ -49,7 +49,17 @@ export const getCostChartData = (
 
   //@ts-ignore
   let stack_data = d3.stack().keys(chart_data[0].stack_keys)(chart_data);
-  let legend_data = keys;
+
+  let legend_data: any = [];
+  keys.forEach((key) => {
+    let keysum = d3.sum(
+      chart_data.map((d) => d[key as keyof typeof d]) as number[]
+    );
+    if (keysum > 0) {
+      legend_data.push(key);
+    }
+  });
+
   return { chart_data, stack_data, legend_data };
 };
 
@@ -99,8 +109,6 @@ export const getCarbonChartData = (
     if (keysum > 0) {
       legend_data.push(key);
     }
-
-    console.log(chart_data[key as keyof typeof chart_data]);
   });
   //@ts-ignore
   let stack_data = d3.stack().keys(chart_data[0].stack_keys)(chart_data);
