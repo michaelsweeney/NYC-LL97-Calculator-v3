@@ -9,6 +9,7 @@ import { setupSVGComponents } from "./setupsvgcomponents";
 import { createCarbonChart } from "./createcarbonchart";
 import { createCostChart } from "./createcostchart";
 import { createLegend } from "./createlegend";
+import { createTable } from "./createtable";
 
 const ChartView = () => {
   const { view_type, stack_type, unit_type } = useAppSelector(
@@ -49,6 +50,11 @@ const ChartView = () => {
         legend_data: cost_chart_data.legend_data,
         svg_components,
       });
+
+      createTable({
+        chart_data: cost_chart_data.chart_data,
+        svg_components,
+      });
     } else {
       createCarbonChart({
         chart_data: carbon_chart_data.chart_data,
@@ -57,8 +63,14 @@ const ChartView = () => {
         unit_type,
         stack_type,
       });
+
       createLegend({
         legend_data: carbon_chart_data.legend_data,
+        svg_components,
+      });
+
+      createTable({
+        chart_data: cost_chart_data.chart_data,
         svg_components,
       });
     }

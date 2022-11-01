@@ -111,6 +111,8 @@ export const getCarbonChartData = (
     }
   });
   //@ts-ignore
+
   let stack_data = d3.stack().keys(chart_data[0].stack_keys)(chart_data);
+
   return { chart_data, stack_data, legend_data };
 };

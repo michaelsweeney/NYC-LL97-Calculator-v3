@@ -66,4 +66,6 @@ export const bar_colors = {
   total: colors.primary.main,
 };
 
+export const threshold_line_color = "#FF5C00";
+
 export const chart_background_color = "rgb(240,240,240)";

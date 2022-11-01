@@ -5,7 +5,11 @@ import {
   ChartViewUnitType,
   D3StackType,
 } from "types";
-import { bar_colors, chart_background_color } from "styles/colors";
+import {
+  bar_colors,
+  chart_background_color,
+  threshold_line_color,
+} from "styles/colors";
 
 import { bindD3Element, getMaxValFromStack } from "./d3helpers";
 
@@ -110,7 +114,7 @@ export const createCarbonChart = (props: {
     .datum(chart_data)
     .attr("d", createThresholdLine)
     .style("fill", "none")
-    .style("stroke", "#FF5C00")
+    .style("stroke", threshold_line_color)
     .style("stroke-width", threshold_line_thickness);
 
   if (stack_type === "enduse") {

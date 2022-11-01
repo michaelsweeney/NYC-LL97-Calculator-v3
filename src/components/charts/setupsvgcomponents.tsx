@@ -22,7 +22,7 @@ export const setupSVGComponents = (
   let y_padding = 1;
 
   let legend_height = 50;
-  let table_height = 150;
+  let table_height = 110;
 
   let table_dims = {
     x: container_padding.l,
