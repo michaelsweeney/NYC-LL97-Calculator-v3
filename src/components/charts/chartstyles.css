@@ -1,0 +1,45 @@
+.border-top {
+    stroke: black;
+    fill: black;
+    stroke-width: 1;
+}
+
+.border-bottom {
+    stroke: black;
+    fill: black;
+    stroke-width: 2;
+}
+
+.border-mid {
+    fill: #FF5C00;
+    stroke: #FF5C00;
+    stroke-width: 1;
+}
+
+.idx-top-text {
+    font-weight: 700;
+    text-anchor: end;
+    font-size: 14px
+}
+
+.idx-bottom-text {
+    text-anchor: end;
+    font-size: 12px;
+}
+
+.idx-alert-text {
+    fill: #FF5C00
+}
+
+.table-val-text {
+    text-anchor: middle;
+    font-size: 14px;
+}
+.table-val-alert-text {
+    fill: #FF5C00
+}
+.period-title-text {
+    text-anchor: middle;
+    font-size: 14px;
+    font-weight: 700;
+}

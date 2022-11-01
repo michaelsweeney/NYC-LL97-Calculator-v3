@@ -4,7 +4,7 @@ import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { InlineStylesType } from "types";
-
+import { formatNumber } from "components/charts/d3helpers";
 const styles: InlineStylesType = {
   root: {},
   intro: {
@@ -30,6 +30,13 @@ const BuildingSummaryModal = () => {
     (state) => state.ll84_query
   );
 
+  const formatIfAvailable = (e: string) => {
+    if (e === "Not Available") {
+      return "Not Available";
+    } else {
+      return formatNumber(+e);
+    }
+  };
   const dispatch = useAppDispatch();
 
   const handleCloseModal = () => {
@@ -66,45 +73,60 @@ const BuildingSummaryModal = () => {
             {ll84_selected_property["1st_property_use_type"]}
           </div>
           <div>
-            1st property use SF: {ll84_selected_property["1st_property_use_sf"]}
+            1st property use SF:{" "}
+            {formatIfAvailable(ll84_selected_property["1st_property_use_sf"])}
           </div>
           <div>
             2nd property use type:{" "}
             {ll84_selected_property["2nd_property_use_type"]}
           </div>
           <div>
-            2nd property use SF: {ll84_selected_property["2nd_property_use_sf"]}
+            2nd property use SF:{" "}
+            {formatIfAvailable(ll84_selected_property["2nd_property_use_sf"])}
           </div>
           <div>
             3rd property use type:{" "}
             {ll84_selected_property["3rd_property_use_type"]}
           </div>
           <div>
-            3rd property use SF: {ll84_selected_property["3rd_property_use_sf"]}
+            3rd property use SF:{" "}
+            {formatIfAvailable(ll84_selected_property["3rd_property_use_sf"])}
           </div>
           <div>
             Fuel Oil 2 Consumption (kBtu):{" "}
-            {ll84_selected_property.fuel_oil_2_consumption_kbtu}
+            {formatIfAvailable(
+              ll84_selected_property.fuel_oil_2_consumption_kbtu
+            )}
           </div>
           <div>
             Fuel Oil 4 Consumption (kBtu){" "}
-            {ll84_selected_property.fuel_oil_4_consumption_kbtu}
+            {formatIfAvailable(
+              ll84_selected_property.fuel_oil_4_consumption_kbtu
+            )}
           </div>
           <div>
             District Steam Consumption (kBtu):{" "}
-            {ll84_selected_property.district_steam_consumption_kbtu}
+            {formatIfAvailable(
+              ll84_selected_property.district_steam_consumption_kbtu
+            )}
           </div>
           <div>
             Natural Gas Consumption (kBtu):{" "}
-            {ll84_selected_property.natural_gas_consumption_kbtu}
+            {formatIfAvailable(
+              ll84_selected_property.natural_gas_consumption_kbtu
+            )}
           </div>
           <div>
             Electricity Consumption (kBtu):{" "}
-            {ll84_selected_property.electricity_consumption_kbtu}
+            {formatIfAvailable(
+              ll84_selected_property.electricity_consumption_kbtu
+            )}
           </div>
           <div>
             Electricity Generated Onsite (kBtu):{" "}
-            {ll84_selected_property.electricity_onsite_generated_kbtu}
+            {formatIfAvailable(
+              ll84_selected_property.electricity_onsite_generated_kbtu
+            )}
           </div>
         </div>
 

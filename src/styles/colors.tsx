@@ -60,10 +60,11 @@ export const bar_colors = {
   fuel_two: "#A644E2",
   fuel_four: "#62009E",
   fine: colors.grays.medium,
-  threshold: colors.primary.main,
-  under: colors.primary.main,
-  excess: colors.grays.medium,
-  total: colors.primary.main,
+  threshold_carbon: colors.primary.main,
+  under_carbon: colors.primary.main,
+  excess_carbon: colors.grays.medium,
+  total_carbon: colors.primary.main,
+  total_cost: colors.primary.main,
 };
 
 export const threshold_line_color = "#FF5C00";

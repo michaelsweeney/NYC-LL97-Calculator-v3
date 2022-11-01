@@ -505,10 +505,11 @@ export const bar_keys_to_labels = {
   fuel_two: "Fuel Oil 2",
   fuel_four: "Fuel Oil 4",
   fine: "Fine",
-  threshold: "Carbon Threshold",
-  under: "Carbon Under Threshold",
-  excess: "Carbon Over Threshold",
-  total: "Total",
+  threshold_carbon: "Carbon Threshold",
+  under_carbon: "Carbon Below Threshold",
+  excess_carbon: "Carbon Over Threshold",
+  total_carbon: "Total Carbon",
+  total_cost: "Total Cost",
 };
 
 export const fuel_keys_to_rate_labels = {

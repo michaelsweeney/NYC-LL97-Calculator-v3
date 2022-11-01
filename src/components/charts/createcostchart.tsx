@@ -22,7 +22,10 @@ export const createCostChart = (props: {
   let yScale = d3
     .scaleLinear()
     .range([svg_components.plot_dims.height, 0])
-    .domain([0, getMaxValFromStack(stack_data) as number]);
+    .domain([
+      0,
+      (getMaxValFromStack(stack_data) as number) * svg_components.y_padding,
+    ]);
 
   let colorScale = d3
     .scaleOrdinal()
@@ -72,39 +75,5 @@ export const createCostChart = (props: {
       return d.data.period_length * svg_components.width_per_year;
     });
 
-  let threshold_line_thickness = 6;
-
-  let createThresholdLine = d3
-    .line<any>()
-    .curve(d3.curveStepAfter)
-    .x((d) => {
-      return xScale(d.threshold !== null ? d.year : 2024) as number;
-    })
-
-    .y((d) => {
-      return yScale(d.threshold !== null ? d.threshold : yScale.domain()[1]);
-    });
-
-  let line_threshold_g = bindD3Element(
-    svg_components.plot_g,
-    "g",
-    "line-threshold-g"
-  );
-
-  let threshold_path = bindD3Element(
-    line_threshold_g,
-    "path",
-    "threshold-path"
-  );
-
-  threshold_path
-    .datum(chart_data)
-    .attr("d", createThresholdLine)
-    .style("fill", "none")
-    .style("stroke", "#FF5C00")
-    .style("stroke-width", threshold_line_thickness);
-
-  if (stack_type === "enduse") {
-    threshold_path.remove();
-  }
+  svg_components.threshold_g.remove();
 };

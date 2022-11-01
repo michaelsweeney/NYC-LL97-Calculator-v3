@@ -7,22 +7,14 @@ import { chart_background_color } from "styles/colors";
 
 export const setupSVGComponents = (
   container_dimensions: WidthHeightDimensionTypes,
-  container_ref: HTMLDivElement
+  container_ref: HTMLDivElement,
+  container_padding: { [key: string]: number },
+  y_padding: number,
+  legend_height: number,
+  table_height: number
 ) => {
   let container_width = container_dimensions.width;
   let container_height = container_dimensions.height;
-
-  let container_padding = {
-    t: 25,
-    l: 100,
-    r: 75,
-    b: 25,
-  };
-
-  let y_padding = 1;
-
-  let legend_height = 50;
-  let table_height = 110;
 
   let table_dims = {
     x: container_padding.l,
@@ -71,13 +63,19 @@ export const setupSVGComponents = (
     })`
   );
 
+  let vertical_line_g = bindD3Element(svg, "g", "vertical-line-g").attr(
+    "transform",
+    `translate(${plot_dims.x},${plot_dims.y})`
+  );
+  let threshold_g = bindD3Element(svg, "g", "threshold-g").attr(
+    "transform",
+    `translate(${plot_dims.x},${plot_dims.y})`
+  );
   let axis_g = bindD3Element(plot_g, "g", "axis-g");
   let y_axis_g = bindD3Element(axis_g, "g", "y-axis-g");
 
   let bar_g = bindD3Element(plot_g, "g", "bar-g");
   let gridlines_g = bindD3Element(plot_g, "g", "gridlines-g");
-
-  let vertical_line_g = bindD3Element(plot_g, "g", "vert-line-g");
 
   let plot_border = bindD3Element(plot_g, "line", "bottom-plot-line")
     .attr("x1", 0)
@@ -103,6 +101,9 @@ export const setupSVGComponents = (
 
   let vline_data = [2024, 2030, 2035, 2040, 2050];
 
+  let vline_1 = -table_dims.height - 10;
+  let vline_2 = plot_dims.height;
+
   vertical_line_g
     .selectAll(".vertical-line-white")
     .data(vline_data)
@@ -110,8 +111,8 @@ export const setupSVGComponents = (
     .attr("class", "vertical-line-white")
     .attr("x1", (d: number) => xScale(d))
     .attr("x2", (d: number) => xScale(d))
-    .attr("y1", () => table_dims.y - table_height)
-    .attr("y2", plot_dims.height)
+    .attr("y1", vline_1)
+    .attr("y2", vline_2)
     .style("stroke", chart_background_color)
     .style("stroke-width", "6px");
 
@@ -122,8 +123,8 @@ export const setupSVGComponents = (
     .attr("class", "vertical-line-solid")
     .attr("x1", (d: number) => xScale(d))
     .attr("x2", (d: number) => xScale(d))
-    .attr("y1", () => table_dims.y - table_height)
-    .attr("y2", plot_dims.height)
+    .attr("y1", vline_1)
+    .attr("y2", vline_2)
     .style("stroke", "black")
     .style("stroke-width", "2px");
 
@@ -146,5 +147,6 @@ export const setupSVGComponents = (
     y_label,
     xScale,
     width_per_year,
+    threshold_g,
   };
 };

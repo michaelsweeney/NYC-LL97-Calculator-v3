@@ -45,6 +45,7 @@ export const HeaderBuildingTitle = styled("div")`
   font-size: 48px;
   font-family: CircularStd-Medium;
   cursor: pointer;
+  transition: color 200ms;
   &:hover {
     color: ${colors.grays.light};
   }

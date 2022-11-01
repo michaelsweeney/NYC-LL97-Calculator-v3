@@ -249,10 +249,11 @@ export type BarKeyTypes =
   | "fuel_two"
   | "fuel_four"
   | "fine"
-  | "total"
-  | "under"
-  | "threshold"
-  | "excess";
+  | "total_carbon"
+  | "total_cost"
+  | "under_carbon"
+  | "threshold_carbon"
+  | "excess_carbon";
 
 export type CostChartDataTypes = {
   elec: number;
@@ -260,13 +261,15 @@ export type CostChartDataTypes = {
   steam: number;
   fuel_two: number;
   fuel_four: number;
-  total: number;
+  total_cost: number;
   fine: number;
   year: number;
   period: YearRangeTypes;
   period_length: number;
   is_fine: boolean;
   stack_keys: BarKeyTypes[];
+  threshold_carbon: number | null;
+  total_carbon: number;
 };
 
 export type CarbonChartDataTypes = {
@@ -276,14 +279,15 @@ export type CarbonChartDataTypes = {
   fuel_two: number;
   fuel_four: number;
   fine: number;
-  threshold: number | null;
+  threshold_carbon: number | null;
   year: number;
   period: YearRangeTypes;
   period_length: number;
   is_fine: boolean;
-  total: number;
-  excess: number;
-  under: number;
+  total_carbon: number;
+  excess_carbon: number;
+  under_carbon: number;
+  total_cost: number;
   stack_keys: BarKeyTypes[];
 };
 

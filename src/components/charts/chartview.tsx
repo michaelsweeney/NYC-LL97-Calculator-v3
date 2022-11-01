@@ -20,9 +20,25 @@ const ChartView = () => {
   const createLayout = (props: D3WrapperCallbackPropTypes) => {
     const { container_dimensions, container_ref } = props;
 
+    let container_padding = {
+      t: 25,
+      l: 100,
+      r: 75,
+      b: 25,
+    };
+
+    let y_padding = 1.15;
+
+    let legend_height = 40;
+    let table_height = 130;
+
     let svg_components = setupSVGComponents(
       container_dimensions,
-      container_ref
+      container_ref,
+      container_padding,
+      y_padding,
+      legend_height,
+      table_height
     );
 
     let cost_chart_data = getCostChartData(
@@ -54,6 +70,9 @@ const ChartView = () => {
       createTable({
         chart_data: cost_chart_data.chart_data,
         svg_components,
+        stack_type,
+        view_type,
+        unit_type,
       });
     } else {
       createCarbonChart({
@@ -72,6 +91,9 @@ const ChartView = () => {
       createTable({
         chart_data: cost_chart_data.chart_data,
         svg_components,
+        stack_type,
+        view_type,
+        unit_type,
       });
     }
   };

@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { bindD3Element } from "./d3helpers";
 import { bar_colors } from "styles/colors";
 import { bar_keys_to_labels } from "locallaw/lookups";
+import { current } from "immer";
 
 export const createLegend = (props: {
   svg_components: { [key: string]: any };
@@ -10,10 +11,10 @@ export const createLegend = (props: {
 }) => {
   let { legend_data, svg_components } = props;
 
-  let { legend_g, container_dimensions, legend_dims } = svg_components;
+  let { legend_g } = svg_components;
 
-  let rect_size = 20;
-  let text_padding = 10;
+  let rect_size = 18;
+  let text_padding = 5;
   let group_padding = 15;
   let top_padding = 25;
   let left_padding = 0;
@@ -37,11 +38,13 @@ export const createLegend = (props: {
   legend_item.each(function (d: any, i: any) {
     //@ts-ignore
     let el = d3.select(this);
+
     let legend_text = bindD3Element(el, "text", "legend-text")
       .text(d.label)
       .attr("alignment-baseline", "center")
       .attr("x", rect_size + text_padding)
-      .attr("y", rect_size / 2 + 5);
+      .attr("y", rect_size / 2 + 5)
+      .style("font-size", 14);
 
     let legend_rect = bindD3Element(el, "rect", "legend-rect")
       .attr("width", rect_size)
@@ -50,14 +53,12 @@ export const createLegend = (props: {
       .attr("x", 0)
       .attr("y", 0);
 
-    //@ts-ignore
     let text_width = el.node().getBBox().width;
 
     el.attr(
       "transform",
       `translate(${left_padding + current_position},${top_padding})`
     );
-
     current_position += text_width + group_padding;
   });
 };

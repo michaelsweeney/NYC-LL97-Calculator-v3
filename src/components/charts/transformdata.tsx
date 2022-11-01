@@ -5,7 +5,6 @@ import {
   CarbonChartDataTypes,
   CostChartDataTypes,
   YearRangeTypes,
-  ChartViewViewType,
   BarKeyTypes,
 } from "types";
 
@@ -25,7 +24,7 @@ export const getCostChartData = (
   let keys =
     stack_type === "enduse"
       ? ["fuel_four", "fuel_two", "steam", "gas", "elec", "fine"]
-      : ["total", "fine"];
+      : ["total_cost", "fine"];
 
   let chart_data: CostChartDataTypes[] = data_year_filter.map((d) => {
     return {
@@ -36,7 +35,7 @@ export const getCostChartData = (
         d.utility_cost[unit_key as keyof typeof d.utility_cost].fuel_two,
       fuel_four:
         d.utility_cost[unit_key as keyof typeof d.utility_cost].fuel_four,
-      total: d.utility_cost[unit_key as keyof typeof d.utility_cost]
+      total_cost: d.utility_cost[unit_key as keyof typeof d.utility_cost]
         .total as number,
       fine: d.fine[unit_key as keyof typeof d.fine],
       year: d.year,
@@ -44,6 +43,8 @@ export const getCostChartData = (
       period_length: range_year_lengths[d.period],
       is_fine: d.is_fine,
       stack_keys: keys as BarKeyTypes[],
+      threshold_carbon: d.threshold[unit_key as keyof typeof d.threshold],
+      total_carbon: d.carbon[unit_key as keyof typeof d.carbon].total as number,
     };
   });
 
@@ -76,7 +77,7 @@ export const getCarbonChartData = (
   let keys =
     stack_type === "enduse"
       ? ["fuel_four", "fuel_two", "steam", "gas", "elec"]
-      : ["under", "excess"];
+      : ["under_carbon", "excess_carbon"];
 
   let chart_data: CarbonChartDataTypes[] = data_year_filter.map((d) => {
     return {
@@ -86,17 +87,19 @@ export const getCarbonChartData = (
       fuel_two: d.carbon[unit_key as keyof typeof d.carbon].fuel_two,
       fuel_four: d.carbon[unit_key as keyof typeof d.carbon].fuel_four,
       fine: d.fine[unit_key as keyof typeof d.fine],
-      threshold: d.threshold[unit_key as keyof typeof d.threshold],
+      threshold_carbon: d.threshold[unit_key as keyof typeof d.threshold],
       year: d.year,
       period: d.period as YearRangeTypes,
       period_length: range_year_lengths[d.period],
       is_fine: d.is_fine,
-      total: d.carbon[unit_key as keyof typeof d.carbon].total as number,
-      under: d3.min([
+      total_carbon: d.carbon[unit_key as keyof typeof d.carbon].total as number,
+      total_cost: d.utility_cost[unit_key as keyof typeof d.utility_cost]
+        .total as number,
+      under_carbon: d3.min([
         d.threshold[unit_key as keyof typeof d.threshold] as number,
         d.carbon[unit_key as keyof typeof d.carbon].total as number,
       ]) as number,
-      excess: d.excess_carbon[unit_key as keyof typeof d.excess_carbon],
+      excess_carbon: d.excess_carbon[unit_key as keyof typeof d.excess_carbon],
       stack_keys: keys as BarKeyTypes[],
     };
   });

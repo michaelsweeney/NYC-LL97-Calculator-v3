@@ -11,7 +11,7 @@ const WindowListener = () => {
       width: window.innerWidth,
       height: window.innerHeight,
     };
-    let is_small_window = dims.height < 500 || dims.width < 800;
+    let is_small_window = dims.height < 500 || dims.width < 1000;
     return { dims, is_small_window };
   };
 

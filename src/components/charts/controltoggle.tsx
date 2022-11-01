@@ -12,6 +12,10 @@ const styles: InlineStylesType = {
     marginRight: "15px",
     boxSizing: "border-box",
   },
+  title: {
+    fontFamily: "CircularStd-Book",
+    marginBottom: "5px",
+  },
 };
 
 const ControlToggle = (props: ControlToggleTypes) => {
@@ -25,7 +29,7 @@ const ControlToggle = (props: ControlToggleTypes) => {
 
   return (
     <div style={styles.root}>
-      <div>{label}</div>
+      <div style={styles.title}>{label}</div>
       {options.map((o, i) => {
         return (
           <ButtonSecondary

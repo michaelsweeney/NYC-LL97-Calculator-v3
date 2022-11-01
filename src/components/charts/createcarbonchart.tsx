@@ -29,12 +29,12 @@ export const createCarbonChart = (props: {
     .range([svg_components.plot_dims.height, 0])
     .domain([
       0,
-      d3.max([
+      (d3.max([
         getMaxValFromStack(stack_data),
         d3.max(
-          chart_data.map((d) => (d.threshold ? d.threshold : 0))
+          chart_data.map((d) => (d.threshold_carbon ? d.threshold_carbon : 0))
         ) as number,
-      ]) as number,
+      ]) as number) * svg_components.y_padding,
     ]);
 
   let colorScale = d3
@@ -91,15 +91,17 @@ export const createCarbonChart = (props: {
     .line<any>()
     .curve(d3.curveStepAfter)
     .x((d) => {
-      return xScale(d.threshold !== null ? d.year : 2024) as number;
+      return xScale(d.threshold_carbon !== null ? d.year : 2024) as number;
     })
 
     .y((d) => {
-      return yScale(d.threshold !== null ? d.threshold : yScale.domain()[1]);
+      return yScale(
+        d.threshold_carbon !== null ? d.threshold_carbon : yScale.domain()[1]
+      );
     });
 
   let line_threshold_g = bindD3Element(
-    svg_components.plot_g,
+    svg_components.threshold_g,
     "g",
     "line-threshold-g"
   );
@@ -110,14 +112,22 @@ export const createCarbonChart = (props: {
     "threshold-path"
   );
 
+  let threshold_data = chart_data.map((d) => {
+    return {
+      threshold_carbon: d.threshold_carbon,
+      year: d.year,
+    };
+  });
+
+  threshold_data.push({
+    threshold_carbon: 0,
+    year: 2055,
+  });
+
   threshold_path
-    .datum(chart_data)
+    .datum(threshold_data)
     .attr("d", createThresholdLine)
     .style("fill", "none")
     .style("stroke", threshold_line_color)
     .style("stroke-width", threshold_line_thickness);
-
-  if (stack_type === "enduse") {
-    threshold_path.remove();
-  }
 };
