@@ -16,7 +16,7 @@ const sidebar_width = "375px";
 const border_color = colors.secondary.main;
 interface IAppProps {}
 
-const borderWidth = "4px";
+const border_width = "4px";
 
 const styles: InlineStylesType = {
   root: {
@@ -27,7 +27,7 @@ const styles: InlineStylesType = {
   header: {
     width: "100%",
     height: "100px",
-    borderBottom: `${borderWidth} solid ${border_color}`,
+    borderBottom: `${border_width} solid ${border_color}`,
     boxSizing: "border-box",
   },
   middle: {
@@ -38,13 +38,13 @@ const styles: InlineStylesType = {
   footer: {
     width: "100%",
     height: "50px",
-    borderTop: `${borderWidth} solid ${border_color}`,
+    borderTop: `${border_width} solid ${border_color}`,
     boxSizing: "border-box",
   },
   sidebar: {
     width: sidebar_width,
     height: "100%",
-    borderRight: `${borderWidth} solid ${border_color}`,
+    borderRight: `${border_width} solid ${border_color}`,
     padding: "10px",
     display: "inline-block",
     boxSizing: "border-box",

@@ -1,27 +1,25 @@
 import * as React from "react";
+import { colors } from "styles/colors";
 
 import { InlineStylesType } from "types";
 
-import ChartController from "./charts/chartcontroller";
+import ChartViewSelector from "./chartviewselector";
 import ChartView from "./charts/chartview";
 
 interface IAppProps {}
 const styles: InlineStylesType = {
   root: {},
   control_container: {
-    height: "85px",
+    height: "75px",
     width: "100%",
     display: "inline-block",
     whiteSpace: "nowrap",
     overflow: "hidden",
   },
   chart_container: {
-    height: "calc(100% - 85px)",
+    height: "calc(100% - 75px)",
     width: "100%",
     display: "inline-block",
-  },
-  button: {
-    marginRight: "5px",
   },
 };
 
@@ -29,7 +27,7 @@ const ViewContainer: React.FunctionComponent<IAppProps> = () => {
   return (
     <React.Fragment>
       <div style={styles.control_container}>
-        <ChartController />
+        <ChartViewSelector />
       </div>
       <div style={styles.chart_container}>
         <ChartView />
