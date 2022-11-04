@@ -31,8 +31,10 @@ const styles: InlineStylesType = {
     textAlign: "left",
     display: "inline-block",
     verticalAlign: "middle",
-    paddingLeft: "15px",
+    paddingLeft: "10px",
     boxSizing: "border-box",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
   },
   right: {
     width: right_width,
