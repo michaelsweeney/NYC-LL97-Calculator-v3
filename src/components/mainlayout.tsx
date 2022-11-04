@@ -12,7 +12,7 @@ import NoFineDialogue from "./nofinedialogue";
 import NoInputDialogue from "./noinputdialogue";
 import { chart_background_color } from "styles/colors";
 
-const sidebar_width = "375px";
+const sidebar_width = "340px";
 const border_color = colors.secondary.main;
 interface IAppProps {}
 

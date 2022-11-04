@@ -7,6 +7,7 @@ import {
   ChartViewViewType,
   ChartViewStackType,
   ChartViewUnitType,
+  WindowSizeTypes,
 } from "types";
 type DataType = CostChartDataTypes | CarbonChartDataTypes;
 
@@ -16,9 +17,16 @@ export const createTable = (props: {
   unit_type: ChartViewUnitType;
   stack_type: ChartViewStackType;
   view_type: ChartViewViewType;
+  window_size: WindowSizeTypes;
 }) => {
-  const { svg_components, chart_data, unit_type, stack_type, view_type } =
-    props;
+  const {
+    svg_components,
+    chart_data,
+    unit_type,
+    stack_type,
+    view_type,
+    window_size,
+  } = props;
 
   const { table_g, xScale, table_dims } = svg_components;
 
@@ -93,25 +101,29 @@ export const createTable = (props: {
     let title = bindD3Element(el, "text", "period-title-text")
       .text(header_text)
       .attr("x", titlexpos)
-      .classed("period-title-text", true);
+      .classed("period-title-text", true)
+      .classed("period-title-text-small", window_size === "small");
 
     let row_1 = bindD3Element(el, "text", "row-1-text")
       .text(row_key_map["row_1"][view_type][unit_type])
       .attr("x", xpos)
       .attr("y", dimensions.row_height * 1 - dimensions.row_text_y_offset)
-      .classed("table-val-text", true);
+      .classed("table-val-text", true)
+      .classed("table-val-text-small", window_size === "small");
 
     let row_2 = bindD3Element(el, "text", "row-2-text")
       .text(row_key_map["row_2"][view_type][unit_type])
       .attr("x", xpos)
       .attr("y", dimensions.row_height * 2 - dimensions.row_text_y_offset)
-      .classed("table-val-text table-val-alert-text", true);
+      .classed("table-val-text table-val-alert-text", true)
+      .classed("table-val-text-small", window_size === "small");
 
     let row_3 = bindD3Element(el, "text", "row-3-text")
       .text(row_key_map["row_3"][view_type][unit_type])
       .attr("x", xpos)
       .attr("y", dimensions.row_height * 3 - dimensions.row_text_y_offset)
-      .classed("table-val-text", true);
+      .classed("table-val-text", true)
+      .classed("table-val-text-small", window_size === "small");
   });
 
   /* ---------------------- */
@@ -195,21 +207,24 @@ export const createTable = (props: {
     .attr("x", dimensions.index_position)
     //@ts-ignore
     .text(index_name_map["idx_row_1"][view_type][unit_type]["top"])
-    .classed("idx-top-text", true);
+    .classed("idx-top-text", true)
+    .classed("idx-top-text-small", window_size === "small");
 
   let index_2_top = bindD3Element(table_index, "text", "index-2-text-top")
     .attr("y", dimensions.row_height * 2 - dimensions.idx_top_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
     .text(index_name_map["idx_row_2"][view_type][unit_type]["top"])
-    .classed("idx-top-text idx-alert-text", true);
+    .classed("idx-top-text idx-alert-text", true)
+    .classed("idx-top-text-small", window_size === "small");
 
   let index_3_top = bindD3Element(table_index, "text", "index-3-text-top")
     .attr("y", dimensions.row_height * 3 - dimensions.idx_top_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
     .text(index_name_map["idx_row_3"][view_type][unit_type]["top"])
-    .classed("idx-top-text", true);
+    .classed("idx-top-text", true)
+    .classed("idx-top-text-small", window_size === "small");
 
   let index_1_bottom = bindD3Element(table_index, "text", "index-1-text-bottom")
     .attr("y", dimensions.row_height * 1 + dimensions.idx_bottom_offset)
@@ -217,21 +232,24 @@ export const createTable = (props: {
 
     //@ts-ignore
     .text(index_name_map["idx_row_1"][view_type][unit_type]["bottom"])
-    .classed("idx-bottom-text", true);
+    .classed("idx-bottom-text", true)
+    .classed("idx-bottom-text-small", window_size === "small");
 
   let index_2_bottom = bindD3Element(table_index, "text", "index-2-text-bottom")
     .attr("y", dimensions.row_height * 2 + dimensions.idx_bottom_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
     .text(index_name_map["idx_row_2"][view_type][unit_type]["bottom"])
-    .classed("idx-bottom-text idx-alert-text", true);
+    .classed("idx-bottom-text idx-alert-text", true)
+    .classed("idx-bottom-text-small", window_size === "small");
 
   let index_3_bottom = bindD3Element(table_index, "text", "index-3-text-bottom")
     .attr("y", dimensions.row_height * 3 + dimensions.idx_bottom_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
     .text(index_name_map["idx_row_3"][view_type][unit_type]["bottom"])
-    .classed("idx-bottom-text", true);
+    .classed("idx-bottom-text", true)
+    .classed("idx-bottom-text-small", window_size === "small");
 
   /* ------------------------------------ */
   /* ---- BORDERS & HORIZONTAL LINES ---- */

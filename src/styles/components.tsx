@@ -31,6 +31,8 @@ export const ButtonSecondary = styled(Button)<{}>`
 `;
 
 export const RemoveTypeButton = styled(Button)`
+  position: relative;
+  left: -15px;
   font-family: CircularStd-Bold;
   &:hover {
     background-color: white;

@@ -15,13 +15,15 @@ const ChartView = () => {
   const { view_type, stack_type, unit_type } = useAppSelector(
     (state) => state.ui.chart_view
   );
+
+  const { window_size } = useAppSelector((state) => state.ui);
   const { building_outputs } = useAppSelector((state) => state);
 
   const createLayout = (props: D3WrapperCallbackPropTypes) => {
     const { container_dimensions, container_ref } = props;
 
     let container_padding = {
-      t: 25,
+      t: 60,
       l: 100,
       r: 75,
       b: 25,
@@ -73,6 +75,7 @@ const ChartView = () => {
         stack_type,
         view_type,
         unit_type,
+        window_size,
       });
     } else {
       createCarbonChart({
@@ -94,6 +97,7 @@ const ChartView = () => {
         stack_type,
         view_type,
         unit_type,
+        window_size,
       });
     }
   };

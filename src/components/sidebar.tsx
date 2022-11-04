@@ -26,8 +26,6 @@ const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
       <InputUtilities />
       <SidebarSubHeader>Onsite Generation</SidebarSubHeader>
       <InputOnsiteGeneration />
-      {/* <SidebarSubHeader>Carbon Coefficients</SidebarSubHeader> */}
-      {/* <CoefficientSelector /> */}
     </div>
   );
 };

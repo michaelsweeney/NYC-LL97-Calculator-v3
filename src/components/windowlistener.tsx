@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import { uiActions } from "store/uislice";
+import { WindowSizeTypes } from "types";
 const WindowListener = () => {
   const dispatch = useAppDispatch();
   const { is_dev_mode } = useAppSelector((state) => state.ui);
@@ -12,20 +13,28 @@ const WindowListener = () => {
       width: window.innerWidth,
       height: window.innerHeight,
     };
-    let is_small_window = dims.height < 500 || dims.width < 1000;
+    let is_small_window = dims.height < 500 || dims.width < 900;
+
+    let window_size =
+      dims.width < 1100 || dims.height < 600
+        ? "small"
+        : dims.width < 2000
+        ? "medium"
+        : "large";
 
     if (is_dev_mode) {
       is_small_window = false;
     }
-    return { dims, is_small_window };
+    return { dims, is_small_window, window_size };
   };
 
   useEffect(() => {
     const handleResize = () => {
-      let { dims, is_small_window } = getDimensions();
+      let { dims, is_small_window, window_size } = getDimensions();
 
       dispatch(uiActions.setWindowDimensions(dims));
       dispatch(uiActions.setSmallWindow(is_small_window));
+      dispatch(uiActions.setWindowSize(window_size as WindowSizeTypes));
     };
 
     window.addEventListener("resize", handleResize);

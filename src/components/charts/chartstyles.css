@@ -17,14 +17,23 @@
 }
 
 .idx-top-text {
-    font-weight: 700;
+    font-family: CircularStd-Bold;
     text-anchor: end;
-    font-size: 14px
+    font-size: 12px
+}
+
+.idx-top-text-small {
+    font-size: 9px;
 }
 
 .idx-bottom-text {
+    font-family: CircularStd-Medium;
     text-anchor: end;
-    font-size: 12px;
+    font-size: 10px;
+}
+
+.idx-bottom-text-small {
+    font-size: 8px;
 }
 
 .idx-alert-text {
@@ -32,14 +41,22 @@
 }
 
 .table-val-text {
+    font-family: CircularStd-Book;
     text-anchor: middle;
     font-size: 14px;
 }
+.table-val-text-small {
+    font-size: 10px;
+}
+
 .table-val-alert-text {
     fill: #FF5C00
 }
 .period-title-text {
+    font-family: CircularStd-Bold;
     text-anchor: middle;
     font-size: 14px;
-    font-weight: 700;
+}
+.period-title-text-small {
+    font-size: 10px;
 }

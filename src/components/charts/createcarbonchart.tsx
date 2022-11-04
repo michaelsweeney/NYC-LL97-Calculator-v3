@@ -22,7 +22,8 @@ export const createCarbonChart = (props: {
 }) => {
   let { chart_data, stack_data, svg_components, unit_type, stack_type } = props;
 
-  let xScale = svg_components.xScale;
+  let { xScale, title_text } = svg_components;
+  title_text.text("Annual Carbon Threshold Summary");
 
   let yScale = d3
     .scaleLinear()
@@ -46,6 +47,7 @@ export const createCarbonChart = (props: {
     .axisLeft(yScale)
     .ticks(5)
     .tickFormat(d3.format(unit_type === "absolute" ? "~s" : ".1"));
+
   svg_components.y_axis_g.call(yaxis);
   svg_components.y_axis_g.selectAll("line").remove();
   svg_components.y_axis_g.selectAll(".domain").remove();

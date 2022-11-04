@@ -3,18 +3,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { uiActions } from "store/uislice";
 import { InlineStylesType } from "types";
 
-import ChartViewButton from "./chartviewbutton";
-const styles: InlineStylesType = {
-  div_button: {
-    width: "75px",
-    display: "inline-block",
-    height: "50px",
-    cursor: "pointer",
-    "&:hover": {
-      color: "red",
-    },
-  },
-};
+import ChartViewButton from "./charttogglebutton";
 
 const ChartViewSelector = () => {
   const { view_type, stack_type, unit_type } = useAppSelector(

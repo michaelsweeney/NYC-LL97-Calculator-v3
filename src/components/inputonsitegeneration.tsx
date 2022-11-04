@@ -20,7 +20,7 @@ const styles: InlineStylesType = {
   },
   input_container: {
     marginLeft: "15px",
-    // width: "100px",
+    width: "125px",
     display: "inline-block",
   },
 };

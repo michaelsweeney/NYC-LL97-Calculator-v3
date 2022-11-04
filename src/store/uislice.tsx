@@ -1,18 +1,19 @@
 import { height } from "@mui/system";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UiSliceTypes, WindowDimensionTypes } from "types";
+import { UiSliceTypes, WindowDimensionTypes, WindowSizeTypes } from "types";
 
 const initialState: UiSliceTypes = {
   is_info_modal_open: true,
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
-  is_dev_mode: true,
+  is_dev_mode: false,
   is_print_mode: false,
   window_dimensions: {
     width: 0,
     height: 0,
   },
+  window_size: "medium",
   small_window: false,
   chart_view: {
     view_type: "carbon",
@@ -46,6 +47,9 @@ export const uiSlice = createSlice({
     },
     setSmallWindow: (state, action: PayloadAction<boolean>) => {
       state.small_window = action.payload;
+    },
+    setWindowSize: (state, action: PayloadAction<WindowSizeTypes>) => {
+      state.window_size = action.payload;
     },
     setChartView: (
       state,

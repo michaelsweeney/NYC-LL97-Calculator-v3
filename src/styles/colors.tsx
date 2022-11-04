@@ -40,6 +40,7 @@ export const colors: ColorTypes = {
     dark: "rgb(35,103,133)",
   },
   grays: {
+    extralight: "rgb(235,235,235)",
     light: "#878787",
     medium: "#595954",
     dark: "#3B3B3B",

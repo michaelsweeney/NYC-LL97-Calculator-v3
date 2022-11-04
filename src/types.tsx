@@ -89,6 +89,7 @@ export type UiSliceTypes = {
   small_window: boolean;
   chart_view: ChartViewTypes;
   is_dev_mode: boolean;
+  window_size: WindowSizeTypes;
 };
 
 export type LL84QuerySliceTypes = {
@@ -302,3 +303,5 @@ export type D3StackType = d3.Series<
 export type D3SelectionType = d3.Selection<any, any, any, any>;
 
 export type D3ScaleLinearType = d3.ScaleLinear<number, number, never>;
+
+export type WindowSizeTypes = "small" | "medium" | "large";

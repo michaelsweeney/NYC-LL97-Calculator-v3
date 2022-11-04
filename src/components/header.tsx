@@ -13,7 +13,7 @@ import CalcLogo from "./calclogo";
 
 interface IAppProps {}
 
-const left_width = "375px";
+const left_width = "350px";
 const right_width = "100px";
 
 const styles: InlineStylesType = {
@@ -31,7 +31,7 @@ const styles: InlineStylesType = {
     textAlign: "left",
     display: "inline-block",
     verticalAlign: "middle",
-    paddingLeft: "15px",
+    paddingLeft: "0px",
     boxSizing: "border-box",
   },
   right: {

@@ -27,7 +27,7 @@ const styles: InlineStylesType = {
     tableLayout: "fixed",
     width: "300px",
     marginTop: "5px",
-    marginBottom: "10px",
+    marginBottom: "5px",
   },
 
   bldg_id_col: {
@@ -66,8 +66,10 @@ const styles: InlineStylesType = {
   },
   add_button_text: {
     position: "relative",
-    marginLeft: 10,
-    top: 1,
+    fontSize: "14px",
+    fontFamily: "CircularStd-Medium",
+    marginLeft: 5,
+    top: 3,
   },
 };
 

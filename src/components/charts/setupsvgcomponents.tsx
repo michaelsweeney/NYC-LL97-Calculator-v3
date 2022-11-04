@@ -51,6 +51,15 @@ export const setupSVGComponents = (
     `translate(${table_dims.x},${table_dims.y})`
   );
 
+  let title_g = bindD3Element(svg, "g", "title-g");
+  let title_text = bindD3Element(title_g, "text", "title-text");
+  title_text
+    .text("")
+    .attr("font-family", "CircularStd-Medium")
+    .attr("font-size", "20px")
+    .attr("x", plot_dims.x)
+    .attr("y", 30);
+
   let plot_g = bindD3Element(svg, "g", "plot-g").attr(
     "transform",
     `translate(${plot_dims.x},${plot_dims.y})`
@@ -87,9 +96,10 @@ export const setupSVGComponents = (
 
   let y_label = bindD3Element(axis_g, "text", "y-label")
     .attr("x", -plot_dims.height / 2)
-    .attr("y", -60)
+    .attr("y", -50)
     .attr("transform", "rotate(270)")
-    .style("text-anchor", "middle");
+    .style("text-anchor", "middle")
+    .attr("font-size", "12px");
 
   let xScale = d3
     .scaleLinear()
@@ -148,5 +158,7 @@ export const setupSVGComponents = (
     xScale,
     width_per_year,
     threshold_g,
+    title_g,
+    title_text,
   };
 };

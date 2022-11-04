@@ -17,7 +17,9 @@ export const createCostChart = (props: {
 }) => {
   let { chart_data, stack_data, svg_components, unit_type, stack_type } = props;
 
-  let xScale = svg_components.xScale;
+  let { xScale, title_text } = svg_components;
+
+  title_text.text("Annual Cost Summary");
 
   let yScale = d3
     .scaleLinear()

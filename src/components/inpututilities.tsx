@@ -11,6 +11,7 @@ import {
 import FocusNumberInput from "./focusnumberinput";
 
 import { colors } from "styles/colors";
+
 import {
   fuel_keys_to_labels,
   fuel_keys_to_rate_labels,
@@ -23,19 +24,33 @@ interface IAppProps {}
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
   root: { overflowX: "hidden" },
-  table: { marginLeft: "24px", tableLayout: "fixed", width: "275px" },
+  table: { tableLayout: "fixed", width: "300px" },
+  bldg_id_col: {
+    visibility: "hidden",
+    width: "10px",
+    paddingLeft: defaultPadding,
+    paddingRight: defaultPadding,
+    textAlign: "center",
+  },
   fuel_col: {
-    width: "150px",
+    width: "70px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
   rate_col: {
-    width: "70px",
+    width: "50px",
     paddingLeft: defaultPadding,
     paddingRight: defaultPadding,
   },
   default_rate_container: {
     paddingLeft: 25,
+  },
+  rm_btn_col: {
+    visibility: "hidden",
+    width: "10px",
+    textAlign: "center",
+    paddingLeft: 0,
+    paddingRight: 0,
   },
 };
 
@@ -72,6 +87,7 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
               return (
                 <React.Fragment key={i}>
                   <TableRow>
+                    <TableCell sx={styles.bldg_id_col}>i</TableCell>
                     <TableCell sx={styles.fuel_col} variant="head">
                       {
                         fuel_keys_to_labels[
@@ -86,9 +102,12 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
                         ]
                       }
                     </TableCell>
+                    <TableCell sx={styles.rm_btn_col}>i</TableCell>
                   </TableRow>
 
                   <TableRow>
+                    <TableCell sx={styles.bldg_id_col}>i</TableCell>
+
                     <TableCell sx={styles.fuel_col}>
                       <FocusNumberInput
                         value={fuel_obj.consumption}
@@ -105,6 +124,7 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
                         }}
                       />
                     </TableCell>
+                    <TableCell sx={styles.rm_btn_col}>i</TableCell>
                   </TableRow>
                 </React.Fragment>
               );
