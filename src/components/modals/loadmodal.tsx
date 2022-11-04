@@ -42,7 +42,6 @@ const LoadModal = () => {
   useEffect(() => {
     if (inputref) {
       if (inputref.current) {
-        console.log(inputref.current);
       }
     }
   }, [is_load_modal_open]);

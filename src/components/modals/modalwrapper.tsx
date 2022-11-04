@@ -28,7 +28,7 @@ const styles: InlineStylesType = {
   },
   xCornerButton: {
     position: "absolute",
-    right: "40px",
+    right: "25px",
     top: "35px",
   },
   childrenContainer: {

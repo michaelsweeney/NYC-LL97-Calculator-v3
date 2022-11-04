@@ -9,6 +9,11 @@ const styles: InlineStylesType = {
   root: {},
   intro: {
     fontFamily: "CircularStd-Medium",
+    marginBottom: "10px",
+  },
+  warning: {
+    color: "red",
+    marginBottom: "10px",
   },
   list: {
     fontFamily: "CircularStd-Book",
@@ -48,6 +53,13 @@ const BuildingSummaryModal = () => {
     ll84_year_map[d.key] = d.label;
   });
 
+  const use_types = [
+    ll84_selected_property["3rd_property_use_type"],
+    ll84_selected_property["2nd_property_use_type"],
+    ll84_selected_property["1st_property_use_type"],
+  ];
+  const is_other_warning = use_types.includes("Other");
+
   return (
     <ModalWrapper
       modalTitle="LL84 Loaded Building Summary"
@@ -60,6 +72,18 @@ const BuildingSummaryModal = () => {
           that inputs should be verified by the building owner / stakeholder for
           accuracy.
         </div>
+        {is_other_warning ? (
+          <div style={styles.warning}>
+            Warning: This building's LL87 query includes a property type of
+            "Other," which is not included as a category in the most current
+            LL97 rules. The "Other" type has been set to have "Office"
+            thresholds. Please review and either redefine the category or select
+            one of the more-specific "Other" categories (i.e., "Other -
+            Education", etc.).
+          </div>
+        ) : (
+          ""
+        )}
 
         <div style={styles.list}>
           <div>LL84 Year Queried: {ll84_year_map[ll84_year_selection]}</div>

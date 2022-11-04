@@ -30,10 +30,17 @@ export const ButtonSecondary = styled(Button)<{}>`
   }
 `;
 
-export const RemoveTypeButton = styled(Button)`
-  position: relative;
-  left: -15px;
+export const RemoveTypeButton = styled("button")`
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  color: ${colors.secondary.main};
+  overflow: hidden;
   font-family: CircularStd-Bold;
+  font-size: "14px";
+  font-weight: 700;
+  transition: color 250ms;
   &:hover {
     background-color: white;
     color: ${colors.secondary.dark};

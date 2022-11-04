@@ -149,18 +149,11 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                       <span></span>
                     ) : (
                       <RemoveTypeButton
-                        color="secondary"
-                        variant="text"
-                        sx={{
-                          paddingLeft: 0,
-                          paddingRight: 0,
-                        }}
-                        size="small"
                         onClick={() =>
                           handleRemoveBuildingType(bldg_type.building_id)
                         }
                       >
-                        x
+                        X
                       </RemoveTypeButton>
                     )}
                   </TableCell>

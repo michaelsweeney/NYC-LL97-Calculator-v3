@@ -20,6 +20,7 @@ export const ChartHeaderLined = styled("div")`
 export const MenuTitle = styled("div")`
   font-size: 20px;
   font-family: CircularStd-Bold;
+  color: ${colors.secondary.dark};
   border-top: 4px solid ${colors.secondary.main};
   border-bottom: 4px solid ${colors.secondary.main};
   padding-top: 10px;

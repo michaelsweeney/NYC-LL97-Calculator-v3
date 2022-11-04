@@ -2,11 +2,7 @@ import React from "react";
 import { FormControl } from "@mui/material";
 import { InlineStylesType } from "types";
 import { StyledInput } from "styles/components";
-import {
-  NumberFormatBaseProps,
-  NumericFormat,
-  NumericFormatProps,
-} from "react-number-format";
+import { NumericFormat } from "react-number-format";
 type PropTypes = {
   value: string | number;
   callback: (d: string | number) => void;
@@ -18,7 +14,6 @@ const FocusNumberInput = (props: PropTypes) => {
   const handleInput = (v: string | number) => {
     callback(+v);
   };
-  console.log(value);
 
   return (
     <FormControl variant="standard" size="small" fullWidth>
