@@ -241,7 +241,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2050-": 0,
   },
   {
-    building_type: "Other", // << manually added 'other'
+    building_type: "Other",
     "2024-2029": 0.00758,
     "2030-2034": 0.002690852,
     "2035-2039": 0.00165234,
