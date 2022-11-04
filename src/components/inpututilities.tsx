@@ -8,7 +8,7 @@ import {
   TableContainer,
   Checkbox,
 } from "@mui/material";
-import FocusInput from "./focusinput";
+import FocusNumberInput from "./focusnumberinput";
 
 import { colors } from "styles/colors";
 import {
@@ -90,21 +90,19 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
 
                   <TableRow>
                     <TableCell sx={styles.fuel_col}>
-                      <FocusInput
+                      <FocusNumberInput
                         value={fuel_obj.consumption}
                         callback={(v) => {
                           handleFuelConsumptionChange(fuel, v as number);
                         }}
-                        input_type="number"
                       />
                     </TableCell>
                     <TableCell sx={styles.rate_col}>
-                      <FocusInput
+                      <FocusNumberInput
                         value={fuel_obj.rate}
                         callback={(v) => {
                           handleFuelRateChange(fuel, v as number);
                         }}
-                        input_type="number"
                       />
                     </TableCell>
                   </TableRow>

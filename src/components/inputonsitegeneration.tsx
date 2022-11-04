@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import FocusInput from "./focusinput";
+import FocusNumberInput from "./focusnumberinput";
 import { buildingInputActions } from "store/buildinginputslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { InlineStylesType } from "types";
@@ -12,7 +12,7 @@ const styles: InlineStylesType = {
     verticalAlign: "middle",
     position: "relative",
     top: "5px",
-    marginLeft: "45px",
+    marginLeft: "25px",
     fontFamily: "CircularStd-Book",
     fontSize: "14px",
     fontWeight: "400",
@@ -36,15 +36,14 @@ const InputOnsiteGeneration: React.FunctionComponent<IAppProps> = () => {
     <div>
       <div style={styles.text}>Solar PV (kWh)</div>
       <div style={styles.input_container}>
-        <FocusInput
+        <FocusNumberInput
           value={
             building_inputs.electric_onsite_generation.photovoltaic.consumption
           }
-          input_type="number"
           callback={(v) => {
             handleElectricOnsitePVConsumptionChange(v as number);
           }}
-        ></FocusInput>
+        ></FocusNumberInput>
       </div>
     </div>
   );

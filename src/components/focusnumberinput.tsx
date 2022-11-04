@@ -2,19 +2,18 @@ import React from "react";
 import { FormControl } from "@mui/material";
 import { InlineStylesType } from "types";
 import { StyledInput } from "styles/components";
-
+import { NumericFormat } from "react-number-format";
 type PropTypes = {
   value: string | number;
   callback: (d: string | number) => void;
-  input_type: string;
 };
 
 const styles: InlineStylesType = {
   input: {},
 };
 
-const FocusInput = (props: PropTypes) => {
-  const { callback, value, input_type } = props;
+const FocusNumberInput = (props: PropTypes) => {
+  const { callback, value } = props;
 
   const handleInput = (v: string | number) => {
     callback(v);
@@ -22,16 +21,19 @@ const FocusInput = (props: PropTypes) => {
 
   return (
     <FormControl variant="standard" size="small" fullWidth>
-      <StyledInput
+      <NumericFormat
+        value={value}
+        customInput={StyledInput}
         color="secondary"
-        sx={styles.input}
-        type={input_type}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        variant="standard"
+        thousandSeparator=","
+        type="text"
+        //@ts-ignore
+        onValueChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           handleInput(e.target.value);
         }}
-        value={value}
       />
     </FormControl>
   );
 };
-export default FocusInput;
+export default FocusNumberInput;

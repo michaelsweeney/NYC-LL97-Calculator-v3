@@ -11,7 +11,7 @@ import {
 import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";
 import SingleSelect from "./singleselect";
-import FocusInput from "./focusinput";
+import FocusNumberInput from "./focusnumberinput";
 import { ButtonSecondary } from "styles/components";
 import { building_type_co2_coefficients } from "locallaw/lookups";
 
@@ -132,7 +132,7 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                     />
                   </TableCell>
                   <TableCell sx={styles.input_area_col}>
-                    <FocusInput
+                    <FocusNumberInput
                       value={bldg_type.building_area}
                       callback={(v) => {
                         handleBuildingAreaChange(
@@ -140,7 +140,6 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
                           v as number
                         );
                       }}
-                      input_type="number"
                     />
                   </TableCell>
                   <TableCell sx={styles.rm_btn_col}>

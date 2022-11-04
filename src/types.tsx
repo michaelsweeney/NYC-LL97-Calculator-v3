@@ -88,6 +88,7 @@ export type UiSliceTypes = {
   window_dimensions: WindowDimensionTypes;
   small_window: boolean;
   chart_view: ChartViewTypes;
+  is_dev_mode: boolean;
 };
 
 export type LL84QuerySliceTypes = {

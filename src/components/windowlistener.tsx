@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 
-import { useAppDispatch } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import { uiActions } from "store/uislice";
 const WindowListener = () => {
   const dispatch = useAppDispatch();
+  const { is_dev_mode } = useAppSelector((state) => state.ui);
 
   const getDimensions = () => {
     let dims = {
@@ -12,6 +13,10 @@ const WindowListener = () => {
       height: window.innerHeight,
     };
     let is_small_window = dims.height < 500 || dims.width < 1000;
+
+    if (is_dev_mode) {
+      is_small_window = false;
+    }
     return { dims, is_small_window };
   };
 

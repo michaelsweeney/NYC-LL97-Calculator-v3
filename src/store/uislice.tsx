@@ -1,14 +1,13 @@
 import { height } from "@mui/system";
-import { current, StateFromReducersMapObject } from "@reduxjs/toolkit";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UiSliceTypes, WindowDimensionTypes, ChartViewTypes } from "types";
+import { UiSliceTypes, WindowDimensionTypes } from "types";
 
 const initialState: UiSliceTypes = {
-  is_info_modal_open: false,
+  is_info_modal_open: true,
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
-
+  is_dev_mode: true,
   is_print_mode: false,
   window_dimensions: {
     width: 0,
