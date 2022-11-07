@@ -76,7 +76,8 @@ const handleLL84QueryResponse = (
       } catch {
         parsed = JSON.parse(`"${res}"`);
       }
-
+      console.log(res);
+      console.log(parsed);
       let sanitized_array: LL84QueryPropertyTypes[] = [];
 
       parsed.forEach((pobj) => {

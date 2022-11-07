@@ -11,16 +11,18 @@ import {
   TableRow,
   TableCell,
   TableHead,
+  TableContainer,
 } from "@mui/material";
 import { buildingInputActions } from "store/buildinginputslice";
 import styled from "@emotion/styled";
 
 const ResultContainer = styled.div`
-  height: 500px;
+  /* height: 500px; */
 `;
 
 const LoadModalResults = () => {
   const { ll84_query_results } = useAppSelector((state) => state.ll84_query);
+  const { window_dimensions } = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
 
@@ -47,38 +49,49 @@ const LoadModalResults = () => {
 
   return (
     <ResultContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            {table_column_map.map((e, i) => {
-              return <TableCell key={i}>{e[0]}</TableCell>;
-            })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {ll84_query_results.map((result, i) => {
-            return (
-              <TableRow key={i}>
-                <TableCell>
-                  <ButtonSecondary
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleLoadBuilding(result)}
-                  >
-                    Load
-                  </ButtonSecondary>
-                </TableCell>
-                {table_column_map.map((e, si) => (
-                  <TableCell key={si}>
-                    {result[e[1] as keyof typeof result]}
+      <TableContainer
+        sx={{
+          height: window_dimensions.height - 400,
+          overflowY: "scroll",
+          // border: "1px solid black",
+          // padding: "10px",
+          // marginBottom: "10px",
+          // marginTop: "10px",
+        }}
+      >
+        <Table stickyHeader sx={{}}>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              {table_column_map.map((e, i) => {
+                return <TableCell key={i}>{e[0]}</TableCell>;
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {ll84_query_results.map((result, i) => {
+              return (
+                <TableRow key={i}>
+                  <TableCell>
+                    <ButtonSecondary
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleLoadBuilding(result)}
+                    >
+                      Load
+                    </ButtonSecondary>
                   </TableCell>
-                ))}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+                  {table_column_map.map((e, si) => (
+                    <TableCell key={si}>
+                      {result[e[1] as keyof typeof result]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </ResultContainer>
   );
 };

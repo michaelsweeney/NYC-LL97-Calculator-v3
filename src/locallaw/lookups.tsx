@@ -553,8 +553,39 @@ export const default_utility_rates = {
   fuel_two: 1.65,
   fuel_four: 1.65,
 };
-
 export const ll84_year_lookups: LL84QueryObjTypes[] = [
+  {
+    key: "ll84_2022_cal_2021",
+    documentation:
+      "https://dev.socrata.com/foundry/data.cityofnewyork.us/7x5e-2fxh",
+    endpoint: "https://data.cityofnewyork.us/resource/7x5e-2fxh.json",
+    label: "2022 (cal year 2021)",
+    column_name_map: [
+      ["property_name", "property_name"],
+      ["property_id", "property_id"],
+      ["address_1", "address_1"],
+      ["nyc_bbl", "nyc_borough_block_and_lot"],
+      ["nyc_bin", "nyc_building_identification"],
+      ["1st_property_use_type", "largest_property_use_type"],
+      ["1st_property_use_sf", "largest_property_use_type_1"],
+      ["2nd_property_use_type", "_2nd_largest_property_use"],
+      ["2nd_property_use_sf", "_2nd_largest_property_use_1"],
+      ["3rd_property_use_type", "_3rd_largest_property_use"],
+      ["3rd_property_use_sf", "_3rd_largest_property_use_1"],
+      ["fuel_oil_2_consumption_kbtu", "fuel_oil_2_use_kbtu"],
+      ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
+      ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
+      ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase"],
+      ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
+    ],
+    query_columns: [
+      "property_name",
+      "nyc_borough_block_and_lot",
+      "address_1",
+      "nyc_building_identification",
+    ],
+  },
   {
     key: "ll84_2021_cal_2020",
     documentation:
@@ -580,10 +611,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
       ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
       ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
-      [
-        "electricity_consumption_kbtu",
-        "electricity_use_grid_purchase_and_generated_from_onsite_renewable_systems_kbtu",
-      ],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_kbtu"],
       [
         "electricity_onsite_generated_kbtu",
         "electricity_use_generated_from_onsite_renewable_systems_and_used_onsite_kbtu",
@@ -618,7 +646,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
       ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
       ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_2"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase"],
       ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
     ],
     query_columns: [
@@ -651,7 +679,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
       ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
       ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_2"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase"],
       ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
     ],
     query_columns: [
@@ -683,7 +711,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
       ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
       ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
       ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
-      ["electricity_consumption_kbtu", "electricity_use_grid_purchase_2"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase"],
       ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
     ],
     query_columns: [
