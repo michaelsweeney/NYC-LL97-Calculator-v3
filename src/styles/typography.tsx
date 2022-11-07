@@ -76,4 +76,7 @@ export const FooterTextAKF = styled(FooterTextAccelerator)`
   & a {
     color: ${colors.akf.red};
   }
+  & span {
+    color: ${colors.akf.red};
+  }
 `;

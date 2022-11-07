@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import {} from "styles/typography";
-import { InlineStylesType } from "types";
+import { FooterTextAKF } from "styles/typography";
+import { colors } from "styles/colors";
 
-const styles: InlineStylesType = {
-  root: {
-    borderTop: "4px solid #BAD636",
-    height: "5px",
-  },
-  h1: {},
-  h2: {},
-};
+const Root = styled.div`
+  border-top: 4px solid ${colors.secondary.main};
+  height: 5px;
+`;
 
 const PageNumber = () => <div></div>;
 
@@ -22,9 +18,12 @@ const PageCounter = styled(PageNumber)`
 
 const PrintFooter = () => {
   return (
-    <div style={styles.root}>
+    <Root>
       <PageCounter />
-    </div>
+      <FooterTextAKF>
+        Calculator engine by <span>AKF Group LLC</span>
+      </FooterTextAKF>
+    </Root>
   );
 };
 

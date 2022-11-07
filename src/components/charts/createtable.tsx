@@ -136,11 +136,11 @@ export const createTable = (props: {
     idx_row_1: {
       carbon: {
         absolute: {
-          top: "Consumption",
+          top: "Emissions",
           bottom: "(tCO2e/yr)",
         },
         normalized: {
-          top: "Consumption",
+          top: "Emissions",
           bottom: "(tCO2e/sf/yr)",
         },
       },

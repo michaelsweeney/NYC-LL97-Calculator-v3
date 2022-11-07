@@ -2,28 +2,34 @@ import PrintContent from "./printcontent";
 import PrintHeader from "./printheader";
 import PrintFooter from "./printfooter";
 
-import { InlineStylesType } from "types";
+import styled from "styled-components";
 
-const styles: InlineStylesType = {
-  header: {
-    height: "100px",
-    width: "100%",
-    position: "fixed",
-    top: 0,
-  },
-  headerSpace: { height: "100px" },
-  footer: {
-    height: "50px",
-    position: "fixed",
-    bottom: 0,
-    width: "100%",
-  },
-  footerSpace: { height: "50px" },
-  content: {
-    width: "100%",
-    height: "100%",
-  },
-};
+const Header = styled.div`
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+`;
+
+const HeaderSpace = styled.div`
+  height: 100px;
+`;
+
+const Footer = styled.div`
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`;
+
+const FooterSpace = styled.div`
+  height: 50px;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const PrintLayout = () => {
   return (
@@ -32,7 +38,7 @@ const PrintLayout = () => {
         <thead>
           <tr>
             <td>
-              <div style={styles.headerSpace}></div>
+              <HeaderSpace />
             </td>
           </tr>
         </thead>
@@ -40,9 +46,9 @@ const PrintLayout = () => {
         <tbody>
           <tr>
             <td>
-              <div style={styles.content}>
+              <Content>
                 <PrintContent />
-              </div>
+              </Content>
             </td>
           </tr>
         </tbody>
@@ -50,18 +56,17 @@ const PrintLayout = () => {
         <tfoot>
           <tr>
             <td>
-              <div style={styles.footerSpace}></div>
+              <FooterSpace />
             </td>
           </tr>
         </tfoot>
       </table>
-
-      <div style={styles.header}>
+      <Header>
         <PrintHeader />
-      </div>
-      <div style={styles.footer}>
+      </Header>
+      <Footer>
         <PrintFooter />
-      </div>
+      </Footer>
     </div>
   );
 };

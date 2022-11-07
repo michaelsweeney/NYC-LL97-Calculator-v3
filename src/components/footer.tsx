@@ -54,12 +54,7 @@ const Footer: React.FunctionComponent<IAppProps> = (props) => {
       <div style={styles.right}>
         <FooterTextAKF>
           Calculator engine by{" "}
-          <a
-            style={styles.akfText}
-            href={akfurl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={akfurl} target="_blank" rel="noopener noreferrer">
             AKF Group LLC
           </a>
         </FooterTextAKF>
