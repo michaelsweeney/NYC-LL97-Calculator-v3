@@ -7,6 +7,10 @@ const Root = styled.div`
   height: 5px;
 `;
 
+const FooterText = styled(FooterTextAKF)`
+  margin-top: 10px;
+`;
+
 const PageNumber = () => <div></div>;
 
 const PageCounter = styled(PageNumber)`
@@ -20,9 +24,9 @@ const PrintFooter = () => {
   return (
     <Root>
       <PageCounter />
-      <FooterTextAKF>
+      <FooterText>
         Calculator engine by <span>AKF Group LLC</span>
-      </FooterTextAKF>
+      </FooterText>
     </Root>
   );
 };
