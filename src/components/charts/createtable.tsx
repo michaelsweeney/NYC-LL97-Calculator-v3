@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import "./chartstyles.css";
+import "./tablestyles.css";
 import { bindD3Element, formatCurrency, formatNumber } from "./d3helpers";
 import {
   CostChartDataTypes,

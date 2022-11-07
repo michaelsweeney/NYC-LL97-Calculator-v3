@@ -61,7 +61,7 @@ export const createCarbonChart = (props: {
   svg_components.gridlines_g.selectAll(".domain").remove();
 
   svg_components.y_label.text(() => {
-    return unit_type === "absolute" ? "kg CO2e/yr" : "kg CO2e/sf/yr";
+    return unit_type === "absolute" ? "tons CO2e/yr" : "tons CO2e/sf/yr";
   });
 
   let stacked_group_g = svg_components.bar_g
