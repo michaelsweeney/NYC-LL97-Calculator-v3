@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { handleLL84QueryResponse } from "locallaw/ll84_query";
 import { LL84QueryPropertyTypes, LL84YearTypes } from "types";
+import styled from "styled-components";
 
 const LoadModal = () => {
   const { is_load_modal_open } = useAppSelector((state) => state.ui);
@@ -65,40 +66,44 @@ const LoadModal = () => {
       exitCallback={handleCloseModal}
     >
       <div>
-        This form allows for querying NYC's "Energy and Water Data Disclosure"
-        database for multiple years. The form loads and translates building
-        utility information, either using the property's BBL number, address, or
-        property name (searches are case sensitive). Data loaded using this form
-        should be verified with building utility consumption and gross square
-        footage.
-      </div>
-      <div>Input BBL ID Number, Property Name, or Address (case sensitive)</div>
+        <div>
+          This form allows for querying NYC's "Energy and Water Data Disclosure"
+          database for multiple years. The form loads and translates building
+          utility information, either using the property's BBL number, address,
+          or property name (searches are case sensitive). Data loaded using this
+          form should be verified with building utility consumption and gross
+          square footage.
+        </div>
+        <div>
+          Input BBL ID Number, Property Name, or Address (case sensitive)
+        </div>
 
-      <div>
-        <Select
-          color="secondary"
-          onChange={handleYearSelection}
-          value={ll84_year_selection}
-        >
-          {ll84_year_lookups.map((e, i) => {
-            return (
-              <MenuItem color="secondary" key={i} value={e.key}>
-                {e.label}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <TextField
-          color="secondary"
-          autoFocus
-          inputRef={inputref}
-          onChange={handleSearchChange}
-          value={ll84_query_input}
-        />
-      </div>
+        <div>
+          <Select
+            color="secondary"
+            onChange={handleYearSelection}
+            value={ll84_year_selection}
+          >
+            {ll84_year_lookups.map((e, i) => {
+              return (
+                <MenuItem color="secondary" key={i} value={e.key}>
+                  {e.label}
+                </MenuItem>
+              );
+            })}
+          </Select>
+          <TextField
+            color="secondary"
+            autoFocus
+            inputRef={inputref}
+            onChange={handleSearchChange}
+            value={ll84_query_input}
+          />
+        </div>
 
-      <div>
-        <LoadModalResults />
+        <div>
+          <LoadModalResults />
+        </div>
       </div>
     </ModalWrapper>
   );

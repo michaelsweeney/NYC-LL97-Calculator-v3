@@ -5,9 +5,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { SubHeaderLined } from "styles/typography";
 
 const InfoModal = () => {
-  const { is_info_modal_open, is_print_mode } = useAppSelector(
-    (state) => state.ui
-  );
+  const { is_info_modal_open } = useAppSelector((state) => state.ui);
   const dispatch = useAppDispatch();
 
   const handleCloseModal = () => {
@@ -17,7 +15,7 @@ const InfoModal = () => {
   return (
     <ModalWrapper
       modalTitle="NYC LL97 Carbon Emissions Calculator"
-      isOpen={is_info_modal_open && !is_print_mode}
+      isOpen={is_info_modal_open}
       exitCallback={handleCloseModal}
     >
       <div>

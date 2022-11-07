@@ -52,14 +52,14 @@ const App = () => {
       <BuildingSummaryModal />
       <div
         className="layout-container"
-        style={{ display: !is_print_mode ? "block" : "none" }}
+        // style={{ display: !is_print_mode ? "block" : "none" }}
       >
         <MainLayout />
       </div>
 
       <div
         className="print-container"
-        style={{ display: is_print_mode ? "block" : "none" }}
+        // style={{ display: is_print_mode ? "block" : "none" }}
       >
         <PrintLayout />
       </div>

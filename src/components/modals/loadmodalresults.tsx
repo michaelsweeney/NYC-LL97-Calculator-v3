@@ -13,6 +13,11 @@ import {
   TableHead,
 } from "@mui/material";
 import { buildingInputActions } from "store/buildinginputslice";
+import styled from "@emotion/styled";
+
+const ResultContainer = styled.div`
+  height: 500px;
+`;
 
 const LoadModalResults = () => {
   const { ll84_query_results } = useAppSelector((state) => state.ll84_query);
@@ -41,10 +46,11 @@ const LoadModalResults = () => {
   };
 
   return (
-    <div>
+    <ResultContainer>
       <Table>
         <TableHead>
           <TableRow>
+            <TableCell></TableCell>
             {table_column_map.map((e, i) => {
               return <TableCell key={i}>{e[0]}</TableCell>;
             })}
@@ -73,7 +79,7 @@ const LoadModalResults = () => {
           })}
         </TableBody>
       </Table>
-    </div>
+    </ResultContainer>
   );
 };
 

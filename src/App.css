@@ -1,3 +1,11 @@
+
+
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
 @font-face {
 	font-family: 'CircularStd-Black';
 	src: local('CircularStd'), url('./fonts/CircularStd-Black.otf') format('truetype');
@@ -17,25 +25,28 @@
 }
 
 
-
 div {
     font-family: 'CircularStd-Book';
 }
 
 
 .print-container {
-	display: none;
+	/* display: none; */
+	visibility: hidden;
 } 
 
 
 @media print {
 	.layout-container {
 		display: none !important;
+		visibility: hidden;
 	}
 	.print-container {
-		display: block !important;
+		/* display: block !important; */
+		visibility: visible !important;
 	}
 	.MuiPopover-root {
 		display: none !important;
+
 	}
 }

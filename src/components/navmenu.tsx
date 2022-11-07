@@ -50,8 +50,10 @@ const NavMenu = () => {
   };
 
   const handleTogglePrintMode = () => {
-    window.print();
     // dispatch(uiActions.setIsPrintMode(true));
+
+    window.print();
+    // dispatch(uiActions.setIsPrintMode(false));
   };
 
   const handleLoadDemoBuildling = () => {

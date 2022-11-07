@@ -7,8 +7,8 @@ const initialState: UiSliceTypes = {
   is_info_modal_open: true,
   is_load_modal_open: false,
   is_building_summary_modal_open: false,
-  is_dev_mode: true,
-  is_print_mode: true,
+  is_dev_mode: false,
+  is_print_mode: false,
   window_dimensions: {
     width: 0,
     height: 0,
