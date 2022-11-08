@@ -1,13 +1,9 @@
 import * as React from "react";
 import { colors } from "styles/colors";
 
-import { InlineStylesType } from "types";
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "store/hooks";
 
-const border_width = "4px";
 const border_color = colors.secondary.main;
-const border_style = `${border_width} solid ${border_color}`;
 
 type ToggleButtonProps = {
   is_active: boolean;

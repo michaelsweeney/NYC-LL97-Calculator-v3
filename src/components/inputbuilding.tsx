@@ -6,7 +6,6 @@ import {
   Table,
   TableBody,
   TableContainer,
-  Button,
 } from "@mui/material";
 import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";

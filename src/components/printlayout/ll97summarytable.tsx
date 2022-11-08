@@ -31,37 +31,41 @@ const LL97SummaryTable = (props: PropTypes) => {
   return (
     <React.Fragment>
       <SubHeaderLined>LL97 Threshold Summary</SubHeaderLined>
-      <Table sx={{ width: width }} size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell variant="head">Year</TableCell>
-            <TableCell variant="head">Threshold (tCO2e/yr)</TableCell>
-            <TableCell variant="head">GHG Emissions (tCO2e/yr)</TableCell>
-            <TableCell variant="head">Fine ($/yr)</TableCell>
-          </TableRow>
+      <TableContainer>
+        <Table sx={{ width: width }} size="small">
+          <TableBody>
+            <TableRow>
+              <TableCell variant="head">Year</TableCell>
+              <TableCell variant="head">Threshold (tCO2e/yr)</TableCell>
+              <TableCell variant="head">GHG Emissions (tCO2e/yr)</TableCell>
+              <TableCell variant="head">Fine ($/yr)</TableCell>
+            </TableRow>
 
-          {carbon_periods.length === 0 ? (
-            <TableRow></TableRow>
-          ) : (
-            carbon_periods.map((period, i) => {
-              return (
-                <TableRow key={i}>
-                  <TableCell>{period.year}</TableCell>
-                  <TableCell>
-                    {period.threshold.absolute
-                      ? formatNumber(period.threshold.absolute)
-                      : period.threshold.absolute}
-                  </TableCell>
-                  <TableCell>
-                    {formatNumber(period.carbon.absolute.total as number)}
-                  </TableCell>
-                  <TableCell>{formatCurrency(period.fine.absolute)}</TableCell>
-                </TableRow>
-              );
-            })
-          )}
-        </TableBody>
-      </Table>
+            {carbon_periods.length === 0 ? (
+              <TableRow></TableRow>
+            ) : (
+              carbon_periods.map((period, i) => {
+                return (
+                  <TableRow key={i}>
+                    <TableCell>{period.year}</TableCell>
+                    <TableCell>
+                      {period.threshold.absolute
+                        ? formatNumber(period.threshold.absolute)
+                        : period.threshold.absolute}
+                    </TableCell>
+                    <TableCell>
+                      {formatNumber(period.carbon.absolute.total as number)}
+                    </TableCell>
+                    <TableCell>
+                      {formatCurrency(period.fine.absolute)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </React.Fragment>
   );
 };

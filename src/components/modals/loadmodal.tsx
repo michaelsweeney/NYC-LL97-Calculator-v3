@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { handleLL84QueryResponse } from "locallaw/ll84_query";
 import { LL84QueryPropertyTypes, LL84YearTypes } from "types";
-import styled from "styled-components";
 
 const LoadModal = () => {
   const { is_load_modal_open } = useAppSelector((state) => state.ui);

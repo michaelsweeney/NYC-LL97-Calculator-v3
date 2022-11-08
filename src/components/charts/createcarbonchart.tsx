@@ -5,11 +5,7 @@ import {
   ChartViewUnitType,
   D3StackType,
 } from "types";
-import {
-  bar_colors,
-  chart_background_color,
-  threshold_line_color,
-} from "styles/colors";
+import { bar_colors, threshold_line_color } from "styles/colors";
 
 import { bindD3Element, getMaxValFromStack } from "./d3helpers";
 
@@ -20,7 +16,7 @@ export const createCarbonChart = (props: {
   unit_type: ChartViewUnitType;
   stack_type: ChartViewStackType;
 }) => {
-  let { chart_data, stack_data, svg_components, unit_type, stack_type } = props;
+  let { chart_data, stack_data, svg_components, unit_type } = props;
 
   let { xScale, title_text } = svg_components;
   title_text.text("Annual Carbon Threshold Summary");

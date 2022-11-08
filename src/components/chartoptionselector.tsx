@@ -1,8 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { uiActions } from "store/uislice";
-import { InlineStylesType } from "types";
-import { ButtonPrimary, ButtonSecondary } from "styles/components";
+
 import styled from "styled-components";
 import ChartToggleButton from "./charttogglebutton";
 import { colors } from "styles/colors";
@@ -26,7 +25,7 @@ const ToggleLabel = styled.div`
 `;
 
 const ChartOptionSelector = () => {
-  const { view_type, stack_type, unit_type } = useAppSelector(
+  const { stack_type, unit_type } = useAppSelector(
     (state) => state.ui.chart_view
   );
   const dispatch = useAppDispatch();

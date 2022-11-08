@@ -29,7 +29,7 @@ const TestComponent = () => {
     }
 
     // dispatch loaded inputs to building inputs.
-  }, [dispatch]);
+  }, [dispatch, is_dev_mode]);
 
   return <div style={{ display: "none" }}></div>;
 };

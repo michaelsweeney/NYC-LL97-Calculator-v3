@@ -1,4 +1,3 @@
-import * as d3 from "d3";
 import SVGWrapper from "./svgwrapper";
 import { D3WrapperCallbackPropTypes } from "types";
 import { useAppSelector } from "store/hooks";

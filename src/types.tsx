@@ -100,6 +100,8 @@ export type LL84QuerySliceTypes = {
   ll84_selected_property: LL84QueryPropertyTypes;
   is_ll84_loaded: boolean;
   is_ll84_overridden: boolean;
+  ll84_year_label: string | undefined;
+  ll84_building_name: string | undefined;
 };
 
 export type LL84QueryObjTypes = {

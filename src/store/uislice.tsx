@@ -1,4 +1,3 @@
-import { height } from "@mui/system";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { UiSliceTypes, WindowDimensionTypes, WindowSizeTypes } from "types";

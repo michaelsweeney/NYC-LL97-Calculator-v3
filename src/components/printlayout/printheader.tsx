@@ -21,7 +21,11 @@ const H2 = styled.div`
   color: ${colors.secondary.main};
   font-size: 16px;
 `;
-
+const H3 = styled.div`
+  font-family: CircularStd-Medium;
+  color: ${colors.secondary.main};
+  font-size: 14px;
+`;
 const LogoContainer = styled.div`
   position: absolute;
   right: -100px;
@@ -29,15 +33,15 @@ const LogoContainer = styled.div`
 `;
 
 const PrintHeader = () => {
-  const { ll84_selected_property } = useAppSelector(
+  const { ll84_building_name, ll84_year_label } = useAppSelector(
     (state) => state.ll84_query
   );
 
-  const property_name = ll84_selected_property.property_name || "Manual Entry";
   return (
     <Root>
       <H1>NYC LL97 Carbon Emissions Report</H1>
-      <H2>{property_name}</H2>
+      <H2>{ll84_building_name}</H2>
+      <H3>{ll84_year_label}</H3>
       <LogoContainer>
         <BeExLogo small={true} width={150} height={150} />
       </LogoContainer>

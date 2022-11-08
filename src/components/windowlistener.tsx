@@ -40,7 +40,7 @@ const WindowListener = () => {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     let { dims, is_small_window } = getDimensions();

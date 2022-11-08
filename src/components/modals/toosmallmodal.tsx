@@ -1,9 +1,7 @@
 import * as React from "react";
-import { useEffect } from "react";
 
-import { useAppSelector, useAppDispatch } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 
-import { uiActions } from "store/uislice";
 import ModalWrapper from "./modalwrapper";
 
 const TooSmallDialogue = () => {

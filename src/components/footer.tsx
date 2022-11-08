@@ -1,7 +1,7 @@
 import * as React from "react";
 import { InlineStylesType } from "types";
 
-import { FooterTextAccelerator, FooterTextAKF } from "styles/typography";
+import { FooterTextAKF } from "styles/typography";
 interface IAppProps {}
 
 const styles: InlineStylesType = {
@@ -30,8 +30,6 @@ const styles: InlineStylesType = {
 };
 
 const Footer: React.FunctionComponent<IAppProps> = (props) => {
-  const retrofiturl =
-    "https://www1.nyc.gov/site/nycaccelerator/index.page?utm_source=BEEx&utm_medium=LL97_Calc&utm_campaign=Evergreen";
   const akfurl = "http://www.akfgroup.com";
 
   return (

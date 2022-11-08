@@ -4,7 +4,7 @@ import {
   NumberObjectType,
   PropertyTypeCoefficientsTypes,
   LL84QueryPropertyTypes,
-  YearRangeTypes,
+  LL84YearTypes,
 } from "types";
 
 export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
@@ -868,4 +868,8 @@ export const range_year_lengths: { [key: string]: number } = {
   "2035-2039": 5,
   "2040-2049": 10,
   "2050-": 5,
+};
+
+export const getLL84LookupLabel = (yr: LL84YearTypes) => {
+  return ll84_year_lookups.find((d) => d.key === yr)?.label;
 };

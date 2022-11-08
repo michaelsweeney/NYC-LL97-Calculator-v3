@@ -25,28 +25,32 @@ const BuildingAreasTable = (props: PropTypes) => {
   return (
     <React.Fragment>
       <SubHeaderLined>Building Areas</SubHeaderLined>
-      <Table sx={{ width: width }} size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell variant="head">Building Type</TableCell>
-            <TableCell variant="head">Area (SF)</TableCell>
-          </TableRow>
-          {building_types.map((t, i) => {
-            return (
-              <TableRow key={i}>
-                <TableCell>{t.building_type}</TableCell>
-                <TableCell>{formatNumber(t.building_area)}</TableCell>
-              </TableRow>
-            );
-          })}
-          <TableRow>
-            <TableCell variant="head">Total Area</TableCell>
-            <TableCell variant="head">
-              {formatNumber(d3.sum(building_types.map((t) => t.building_area)))}
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+      <TableContainer>
+        <Table sx={{ width: width }} size="small">
+          <TableBody>
+            <TableRow>
+              <TableCell variant="head">Building Type</TableCell>
+              <TableCell variant="head">Area (SF)</TableCell>
+            </TableRow>
+            {building_types.map((t, i) => {
+              return (
+                <TableRow key={i}>
+                  <TableCell>{t.building_type}</TableCell>
+                  <TableCell>{formatNumber(t.building_area)}</TableCell>
+                </TableRow>
+              );
+            })}
+            <TableRow>
+              <TableCell variant="head">Total Area</TableCell>
+              <TableCell variant="head">
+                {formatNumber(
+                  d3.sum(building_types.map((t) => t.building_area))
+                )}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </React.Fragment>
   );
 };

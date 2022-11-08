@@ -11,7 +11,6 @@ import PrintLayout from "components/printlayout/printlayout";
 
 import { colors } from "styles/colors";
 import { Shadows } from "@mui/material/styles/shadows";
-import { useAppSelector } from "store/hooks";
 import TooSmallModal from "components/modals/toosmallmodal";
 import WindowListener from "components/windowlistener";
 
@@ -39,8 +38,6 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const { is_print_mode } = useAppSelector((state) => state.ui);
-
   return (
     <ThemeProvider theme={theme}>
       <InputListener />
@@ -50,17 +47,11 @@ const App = () => {
       <LoadModal />
       <TooSmallModal />
       <BuildingSummaryModal />
-      <div
-        className="layout-container"
-        // style={{ display: !is_print_mode ? "block" : "none" }}
-      >
+      <div className="layout-container">
         <MainLayout />
       </div>
 
-      <div
-        className="print-container"
-        // style={{ display: is_print_mode ? "block" : "none" }}
-      >
+      <div className="print-container">
         <PrintLayout />
       </div>
     </ThemeProvider>

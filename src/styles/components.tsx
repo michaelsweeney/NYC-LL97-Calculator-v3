@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "./colors";
-import { Input, Button, Checkbox } from "@mui/material";
+import { Input, Button } from "@mui/material";
 
 export const StyledInput = styled(Input)`
   input[type="number"] {

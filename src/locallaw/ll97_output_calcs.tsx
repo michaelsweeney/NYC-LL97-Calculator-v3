@@ -1,7 +1,6 @@
 import {
   BuildingInputTypes,
   BuildingOutputSliceTypes,
-  UtilityConsumptionType,
   ResultsPeriodType,
 } from "types";
 import {
@@ -11,7 +10,6 @@ import {
   non_electric_tons_per_kbtu_coefficients,
   yearToYearRangeString,
 } from "./lookups";
-import * as d3 from "d3";
 
 const LL97OutputsFromBuildingInputs = (ll97_in: BuildingInputTypes) => {
   let { building_types, utilities, electric_onsite_generation } = ll97_in;

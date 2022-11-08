@@ -1,6 +1,5 @@
 import React from "react";
 import { FormControl } from "@mui/material";
-import { InlineStylesType } from "types";
 import { StyledInput } from "styles/components";
 import { NumericFormat } from "react-number-format";
 type PropTypes = {

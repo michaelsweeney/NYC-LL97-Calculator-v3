@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import FocusNumberInput from "./focusnumberinput";
 
-import { colors } from "styles/colors";
-
 import {
   fuel_keys_to_labels,
   fuel_keys_to_rate_labels,

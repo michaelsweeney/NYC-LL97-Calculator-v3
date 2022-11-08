@@ -9,7 +9,6 @@ import {
   HeaderBuildingTitleGray,
   HeaderLL84Label,
 } from "styles/typography";
-import { ll84_year_lookups } from "locallaw/lookups";
 import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
 
@@ -61,15 +60,8 @@ const TitleContainer = styled.div`
 
 const Header: React.FunctionComponent<IAppProps> = () => {
   const dispatch = useAppDispatch();
-  const {
-    is_ll84_loaded,
-    is_ll84_overridden,
-    ll84_selected_property: { property_name, ll84_year },
-  } = useAppSelector((state) => state.ll84_query);
-
-  const lookup_label = !is_ll84_overridden
-    ? ll84_year_lookups.find((d) => d.key === ll84_year)?.label
-    : "manually entered inputs";
+  const { is_ll84_loaded, ll84_year_label, ll84_building_name } =
+    useAppSelector((state) => state.ll84_query);
 
   const handleLL84NameClick = () => {
     dispatch(uiActions.setIsLoadModalOpen(true));
@@ -84,8 +76,8 @@ const Header: React.FunctionComponent<IAppProps> = () => {
         <div>
           {is_ll84_loaded ? (
             <TitleContainer onClick={handleLL84NameClick}>
-              <HeaderBuildingTitle>{property_name}</HeaderBuildingTitle>
-              <HeaderLL84Label>{lookup_label}</HeaderLL84Label>
+              <HeaderBuildingTitle>{ll84_building_name}</HeaderBuildingTitle>
+              <HeaderLL84Label>{ll84_year_label}</HeaderLL84Label>
             </TitleContainer>
           ) : (
             <HeaderBuildingTitleGray onClick={handleLL84NameClick}>

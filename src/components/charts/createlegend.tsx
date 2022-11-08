@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import { bindD3Element } from "./d3helpers";
 import { bar_colors } from "styles/colors";
 import { bar_keys_to_labels } from "locallaw/lookups";
-import { current } from "immer";
 
 export const createLegend = (props: {
   svg_components: { [key: string]: any };
@@ -39,14 +38,14 @@ export const createLegend = (props: {
     //@ts-ignore
     let el = d3.select(this);
 
-    let legend_text = bindD3Element(el, "text", "legend-text")
+    bindD3Element(el, "text", "legend-text")
       .text(d.label)
       .attr("alignment-baseline", "center")
       .attr("x", rect_size + text_padding)
       .attr("y", rect_size / 2 + 5)
       .style("font-size", 14);
 
-    let legend_rect = bindD3Element(el, "rect", "legend-rect")
+    bindD3Element(el, "rect", "legend-rect")
       .attr("width", rect_size)
       .attr("height", rect_size)
       .attr("fill", d.color)

@@ -3,10 +3,9 @@ import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 
 import { CloseIconButton } from "../iconbuttons";
-import { ButtonPrimary, ButtonSecondary } from "styles/components";
+import { ButtonSecondary } from "styles/components";
 import { MenuTitle } from "styles/typography";
 import { InlineStylesType } from "types";
-import { relative } from "path";
 
 type PropTypes = {
   isOpen: boolean;

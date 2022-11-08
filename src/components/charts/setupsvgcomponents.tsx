@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { ChartViewStackType, WidthHeightDimensionTypes } from "types";
+import { WidthHeightDimensionTypes } from "types";
 import { bindD3Element } from "./d3helpers";
 import { range_year_lengths } from "locallaw/lookups";
 

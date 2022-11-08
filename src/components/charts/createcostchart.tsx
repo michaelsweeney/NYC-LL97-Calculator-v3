@@ -5,8 +5,8 @@ import {
   ChartViewStackType,
   D3StackType,
 } from "types";
-import { bindD3Element, getMaxValFromStack } from "./d3helpers";
-import { chart_background_color, bar_colors } from "styles/colors";
+import { getMaxValFromStack } from "./d3helpers";
+import { bar_colors } from "styles/colors";
 
 export const createCostChart = (props: {
   chart_data: CostChartDataTypes[];
@@ -15,7 +15,7 @@ export const createCostChart = (props: {
   unit_type: ChartViewUnitType;
   stack_type: ChartViewStackType;
 }) => {
-  let { chart_data, stack_data, svg_components, unit_type, stack_type } = props;
+  let { chart_data, stack_data, svg_components, unit_type } = props;
 
   let { xScale, title_text } = svg_components;
 
