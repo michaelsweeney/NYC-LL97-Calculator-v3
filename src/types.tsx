@@ -135,6 +135,7 @@ export type LL84QueryPropertyTypes = {
   natural_gas_consumption_kbtu: string;
   electricity_consumption_kbtu: string;
   electricity_onsite_generated_kbtu: string;
+  is_other_lookup_error: boolean;
 };
 
 export type LL97ConversionTypes = {

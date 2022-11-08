@@ -240,14 +240,7 @@ export const building_type_co2_coefficients: PropertyTypeCoefficientsTypes[] = [
     "2040-2049": 0.000581893,
     "2050-": 0,
   },
-  {
-    building_type: "Other",
-    "2024-2029": 0.00758,
-    "2030-2034": 0.002690852,
-    "2035-2039": 0.00165234,
-    "2040-2049": 0.000581893,
-    "2050-": 0,
-  },
+
   {
     building_type: "Other - Education",
     "2024-2029": 0.00846,
@@ -859,6 +852,7 @@ export const sample_ll84_data: LL84QueryPropertyTypes = {
   natural_gas_consumption_kbtu: (18293 * 100).toString(),
   electricity_consumption_kbtu: (35678343 * 3.412).toString(),
   electricity_onsite_generated_kbtu: "Not Available",
+  is_other_lookup_error: false,
 };
 
 export const range_year_lengths: { [key: string]: number } = {

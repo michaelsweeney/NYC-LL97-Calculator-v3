@@ -51,6 +51,24 @@ const sanitizeLL84QueryResultsObject = (
     }
   });
 
+  // catch any types that are 'Other' and flag them
+
+  let is_other_lookup_error = false;
+
+  if (sanitized_obj["1st_property_use_type"] === "Other") {
+    is_other_lookup_error = true;
+    sanitized_obj["1st_property_use_type"] = "Office";
+  }
+  if (sanitized_obj["2nd_property_use_type"] === "Other") {
+    is_other_lookup_error = true;
+    sanitized_obj["2nd_property_use_type"] = "Office";
+  }
+  if (sanitized_obj["3rd_property_use_type"] === "Other") {
+    is_other_lookup_error = true;
+    sanitized_obj["3rd_property_use_type"] = "Office";
+  }
+  sanitized_obj.is_other_lookup_error = is_other_lookup_error;
+
   return sanitized_obj as LL84QueryPropertyTypes;
 };
 
@@ -109,7 +127,7 @@ const handleLL84QueryResponse = (
         );
         sanitized_array.push(sanitized_object);
       });
-      console.log(sanitized_array);
+
       callback(sanitized_array);
     }
   };

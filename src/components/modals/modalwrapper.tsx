@@ -79,6 +79,7 @@ const ModalWrapper = (props: PropTypes) => {
             <></>
           ) : (
             <ButtonSecondary
+              sx={{ borderRadius: 0 }}
               color="secondary"
               onClick={hideModal}
               variant="contained"

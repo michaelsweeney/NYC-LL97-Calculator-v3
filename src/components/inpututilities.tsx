@@ -43,7 +43,7 @@ const styles: InlineStylesType = {
     paddingRight: defaultPadding,
   },
   default_rate_container: {
-    paddingLeft: 25,
+    paddingLeft: 28,
   },
   rm_btn_col: {
     visibility: "hidden",
@@ -51,6 +51,13 @@ const styles: InlineStylesType = {
     textAlign: "center",
     paddingLeft: 0,
     paddingRight: 0,
+  },
+  default_rate_text: {
+    position: "relative",
+    fontSize: "14px",
+    fontFamily: "CircularStd-Medium",
+    marginLeft: 0,
+    top: 2,
   },
 };
 
@@ -144,7 +151,7 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
             checked={is_default_rates ? true : false}
           ></Checkbox>
         </span>
-        Use Default Rates
+        <span style={styles.default_rate_text}>Use Default Rates </span>
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ const StyledToggleButton = styled(ToggleButton)`
     props.is_active
       ? `1px solid ${border_color}`
       : `1px solid ${colors.secondary.light}`};
-  border-radius: 5px;
+  border-radius: 0px;
   margin-right: ${(props) => (props.size === "small" ? "10px" : "10px")};
   padding: ${(props) => (props.size === "small" ? "7.5px" : "10px")};
   text-align: center;

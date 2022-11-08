@@ -70,6 +70,7 @@ const LoadModalResults = () => {
                 <TableRow key={i}>
                   <TableCell>
                     <ButtonSecondary
+                      sx={{ borderRadius: 0 }}
                       variant="contained"
                       color="secondary"
                       onClick={() => handleLoadBuilding(result)}

@@ -11,7 +11,7 @@ import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";
 import SingleSelect from "./singleselect";
 import FocusNumberInput from "./focusnumberinput";
-import { ButtonSecondary } from "styles/components";
+import { ButtonSecondary, AddBuildingTypeButton } from "styles/components";
 import { building_type_co2_coefficients } from "locallaw/lookups";
 
 import { buildingInputActions } from "store/buildinginputslice";
@@ -58,6 +58,7 @@ const styles: InlineStylesType = {
     width: "10px",
     paddingLeft: 0,
     paddingRight: 0,
+    borderRadius: 0,
   },
   add_button_container: {
     marginLeft: "40px",
@@ -68,8 +69,8 @@ const styles: InlineStylesType = {
     position: "relative",
     fontSize: "14px",
     fontFamily: "CircularStd-Medium",
-    marginLeft: 5,
-    top: 3,
+    marginLeft: 8,
+    top: 1,
   },
 };
 
@@ -168,15 +169,9 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
         </Table>
       </TableContainer>
       <div style={styles.add_button_container}>
-        <ButtonSecondary
-          color="secondary"
-          size="small"
-          onClick={() => handleAddBuildingType()}
-          variant="outlined"
-          sx={styles.add_button}
-        >
+        <AddBuildingTypeButton onClick={() => handleAddBuildingType()}>
           +
-        </ButtonSecondary>
+        </AddBuildingTypeButton>
         <span style={styles.add_button_text}>Add Building Type</span>
       </div>
     </div>
