@@ -1,10 +1,13 @@
-import ModalWrapper from "./modalwrapper";
+import DialogueContainer from "./dialoguecontainer";
 
+import { SubHeaderLined } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { CloseDialogueButton } from "styles/components";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { InlineStylesType } from "types";
 import { formatNumber } from "components/charts/d3helpers";
+
 const styles: InlineStylesType = {
   root: {},
   intro: {
@@ -26,10 +29,12 @@ const styles: InlineStylesType = {
   },
 };
 
-const BuildingSummaryModal = () => {
-  const { is_building_summary_modal_open } = useAppSelector(
-    (state) => state.ui
-  );
+const BuildingSummaryDialogue = () => {
+  const dispatch = useAppDispatch();
+
+  const handleCloseDialogue = () => {
+    dispatch(uiActions.setCurrentView("chart_view"));
+  };
 
   const { ll84_selected_property } = useAppSelector(
     (state) => state.ll84_query
@@ -42,29 +47,18 @@ const BuildingSummaryModal = () => {
       return formatNumber(+e);
     }
   };
-  const dispatch = useAppDispatch();
-
-  const handleCloseModal = () => {
-    dispatch(uiActions.setIsBuildingSummaryModalOpen(false));
-  };
 
   let ll84_year_map: { [key: string]: string } = {};
   ll84_year_lookups.forEach((d) => {
     ll84_year_map[d.key] = d.label;
   });
 
-  const use_types = [
-    ll84_selected_property["3rd_property_use_type"],
-    ll84_selected_property["2nd_property_use_type"],
-    ll84_selected_property["1st_property_use_type"],
-  ];
-
   return (
-    <ModalWrapper
-      modalTitle="LL84 Loaded Building Summary"
-      isOpen={is_building_summary_modal_open}
-      exitCallback={handleCloseModal}
-    >
+    <DialogueContainer>
+      <CloseDialogueButton onClick={handleCloseDialogue}>
+        back
+      </CloseDialogueButton>
+      <SubHeaderLined>Loaded LL84 Building Summary</SubHeaderLined>
       <div>
         <div style={styles.intro}>
           The following info has been loaded from the NYC LL84 Database. Note
@@ -160,8 +154,11 @@ const BuildingSummaryModal = () => {
           calculator.
         </div>
       </div>
-    </ModalWrapper>
+      <CloseDialogueButton onClick={handleCloseDialogue}>
+        OK
+      </CloseDialogueButton>
+    </DialogueContainer>
   );
 };
 
-export default BuildingSummaryModal;
+export default BuildingSummaryDialogue;

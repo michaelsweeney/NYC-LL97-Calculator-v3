@@ -35,25 +35,18 @@ const NavMenu = () => {
   };
 
   const handleOpenLoadModal = () => {
-    dispatch(uiActions.setIsLoadModalOpen(true));
+    dispatch(uiActions.setCurrentView("load_building_dialogue"));
     handleClose();
   };
 
   const handleOpenInfoModal = () => {
-    dispatch(uiActions.setIsInfoModalOpen(true));
+    dispatch(uiActions.setCurrentView("calc_info_dialogue"));
     handleClose();
   };
 
   const handleOpenBuildingSummaryModal = () => {
-    dispatch(uiActions.setIsBuildingSummaryModalOpen(true));
+    dispatch(uiActions.setCurrentView("building_summary_dialogue"));
     handleClose();
-  };
-
-  const handleTogglePrintMode = () => {
-    // dispatch(uiActions.setIsPrintMode(true));
-
-    window.print();
-    // dispatch(uiActions.setIsPrintMode(false));
   };
 
   const handleLoadDemoBuildling = () => {
@@ -65,10 +58,11 @@ const NavMenu = () => {
         buildingInputActions.setBuildingInputsFromLL84Results(ll97_conversion)
       );
     }
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   return (
-    <div>
+    <div style={{ width: "10px" }}>
       <BurgerMenuIconButton
         active={open}
         clickCallback={handleClick}
@@ -86,9 +80,6 @@ const NavMenu = () => {
         <MenuItem onClick={handleOpenInfoModal}>About This Calculator</MenuItem>
         <MenuItem onClick={handleOpenBuildingSummaryModal}>
           About Loaded Building
-        </MenuItem>
-        <MenuItem onClick={handleTogglePrintMode}>
-          Print Summary Report
         </MenuItem>
         <MenuItem onClick={handleLoadDemoBuildling}>
           Load Sample Building

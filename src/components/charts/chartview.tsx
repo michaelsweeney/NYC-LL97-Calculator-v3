@@ -9,6 +9,7 @@ import { createCarbonChart } from "./createcarbonchart";
 import { createCostChart } from "./createcostchart";
 import { createLegend } from "./createlegend";
 import { createTable } from "./createtable";
+
 import {
   ChartViewViewType,
   ChartViewUnitType,

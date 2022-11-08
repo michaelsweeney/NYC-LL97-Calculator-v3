@@ -17,7 +17,8 @@ const TestComponent = () => {
 
   useEffect(() => {
     if (is_dev_mode) {
-      dispatch(uiActions.setIsInfoModalOpen(false));
+      dispatch(uiActions.setCurrentView("chart_view"));
+
       dispatch(ll84QueryActions.setSelectedLL84Property(sample_ll84_data));
       let ll97_conversion = LL84SelectionToLL97Inputs(sample_ll84_data);
 

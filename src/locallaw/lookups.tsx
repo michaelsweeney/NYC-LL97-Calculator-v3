@@ -867,3 +867,6 @@ export const range_year_lengths: { [key: string]: number } = {
 export const getLL84LookupLabel = (yr: LL84YearTypes) => {
   return ll84_year_lookups.find((d) => d.key === yr)?.label;
 };
+export const getLL84LookupTitle = (yr: LL84YearTypes) => {
+  return ll84_year_lookups.find((d) => d.key === yr)?.title;
+};

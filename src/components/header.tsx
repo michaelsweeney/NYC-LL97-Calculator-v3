@@ -11,6 +11,7 @@ import {
 } from "styles/typography";
 import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
+import { PrintIconButton } from "./iconbuttons";
 
 import CalcLogo from "./calclogo";
 import styled from "styled-components";
@@ -18,7 +19,7 @@ import styled from "styled-components";
 interface IAppProps {}
 
 const left_width = "350px";
-const right_width = "100px";
+const right_width = "150px";
 
 const styles: InlineStylesType = {
   root: {},
@@ -45,7 +46,7 @@ const styles: InlineStylesType = {
     paddingRight: "25px",
     display: "inline-block",
     verticalAlign: "middle",
-    textAlign: "right",
+    textAlign: "left",
     boxSizing: "border-box",
   },
 };
@@ -64,7 +65,7 @@ const Header: React.FunctionComponent<IAppProps> = () => {
     useAppSelector((state) => state.ll84_query);
 
   const handleLL84NameClick = () => {
-    dispatch(uiActions.setIsLoadModalOpen(true));
+    dispatch(uiActions.setCurrentView("load_building_dialogue"));
   };
 
   return (
@@ -87,7 +88,17 @@ const Header: React.FunctionComponent<IAppProps> = () => {
         </div>
       </div>
       <div style={styles.right}>
-        <NavMenu />
+        <span style={{ display: "inline-block" }}>
+          <PrintIconButton
+            width={25}
+            height={25}
+            clickCallback={() => window.print()}
+          />
+        </span>
+
+        <span style={{ display: "inline-block" }}>
+          <NavMenu />
+        </span>
       </div>
     </React.Fragment>
   );

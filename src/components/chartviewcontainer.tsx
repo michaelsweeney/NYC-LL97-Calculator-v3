@@ -36,7 +36,7 @@ const styles: InlineStylesType = {
   },
 };
 
-const ViewContainer: React.FunctionComponent<IAppProps> = () => {
+const ChartViewContainer: React.FunctionComponent<IAppProps> = () => {
   return (
     <React.Fragment>
       <div style={styles.control_container_top}>
@@ -52,4 +52,4 @@ const ViewContainer: React.FunctionComponent<IAppProps> = () => {
   );
 };
 
-export default ViewContainer;
+export default ChartViewContainer;

@@ -81,11 +81,15 @@ export type ChartViewTypes = {
   stack_type: ChartViewStackType;
 };
 
+export type ViewTypes =
+  | "load_building_dialogue"
+  | "calc_info_dialogue"
+  | "building_summary_dialogue"
+  | "chart_view";
+
 export type UiSliceTypes = {
-  is_load_modal_open: boolean;
-  is_info_modal_open: boolean;
-  is_building_summary_modal_open: boolean;
   is_print_mode: boolean;
+  current_view: ViewTypes;
   window_dimensions: WindowDimensionTypes;
   small_window: boolean;
   chart_view: ChartViewTypes;

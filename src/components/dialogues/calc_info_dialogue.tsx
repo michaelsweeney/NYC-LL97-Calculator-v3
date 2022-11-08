@@ -1,25 +1,25 @@
-import ModalWrapper from "./modalwrapper";
-
+import { SubHeaderLined } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { SubHeaderLined } from "styles/typography";
+import { CloseDialogueButton } from "styles/components";
+import DialogueContainer from "./dialoguecontainer";
 
-const InfoModal = () => {
-  const { is_info_modal_open } = useAppSelector((state) => state.ui);
+import NoFineLanguage from "./nofinelanguage";
+import NoInputLanguage from "./noinputlanguage";
+
+const CalcInfoDialogue = () => {
   const dispatch = useAppDispatch();
-
-  const handleCloseModal = () => {
-    dispatch(uiActions.setIsInfoModalOpen(false));
+  const { is_greater_than_25k_sf, is_input_info_missing } = useAppSelector(
+    (state) => state.building_outputs
+  );
+  const handleCloseDialogue = () => {
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   return (
-    <ModalWrapper
-      modalTitle="NYC LL97 Carbon Emissions Calculator"
-      isOpen={is_info_modal_open}
-      exitCallback={handleCloseModal}
-    >
+    <DialogueContainer>
       <div>
-        <SubHeaderLined>About</SubHeaderLined>
+        <SubHeaderLined>About This Calculator</SubHeaderLined>
         <div>
           <p>
             This calculator estimates a building's carbon penalty as a result of{" "}
@@ -117,8 +117,12 @@ const InfoModal = () => {
           </li>
         </ul>
       </div>
-    </ModalWrapper>
+
+      <CloseDialogueButton onClick={handleCloseDialogue}>
+        BACK
+      </CloseDialogueButton>
+    </DialogueContainer>
   );
 };
 
-export default InfoModal;
+export default CalcInfoDialogue;

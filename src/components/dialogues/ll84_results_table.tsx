@@ -17,10 +17,13 @@ import { buildingInputActions } from "store/buildinginputslice";
 import styled from "@emotion/styled";
 
 const ResultContainer = styled.div`
-  /* height: 500px; */
+  height: 100%;
+  overflow-y: scroll;
 `;
 
-const LoadModalResults = () => {
+const SizedTableContainer = styled(TableContainer)``;
+
+const LL84ResultsTable = () => {
   const { ll84_query_results } = useAppSelector((state) => state.ll84_query);
   const { window_dimensions } = useAppSelector((state) => state.ui);
 
@@ -38,24 +41,18 @@ const LoadModalResults = () => {
 
   const handleLoadBuilding = (selected_ll84_data: LL84QueryPropertyTypes) => {
     dispatch(ll84QueryActions.setSelectedLL84Property(selected_ll84_data));
-    dispatch(uiActions.setIsLoadModalOpen(false));
     let ll97_inputs = LL84SelectionToLL97Inputs(selected_ll84_data);
 
     dispatch(
       buildingInputActions.setBuildingInputsFromLL84Results(ll97_inputs)
     );
-    dispatch(uiActions.setIsBuildingSummaryModalOpen(true));
+    dispatch(uiActions.setCurrentView("building_summary_dialogue"));
   };
 
   return (
     <ResultContainer>
-      <TableContainer
-        sx={{
-          height: window_dimensions.height - 400,
-          overflowY: "scroll",
-        }}
-      >
-        <Table stickyHeader sx={{}}>
+      <SizedTableContainer>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
@@ -88,9 +85,9 @@ const LoadModalResults = () => {
             })}
           </TableBody>
         </Table>
-      </TableContainer>
+      </SizedTableContainer>
     </ResultContainer>
   );
 };
 
-export default LoadModalResults;
+export default LL84ResultsTable;

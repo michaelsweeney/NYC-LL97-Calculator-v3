@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UiSliceTypes, WindowDimensionTypes, WindowSizeTypes } from "types";
+import {
+  UiSliceTypes,
+  WindowDimensionTypes,
+  WindowSizeTypes,
+  ViewTypes,
+} from "types";
 
 const initialState: UiSliceTypes = {
-  is_info_modal_open: true,
-  is_load_modal_open: false,
-  is_building_summary_modal_open: false,
+  // is_info_modal_open: true,
+  // is_load_modal_open: false,
+  // is_building_summary_modal_open: false,
   is_dev_mode: false,
   is_print_mode: false,
+  current_view: "calc_info_dialogue",
   window_dimensions: {
     width: 0,
     height: 0,
@@ -25,14 +31,8 @@ export const uiSlice = createSlice({
   name: "ui_slice",
   initialState: initialState,
   reducers: {
-    setIsInfoModalOpen: (state, action: PayloadAction<boolean>) => {
-      state.is_info_modal_open = action.payload;
-    },
-    setIsLoadModalOpen: (state, action: PayloadAction<boolean>) => {
-      state.is_load_modal_open = action.payload;
-    },
-    setIsBuildingSummaryModalOpen: (state, action: PayloadAction<boolean>) => {
-      state.is_building_summary_modal_open = action.payload;
+    setCurrentView: (state, action: PayloadAction<ViewTypes>) => {
+      state.current_view = action.payload;
     },
 
     setIsPrintMode: (state, action: PayloadAction<boolean>) => {

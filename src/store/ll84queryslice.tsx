@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getLL84LookupLabel } from "locallaw/lookups";
+import { getLL84LookupTitle } from "locallaw/lookups";
 import {
   LL84QueryPropertyTypes,
   LL84QuerySliceTypes,
@@ -54,7 +54,7 @@ export const ll84QuerySlice = createSlice({
       state.is_ll84_loaded = true;
       state.is_ll84_overridden = false;
       state.ll84_building_name = action.payload.property_name;
-      state.ll84_year_label = getLL84LookupLabel(action.payload.ll84_year);
+      state.ll84_year_label = getLL84LookupTitle(action.payload.ll84_year);
     },
   },
 });
