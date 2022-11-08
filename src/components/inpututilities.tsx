@@ -17,6 +17,8 @@ import {
   fuel_keys_to_rate_labels,
 } from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
+import { ll84QueryActions } from "store/ll84queryslice";
+
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 interface IAppProps {}
@@ -63,16 +65,19 @@ const InputUtilities: React.FunctionComponent<IAppProps> = (props) => {
 
   const handleFuelConsumptionChange = (fuel: string, value: number) => {
     dispatch(buildingInputActions.setFuelConsumption({ fuel, value }));
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
   const handleFuelRateChange = (fuel: string, value: number) => {
     dispatch(buildingInputActions.setFuelRate({ fuel, value }));
     dispatch(
       buildingInputActions.setIsDefaultRates({ is_default_rates: false })
     );
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
 
   const handleSetIsDefaultRates = (is_default_rates: boolean) => {
     dispatch(buildingInputActions.setIsDefaultRates({ is_default_rates }));
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
 
   const utility_keys = ["elec", "gas", "steam", "fuel_two", "fuel_four"];

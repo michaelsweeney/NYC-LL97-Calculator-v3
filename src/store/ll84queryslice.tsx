@@ -12,6 +12,7 @@ const initialState: LL84QuerySliceTypes = {
   ll84_query_results: [] as LL84QueryPropertyTypes[],
   ll84_selected_property: {} as LL84QueryPropertyTypes,
   is_ll84_loaded: false,
+  is_ll84_overridden: false,
 };
 
 export const ll84QuerySlice = createSlice({
@@ -23,6 +24,12 @@ export const ll84QuerySlice = createSlice({
     },
     setLL84YearSelection: (state, action: PayloadAction<LL84YearTypes>) => {
       state.ll84_year_selection = action.payload;
+    },
+    setIsLL84Loaded: (state, action: PayloadAction<boolean>) => {
+      state.is_ll84_loaded = action.payload;
+    },
+    setIsLL84Overriden: (state, action: PayloadAction<boolean>) => {
+      state.is_ll84_overridden = action.payload;
     },
     setLL84QueryResultsResponse: (
       state,
@@ -36,6 +43,7 @@ export const ll84QuerySlice = createSlice({
     ) => {
       state.ll84_selected_property = action.payload;
       state.is_ll84_loaded = true;
+      state.is_ll84_overridden = false;
     },
   },
 });

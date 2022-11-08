@@ -2,14 +2,19 @@ import * as React from "react";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
+import { colors } from "styles/colors";
+
 import {
   HeaderBuildingTitle,
   HeaderBuildingTitleGray,
+  HeaderLL84Label,
 } from "styles/typography";
+import { ll84_year_lookups } from "locallaw/lookups";
 import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
 
 import CalcLogo from "./calclogo";
+import styled from "styled-components";
 
 interface IAppProps {}
 
@@ -46,13 +51,25 @@ const styles: InlineStylesType = {
   },
 };
 
+const TitleContainer = styled.div`
+  cursor: pointer;
+  transition: color 200ms;
+  &:hover div {
+    color: ${colors.grays.light};
+  }
+`;
+
 const Header: React.FunctionComponent<IAppProps> = () => {
   const dispatch = useAppDispatch();
-  const { property_name } = useAppSelector(
-    (state) => state.ll84_query.ll84_selected_property
-  );
+  const {
+    is_ll84_loaded,
+    is_ll84_overridden,
+    ll84_selected_property: { property_name, ll84_year },
+  } = useAppSelector((state) => state.ll84_query);
 
-  const { is_ll84_loaded } = useAppSelector((state) => state.ll84_query);
+  const lookup_label = !is_ll84_overridden
+    ? ll84_year_lookups.find((d) => d.key === ll84_year)?.label
+    : "manually entered inputs";
 
   const handleLL84NameClick = () => {
     dispatch(uiActions.setIsLoadModalOpen(true));
@@ -66,9 +83,10 @@ const Header: React.FunctionComponent<IAppProps> = () => {
       <div style={styles.middle}>
         <div>
           {is_ll84_loaded ? (
-            <HeaderBuildingTitle onClick={handleLL84NameClick}>
-              {property_name}
-            </HeaderBuildingTitle>
+            <TitleContainer onClick={handleLL84NameClick}>
+              <HeaderBuildingTitle>{property_name}</HeaderBuildingTitle>
+              <HeaderLL84Label>{lookup_label}</HeaderLL84Label>
+            </TitleContainer>
           ) : (
             <HeaderBuildingTitleGray onClick={handleLL84NameClick}>
               find your building

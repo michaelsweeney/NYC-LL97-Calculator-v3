@@ -31,7 +31,7 @@ const BuildingSummaryModal = () => {
     (state) => state.ui
   );
 
-  const { ll84_selected_property, ll84_year_selection } = useAppSelector(
+  const { ll84_selected_property } = useAppSelector(
     (state) => state.ll84_query
   );
 
@@ -86,7 +86,9 @@ const BuildingSummaryModal = () => {
         )}
 
         <div style={styles.list}>
-          <div>LL84 Year Queried: {ll84_year_map[ll84_year_selection]}</div>
+          <div>
+            LL84 Year Queried: {ll84_year_map[ll84_selected_property.ll84_year]}
+          </div>
           <div>Property Name: {ll84_selected_property.property_name}</div>
           <div>Property ID: {ll84_selected_property.property_id}</div>
           <div>NYC BBL: {ll84_selected_property.nyc_bbl}</div>

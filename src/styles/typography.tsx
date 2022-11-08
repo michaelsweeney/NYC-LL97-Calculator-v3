@@ -40,21 +40,28 @@ export const HeaderTitle = styled("div")`
 `;
 
 export const HeaderBuildingTitle = styled("div")`
-  display: inline-block;
-  text-align: center;
+  display: block;
+  text-align: left;
   color: ${colors.grays.dark};
-  font-size: 48px;
+  font-size: 36px;
   font-family: CircularStd-Medium;
-  cursor: pointer;
-  transition: color 200ms;
-  &:hover {
-    color: ${colors.grays.light};
-  }
+`;
+
+export const HeaderLL84Label = styled("div")`
+  display: block;
+  text-align: left;
+  color: ${colors.grays.dark};
+  font-size: 20px;
+  font-family: CircularStd-Book;
+  margin-left: 5px;
+  letter-spacing: 0.1em;
 `;
 
 export const HeaderBuildingTitleGray = styled(HeaderBuildingTitle)`
   font-family: CircularStd-Book;
   color: rgb(180, 180, 180);
+  cursor: pointer;
+  transition: color 200ms;
   &:hover {
     color: ${colors.grays.light};
   }

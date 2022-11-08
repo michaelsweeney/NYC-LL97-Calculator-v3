@@ -18,6 +18,7 @@ import { building_type_co2_coefficients } from "locallaw/lookups";
 import { buildingInputActions } from "store/buildinginputslice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { ll84QueryActions } from "store/ll84queryslice";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
@@ -82,18 +83,22 @@ const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
 
   const handleBuildingAreaChange = (id: number, value: number) => {
     dispatch(buildingInputActions.setBuildingArea({ id, value }));
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
 
   const handleBuildingTypeChange = (id: number, value: string) => {
     dispatch(buildingInputActions.setBuildingType({ id, value }));
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
 
   const handleRemoveBuildingType = (id: number) => {
     dispatch(buildingInputActions.removeBuildingType({ id }));
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
 
   const handleAddBuildingType = () => {
     dispatch(buildingInputActions.addBuildingType({}));
+    dispatch(ll84QueryActions.setIsLL84Overriden(true));
   };
 
   return (

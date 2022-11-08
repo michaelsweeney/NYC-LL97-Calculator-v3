@@ -4,20 +4,25 @@ import {
   LL84QueryPropertyTypes,
   StringObjectType,
   ColumnNameMapType,
+  LL84YearTypes,
 } from "types";
 
 const sanitizeLL84QueryResultsObject = (
   pobj: StringObjectType,
-  colnamemap: ColumnNameMapType
+  colnamemap: ColumnNameMapType,
+  ll84_year: LL84YearTypes
 ) => {
-  let sanitized_columns_string = colnamemap.map((d) => d[0]);
   let pobj_length = Object.keys(pobj).length;
-  let sanitized_obj: StringObjectType = {};
+
+  let sanitized_obj: { [key: string]: any } = {};
 
   Object.keys(pobj).forEach((pobj_key, i) => {
     let pobj_val = pobj[pobj_key];
-    let sanitized_key = sanitized_columns_string[i];
-    sanitized_obj[sanitized_key] = pobj_val;
+
+    //@ts-ignore
+    let sanitized_key = colnamemap.find((d) => pobj_key === d[1])[0];
+    //@ts-ignore
+    sanitized_obj[sanitized_key as keyof LL84QueryPropertyTypes] = pobj_val;
   });
   let sanitized_obj_length = Object.keys(sanitized_obj).length;
 
@@ -29,12 +34,29 @@ const sanitizeLL84QueryResultsObject = (
     );
     throw err;
   }
+
+  sanitized_obj.ll84_year = ll84_year;
+
+  // check that each column name is mapped, otherwise enter "Not Available"
+  colnamemap.forEach((c) => {
+    let v = sanitized_obj[c[0] as keyof typeof sanitized_obj];
+    if (v === undefined) {
+      sanitized_obj[c[0]] = "Not Available";
+      console.warn("parsing error");
+      console.warn(sanitized_obj);
+      console.warn(c[0]);
+      console.warn(
+        'key not found. this may happen in ll84 / cal year 2017 parsing. Query values not found have been set to "Not Available"'
+      );
+    }
+  });
+
   return sanitized_obj as LL84QueryPropertyTypes;
 };
 
 const handleLL84QueryResponse = (
   val: string,
-  year: string,
+  year: LL84YearTypes,
   callback: (e: LL84QueryPropertyTypes[]) => void
 ) => {
   if (val === "") {
@@ -76,18 +98,18 @@ const handleLL84QueryResponse = (
       } catch {
         parsed = JSON.parse(`"${res}"`);
       }
-      console.log(res);
-      console.log(parsed);
+
       let sanitized_array: LL84QueryPropertyTypes[] = [];
 
       parsed.forEach((pobj) => {
         let sanitized_object = sanitizeLL84QueryResultsObject(
           pobj,
-          column_name_map
+          column_name_map,
+          year
         );
         sanitized_array.push(sanitized_object);
       });
-
+      console.log(sanitized_array);
       callback(sanitized_array);
     }
   };

@@ -99,6 +99,7 @@ export type LL84QuerySliceTypes = {
   ll84_query_results: LL84QueryPropertyTypes[];
   ll84_selected_property: LL84QueryPropertyTypes;
   is_ll84_loaded: boolean;
+  is_ll84_overridden: boolean;
 };
 
 export type LL84QueryObjTypes = {
@@ -108,11 +109,13 @@ export type LL84QueryObjTypes = {
   label: string;
   query_columns: string[];
   column_name_map: ColumnNameMapType;
+  title: string;
 };
 
 export type ColumnNameMapType = string[][];
 
 export type LL84QueryPropertyTypes = {
+  ll84_year: LL84YearTypes;
   property_name: string;
   property_id: string;
   nyc_bbl: string;

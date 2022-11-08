@@ -556,6 +556,7 @@ export const default_utility_rates = {
 export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
     key: "ll84_2022_cal_2021",
+    title: "LL84 2022 (calendar year 2021)",
     documentation:
       "https://dev.socrata.com/foundry/data.cityofnewyork.us/7x5e-2fxh",
     endpoint: "https://data.cityofnewyork.us/resource/7x5e-2fxh.json",
@@ -588,6 +589,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   },
   {
     key: "ll84_2021_cal_2020",
+    title: "LL84 2021 (calendar year 2020)",
     documentation:
       "https://dev.socrata.com/foundry/data.cityofnewyork.us/usc3-8zwd",
     endpoint: "https://data.cityofnewyork.us/resource/usc3-8zwd.json",
@@ -626,6 +628,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   },
   {
     key: "ll84_2020_cal_2019",
+    title: "LL84 2020 (calendar year 2019)",
     endpoint: "https://data.cityofnewyork.us/resource/wcm8-aq5w.json",
     documentation:
       "https://dev.socrata.com/foundry/data.cityofnewyork.us/wcm8-aq5w",
@@ -659,6 +662,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
 
   {
     key: "ll84_2019_cal_2018",
+    title: "LL84 2019 (calendar year 2018)",
     endpoint: "https://data.cityofnewyork.us/resource/4tys-3tzj.json",
     documentation:
       "https://dev.socrata.com/foundry/data.cityofnewyork.us/4tys-3tzj",
@@ -692,6 +696,7 @@ export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
     key: "ll84_2018_cal_2017",
     endpoint: "https://data.cityofnewyork.us/resource/4t62-jm4m.json",
+    title: "LL84 2018 (calendar year 2017)",
     documentation:
       "https://dev.socrata.com/foundry/data.cityofnewyork.us/4t62-jm4m",
     label: "2018 (cal year 2017)",
@@ -836,6 +841,7 @@ export const yearToYearArray = (year: number) => {
 };
 
 export const sample_ll84_data: LL84QueryPropertyTypes = {
+  ll84_year: "ll84_2022_cal_2021",
   property_name: "Sample Building",
   property_id: "1261446",
   address_1: "125 Broadway",
