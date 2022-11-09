@@ -19,6 +19,7 @@ import { ll84QueryActions } from "store/ll84queryslice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import styled from "styled-components";
+import { uiActions } from "store/uislice";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
@@ -75,6 +76,7 @@ const InputUtilities = () => {
   const handleFuelConsumptionChange = (fuel: string, value: number) => {
     dispatch(buildingInputActions.setFuelConsumption({ fuel, value }));
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
   const handleFuelRateChange = (fuel: string, value: number) => {
     dispatch(buildingInputActions.setFuelRate({ fuel, value }));
@@ -82,11 +84,13 @@ const InputUtilities = () => {
       buildingInputActions.setIsDefaultRates({ is_default_rates: false })
     );
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   const handleSetIsDefaultRates = (is_default_rates: boolean) => {
     dispatch(buildingInputActions.setIsDefaultRates({ is_default_rates }));
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   const utility_keys = ["elec", "gas", "steam", "fuel_two", "fuel_four"];

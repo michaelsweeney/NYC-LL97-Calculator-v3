@@ -65,21 +65,3 @@ export const AddBuildingTypeButton = styled("button")`
     background-color: ${colors.secondary.dark};
   }
 `;
-
-export const CloseDialogueButton = styled("button")`
-  background-color: ${colors.secondary.main};
-  color: white;
-  border: none;
-  box-sizing: border-box;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  overflow: hidden;
-  font-family: CircularStd-Bold;
-  font-size: "20px";
-  padding: 15px;
-  /* margin: 10px; */
-  transition: background-color 250ms, color 250ms;
-  &:hover {
-    background-color: ${colors.secondary.dark};
-  }
-`;

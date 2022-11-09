@@ -76,6 +76,14 @@ const ChartView = (props: ChartViewPropTypes) => {
         unit_type
       );
 
+      let { width_per_year } = svg_components;
+
+      let { is_input_info_missing } = building_outputs;
+      if (width_per_year < 0 || is_input_info_missing) {
+        return;
+      } else {
+      }
+
       if (view_type === "cost") {
         createCostChart({
           chart_data: cost_chart_data.chart_data,

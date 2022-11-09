@@ -4,25 +4,25 @@ import { FooterTextAKF } from "styles/typography";
 import styled from "styled-components";
 
 const Right = styled.div`
-  display: "inline-block";
-  width: "calc(100% - 600px)";
-  text-align: "right";
-  vertical-align: "top";
-  padding-left: "15px";
-  box-sizing: "border-box";
-  padding-right: "20px";
-  padding-top: "15px";
+  display: inline-block;
+  width: calc(100% - 600px);
+  text-align: right;
+  vertical-align: top;
+  padding-left: 15px;
+  box-sizing: border-box;
+  padding-right: 20px;
+  padding-top: 12px;
 `;
 
 const Left = styled.div`
-  display: "inline-block";
-  width: "600px";
-  text-align: "left";
-  vertical-align: "top";
-  padding-right: "10px";
-  box-sizing: "border-box";
-  padding-left: "20px";
-  padding-top: "15px";
+  display: inline-block;
+  width: 600px;
+  text-align: left;
+  vertical-align: top;
+  padding-right: 10px;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-top: 15px;
 `;
 
 const Root = styled.div`

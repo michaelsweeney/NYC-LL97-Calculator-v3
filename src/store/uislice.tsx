@@ -8,9 +8,6 @@ import {
 } from "types";
 
 const initialState: UiSliceTypes = {
-  // is_info_modal_open: true,
-  // is_load_modal_open: false,
-  // is_building_summary_modal_open: false,
   is_dev_mode: false,
   is_print_mode: false,
   current_view: "calc_info_dialogue",
@@ -55,7 +52,6 @@ export const uiSlice = createSlice({
       action: PayloadAction<{ view_key: string; view_value: string }>
     ) => {
       const { view_key, view_value } = action.payload;
-
       //@ts-ignore
       state.chart_view[view_key] = view_value;
     },

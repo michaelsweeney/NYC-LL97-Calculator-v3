@@ -66,8 +66,8 @@ const NavMenu = () => {
       <BurgerMenuIconButton
         active={open}
         clickCallback={handleClick}
-        width={40}
-        height={40}
+        width={35}
+        height={35}
       />
 
       <Menu

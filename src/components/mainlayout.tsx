@@ -8,20 +8,21 @@ import Sidebar from "./sidebar";
 import NoFineLanguage from "./dialogues/nofinelanguage";
 import NoInputLanguage from "./dialogues/noinputlanguage";
 
-import BuildingSummaryDialogue from "./dialogues/building_summary_dialogue";
-import LoadBuildingDialogue from "./dialogues/load_building_dialogue";
-import CalcInfoDialogue from "./dialogues/calc_info_dialogue";
+import BuildingSummaryDialogue from "./dialogues/ll84summarydialogue";
+import LoadBuildingDialogue from "./dialogues/loadbuildingdialogue";
+import CalcInfoDialogue from "./dialogues/calcinfodialogue";
 
 import { useAppSelector } from "store/hooks";
 import { colors } from "styles/colors";
 import { chart_background_color } from "styles/colors";
 import styled from "styled-components";
+
 const sidebar_width = "350px";
 const border_color = colors.secondary.main;
 
 const border_width = "4px";
 
-const ViewContainer = styled.div`
+const MainContainer = styled.div`
   width: calc(100% - ${sidebar_width});
   height: 100%;
   display: inline-block;
@@ -72,7 +73,17 @@ const MainLayout = () => {
   );
   const { current_view } = useAppSelector((state) => state.ui);
 
-  const ViewComponent = () => {
+  const ChartViewComponent = () => {
+    return !is_greater_than_25k_sf ? (
+      <NoFineLanguage />
+    ) : is_input_info_missing ? (
+      <NoInputLanguage />
+    ) : (
+      <ChartViewContainer />
+    );
+  };
+
+  const CurrentViewComponent = () => {
     switch (current_view) {
       case "building_summary_dialogue":
         return <BuildingSummaryDialogue />;
@@ -81,19 +92,13 @@ const MainLayout = () => {
         return <LoadBuildingDialogue />;
 
       case "chart_view":
-        return <ChartViewContainer />;
+        return <ChartViewComponent />;
 
       case "calc_info_dialogue":
         return <CalcInfoDialogue />;
 
       default:
-        return !is_greater_than_25k_sf ? (
-          <NoFineLanguage />
-        ) : is_input_info_missing ? (
-          <NoInputLanguage />
-        ) : (
-          <ChartViewContainer />
-        );
+        return <ChartViewComponent />;
     }
   };
 
@@ -106,9 +111,9 @@ const MainLayout = () => {
         <SidebarContainer>
           <Sidebar />
         </SidebarContainer>
-        <ViewContainer>
-          <ViewComponent />
-        </ViewContainer>
+        <MainContainer>
+          <CurrentViewComponent />
+        </MainContainer>
       </MiddleContainer>
       <FooterContainer>
         <Footer />

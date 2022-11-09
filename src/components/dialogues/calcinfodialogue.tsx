@@ -1,7 +1,7 @@
-import { SubHeaderLined, DialogueHeader } from "styles/typography";
+import { SubHeaderLined } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CloseDialogueButton } from "styles/components";
+
 import DialogueContainer from "./dialoguecontainer";
 
 import NoFineLanguage from "./nofinelanguage";
@@ -18,12 +18,8 @@ const CalcInfoDialogue = () => {
 
   return (
     <DialogueContainer
-      header={<DialogueHeader>About This Calculator</DialogueHeader>}
-      footer={
-        <CloseDialogueButton onClick={handleCloseDialogue}>
-          BACK
-        </CloseDialogueButton>
-      }
+      closeCallback={handleCloseDialogue}
+      title="About This Calculator"
     >
       <div>
         <div>

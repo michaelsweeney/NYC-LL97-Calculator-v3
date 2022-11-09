@@ -4,23 +4,53 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import { colors } from "styles/colors";
 
-import {
-  HeaderBuildingTitle,
-  HeaderBuildingTitleGray,
-  HeaderLL84Label,
-} from "styles/typography";
 import NavMenu from "./navmenu";
-import { PrintIconButton } from "./iconbuttons";
+import { PrintIconButton, InfoIconButton } from "./iconbuttons";
 
 import CalcLogo from "./calclogo";
 import styled from "styled-components";
 
 const left_width = "350px";
-const right_width = "140px";
+const right_width = "200px";
+
+const HeaderBuildingTitle = styled("div")`
+  display: block;
+  text-align: left;
+  color: ${colors.grays.dark};
+  font-size: 36px;
+  font-family: CircularStd-Medium;
+  cursor: pointer;
+  &:hover {
+    color: ${colors.grays.light};
+  }
+`;
+
+const HeaderLL84Label = styled("div")`
+  display: block;
+  text-align: left;
+  color: ${colors.grays.dark};
+  font-size: 20px;
+  font-family: CircularStd-Book;
+  margin-left: 5px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  &:hover {
+    color: ${colors.grays.light};
+  }
+`;
+
+const HeaderBuildingTitleGray = styled(HeaderBuildingTitle)`
+  font-family: CircularStd-Book;
+  color: rgb(180, 180, 180);
+  cursor: pointer;
+  transition: color 200ms;
+  &:hover {
+    color: ${colors.grays.light};
+  }
+`;
 
 const Right = styled.div`
   width: ${right_width};
-  padding-right: 25px;
   display: inline-block;
   vertical-align: middle;
   text-align: left;
@@ -47,18 +77,24 @@ const Left = styled.div`
   box-sizing: border-box;
 `;
 
-const TitleContainer = styled.div`
-  cursor: pointer;
-  transition: color 200ms;
-  &:hover div {
-    color: ${colors.grays.light};
-  }
-`;
+const TitleContainer = styled.div``;
 
-const PrintContainer = styled.div`
+const PrintButtonWrapper = styled.div`
   display: inline-block;
   position: relative;
-  left: 10px;
+  left: 45px;
+  top: -5px;
+`;
+const InfoIconButtonWrapper = styled.div`
+  display: inline-block;
+  position: relative;
+  left: 40px;
+  top: -5px;
+`;
+const NavButtonWrapper = styled.div`
+  display: inline-block;
+  position: relative;
+  left: 50px;
 `;
 
 const Header = () => {
@@ -70,6 +106,14 @@ const Header = () => {
     dispatch(uiActions.setCurrentView("load_building_dialogue"));
   };
 
+  const handleLL84YearClick = () => {
+    dispatch(uiActions.setCurrentView("building_summary_dialogue"));
+  };
+
+  const handleInfoClick = () => {
+    dispatch(uiActions.setCurrentView("calc_info_dialogue"));
+  };
+
   return (
     <React.Fragment>
       <Left>
@@ -78,9 +122,13 @@ const Header = () => {
       <Middle>
         <div>
           {is_ll84_loaded ? (
-            <TitleContainer onClick={handleLL84NameClick}>
-              <HeaderBuildingTitle>{ll84_building_name}</HeaderBuildingTitle>
-              <HeaderLL84Label>{ll84_year_label}</HeaderLL84Label>
+            <TitleContainer>
+              <HeaderBuildingTitle onClick={handleLL84NameClick}>
+                {ll84_building_name}
+              </HeaderBuildingTitle>
+              <HeaderLL84Label onClick={handleLL84YearClick}>
+                {ll84_year_label}
+              </HeaderLL84Label>
             </TitleContainer>
           ) : (
             <HeaderBuildingTitleGray onClick={handleLL84NameClick}>
@@ -90,17 +138,25 @@ const Header = () => {
         </div>
       </Middle>
       <Right>
-        <PrintContainer>
+        <InfoIconButtonWrapper>
+          <InfoIconButton
+            width={25}
+            height={25}
+            clickCallback={handleInfoClick}
+          />
+        </InfoIconButtonWrapper>
+
+        <PrintButtonWrapper>
           <PrintIconButton
             width={25}
             height={25}
             clickCallback={() => window.print()}
           />
-        </PrintContainer>
+        </PrintButtonWrapper>
 
-        <span style={{ display: "inline-block" }}>
+        <NavButtonWrapper>
           <NavMenu />
-        </span>
+        </NavButtonWrapper>
       </Right>
     </React.Fragment>
   );

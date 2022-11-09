@@ -3,7 +3,6 @@ import DialogueContainer from "./dialoguecontainer";
 import { SubHeaderLined } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CloseDialogueButton } from "styles/components";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { formatNumber } from "components/charts/d3helpers";
 import styled from "styled-components";
@@ -24,6 +23,7 @@ const Warning = styled.div`
 const Intro = styled.div`
   font-family: CircularStd-Medium;
   margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const BuildingSummaryDialogue = () => {
@@ -51,17 +51,11 @@ const BuildingSummaryDialogue = () => {
   });
 
   return (
-    <DialogueContainer>
-      <CloseDialogueButton onClick={handleCloseDialogue}>
-        back
-      </CloseDialogueButton>
-      <SubHeaderLined>Loaded LL84 Building Summary</SubHeaderLined>
+    <DialogueContainer
+      closeCallback={handleCloseDialogue}
+      title="Loaded LL84 Building Summary"
+    >
       <div>
-        <Intro>
-          The following info has been loaded from the NYC LL84 Database. Note
-          that inputs should be verified by the building owner / stakeholder for
-          accuracy.
-        </Intro>
         {ll84_selected_property.is_other_lookup_error ? (
           <Warning>
             Warning: This building's LL87 query includes a property type of
@@ -73,6 +67,11 @@ const BuildingSummaryDialogue = () => {
         ) : (
           ""
         )}
+        <Intro>
+          The following info has been loaded from the NYC LL84 Database. Note
+          that inputs should be verified by the building owner / stakeholder for
+          accuracy.
+        </Intro>
 
         <List>
           <div>
@@ -151,9 +150,6 @@ const BuildingSummaryDialogue = () => {
           calculator.
         </End>
       </div>
-      <CloseDialogueButton onClick={handleCloseDialogue}>
-        OK
-      </CloseDialogueButton>
     </DialogueContainer>
   );
 };

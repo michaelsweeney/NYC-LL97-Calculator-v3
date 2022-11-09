@@ -15,7 +15,7 @@ import { ButtonSecondary, AddBuildingTypeButton } from "styles/components";
 import { building_type_co2_coefficients } from "locallaw/lookups";
 
 import { buildingInputActions } from "store/buildinginputslice";
-
+import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ll84QueryActions } from "store/ll84queryslice";
 import styled from "styled-components";
@@ -83,21 +83,25 @@ const InputBuilding = () => {
   const handleBuildingAreaChange = (id: number, value: number) => {
     dispatch(buildingInputActions.setBuildingArea({ id, value }));
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   const handleBuildingTypeChange = (id: number, value: string) => {
     dispatch(buildingInputActions.setBuildingType({ id, value }));
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   const handleRemoveBuildingType = (id: number) => {
     dispatch(buildingInputActions.removeBuildingType({ id }));
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   const handleAddBuildingType = () => {
     dispatch(buildingInputActions.addBuildingType({}));
     dispatch(ll84QueryActions.setIsLL84Overriden(true));
+    dispatch(uiActions.setCurrentView("chart_view"));
   };
 
   return (

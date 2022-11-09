@@ -4,11 +4,10 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import { TextField, MenuItem, TextFieldProps } from "@mui/material";
 import DialogueContainer from "./dialoguecontainer";
-import LoadModalResults from "./ll84_results_table";
+import LoadModalResults from "./ll84resultstable";
 import { SubHeaderLined } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CloseDialogueButton } from "styles/components";
 import { useEffect, ChangeEvent, useRef } from "react";
 import { ll84QueryActions } from "store/ll84queryslice";
 import { ll84_year_lookups } from "locallaw/lookups";
@@ -16,9 +15,27 @@ import { handleLL84QueryResponse } from "locallaw/ll84_query";
 import { LL84QueryPropertyTypes, LL84YearTypes } from "types";
 
 const SearchContainer = styled.div`
-  background-color: white;
+  /* background-color: white; */
   height: 100%;
-  padding: 20px;
+  /* padding: 20px; */
+  margin-top: 20px;
+  box-sizing: border-box;
+`;
+
+const ControlWrapper = styled.div`
+  margin-bottom: 15px;
+`;
+const SelectWrapper = styled(Select)`
+  background-color: white;
+  border-radius: 0px;
+`;
+
+const InputWrapper = styled(TextField)`
+  background-color: white;
+  margin-left: 10px;
+  & fieldset {
+    border-radius: 0px;
+  }
 `;
 
 const LoadBuildingDialogue = () => {
@@ -36,7 +53,7 @@ const LoadBuildingDialogue = () => {
     dispatch(ll84QueryActions.setLL84QueryInput(querytext));
   };
 
-  const handleYearSelection = (e: SelectChangeEvent) => {
+  const handleYearSelection = (e: SelectChangeEvent<unknown>) => {
     let year = e.target.value as LL84YearTypes;
     dispatch(ll84QueryActions.setLL84YearSelection(year));
   };
@@ -62,26 +79,24 @@ const LoadBuildingDialogue = () => {
   }, [ll84_query_input, ll84_year_selection, dispatch]);
 
   return (
-    <DialogueContainer>
-      <SubHeaderLined>Load LL84 Building Info</SubHeaderLined>
-
+    <DialogueContainer
+      closeCallback={handleCloseDialogue}
+      title="Load LL84 Building Info"
+    >
       <div>
-        <div>
+        <p>
           This form allows for querying NYC's "Energy and Water Data Disclosure"
           database for multiple years. The form loads and translates building
           utility information, either using the property's BBL number, address,
           or property name (searches are case sensitive). Data loaded using this
           form should be verified with building utility consumption and gross
           square footage.
-        </div>
-        <div>
-          Input BBL ID Number, Property Name, or Address (case sensitive)
-        </div>
+        </p>
+        <p>Input BBL ID Number, Property Name, or Address (case sensitive)</p>
 
         <SearchContainer>
-          <div>
-            <Select
-              sx={{ backgroundColor: "white" }}
+          <ControlWrapper>
+            <SelectWrapper
               color="secondary"
               onChange={handleYearSelection}
               value={ll84_year_selection}
@@ -93,25 +108,20 @@ const LoadBuildingDialogue = () => {
                   </MenuItem>
                 );
               })}
-            </Select>
-            <TextField
-              sx={{ backgroundColor: "white" }}
+            </SelectWrapper>
+            <InputWrapper
               color="secondary"
               autoFocus
               inputRef={inputref}
               onChange={handleSearchChange}
               value={ll84_query_input}
             />
-          </div>
+          </ControlWrapper>
 
           <div>
             <LoadModalResults />
           </div>
         </SearchContainer>
-
-        <CloseDialogueButton onClick={handleCloseDialogue}>
-          BACK
-        </CloseDialogueButton>
       </div>
     </DialogueContainer>
   );

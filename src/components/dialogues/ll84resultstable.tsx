@@ -21,6 +21,15 @@ const ResultContainer = styled.div`
   overflow-y: scroll;
 `;
 
+const HeadCell = styled(TableCell)`
+  background-color: transparent;
+`;
+
+const TD = styled(TableCell)`
+  max-width: 50px;
+  overflow: hidden;
+`;
+
 const SizedTableContainer = styled(TableContainer)``;
 
 const LL84ResultsTable = () => {
@@ -55,9 +64,9 @@ const LL84ResultsTable = () => {
         <Table stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell></TableCell>
+              <HeadCell></HeadCell>
               {table_column_map.map((e, i) => {
-                return <TableCell key={i}>{e[0]}</TableCell>;
+                return <HeadCell key={i}>{e[0]}</HeadCell>;
               })}
             </TableRow>
           </TableHead>
@@ -76,9 +85,7 @@ const LL84ResultsTable = () => {
                     </ButtonSecondary>
                   </TableCell>
                   {table_column_map.map((e, si) => (
-                    <TableCell key={si}>
-                      {result[e[1] as keyof typeof result]}
-                    </TableCell>
+                    <TD key={si}>{result[e[1] as keyof typeof result]}</TD>
                   ))}
                 </TableRow>
               );
