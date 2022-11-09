@@ -5,13 +5,15 @@ import { uiActions } from "store/uislice";
 import styled from "styled-components";
 import ChartToggleButton from "./charttogglebutton";
 import { colors } from "styles/colors";
+
 const MainContainer = styled.div`
   margin-left: 20px;
   margin-right: 0px;
-  padding-top: 8px;
-  padding-bottom: 10px;
+  padding-top: 7px;
+  padding-bottom: 0px;
   box-sizing: border-box;
 `;
+
 const ToggleContainer = styled.div`
   display: inline-block;
   margin-right: 10px;

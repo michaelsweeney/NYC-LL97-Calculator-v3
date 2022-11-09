@@ -1,4 +1,4 @@
-import { SubHeaderLined } from "styles/typography";
+import { SubHeaderLined, DialogueHeader } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CloseDialogueButton } from "styles/components";
@@ -17,9 +17,15 @@ const CalcInfoDialogue = () => {
   };
 
   return (
-    <DialogueContainer>
+    <DialogueContainer
+      header={<DialogueHeader>About This Calculator</DialogueHeader>}
+      footer={
+        <CloseDialogueButton onClick={handleCloseDialogue}>
+          BACK
+        </CloseDialogueButton>
+      }
+    >
       <div>
-        <SubHeaderLined>About This Calculator</SubHeaderLined>
         <div>
           <p>
             This calculator estimates a building's carbon penalty as a result of{" "}
@@ -117,10 +123,6 @@ const CalcInfoDialogue = () => {
           </li>
         </ul>
       </div>
-
-      <CloseDialogueButton onClick={handleCloseDialogue}>
-        BACK
-      </CloseDialogueButton>
     </DialogueContainer>
   );
 };

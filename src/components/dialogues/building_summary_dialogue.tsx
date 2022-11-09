@@ -5,29 +5,26 @@ import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CloseDialogueButton } from "styles/components";
 import { ll84_year_lookups } from "locallaw/lookups";
-import { InlineStylesType } from "types";
 import { formatNumber } from "components/charts/d3helpers";
+import styled from "styled-components";
 
-const styles: InlineStylesType = {
-  root: {},
-  intro: {
-    fontFamily: "CircularStd-Medium",
-    marginBottom: "10px",
-  },
-  warning: {
-    color: "red",
-    marginBottom: "10px",
-  },
-  list: {
-    fontFamily: "CircularStd-Book",
-    marginBottom: "15px",
-    marginTop: "15px",
-    marginLeft: "15px",
-  },
-  end: {
-    fontFamily: "CircularStd-Medium",
-  },
-};
+const End = styled.div`
+  font-family: CircularStd-Medium;
+`;
+const List = styled.div`
+  font-family: CircularStd-Book;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-left: 15px;
+`;
+const Warning = styled.div`
+  color: red;
+  margin-bottom: 10px;
+`;
+const Intro = styled.div`
+  font-family: CircularStd-Medium;
+  margin-bottom: 10px;
+`;
 
 const BuildingSummaryDialogue = () => {
   const dispatch = useAppDispatch();
@@ -60,24 +57,24 @@ const BuildingSummaryDialogue = () => {
       </CloseDialogueButton>
       <SubHeaderLined>Loaded LL84 Building Summary</SubHeaderLined>
       <div>
-        <div style={styles.intro}>
+        <Intro>
           The following info has been loaded from the NYC LL84 Database. Note
           that inputs should be verified by the building owner / stakeholder for
           accuracy.
-        </div>
+        </Intro>
         {ll84_selected_property.is_other_lookup_error ? (
-          <div style={styles.warning}>
+          <Warning>
             Warning: This building's LL87 query includes a property type of
             "Other," which is not included as a category in the most current
             LL97 rules. The "Other" type has been set to "Office." Please review
             and redefine the category or select one of the more-specific "Other"
             categories (i.e., "Other - Education", etc.).
-          </div>
+          </Warning>
         ) : (
           ""
         )}
 
-        <div style={styles.list}>
+        <List>
           <div>
             LL84 Year Queried: {ll84_year_map[ll84_selected_property.ll84_year]}
           </div>
@@ -146,13 +143,13 @@ const BuildingSummaryDialogue = () => {
               ll84_selected_property.electricity_onsite_generated_kbtu
             )}
           </div>
-        </div>
+        </List>
 
-        <div style={styles.end}>
+        <End>
           Please verify the above lookups and make any changes necessary to
           areas and utility consumption in the "Building Inputs" section of the
           calculator.
-        </div>
+        </End>
       </div>
       <CloseDialogueButton onClick={handleCloseDialogue}>
         OK

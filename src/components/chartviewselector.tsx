@@ -1,8 +1,17 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import styled from "styled-components";
 import { uiActions } from "store/uislice";
 
 import ChartViewButton from "./charttogglebutton";
+
+const MainContainer = styled.div`
+  margin-left: 10px;
+  margin-right: 0px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  box-sizing: border-box;
+`;
 
 const ChartViewSelector = () => {
   const { view_type } = useAppSelector((state) => state.ui.chart_view);
@@ -18,7 +27,7 @@ const ChartViewSelector = () => {
   };
 
   return (
-    <div>
+    <MainContainer>
       <ChartViewButton
         label="carbon"
         view_key="carbon"
@@ -31,7 +40,7 @@ const ChartViewSelector = () => {
         is_active={view_type === "cost"}
         callback={changeViewCallback}
       />
-    </div>
+    </MainContainer>
   );
 };
 

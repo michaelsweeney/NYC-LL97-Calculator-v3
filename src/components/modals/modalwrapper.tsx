@@ -5,8 +5,8 @@ import Dialog from "@mui/material/Dialog";
 import { CloseIconButton } from "../iconbuttons";
 import { ButtonSecondary } from "styles/components";
 import { MenuTitle } from "styles/typography";
-import { InlineStylesType } from "types";
 
+import styled from "styled-components";
 type PropTypes = {
   isOpen: boolean;
   exitCallback: (b: boolean) => void;
@@ -15,32 +15,32 @@ type PropTypes = {
   closable: boolean;
 };
 
-const styles: InlineStylesType = {
-  root: {
-    padding: "20px",
-  },
-  header: {
-    width: "100%",
-  },
-  headerLeft: {
-    display: "inline-block",
-    width: "calc(100%)",
-  },
-  xCornerButton: {
-    position: "absolute",
-    right: "25px",
-    top: "35px",
-  },
-  childrenContainer: {
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    paddingTop: "10px",
-    paddingBottom: "10px",
-  },
-  closeContainer: {
-    textAlign: "center",
-  },
-};
+const CloseContainer = styled.div`
+  text-align: center;
+`;
+const ChildrenContainer = styled.div`
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+`;
+
+const XCornerButton = styled.div`
+  position: absolute;
+  right: 25px;
+  top: 35px;
+`;
+const HeaderLeft = styled.div`
+  display: inline-block;
+  width: calc(100%);
+`;
+const Header = styled.div`
+  width: 100%;
+`;
+
+const Root = styled.div`
+  padding: 20px;
+`;
 
 const defaultProps = {
   closable: true,
@@ -55,26 +55,26 @@ const ModalWrapper = (props: PropTypes) => {
 
   return (
     <Dialog open={isOpen} fullWidth={true} onClose={hideModal} maxWidth="xl">
-      <div style={styles.root}>
-        <div style={styles.header}>
-          <div style={styles.headerLeft}>
+      <Root>
+        <Header>
+          <HeaderLeft>
             <MenuTitle>{modalTitle}</MenuTitle>
-          </div>
+          </HeaderLeft>
 
           {!closable ? (
             <></>
           ) : (
-            <div style={styles.xCornerButton}>
+            <XCornerButton>
               <CloseIconButton
                 clickCallback={hideModal}
                 width={30}
                 height={30}
               />
-            </div>
+            </XCornerButton>
           )}
-        </div>
-        <div style={styles.childrenContainer}>{children}</div>
-        <div style={styles.closeContainer}>
+        </Header>
+        <ChildrenContainer>{children}</ChildrenContainer>
+        <CloseContainer>
           {!closable ? (
             <></>
           ) : (
@@ -87,8 +87,8 @@ const ModalWrapper = (props: PropTypes) => {
               Close
             </ButtonSecondary>
           )}
-        </div>
-      </div>
+        </CloseContainer>
+      </Root>
     </Dialog>
   );
 };

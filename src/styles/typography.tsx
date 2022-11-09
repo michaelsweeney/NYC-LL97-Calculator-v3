@@ -9,6 +9,15 @@ export const SubHeaderLined = styled("div")`
   margin-bottom: 10px;
 `;
 
+export const DialogueHeader = styled("div")`
+  font-family: CircularStd-Bold;
+  font-size: 20px;
+  margin-top: 10px;
+  /* margin-left: 10px; */
+  margin-bottom: 10px;
+  width: 100%;
+`;
+
 export const ChartHeaderLined = styled("div")`
   display: inline-block;
   font-family: CircularStd-Black;

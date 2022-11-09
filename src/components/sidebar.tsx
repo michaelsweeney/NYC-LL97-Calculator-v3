@@ -7,19 +7,14 @@ import InputOnsiteGeneration from "./inputonsitegeneration";
 import { SubHeaderLined } from "styles/typography";
 import { InlineStylesType } from "types";
 import styled from "styled-components";
-const styles: InlineStylesType = {
-  root: {},
-};
-
-interface IAppProps {}
 
 const SidebarSubHeader = styled(SubHeaderLined)`
   margin-left: 15px;
 `;
 
-const Sidebar: React.FunctionComponent<IAppProps> = (props) => {
+const Sidebar = () => {
   return (
-    <div style={styles.root}>
+    <div>
       <SidebarSubHeader>Building Inputs</SidebarSubHeader>
       <InputBuilding />
       <SidebarSubHeader>Utility Inputs</SidebarSubHeader>

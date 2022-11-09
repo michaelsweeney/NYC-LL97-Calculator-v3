@@ -23,10 +23,10 @@ const Block = styled.div`
   margin-bottom: 25px;
 `;
 
-const chartContainerStyles: InlineStylesType = {
-  width: 750,
-  height: 500,
-};
+const ChartContainer = styled.div`
+  width: 750px;
+  height: 750px;
+`;
 
 const chartContainerPadding = {
   t: 25,
@@ -67,7 +67,7 @@ const PrintContent = () => {
       {/* <PageBreakAfter>i</PageBreakAfter> */}
       <Block>
         <SubHeaderLined>Carbon Threshold Summary</SubHeaderLined>
-        <div style={chartContainerStyles}>
+        <ChartContainer>
           <ChartView
             view_type="carbon"
             unit_type="absolute"
@@ -75,13 +75,13 @@ const PrintContent = () => {
             container_padding={chartContainerPadding}
             show_title={false}
           />
-        </div>
+        </ChartContainer>
       </Block>
       {/* <PageBreakAfter>i</PageBreakAfter> */}
 
       <Block>
         <SubHeaderLined>Utility and Penalty Cost Summary</SubHeaderLined>
-        <div style={chartContainerStyles}>
+        <ChartContainer>
           <ChartView
             view_type="cost"
             unit_type="absolute"
@@ -89,7 +89,7 @@ const PrintContent = () => {
             container_padding={chartContainerPadding}
             show_title={false}
           />
-        </div>
+        </ChartContainer>
       </Block>
 
       <PageBreakAfter>i</PageBreakAfter>

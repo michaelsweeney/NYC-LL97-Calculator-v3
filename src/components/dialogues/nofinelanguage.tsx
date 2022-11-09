@@ -1,15 +1,13 @@
 import { SubHeaderLined } from "styles/typography";
-import { InlineStylesType } from "types";
+import styled from "styled-components";
 
-const styles: InlineStylesType = {
-  root: {
-    padding: 20,
-  },
-};
+const Root = styled.div`
+  padding: 20px;
+`;
 
 const NoFineDialog = () => {
   return (
-    <div style={styles.root}>
+    <Root>
       <SubHeaderLined>Building Not Regulated</SubHeaderLined>
       <div>Based on your inputs, your building is less than 25,000 SF.</div>
       <div>Local Law 97 applies to the following buildings</div>
@@ -24,7 +22,7 @@ const NoFineDialog = () => {
           by the same board of managers and that exceed 50,000 gross square feet
         </li>
       </ul>
-    </div>
+    </Root>
   );
 };
 export default NoFineDialog;

@@ -18,6 +18,7 @@ import { buildingInputActions } from "store/buildinginputslice";
 
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ll84QueryActions } from "store/ll84queryslice";
+import styled from "styled-components";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
@@ -74,9 +75,7 @@ const styles: InlineStylesType = {
   },
 };
 
-interface IAppProps {}
-
-const InputBuilding: React.FunctionComponent<IAppProps> = (props) => {
+const InputBuilding = () => {
   const { building_types } = useAppSelector((state) => state.building_inputs);
 
   const dispatch = useAppDispatch();

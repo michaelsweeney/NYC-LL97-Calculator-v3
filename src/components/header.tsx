@@ -9,47 +9,43 @@ import {
   HeaderBuildingTitleGray,
   HeaderLL84Label,
 } from "styles/typography";
-import { InlineStylesType } from "types";
 import NavMenu from "./navmenu";
 import { PrintIconButton } from "./iconbuttons";
 
 import CalcLogo from "./calclogo";
 import styled from "styled-components";
 
-interface IAppProps {}
-
 const left_width = "350px";
-const right_width = "150px";
+const right_width = "140px";
 
-const styles: InlineStylesType = {
-  root: {},
-  left: {
-    width: left_width,
-    display: "inline-block",
-    verticalAlign: "middle",
-    paddingLeft: "25px",
-    paddingRight: "15px",
-    boxSizing: "border-box",
-  },
-  middle: {
-    width: `calc(100% - ${left_width} - ${right_width})`,
-    textAlign: "left",
-    display: "inline-block",
-    verticalAlign: "middle",
-    paddingLeft: "10px",
-    boxSizing: "border-box",
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-  },
-  right: {
-    width: right_width,
-    paddingRight: "25px",
-    display: "inline-block",
-    verticalAlign: "middle",
-    textAlign: "left",
-    boxSizing: "border-box",
-  },
-};
+const Right = styled.div`
+  width: ${right_width};
+  padding-right: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  box-sizing: border-box;
+`;
+
+const Middle = styled.div`
+  width: calc(100% - ${left_width} - ${right_width});
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+const Left = styled.div`
+  width: ${left_width};
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 25px;
+  padding-right: 15px;
+  box-sizing: border-box;
+`;
 
 const TitleContainer = styled.div`
   cursor: pointer;
@@ -59,7 +55,13 @@ const TitleContainer = styled.div`
   }
 `;
 
-const Header: React.FunctionComponent<IAppProps> = () => {
+const PrintContainer = styled.div`
+  display: inline-block;
+  position: relative;
+  left: 10px;
+`;
+
+const Header = () => {
   const dispatch = useAppDispatch();
   const { is_ll84_loaded, ll84_year_label, ll84_building_name } =
     useAppSelector((state) => state.ll84_query);
@@ -70,10 +72,10 @@ const Header: React.FunctionComponent<IAppProps> = () => {
 
   return (
     <React.Fragment>
-      <div style={styles.left}>
+      <Left>
         <CalcLogo />
-      </div>
-      <div style={styles.middle}>
+      </Left>
+      <Middle>
         <div>
           {is_ll84_loaded ? (
             <TitleContainer onClick={handleLL84NameClick}>
@@ -86,20 +88,20 @@ const Header: React.FunctionComponent<IAppProps> = () => {
             </HeaderBuildingTitleGray>
           )}
         </div>
-      </div>
-      <div style={styles.right}>
-        <span style={{ display: "inline-block" }}>
+      </Middle>
+      <Right>
+        <PrintContainer>
           <PrintIconButton
             width={25}
             height={25}
             clickCallback={() => window.print()}
           />
-        </span>
+        </PrintContainer>
 
         <span style={{ display: "inline-block" }}>
           <NavMenu />
         </span>
-      </div>
+      </Right>
     </React.Fragment>
   );
 };

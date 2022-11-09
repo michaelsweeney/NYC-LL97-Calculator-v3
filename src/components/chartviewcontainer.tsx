@@ -6,48 +6,46 @@ import { InlineStylesType } from "types";
 import ChartViewSelector from "./chartviewselector";
 import ChartOptionSelector from "./chartoptionselector";
 import ChartView from "./charts/chartview";
+import styled from "styled-components";
 
-const top_height = "50px";
-const bottom_height = "50px";
+const top_height = "60px";
+const bottom_height = "60px";
 
-interface IAppProps {}
-const styles: InlineStylesType = {
-  root: {},
-  control_container_top: {
-    height: top_height,
-    width: "100%",
-    display: "inline-block",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-  },
-  chart_container: {
-    height: `calc(100% - ${top_height} - ${bottom_height})`,
-    width: "100%",
-    display: "inline-block",
-    borderTop: `1px solid ${colors.grays.light}`,
-    borderBottom: `1px solid ${colors.grays.light}`,
-  },
-  control_container_bottom: {
-    height: bottom_height,
-    width: "100%",
-    display: "inline-block",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-  },
-};
+const Top = styled.div`
+  height: ${top_height};
+  width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+`;
 
-const ChartViewContainer: React.FunctionComponent<IAppProps> = () => {
+const Main = styled.div`
+  height: calc(100% - ${top_height} - ${bottom_height});
+  width: 100%;
+  display: inline-block;
+  border-top: 1px solid ${colors.grays.light};
+  border-bottom: 1px solid ${colors.grays.light};
+`;
+const Bottom = styled.div`
+  height: ${bottom_height};
+  width: "100%";
+  display: "inline-block";
+  white-space: "nowrap";
+  overflow: "hidden";
+`;
+
+const ChartViewContainer = () => {
   return (
     <React.Fragment>
-      <div style={styles.control_container_top}>
+      <Top>
         <ChartViewSelector />
-      </div>
-      <div style={styles.chart_container}>
+      </Top>
+      <Main>
         <ChartView />
-      </div>
-      <div style={styles.control_container_bottom}>
+      </Main>
+      <Bottom>
         <ChartOptionSelector />
-      </div>
+      </Bottom>
     </React.Fragment>
   );
 };
