@@ -51,14 +51,19 @@ const styles: InlineStylesType = {
     paddingLeft: 0,
     paddingRight: 0,
   },
-  default_rate_text: {
-    position: "relative",
-    fontSize: "14px",
-    fontFamily: "CircularStd-Medium",
-    marginLeft: 0,
-    top: 2,
-  },
 };
+
+const DefaultRateText = styled.span`
+  position: relative;
+  font-size: 14px;
+  font-family: CircularStd-Medium;
+  margin-left: 0;
+  top: 2;
+`;
+
+const DefaultRateContainer = styled.div`
+  padding-left: 28px;
+`;
 
 const InputUtilities = () => {
   const { utilities, is_default_rates } = useAppSelector(
@@ -142,7 +147,7 @@ const InputUtilities = () => {
         </Table>
       </TableContainer>
 
-      <div style={styles.default_rate_container}>
+      <DefaultRateContainer>
         <span>
           <Checkbox
             color="secondary"
@@ -150,8 +155,8 @@ const InputUtilities = () => {
             checked={is_default_rates ? true : false}
           ></Checkbox>
         </span>
-        <span style={styles.default_rate_text}>Use Default Rates </span>
-      </div>
+        <DefaultRateText>Use Default Rates </DefaultRateText>
+      </DefaultRateContainer>
     </div>
   );
 };
