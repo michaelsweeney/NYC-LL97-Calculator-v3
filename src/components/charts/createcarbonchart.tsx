@@ -5,9 +5,20 @@ import {
   ChartViewUnitType,
   D3StackType,
 } from "types";
-import { bar_colors, threshold_line_color } from "styles/colors";
+import {
+  bar_colors,
+  threshold_line_color,
+  darkened_bar_colors,
+  lightened_bar_colors,
+} from "styles/colors";
 
-import { bindD3Element, getMaxValFromStack } from "./d3helpers";
+import { getHoverText } from "./hovertext";
+
+import {
+  bindD3Element,
+  getMaxValFromStack,
+  getHoverPosition,
+} from "./d3helpers";
 
 export const createCarbonChart = (props: {
   chart_data: CarbonChartDataTypes[];
@@ -16,9 +27,9 @@ export const createCarbonChart = (props: {
   unit_type: ChartViewUnitType;
   stack_type: ChartViewStackType;
 }) => {
-  let { chart_data, stack_data, svg_components, unit_type } = props;
+  let { chart_data, stack_data, svg_components, unit_type, stack_type } = props;
 
-  let { xScale, title_text } = svg_components;
+  let { xScale, title_text, hover_div, table_g } = svg_components;
   title_text.text("Annual Carbon Threshold Summary");
 
   let yScale = d3
@@ -38,6 +49,11 @@ export const createCarbonChart = (props: {
     .scaleOrdinal()
     .domain(chart_data[0].stack_keys)
     .range(chart_data[0].stack_keys.map((d) => bar_colors[d]));
+
+  let colorScaleHover = d3
+    .scaleOrdinal()
+    .domain(chart_data[0].stack_keys)
+    .range(chart_data[0].stack_keys.map((d) => darkened_bar_colors[d]));
 
   let yaxis = d3
     .axisLeft(yScale)
@@ -60,20 +76,107 @@ export const createCarbonChart = (props: {
     return unit_type === "absolute" ? "tons CO2e/yr" : "tons CO2e/sf/yr";
   });
 
+  function handleBarMouseover(event: any, data: any) {
+    let { year } = data.data;
+
+    /* ---- set other rect styles in year-group ---- */
+    stacked_rects.nodes().forEach((node: any) => {
+      let node_data = JSON.parse(node.getAttribute("data-object"));
+      if (year === node_data.year) {
+        //@ts-ignore
+        d3.select(node).attr("fill", (d: any) =>
+          colorScaleHover(node_data.key)
+        );
+      }
+    });
+
+    /* ---- set table styles in year-group ---- */
+    table_g
+      .selectAll(".table-column-g")
+      .nodes()
+      .forEach((el: any) => {
+        let node_year = +el.getAttribute("data-year");
+        if (year === node_year) {
+          // restyle table columns
+          d3.select(el)
+            .selectAll(".table-val-text")
+            .style("font-family", "CircularStd-Bold");
+          d3.select(el)
+            .selectAll(".period-title-text")
+            .style("font-family", "CircularStd-Black");
+        }
+      });
+
+    /* ---- set hover style and position ---- */
+    hover_div.style("visibility", "visible");
+
+    let { left_position, top_position } = getHoverPosition(event, "top");
+
+    hover_div.style("left", left_position).style("top", top_position);
+    let data_filter = chart_data.find(
+      (d) => d.year === year
+    ) as typeof chart_data[0];
+
+    hover_div.html(() =>
+      getHoverText(data_filter, unit_type, stack_type, "carbon")
+    );
+  }
+
+  function handleBarMouseout(event: any, data: any) {
+    let { year } = data.data;
+
+    /* ---- reset other rect styles in year-group ---- */
+    stacked_rects.nodes().forEach((node: any) => {
+      let node_data = JSON.parse(node.getAttribute("data-object"));
+      if (year === node_data.year) {
+        //@ts-ignore
+        d3.select(node).attr("fill", (d: any) => colorScale(node_data.key));
+      }
+    });
+
+    /* ---- reset table styles in year-group ---- */
+    table_g
+      .selectAll(".table-column-g")
+      .nodes()
+      .forEach((el: any) => {
+        let node_year = +el.getAttribute("data-year");
+        if (year === node_year) {
+          d3.select(el)
+            .selectAll(".table-val-text")
+            .style("font-family", "CircularStd-Book");
+          d3.select(el)
+            .selectAll(".period-title-text")
+            .style("font-family", "CircularStd-Bold");
+        }
+      });
+
+    /* ---- set hover style and position ---- */
+    hover_div.style("visibility", "hidden");
+  }
+
   let stacked_group_g = svg_components.bar_g
     .selectAll(".stacked-group-g")
     .data(stack_data)
     .join("g")
     .attr("class", "stacked-group-g")
-    .attr("fill", (d: any, i: number) => {
-      return colorScale(d.key);
-    });
+    .attr("fill", (d: any, i: number) => colorScale(d.key))
+    .attr("data-key", (d: any) => d.key);
 
-  stacked_group_g
+  let stacked_rects = stacked_group_g
     .selectAll(".stacked-rect")
     .data((d: any, i: number) => d)
     .join("rect")
     .attr("class", "stacked-rect")
+    .attr("data-object", function (d: any) {
+      let obj = {
+        year: d.data.year,
+        bottom: d[0],
+        top: d[1],
+        //@ts-ignore
+        key: this.parentNode.getAttribute("data-key"),
+      };
+      return JSON.stringify(obj);
+    })
     .attr("x", (d: any) => xScale(d.data.year))
     .attr("y", (d: any) => yScale(d[1]))
     .attr("height", (d: any) => {
@@ -81,7 +184,10 @@ export const createCarbonChart = (props: {
     })
     .attr("width", (d: any) => {
       return d.data.period_length * svg_components.width_per_year;
-    });
+    })
+    .style("cursor", "pointer")
+    .on("mouseover", handleBarMouseover)
+    .on("mouseout", handleBarMouseout);
 
   let threshold_line_thickness = 6;
 

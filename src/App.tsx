@@ -2,9 +2,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "App.css";
 
 import MainLayout from "components/mainlayout";
-// import InfoModal from "components/modals/infomodal";
-// import LoadModal from "components/modals/loadmodal";
-// import BuildingSummaryModal from "components/modals/buildingsummarymodal";
 import TestComponent from "components/testcomponent";
 import InputListener from "components/inputlistener";
 import PrintLayout from "components/printlayout/printlayout";
@@ -43,10 +40,7 @@ const App = () => {
       <InputListener />
       <WindowListener />
       <TestComponent />
-      {/* <InfoModal /> */}
-      {/* <LoadModal /> */}
       <TooSmallModal />
-      {/* <BuildingSummaryModal /> */}
       <div className="layout-container">
         <MainLayout />
       </div>

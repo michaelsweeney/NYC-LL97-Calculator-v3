@@ -60,6 +60,11 @@ export const setupSVGComponents = (
     .attr("x", plot_dims.x)
     .attr("y", 30);
 
+  let hover_div = bindD3Element(container_ref, "div", "hover-div").style(
+    "visibility",
+    "hidden"
+  );
+
   let plot_g = bindD3Element(svg, "g", "plot-g").attr(
     "transform",
     `translate(${plot_dims.x},${plot_dims.y})`
@@ -160,5 +165,6 @@ export const setupSVGComponents = (
     threshold_g,
     title_g,
     title_text,
+    hover_div,
   };
 };

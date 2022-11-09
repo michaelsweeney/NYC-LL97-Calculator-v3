@@ -1,6 +1,11 @@
 import * as d3 from "d3";
 import "./tablestyles.css";
-import { bindD3Element, formatCurrency, formatNumber } from "./d3helpers";
+import {
+  bindD3Element,
+  formatCurrency,
+  formatNumber,
+  getHoverPosition,
+} from "./d3helpers";
 import {
   CostChartDataTypes,
   CarbonChartDataTypes,
@@ -9,6 +14,14 @@ import {
   ChartViewUnitType,
   WindowSizeTypes,
 } from "types";
+import {
+  bar_colors,
+  darkened_bar_colors,
+  lightened_bar_colors,
+} from "styles/colors";
+
+import { getHoverText } from "./hovertext";
+
 type DataType = CostChartDataTypes | CarbonChartDataTypes;
 
 export const createTable = (props: {
@@ -19,10 +32,16 @@ export const createTable = (props: {
   view_type: ChartViewViewType;
   window_size: WindowSizeTypes;
 }) => {
-  const { svg_components, chart_data, unit_type, view_type, window_size } =
-    props;
+  const {
+    svg_components,
+    chart_data,
+    unit_type,
+    view_type,
+    window_size,
+    stack_type,
+  } = props;
 
-  const { table_g, xScale, table_dims } = svg_components;
+  const { table_g, xScale, table_dims, hover_div, plot_g } = svg_components;
 
   let dimensions = {
     row_height: 40,
@@ -33,15 +52,98 @@ export const createTable = (props: {
     idx_bottom_offset: 1,
   };
 
+  let colorScale = d3
+    .scaleOrdinal()
+    .domain(chart_data[0].stack_keys)
+    .range(chart_data[0].stack_keys.map((d) => bar_colors[d]));
+
+  let colorScaleHover = d3
+    .scaleOrdinal()
+    .domain(chart_data[0].stack_keys)
+    .range(chart_data[0].stack_keys.map((d) => darkened_bar_colors[d]));
+
   //@ts-ignore
   let data_filtered = chart_data.filter((d: DataType) => d.year !== 2022);
+
+  function handleMouseover(event: any, data: any) {
+    //@ts-ignore
+    let el = this;
+    let year = +el.getAttribute("data-year");
+
+    /* ---- set table column styles ---- */
+    d3.select(el)
+      .selectAll(".table-val-text")
+      .style("font-family", "CircularStd-Bold");
+    d3.select(el)
+      .selectAll(".period-title-text")
+      .style("font-family", "CircularStd-Black");
+
+    /* ---- set bar styles in year-group ---- */
+    plot_g
+      .selectAll(".stacked-rect")
+      .nodes()
+      .forEach((node: any) => {
+        let node_data = JSON.parse(node.getAttribute("data-object"));
+        if (+year === +node_data.year) {
+          //@ts-ignore
+          d3.select(node).attr("fill", (d: any) =>
+            colorScaleHover(node_data.key)
+          );
+        }
+      });
+
+    /* ---- set hover style and position ---- */
+    hover_div.style("visibility", "visible");
+    let { left_position, top_position } = getHoverPosition(event, "bottom");
+
+    hover_div.style("left", left_position).style("top", top_position);
+
+    let data_filter = chart_data.find(
+      (d) => d.year === +year
+    ) as typeof chart_data[0];
+
+    hover_div.html(() =>
+      getHoverText(data_filter, unit_type, stack_type, view_type)
+    );
+  }
+  function handleMouseout(event: any, data: any) {
+    //@ts-ignore
+    let el = this;
+    let year = +el.getAttribute("data-year");
+
+    /* ---- set table column styles ---- */
+    d3.select(el)
+      .selectAll(".table-val-text")
+      .style("font-family", "CircularStd-Medium");
+    d3.select(el)
+      .selectAll(".period-title-text")
+      .style("font-family", "CircularStd-Bold");
+
+    /* ---- reset bar styles in year-group ---- */
+    plot_g
+      .selectAll(".stacked-rect")
+      .nodes()
+      .forEach((node: any) => {
+        let node_data = JSON.parse(node.getAttribute("data-object"));
+        if (year === +node_data.year) {
+          //@ts-ignore
+          d3.select(node).attr("fill", (d: any) => colorScale(node_data.key));
+        }
+      });
+    /* ---- set hover style and position ---- */
+    hover_div.style("visibility", "hidden");
+  }
 
   let table_columns = table_g
     .selectAll(".table-column-g")
     .data(data_filtered)
     .join("g")
     .attr("class", "table-column-g")
-    .attr("transform", (d: DataType) => `translate(${xScale(d.year)},0)`);
+    .attr("transform", (d: DataType) => `translate(${xScale(d.year)},0)`)
+    .attr("data-year", (d: DataType) => d.year)
+    .style("cursor", "pointer")
+    .on("mouseover", handleMouseover)
+    .on("mouseout", handleMouseout);
 
   let table_index = bindD3Element(table_g, "g", "table-index-g");
   let table_borders = bindD3Element(table_g, "g", "table-borders-g");
@@ -92,27 +194,27 @@ export const createTable = (props: {
       },
     };
 
-    bindD3Element(el, "text", "period-title-text")
+    let title_text = bindD3Element(el, "text", "period-title-text")
       .text(header_text)
       .attr("x", titlexpos)
       .classed("period-title-text", true)
       .classed("period-title-text-small", window_size === "small");
 
-    bindD3Element(el, "text", "row-1-text")
+    let row_1_text = bindD3Element(el, "text", "row-1-text")
       .text(row_key_map["row_1"][view_type][unit_type])
       .attr("x", xpos)
       .attr("y", dimensions.row_height * 1 - dimensions.row_text_y_offset)
       .classed("table-val-text", true)
       .classed("table-val-text-small", window_size === "small");
 
-    bindD3Element(el, "text", "row-2-text")
+    let row_2_text = bindD3Element(el, "text", "row-2-text")
       .text(row_key_map["row_2"][view_type][unit_type])
       .attr("x", xpos)
       .attr("y", dimensions.row_height * 2 - dimensions.row_text_y_offset)
       .classed("table-val-text table-val-alert-text", true)
       .classed("table-val-text-small", window_size === "small");
 
-    bindD3Element(el, "text", "row-3-text")
+    let row_3_text = bindD3Element(el, "text", "row-3-text")
       .text(row_key_map["row_3"][view_type][unit_type])
       .attr("x", xpos)
       .attr("y", dimensions.row_height * 3 - dimensions.row_text_y_offset)
@@ -196,7 +298,7 @@ export const createTable = (props: {
     },
   };
 
-  bindD3Element(table_index, "text", "index-1-text-top")
+  let idx_1_text_top = bindD3Element(table_index, "text", "index-1-text-top")
     .attr("y", dimensions.row_height * 1 - dimensions.idx_top_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
@@ -204,7 +306,7 @@ export const createTable = (props: {
     .classed("idx-top-text", true)
     .classed("idx-top-text-small", window_size === "small");
 
-  bindD3Element(table_index, "text", "index-2-text-top")
+  let idx_2_text_top = bindD3Element(table_index, "text", "index-2-text-top")
     .attr("y", dimensions.row_height * 2 - dimensions.idx_top_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
@@ -212,7 +314,7 @@ export const createTable = (props: {
     .classed("idx-top-text idx-alert-text", true)
     .classed("idx-top-text-small", window_size === "small");
 
-  bindD3Element(table_index, "text", "index-3-text-top")
+  let idx_3_text_top = bindD3Element(table_index, "text", "index-3-text-top")
     .attr("y", dimensions.row_height * 3 - dimensions.idx_top_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
@@ -220,7 +322,11 @@ export const createTable = (props: {
     .classed("idx-top-text", true)
     .classed("idx-top-text-small", window_size === "small");
 
-  bindD3Element(table_index, "text", "index-1-text-bottom")
+  let idx_1_text_bottom = bindD3Element(
+    table_index,
+    "text",
+    "index-1-text-bottom"
+  )
     .attr("y", dimensions.row_height * 1 + dimensions.idx_bottom_offset)
     .attr("x", dimensions.index_position)
 
@@ -229,7 +335,11 @@ export const createTable = (props: {
     .classed("idx-bottom-text", true)
     .classed("idx-bottom-text-small", window_size === "small");
 
-  bindD3Element(table_index, "text", "index-2-text-bottom")
+  let idx_2_text_bottom = bindD3Element(
+    table_index,
+    "text",
+    "index-2-text-bottom"
+  )
     .attr("y", dimensions.row_height * 2 + dimensions.idx_bottom_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
@@ -237,7 +347,11 @@ export const createTable = (props: {
     .classed("idx-bottom-text idx-alert-text", true)
     .classed("idx-bottom-text-small", window_size === "small");
 
-  bindD3Element(table_index, "text", "index-3-text-bottom")
+  let idx_3_text_bottom = bindD3Element(
+    table_index,
+    "text",
+    "index-3-text-bottom"
+  )
     .attr("y", dimensions.row_height * 3 + dimensions.idx_bottom_offset)
     .attr("x", dimensions.index_position)
     //@ts-ignore
@@ -248,14 +362,18 @@ export const createTable = (props: {
   /* ------------------------------------ */
   /* ---- BORDERS & HORIZONTAL LINES ---- */
   /* ------------------------------------ */
-  bindD3Element(table_borders, "line", "border-top-line")
+  let border_top_line = bindD3Element(table_borders, "line", "border-top-line")
     .attr("x1", 0)
     .attr("x2", table_dims.width)
     .attr("y1", dimensions.border_y_offset)
     .attr("y2", dimensions.border_y_offset)
     .classed("border-top", true);
 
-  bindD3Element(table_borders, "line", "border-bottom-line")
+  let border_bottom_line = bindD3Element(
+    table_borders,
+    "line",
+    "border-bottom-line"
+  )
     .attr("x1", 0)
     .attr("x2", table_dims.width)
     .attr(
@@ -272,7 +390,11 @@ export const createTable = (props: {
     )
     .classed("border-bottom", true);
 
-  bindD3Element(table_borders, "line", "border-mid-line-one")
+  let border_mid_line_one = bindD3Element(
+    table_borders,
+    "line",
+    "border-mid-line-one"
+  )
     .attr("x1", 0)
     .attr("x2", table_dims.width)
     .attr(
@@ -289,7 +411,11 @@ export const createTable = (props: {
     )
     .classed("border-mid", true);
 
-  bindD3Element(table_borders, "line", "border-mid-line-two")
+  let border_mid_line_two = bindD3Element(
+    table_borders,
+    "line",
+    "border-mid-line-two"
+  )
     .attr("x1", 0)
     .attr("x2", table_dims.width)
     .attr(

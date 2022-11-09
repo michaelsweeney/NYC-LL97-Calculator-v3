@@ -1,3 +1,4 @@
+import * as d3 from "d3";
 type ColorGroupTypes = {
   [key: string]: string;
 };
@@ -54,7 +55,7 @@ export const colors: ColorTypes = {
   },
 };
 
-export const bar_colors = {
+export const bar_colors: { [key: string]: string } = {
   elec: "#358FB4",
   gas: "#6EB12C",
   steam: "#B23232",
@@ -67,6 +68,18 @@ export const bar_colors = {
   total_carbon: colors.primary.main,
   total_cost: colors.primary.main,
 };
+
+const lightened_bar_colors: { [key: string]: string } = {};
+const darkened_bar_colors: { [key: string]: string } = {};
+
+Object.keys(bar_colors).forEach((key) => {
+  let val = bar_colors[key];
+  lightened_bar_colors[key] = d3.color(val)?.brighter().toString() as string;
+  darkened_bar_colors[key] = d3.color(val)?.darker().toString() as string;
+});
+
+export { lightened_bar_colors };
+export { darkened_bar_colors };
 
 export const threshold_line_color = "#FF5C00";
 

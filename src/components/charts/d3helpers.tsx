@@ -42,3 +42,30 @@ export const getMaxValFromStack = (data: any) => {
   });
   return max_val;
 };
+
+export const getHoverPosition = (
+  event: any,
+  anchor: "top" | "bottom" = "top"
+) => {
+  let { clientX, clientY } = event;
+
+  let approx_width = 250;
+  let approx_sidebar_width = 350;
+
+  let screen_fraction_x =
+    (clientX - approx_sidebar_width) /
+    (window.innerWidth - approx_sidebar_width);
+
+  let left = clientX - approx_width * screen_fraction_x;
+
+  let y_offset = anchor === "top" ? -200 : 100;
+  let top = clientY + y_offset;
+
+  let left_position = left + "px";
+  let top_position = top + "px";
+
+  return {
+    left_position,
+    top_position,
+  };
+};

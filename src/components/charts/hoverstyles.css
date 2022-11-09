@@ -1,0 +1,26 @@
+
+
+.hover-div {
+    transition: left 250ms, right 250ms;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 10px;
+    position: absolute;
+    background-color: #878787;
+}
+
+.hover-td-label {
+    color: white;
+    font-size: 12px;
+}
+.hover-td-value {
+    color: white;
+    font-size: 12px;
+}
+
+.hover-title {
+    color: white;
+    font-family: CircularStd-Bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}

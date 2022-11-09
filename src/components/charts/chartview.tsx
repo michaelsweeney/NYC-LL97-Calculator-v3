@@ -10,6 +10,7 @@ import { createCostChart } from "./createcostchart";
 import { createLegend } from "./createlegend";
 import { createTable } from "./createtable";
 
+import "./hoverstyles.css";
 import {
   ChartViewViewType,
   ChartViewUnitType,
@@ -79,9 +80,13 @@ const ChartView = (props: ChartViewPropTypes) => {
       let { width_per_year } = svg_components;
 
       let { is_input_info_missing } = building_outputs;
-      if (width_per_year < 0 || is_input_info_missing) {
+      if (
+        width_per_year < 0 ||
+        is_input_info_missing ||
+        (container_dimensions.width === 50 &&
+          container_dimensions.height === 50)
+      ) {
         return;
-      } else {
       }
 
       if (view_type === "cost") {
