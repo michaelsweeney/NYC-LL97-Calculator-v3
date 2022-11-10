@@ -8,7 +8,7 @@ import {
 } from "types";
 
 const initialState: UiSliceTypes = {
-  is_dev_mode: false,
+  is_dev_mode: true,
   is_print_mode: false,
   current_view: "calc_info_dialogue",
   window_dimensions: {
@@ -20,7 +20,7 @@ const initialState: UiSliceTypes = {
   chart_view: {
     view_type: "carbon",
     unit_type: "absolute",
-    stack_type: "summary",
+    stack_type: "enduse",
   },
 };
 

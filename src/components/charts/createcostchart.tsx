@@ -5,13 +5,14 @@ import {
   ChartViewStackType,
   D3StackType,
 } from "types";
-import { getMaxValFromStack, getHoverPosition } from "./d3helpers";
+import { getMaxValFromStack } from "./d3helpers";
+import { bar_colors, darkened_bar_colors } from "styles/colors";
+
 import {
-  bar_colors,
-  lightened_bar_colors,
-  darkened_bar_colors,
-} from "styles/colors";
-import { getHoverText } from "./hovertext";
+  handleBarMouseout,
+  handleBarMouseover,
+  handleMouseMove,
+} from "./hovercallbacks";
 
 export const createCostChart = (props: {
   chart_data: CostChartDataTypes[];
@@ -62,81 +63,6 @@ export const createCostChart = (props: {
     return unit_type === "absolute" ? "$/yr" : "$/sf/yr";
   });
 
-  function handleBarMouseover(event: any, data: any) {
-    let { year } = data.data;
-
-    /* ---- set other rect styles in year-group ---- */
-    stacked_rects.nodes().forEach((node: any) => {
-      let node_data = JSON.parse(node.getAttribute("data-object"));
-      if (year === node_data.year) {
-        //@ts-ignore
-        d3.select(node).attr("fill", (d: any) =>
-          colorScaleHover(node_data.key)
-        );
-      }
-    });
-
-    /* ---- set table styles in year-group ---- */
-    table_g
-      .selectAll(".table-column-g")
-      .nodes()
-      .forEach((el: any) => {
-        let node_year = +el.getAttribute("data-year");
-        if (year === node_year) {
-          d3.select(el)
-            .selectAll(".table-val-text")
-            .style("font-family", "CircularStd-Bold");
-          d3.select(el)
-            .selectAll(".period-title-text")
-            .style("font-family", "CircularStd-Black");
-        }
-      });
-    /* ---- set hover style and position ---- */
-    hover_div.style("visibility", "visible");
-
-    let { left_position, top_position } = getHoverPosition(event, "top");
-
-    hover_div.style("left", left_position).style("top", top_position);
-    let data_filter = chart_data.find(
-      (d) => d.year === year
-    ) as typeof chart_data[0];
-
-    getHoverText(data_filter, unit_type, stack_type, "cost");
-  }
-
-  function handleBarMouseout(event: any, data: any) {
-    let { year } = data.data;
-
-    /* ---- reset other rect styles in year-group ---- */
-    stacked_rects.nodes().forEach((node: any) => {
-      let node_data = JSON.parse(node.getAttribute("data-object"));
-      if (year === node_data.year) {
-        //@ts-ignore
-        d3.select(node).attr("fill", (d: any) => colorScale(node_data.key));
-      }
-    });
-
-    /* ---- reset table styles in year-group ---- */
-    table_g
-      .selectAll(".table-column-g")
-      .nodes()
-      .forEach((el: any) => {
-        let node_year = +el.getAttribute("data-year");
-        if (year === node_year) {
-          // style table columns
-          d3.select(el)
-            .selectAll(".table-val-text")
-            .style("font-family", "CircularStd-Medium");
-          d3.select(el)
-            .selectAll(".period-title-text")
-            .style("font-family", "CircularStd-Bold");
-        }
-      });
-
-    /* ---- set hover style and position ---- */
-    hover_div.style("visibility", "hidden");
-  }
-
   let stacked_group_g = svg_components.bar_g
     .selectAll(".stacked-group-g")
     .data(stack_data)
@@ -169,8 +95,26 @@ export const createCostChart = (props: {
       return d.data.period_length * svg_components.width_per_year;
     })
     .style("cursor", "pointer")
-    .on("mouseover", handleBarMouseover)
-    .on("mouseout", handleBarMouseout);
+    .on("mouseover", (event: any, data: any) => {
+      handleBarMouseover(
+        event,
+        data,
+        stacked_rects,
+        table_g,
+        hover_div,
+        colorScaleHover,
+        chart_data,
+        unit_type,
+        stack_type,
+        "cost"
+      );
+    })
+    .on("mouseout", (event: any, data: any) => {
+      handleBarMouseout(data, stacked_rects, table_g, hover_div, colorScale);
+    })
+    .on("mousemove", function (event: any) {
+      // handleMouseMove(event, hover_div, "top");
+    });
 
   svg_components.threshold_g.remove();
 };

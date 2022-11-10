@@ -9,16 +9,14 @@ import {
   bar_colors,
   threshold_line_color,
   darkened_bar_colors,
-  lightened_bar_colors,
 } from "styles/colors";
 
-import { getHoverText } from "./hovertext";
-
 import {
-  bindD3Element,
-  getMaxValFromStack,
-  getHoverPosition,
-} from "./d3helpers";
+  handleBarMouseout,
+  handleBarMouseover,
+  handleMouseMove,
+} from "./hovercallbacks";
+import { bindD3Element, getMaxValFromStack } from "./d3helpers";
 
 export const createCarbonChart = (props: {
   chart_data: CarbonChartDataTypes[];
@@ -76,84 +74,6 @@ export const createCarbonChart = (props: {
     return unit_type === "absolute" ? "tons CO2e/yr" : "tons CO2e/sf/yr";
   });
 
-  function handleBarMouseover(event: any, data: any) {
-    let { year } = data.data;
-
-    /* ---- set other rect styles in year-group ---- */
-    stacked_rects.nodes().forEach((node: any) => {
-      let node_data = JSON.parse(node.getAttribute("data-object"));
-      if (year === node_data.year) {
-        //@ts-ignore
-        d3.select(node).attr("fill", (d: any) =>
-          colorScaleHover(node_data.key)
-        );
-      }
-    });
-
-    /* ---- set table styles in year-group ---- */
-    table_g
-      .selectAll(".table-column-g")
-      .nodes()
-      .forEach((el: any) => {
-        let node_year = +el.getAttribute("data-year");
-        if (year === node_year) {
-          // restyle table columns
-          d3.select(el)
-            .selectAll(".table-val-text")
-            .style("font-family", "CircularStd-Bold");
-          d3.select(el)
-            .selectAll(".period-title-text")
-            .style("font-family", "CircularStd-Black");
-        }
-      });
-
-    /* ---- set hover style and position ---- */
-    hover_div.style("visibility", "visible");
-
-    let { left_position, top_position } = getHoverPosition(event, "top");
-
-    hover_div.style("left", left_position).style("top", top_position);
-    let data_filter = chart_data.find(
-      (d) => d.year === year
-    ) as typeof chart_data[0];
-
-    hover_div.html(() =>
-      getHoverText(data_filter, unit_type, stack_type, "carbon")
-    );
-  }
-
-  function handleBarMouseout(event: any, data: any) {
-    let { year } = data.data;
-
-    /* ---- reset other rect styles in year-group ---- */
-    stacked_rects.nodes().forEach((node: any) => {
-      let node_data = JSON.parse(node.getAttribute("data-object"));
-      if (year === node_data.year) {
-        //@ts-ignore
-        d3.select(node).attr("fill", (d: any) => colorScale(node_data.key));
-      }
-    });
-
-    /* ---- reset table styles in year-group ---- */
-    table_g
-      .selectAll(".table-column-g")
-      .nodes()
-      .forEach((el: any) => {
-        let node_year = +el.getAttribute("data-year");
-        if (year === node_year) {
-          d3.select(el)
-            .selectAll(".table-val-text")
-            .style("font-family", "CircularStd-Book");
-          d3.select(el)
-            .selectAll(".period-title-text")
-            .style("font-family", "CircularStd-Bold");
-        }
-      });
-
-    /* ---- set hover style and position ---- */
-    hover_div.style("visibility", "hidden");
-  }
-
   let stacked_group_g = svg_components.bar_g
     .selectAll(".stacked-group-g")
     .data(stack_data)
@@ -186,8 +106,26 @@ export const createCarbonChart = (props: {
       return d.data.period_length * svg_components.width_per_year;
     })
     .style("cursor", "pointer")
-    .on("mouseover", handleBarMouseover)
-    .on("mouseout", handleBarMouseout);
+    .on("mouseover", function (event: any, data: any) {
+      handleBarMouseover(
+        event,
+        data,
+        stacked_rects,
+        table_g,
+        hover_div,
+        colorScaleHover,
+        chart_data,
+        unit_type,
+        stack_type,
+        "carbon"
+      );
+    })
+    .on("mouseout", function (event: any, data: any) {
+      handleBarMouseout(data, stacked_rects, table_g, hover_div, colorScale);
+    })
+    .on("mousemove", function (event: any) {
+      // handleMouseMove(event, hover_div, "top");
+    });
 
   let threshold_line_thickness = 6;
 

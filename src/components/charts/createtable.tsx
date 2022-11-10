@@ -14,13 +14,12 @@ import {
   ChartViewUnitType,
   WindowSizeTypes,
 } from "types";
-import {
-  bar_colors,
-  darkened_bar_colors,
-  lightened_bar_colors,
-} from "styles/colors";
+import { bar_colors, darkened_bar_colors } from "styles/colors";
 
 import { getHoverText } from "./hovertext";
+
+import { handleTableMouseout, handleTableMouseover } from "./hovercallbacks";
+import { type } from "os";
 
 type DataType = CostChartDataTypes | CarbonChartDataTypes;
 
@@ -65,75 +64,6 @@ export const createTable = (props: {
   //@ts-ignore
   let data_filtered = chart_data.filter((d: DataType) => d.year !== 2022);
 
-  function handleMouseover(event: any, data: any) {
-    //@ts-ignore
-    let el = this;
-    let year = +el.getAttribute("data-year");
-
-    /* ---- set table column styles ---- */
-    d3.select(el)
-      .selectAll(".table-val-text")
-      .style("font-family", "CircularStd-Bold");
-    d3.select(el)
-      .selectAll(".period-title-text")
-      .style("font-family", "CircularStd-Black");
-
-    /* ---- set bar styles in year-group ---- */
-    plot_g
-      .selectAll(".stacked-rect")
-      .nodes()
-      .forEach((node: any) => {
-        let node_data = JSON.parse(node.getAttribute("data-object"));
-        if (+year === +node_data.year) {
-          //@ts-ignore
-          d3.select(node).attr("fill", (d: any) =>
-            colorScaleHover(node_data.key)
-          );
-        }
-      });
-
-    /* ---- set hover style and position ---- */
-    hover_div.style("visibility", "visible");
-    let { left_position, top_position } = getHoverPosition(event, "bottom");
-
-    hover_div.style("left", left_position).style("top", top_position);
-
-    let data_filter = chart_data.find(
-      (d) => d.year === +year
-    ) as typeof chart_data[0];
-
-    hover_div.html(() =>
-      getHoverText(data_filter, unit_type, stack_type, view_type)
-    );
-  }
-  function handleMouseout(event: any, data: any) {
-    //@ts-ignore
-    let el = this;
-    let year = +el.getAttribute("data-year");
-
-    /* ---- set table column styles ---- */
-    d3.select(el)
-      .selectAll(".table-val-text")
-      .style("font-family", "CircularStd-Medium");
-    d3.select(el)
-      .selectAll(".period-title-text")
-      .style("font-family", "CircularStd-Bold");
-
-    /* ---- reset bar styles in year-group ---- */
-    plot_g
-      .selectAll(".stacked-rect")
-      .nodes()
-      .forEach((node: any) => {
-        let node_data = JSON.parse(node.getAttribute("data-object"));
-        if (year === +node_data.year) {
-          //@ts-ignore
-          d3.select(node).attr("fill", (d: any) => colorScale(node_data.key));
-        }
-      });
-    /* ---- set hover style and position ---- */
-    hover_div.style("visibility", "hidden");
-  }
-
   let table_columns = table_g
     .selectAll(".table-column-g")
     .data(data_filtered)
@@ -142,8 +72,26 @@ export const createTable = (props: {
     .attr("transform", (d: DataType) => `translate(${xScale(d.year)},0)`)
     .attr("data-year", (d: DataType) => d.year)
     .style("cursor", "pointer")
-    .on("mouseover", handleMouseover)
-    .on("mouseout", handleMouseout);
+    .on("mouseover", function (event: any, data: any) {
+      //@ts-ignore
+      let el = this;
+      handleTableMouseover(
+        el,
+        event,
+        plot_g,
+        colorScaleHover,
+        hover_div,
+        chart_data,
+        unit_type,
+        stack_type,
+        view_type
+      );
+    })
+    .on("mouseout", function (event: any, data: any) {
+      //@ts-ignore
+      let el = this;
+      handleTableMouseout(el, plot_g, hover_div, colorScale);
+    });
 
   let table_index = bindD3Element(table_g, "g", "table-index-g");
   let table_borders = bindD3Element(table_g, "g", "table-borders-g");
