@@ -18,6 +18,7 @@ const List = styled.div`
 `;
 const Warning = styled.div`
   color: red;
+  margin-top: 10px;
   margin-bottom: 10px;
 `;
 const Intro = styled.div`
