@@ -8,9 +8,8 @@ const Root = styled.div`
 const NoFineDialog = () => {
   return (
     <Root>
-      <SubHeaderLined>Building Not Regulated</SubHeaderLined>
-      <div>Based on your inputs, your building is less than 25,000 SF.</div>
-      <div>Local Law 97 applies to the following buildings</div>
+      <SubHeaderLined>Building Not Regulated (under 25,000 SF)</SubHeaderLined>
+      <div> Local Law 97 applies to the following buildings: </div>
       <ul>
         <li>Buildings over 25,000 gross square feet</li>
         <li>
@@ -20,6 +19,8 @@ const NoFineDialog = () => {
         <li>
           Two or more buildings owned by a condo association that are governed
           by the same board of managers and that exceed 50,000 gross square feet
+          Visit the NYC Department of Buildings website for additional guidance
+          on covered buildings.
         </li>
       </ul>
     </Root>

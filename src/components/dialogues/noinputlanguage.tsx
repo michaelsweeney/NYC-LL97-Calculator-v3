@@ -10,10 +10,11 @@ const NoInputDialogue = () => {
   return (
     <Root>
       <SubHeaderLined>Enter or Load Building Information</SubHeaderLined>
-      Building and/or Utility Inputs have not been completed. Enter information
-      manually using the panel on the left or clicking "find your building", or
-      search for your building with the "Search LL84 Database" option on the
-      upper-right menu.
+      <p>
+        Building and/or Utility Inputs have not been completed. Click “find your
+        building,” use the “Search LL84 Database” option on the upper-right
+        menu, or enter information manually using the panel on the left.
+      </p>
     </Root>
   );
 };

@@ -74,10 +74,10 @@ const MainLayout = () => {
   const { current_view } = useAppSelector((state) => state.ui);
 
   const ChartViewComponent = () => {
-    return !is_greater_than_25k_sf ? (
-      <NoFineLanguage />
-    ) : is_input_info_missing ? (
+    return is_input_info_missing ? (
       <NoInputLanguage />
+    ) : !is_greater_than_25k_sf ? (
+      <NoFineLanguage />
     ) : (
       <ChartViewContainer />
     );

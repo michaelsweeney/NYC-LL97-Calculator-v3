@@ -6,12 +6,11 @@ import DialogueContainer from "./dialoguecontainer";
 
 import NoFineLanguage from "./nofinelanguage";
 import NoInputLanguage from "./noinputlanguage";
+import { NotesAndClarifications } from "components/printlayout/notesandclarifications";
 
 const CalcInfoDialogue = () => {
   const dispatch = useAppDispatch();
-  const { is_greater_than_25k_sf, is_input_info_missing } = useAppSelector(
-    (state) => state.building_outputs
-  );
+
   const handleCloseDialogue = () => {
     dispatch(uiActions.setCurrentView("chart_view"));
   };
@@ -24,7 +23,7 @@ const CalcInfoDialogue = () => {
       <div>
         <div>
           <p>
-            This calculator estimates a building's carbon penalty as a result of{" "}
+            This calculator estimates a building’s carbon penalty as a result of{" "}
             <a
               href="https://be-exchange.org/insight/the-climate-mobilization-act-int-1253/"
               target="_blank"
@@ -32,10 +31,9 @@ const CalcInfoDialogue = () => {
             >
               NYC LL97
             </a>
-            . Input annual utility information and building characteristics to
-            generate emissions thresholds and resulting estimated penalties for
-            three major penalty periods (2024-2029, 2030-2034, and 2035 and
-            later).
+            . Search for your building to load benchmarking data, or manually
+            input information, to generate emissions thresholds and estimated
+            penalties for each compliance period.
           </p>
           <p>
             This calculator is one tool in a
@@ -47,10 +45,9 @@ const CalcInfoDialogue = () => {
               {" "}
               suite of resources{" "}
             </a>
-            developed by the Building Energy Exchange in partnership with the
-            NYC Accelerator to help demystify the Climate Mobilization Act and
-            connect our community to solutions. The calculator engine was
-            developed by AKF Group LLC.
+            developed by Building Energy Exchange to demystify the Climate
+            Mobilization Act and connect our community to solutions. The
+            calculator engine was developed by AKF Group LLC.
           </p>
           <p>
             This application is optimized for Google Chrome. If experiencing
@@ -61,18 +58,14 @@ const CalcInfoDialogue = () => {
 
       <div>
         <SubHeaderLined> Instructions</SubHeaderLined>
-
         <div>
-          Users can either load building data or enter manually, following the
-          steps below.
+          To load building utility data, click “find your building,” or enter
+          manually following the steps below.
         </div>
-
         <ul>
           <li>
-            Select occupancy type(s) and input area(s). Occupancy types
-            correspond to occupancy classes found in the NYC Building Code. To
-            add more than one occupancy type use the "Add Occupancy Type"
-            button.
+            Select occupancy type(s) and input area(s). To add more than one
+            occupancy type use the "Add Occupancy Type" button.
           </li>
           <li>
             Enter your annual consumption per fuel source for the entire
@@ -84,40 +77,10 @@ const CalcInfoDialogue = () => {
             DEFAULT RATES" to pre-populate the form with NYC average rates for
             typical commercial buildings.
           </li>
-          <li>
-            If the above data are unavailable, click the “LOAD” button and
-            search for your building to populate the calculator with publicly
-            available data found in NYC’s LL84 Benchmarking Database.
-          </li>
         </ul>
       </div>
       <div>
-        <SubHeaderLined>Notes and Clarifications</SubHeaderLined>
-        <ul>
-          <li>
-            This calculator is based on interpretation of NYC Local Law 97 –
-            2019 and provides only an approximation of the impact of the carbon
-            emissions limits. As actual results will vary the tool should not be
-            relied on as specific legal or risk mitigation guidance.
-          </li>
-          <li>
-            Emission limits for the years 2035 thru 2050 are not yet determined
-            for each individual occupancy group. The tool estimates a penalty
-            for those years based on the average value for all covered buildings
-            identified in the law.
-          </li>
-          <li>
-            City agency rulemaking and enforcement practices may significantly
-            impact the application of LL97 to individual buildings.
-          </li>
-
-          <li>
-            LL97 provides a number of possible adjustments to the annual
-            building emissions limit, including appeal based on special
-            circumstances and critical building uses. These are not accounted
-            for in the calculator.
-          </li>
-        </ul>
+        <NotesAndClarifications />
       </div>
     </DialogueContainer>
   );

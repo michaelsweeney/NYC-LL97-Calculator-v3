@@ -85,14 +85,13 @@ const LoadBuildingDialogue = () => {
     >
       <div>
         <p>
-          This form allows for querying NYC's "Energy and Water Data Disclosure"
-          database for multiple years. The form loads and translates building
-          utility information, either using the property's BBL number, address,
-          or property name (searches are case sensitive). Data loaded using this
-          form should be verified with building utility consumption and gross
-          square footage.
+          This form queries NYC’s “Energy and Water Data Disclosure” database to
+          load building characteristics and utility information.
         </p>
-        <p>Input BBL ID Number, Property Name, or Address (case sensitive)</p>
+        <p>
+          To find your building, select reporting year, then input BBL ID
+          number, property name, or address (case sensitive).
+        </p>
 
         <SearchContainer>
           <ControlWrapper>
