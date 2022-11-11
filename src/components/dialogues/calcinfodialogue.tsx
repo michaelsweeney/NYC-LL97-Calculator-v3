@@ -42,8 +42,8 @@ const CalcInfoDialogue = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              suite of resources{" "}
-            </a>
+              suite of resources
+            </a>{" "}
             developed by Building Energy Exchange to demystify the Climate
             Mobilization Act and connect our community to solutions. The
             calculator engine was developed by AKF Group LLC.
