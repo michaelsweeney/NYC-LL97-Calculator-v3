@@ -36,13 +36,12 @@ const CalcInfoDialogue = () => {
             penalties for each compliance period.
           </p>
           <p>
-            This calculator is one tool in a
+            This calculator is one tool in a{" "}
             <a
               href="https://be-exchange.org/climate-mobilization-act-series/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
               suite of resources{" "}
             </a>
             developed by Building Energy Exchange to demystify the Climate

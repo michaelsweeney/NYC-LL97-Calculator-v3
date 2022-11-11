@@ -18,9 +18,19 @@ const NoFineDialog = () => {
         </li>
         <li>
           Two or more buildings owned by a condo association that are governed
-          by the same board of managers and that exceed 50,000 gross square feet
-          Visit the NYC Department of Buildings website for additional guidance
-          on covered buildings.
+          by the same board of managers and that exceed 50,000 gross square
+          feet.
+        </li>
+        <li>
+          Visit the{" "}
+          <a
+            href="https://www.nyc.gov/site/buildings/codes/sustainability.page"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            NYC Department of Buildings website
+          </a>{" "}
+          for additional guidance on covered buildings.
         </li>
       </ul>
     </Root>

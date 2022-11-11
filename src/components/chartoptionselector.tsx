@@ -81,7 +81,7 @@ const ChartOptionSelector = () => {
         />
         <ChartToggleButton
           size="small"
-          label="enduses"
+          label="end uses"
           view_key="enduse"
           is_active={stack_type === "enduse"}
           callback={changeStackCallback}
