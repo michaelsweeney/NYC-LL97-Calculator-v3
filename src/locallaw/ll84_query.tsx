@@ -6,6 +6,7 @@ import {
   ColumnNameMapType,
   LL84YearTypes,
 } from "types";
+import React from "react";
 
 const sanitizeLL84QueryResultsObject = (
   pobj: StringObjectType,
@@ -75,11 +76,15 @@ const sanitizeLL84QueryResultsObject = (
 const handleLL84QueryResponse = (
   val: string,
   year: LL84YearTypes,
-  callback: (e: LL84QueryPropertyTypes[]) => void
+  callback: (e: LL84QueryPropertyTypes[]) => void,
+  isLoadingCallback: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (val === "") {
+    isLoadingCallback(false);
     return;
   }
+
+  isLoadingCallback(true);
 
   let ll84_year_obj = ll84_year_lookups.find(
     (e) => e.key === year
@@ -108,6 +113,8 @@ const handleLL84QueryResponse = (
     let res = xmlhttp.response;
 
     if (res === "") {
+      isLoadingCallback(false);
+
       callback([]);
     } else {
       let parsed: StringObjectType[];
@@ -129,6 +136,7 @@ const handleLL84QueryResponse = (
       });
 
       callback(sanitized_array);
+      isLoadingCallback(false);
     }
   };
   xmlhttp.send();

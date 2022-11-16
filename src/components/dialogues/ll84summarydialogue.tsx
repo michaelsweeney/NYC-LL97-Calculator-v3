@@ -6,6 +6,13 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { formatNumber } from "components/charts/d3helpers";
 import styled from "styled-components";
+import { ButtonSecondary } from "styles/components";
+
+const CloseButton = styled(ButtonSecondary)`
+  margin-top: 20px;
+  margin-left: 0px;
+  border-radius: 0;
+`;
 
 const End = styled.div`
   font-family: CircularStd-Medium;
@@ -150,6 +157,12 @@ const BuildingSummaryDialogue = () => {
           areas and utility consumption in the "Building Inputs" section of the
           calculator.
         </End>
+      </div>
+
+      <div>
+        <CloseButton color="secondary" variant="outlined">
+          Close
+        </CloseButton>
       </div>
     </DialogueContainer>
   );

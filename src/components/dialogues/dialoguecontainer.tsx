@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "styles/colors";
 import { ReturnIconButton } from "components/iconbuttons";
 import React from "react";
+import { useEffect } from "react";
 const Content = styled.div`
   height: calc(100% - 50px);
   padding-left: 25px;
@@ -57,6 +58,20 @@ const DialogueContainer = (props: DialogueContainerPropTypes) => {
   const handleClick = (d: React.MouseEvent<HTMLButtonElement>) => {
     props.closeCallback();
   };
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        props.closeCallback();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape, false);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape, false);
+    };
+  });
 
   return (
     <MainContainer>

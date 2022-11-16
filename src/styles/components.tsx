@@ -13,16 +13,6 @@ export const StyledInput = styled(Input)`
   }
 `;
 
-export const ButtonPrimary = styled(Button)<{}>`
-  font-family: CircularStd-Bold;
-  box-shadow: 0;
-  color: ${(props) =>
-    props.variant === "outlined" ? colors.primary.main : colors.whites.medium};
-  &:hover {
-    box-shadow: 0;
-  }
-`;
-
 export const ButtonSecondary = styled(Button)<{}>`
   font-family: CircularStd-Bold;
   &:hover {

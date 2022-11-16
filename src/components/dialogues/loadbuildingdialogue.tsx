@@ -2,13 +2,18 @@ import styled from "styled-components";
 
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-import { TextField, MenuItem, TextFieldProps } from "@mui/material";
+import {
+  TextField,
+  MenuItem,
+  TextFieldProps,
+  CircularProgress,
+} from "@mui/material";
 import DialogueContainer from "./dialoguecontainer";
 import LoadModalResults from "./ll84resultstable";
 import { SubHeaderLined } from "styles/typography";
 import { uiActions } from "store/uislice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { useEffect, ChangeEvent, useRef } from "react";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
 import { ll84QueryActions } from "store/ll84queryslice";
 import { ll84_year_lookups } from "locallaw/lookups";
 import { handleLL84QueryResponse } from "locallaw/ll84_query";
@@ -24,8 +29,10 @@ const SearchContainer = styled.div`
 
 const ControlWrapper = styled.div`
   margin-bottom: 15px;
+  height: 80px;
 `;
 const SelectWrapper = styled(Select)`
+  vertical-align: top;
   background-color: white;
   border-radius: 0px;
 `;
@@ -33,15 +40,25 @@ const SelectWrapper = styled(Select)`
 const InputWrapper = styled(TextField)`
   background-color: white;
   margin-left: 10px;
+
   & fieldset {
     border-radius: 0px;
   }
+`;
+
+const LoadingProgressWrapper = styled.div`
+  display: inline-block;
+  position: relative;
+  top: 7.5px;
+  left: 15px;
 `;
 
 const LoadBuildingDialogue = () => {
   const { ll84_query_input, ll84_year_selection } = useAppSelector(
     (state) => state.ll84_query
   );
+  const [queryLoading, setQueryLoading] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const handleCloseDialogue = () => {
@@ -74,7 +91,8 @@ const LoadBuildingDialogue = () => {
     handleLL84QueryResponse(
       ll84_query_input,
       ll84_year_selection,
-      ll84QueryResponseCallback
+      ll84QueryResponseCallback,
+      setQueryLoading
     );
   }, [ll84_query_input, ll84_year_selection, dispatch]);
 
@@ -115,6 +133,9 @@ const LoadBuildingDialogue = () => {
               onChange={handleSearchChange}
               value={ll84_query_input}
             />
+            <LoadingProgressWrapper>
+              {queryLoading ? <CircularProgress color="secondary" /> : ""}
+            </LoadingProgressWrapper>
           </ControlWrapper>
 
           <div>

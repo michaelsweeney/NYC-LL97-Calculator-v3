@@ -7,6 +7,19 @@ import DialogueContainer from "./dialoguecontainer";
 import NoFineLanguage from "./nofinelanguage";
 import NoInputLanguage from "./noinputlanguage";
 import { NotesAndClarifications } from "components/printlayout/notesandclarifications";
+import { ButtonSecondary } from "styles/components";
+
+import styled from "styled-components";
+
+const Footer = styled.div`
+  width: 100%;
+  /* text-align: center; */
+`;
+const CloseButton = styled(ButtonSecondary)`
+  margin-top: 15px;
+  margin-left: 0px;
+  border-radius: 0;
+`;
 
 const CalcInfoDialogue = () => {
   const dispatch = useAppDispatch();
@@ -81,6 +94,15 @@ const CalcInfoDialogue = () => {
       <div>
         <NotesAndClarifications />
       </div>
+      <Footer>
+        <CloseButton
+          onClick={handleCloseDialogue}
+          color="secondary"
+          variant="outlined"
+        >
+          close
+        </CloseButton>
+      </Footer>
     </DialogueContainer>
   );
 };
