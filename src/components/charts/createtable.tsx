@@ -123,13 +123,11 @@ export const createTable = (props: {
           absolute: formatNumber(d.threshold_carbon as number, 0),
           normalized: formatNumber(d.threshold_carbon as number, 4),
         },
-
         cost: {
           absolute: formatCurrency(d.fine, 0),
           normalized: formatCurrency(d.fine, 2),
         },
       },
-
       row_3: {
         carbon: {
           absolute: formatCurrency(d.fine as number, 0),

@@ -32,11 +32,10 @@
   },
   "scripts": {
     "start": "serve -s build",
-    "dev": "react-scripts start",
+    "dev": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "qq": "git add --all && git commit -m heroku-generic-push && git push && git push heroku main"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -45,7 +44,7 @@
     ]
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "browserslist": {
     "production": [
