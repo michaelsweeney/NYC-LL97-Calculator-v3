@@ -1,18 +1,13 @@
 import { fuel_keys_to_labels } from "locallaw/lookups";
 
 import * as d3 from "d3";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-} from "@mui/material";
+import { Table, TableBody, TableContainer } from "@mui/material";
 import { SubHeaderLined } from "styles/typography";
 
 import { useAppSelector } from "store/hooks";
 import { formatNumber, formatCurrency } from "components/charts/d3helpers";
 import React from "react";
+import { PTable, PTD, PTR, PTDPrimary, PTDSecondary } from "styles/components";
 
 type PropTypes = {
   width?: number;
@@ -51,40 +46,34 @@ const UtilityInputsTable = (props: PropTypes) => {
   return (
     <React.Fragment>
       <SubHeaderLined>Utility Inputs</SubHeaderLined>
-      <TableContainer>
-        <Table sx={{ width: width }} size="small">
-          <TableBody>
-            <TableRow>
-              <TableCell variant="head"> Fuel Type</TableCell>
-              <TableCell variant="head"> Consumption</TableCell>
-              <TableCell variant="head"> Utility Rate</TableCell>
-              <TableCell variant="head"> Annual Cost ($/yr)</TableCell>
-            </TableRow>
+      <PTable>
+        <PTR>
+          <PTDPrimary> Fuel Type</PTDPrimary>
+          <PTDPrimary> Consumption</PTDPrimary>
+          <PTDPrimary> Utility Rate</PTDPrimary>
+          <PTDPrimary> Annual Cost ($/yr)</PTDPrimary>
+        </PTR>
 
-            {utility_array.map((d, i) => {
-              return (
-                <TableRow key={i}>
-                  <TableCell>{d.fuel_type}</TableCell>
-                  <TableCell>{formatNumber(d.fuel_consumption)}</TableCell>
-                  <TableCell>{formatCurrency(d.utility_rate, 2)}</TableCell>
-                  <TableCell>{formatCurrency(d.cost_per_year)}</TableCell>
-                </TableRow>
-              );
-            })}
+        {utility_array.map((d, i) => {
+          return (
+            <PTR key={i}>
+              <PTDSecondary>{d.fuel_type}</PTDSecondary>
+              <PTDSecondary>{formatNumber(d.fuel_consumption)}</PTDSecondary>
+              <PTDSecondary>{formatCurrency(d.utility_rate, 2)}</PTDSecondary>
+              <PTDSecondary>{formatCurrency(d.cost_per_year)}</PTDSecondary>
+            </PTR>
+          );
+        })}
 
-            <TableRow>
-              <TableCell variant="head" colSpan={3}>
-                Total Cost
-              </TableCell>
-              <TableCell variant="head">
-                {`${formatCurrency(
-                  d3.sum(utility_array.map((d) => d.cost_per_year))
-                )}`}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+        <PTR>
+          <PTDPrimary colSpan={3}>Total Cost</PTDPrimary>
+          <PTDPrimary>
+            {`${formatCurrency(
+              d3.sum(utility_array.map((d) => d.cost_per_year))
+            )}`}
+          </PTDPrimary>
+        </PTR>
+      </PTable>
     </React.Fragment>
   );
 };

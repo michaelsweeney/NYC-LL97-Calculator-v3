@@ -3,7 +3,7 @@ import { FooterTextAKF } from "styles/typography";
 import { colors } from "styles/colors";
 
 const Root = styled.div`
-  border-top: 4px solid ${colors.secondary.main};
+  border-top: 2px solid ${colors.secondary.main};
   height: 5px;
 `;
 

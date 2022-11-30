@@ -50,3 +50,16 @@ div {
 
 	}
 }
+
+
+/* toggle print mode dev mode */
+/* .layout-container {
+	display: none !important;
+	visibility: hidden;
+}
+.print-container {
+	visibility: visible !important;
+}
+.MuiPopover-root {
+	display: none !important;
+} */

@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { SubHeaderLined } from "styles/typography";
+import { PTable, PTD, PTR, PTDPrimary, PTDSecondary } from "styles/components";
 
 import { useAppSelector } from "store/hooks";
 import { formatNumber } from "components/charts/d3helpers";
@@ -25,32 +26,27 @@ const BuildingAreasTable = (props: PropTypes) => {
   return (
     <React.Fragment>
       <SubHeaderLined>Building Areas</SubHeaderLined>
-      <TableContainer>
-        <Table sx={{ width: width }} size="small">
-          <TableBody>
-            <TableRow>
-              <TableCell variant="head">Building Type</TableCell>
-              <TableCell variant="head">Area (SF)</TableCell>
-            </TableRow>
-            {building_types.map((t, i) => {
-              return (
-                <TableRow key={i}>
-                  <TableCell>{t.building_type}</TableCell>
-                  <TableCell>{formatNumber(t.building_area)}</TableCell>
-                </TableRow>
-              );
-            })}
-            <TableRow>
-              <TableCell variant="head">Total Area</TableCell>
-              <TableCell variant="head">
-                {formatNumber(
-                  d3.sum(building_types.map((t) => t.building_area))
-                )}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+
+      <PTable>
+        <PTR>
+          <PTDPrimary>Building Type</PTDPrimary>
+          <PTDPrimary>Area (SF)</PTDPrimary>
+        </PTR>
+        {building_types.map((t, i) => {
+          return (
+            <PTR key={i}>
+              <PTDSecondary>{t.building_type}</PTDSecondary>
+              <PTDSecondary>{formatNumber(t.building_area)}</PTDSecondary>
+            </PTR>
+          );
+        })}
+        <PTR>
+          <PTDPrimary>Total Area</PTDPrimary>
+          <PTDPrimary>
+            {formatNumber(d3.sum(building_types.map((t) => t.building_area)))}
+          </PTDPrimary>
+        </PTR>
+      </PTable>
     </React.Fragment>
   );
 };

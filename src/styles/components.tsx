@@ -55,3 +55,40 @@ export const AddBuildingTypeButton = styled("button")`
     background-color: ${colors.secondary.dark};
   }
 `;
+
+export const PTable = styled.table`
+  border-top: 2px solid ${colors.secondary.main};
+  border-bottom: 2px solid ${colors.secondary.main};
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const PTR = styled.tr``;
+
+export const PTD = styled.td`
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  min-width: 75px;
+`;
+export const PTDSecondary = styled(PTD)`
+  border-bottom: 1px solid ${colors.secondary.main};
+`;
+
+export const PTDPrimary = styled(PTD)`
+  text-align: left;
+  color: ${colors.primary.main};
+  font-family: CircularStd-Bold;
+  border-bottom: 2px solid ${colors.primary.main};
+`;
+
+export const PrintUL = styled.ul`
+  padding-left: 0px;
+`;
+
+export const PrintLI = styled.li`
+  margin-bottom: 5px;
+`;

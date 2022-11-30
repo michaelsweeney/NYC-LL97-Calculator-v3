@@ -9,7 +9,6 @@ import {
 
 const initialState: UiSliceTypes = {
   is_dev_mode: false,
-  is_print_mode: false,
   current_view: "calc_info_dialogue",
   window_dimensions: {
     width: 0,
@@ -32,9 +31,6 @@ export const uiSlice = createSlice({
       state.current_view = action.payload;
     },
 
-    setIsPrintMode: (state, action: PayloadAction<boolean>) => {
-      state.is_print_mode = action.payload;
-    },
     setWindowDimensions: (
       state,
       action: PayloadAction<WindowDimensionTypes>

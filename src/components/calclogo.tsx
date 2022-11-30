@@ -1,6 +1,10 @@
-type PropTypes = {};
+type PropTypes = {
+  width?: number;
+};
 
 const CalcLogo = (props: PropTypes) => {
+  const { width = 150 } = props;
+
   return (
     <div
       style={{
@@ -9,7 +13,7 @@ const CalcLogo = (props: PropTypes) => {
       }}
     >
       <a href="https://be-exchange.org" target="_blank" rel="noreferrer">
-        <img width="150" alt="a" src="beex_CC_art_webheader.webp"></img>
+        <img width={width} alt="a" src="beex_CC_art_webheader.webp"></img>
       </a>
     </div>
   );

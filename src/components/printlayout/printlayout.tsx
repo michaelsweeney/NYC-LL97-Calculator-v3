@@ -5,14 +5,14 @@ import PrintFooter from "./printfooter";
 import styled from "styled-components";
 
 const Header = styled.div`
-  height: 100px;
+  height: 125px;
   width: 100%;
   position: fixed;
   top: 0;
 `;
 
 const HeaderSpace = styled.div`
-  height: 100px;
+  height: 125px;
 `;
 
 const Footer = styled.div`
@@ -42,7 +42,6 @@ const PrintLayout = () => {
             </td>
           </tr>
         </thead>
-
         <tbody>
           <tr>
             <td>

@@ -88,7 +88,6 @@ export type ViewTypes =
   | "chart_view";
 
 export type UiSliceTypes = {
-  is_print_mode: boolean;
   current_view: ViewTypes;
   window_dimensions: WindowDimensionTypes;
   small_window: boolean;

@@ -11,6 +11,7 @@ import { useAppSelector } from "store/hooks";
 import { formatNumber, formatCurrency } from "components/charts/d3helpers";
 import React from "react";
 import { ResultsPeriodType } from "types";
+import { PTable, PTD, PTR, PTDPrimary, PTDSecondary } from "styles/components";
 
 type PropTypes = {
   width?: number;
@@ -31,41 +32,38 @@ const LL97SummaryTable = (props: PropTypes) => {
   return (
     <React.Fragment>
       <SubHeaderLined>LL97 Threshold Summary</SubHeaderLined>
-      <TableContainer>
-        <Table sx={{ width: width }} size="small">
-          <TableBody>
-            <TableRow>
-              <TableCell variant="head">Year</TableCell>
-              <TableCell variant="head">Threshold (tCO2e/yr)</TableCell>
-              <TableCell variant="head">GHG Emissions (tCO2e/yr)</TableCell>
-              <TableCell variant="head">Fine ($/yr)</TableCell>
-            </TableRow>
 
-            {carbon_periods.length === 0 ? (
-              <TableRow></TableRow>
-            ) : (
-              carbon_periods.map((period, i) => {
-                return (
-                  <TableRow key={i}>
-                    <TableCell>{period.year}</TableCell>
-                    <TableCell>
-                      {period.threshold.absolute
-                        ? formatNumber(period.threshold.absolute)
-                        : period.threshold.absolute}
-                    </TableCell>
-                    <TableCell>
-                      {formatNumber(period.carbon.absolute.total as number)}
-                    </TableCell>
-                    <TableCell>
-                      {formatCurrency(period.fine.absolute)}
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <PTable>
+        <PTR>
+          <PTDPrimary>Year</PTDPrimary>
+          <PTDPrimary>Threshold (tCO2e/yr)</PTDPrimary>
+          <PTDPrimary>GHG Emissions (tCO2e/yr)</PTDPrimary>
+          <PTDPrimary>Penalty ($/yr)</PTDPrimary>
+        </PTR>
+
+        {carbon_periods.length === 0 ? (
+          <PTR></PTR>
+        ) : (
+          carbon_periods.map((period, i) => {
+            return (
+              <PTR key={i}>
+                <PTDSecondary>{period.year}</PTDSecondary>
+                <PTDSecondary>
+                  {period.threshold.absolute
+                    ? formatNumber(period.threshold.absolute)
+                    : period.threshold.absolute}
+                </PTDSecondary>
+                <PTDSecondary>
+                  {formatNumber(period.carbon.absolute.total as number)}
+                </PTDSecondary>
+                <PTDSecondary>
+                  {formatCurrency(period.fine.absolute)}
+                </PTDSecondary>
+              </PTR>
+            );
+          })
+        )}
+      </PTable>
     </React.Fragment>
   );
 };

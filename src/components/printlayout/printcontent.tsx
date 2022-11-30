@@ -9,13 +9,28 @@ import BuildingAreasTable from "./buildingareastable";
 import LL97SummaryTable from "./ll97summarytable";
 
 import styled from "styled-components";
+import DynamicText from "./dynamictext";
+
+import { useAppSelector } from "store/hooks";
 
 const Paragraph = styled.div`
-  margin: 20px;
+  /* margin: 20px; */
 `;
 const RootContainer = styled.div`
   margin-top: 0px;
   margin-bottom: 0px;
+  padding: 30px;
+`;
+
+const H1 = styled.div`
+  font-size: 36px;
+  font-family: CircularStd-Bold;
+`;
+
+const H2 = styled(SubHeaderLined)`
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-family: CircularStd-Bold;
 `;
 
 const Block = styled.div`
@@ -24,8 +39,10 @@ const Block = styled.div`
 `;
 
 const ChartContainer = styled.div`
-  width: 750px;
-  height: 750px;
+  vertical-align: left;
+  margin-top: 25px;
+  width: 850px;
+  height: 600px;
 `;
 
 const chartContainerPadding = {
@@ -45,28 +62,49 @@ const PageBreakAfter = styled.div`
 `;
 
 const PrintContent = () => {
+  const { building_inputs, building_outputs, ll84_query } = useAppSelector(
+    (state) => state
+  );
+
+  let address = ll84_query.ll84_building_name;
+  let querylabel = `${ll84_query.ll84_year_label} data`;
+
   return (
     <RootContainer>
       <Block>
+        <H1>{address}</H1>
+        <H2>{querylabel}</H2>
         <SubHeaderLined>Introduction</SubHeaderLined>
         <Paragraph>
-          This report provides a summary of this property’s standing related to
-          NYC Local Law 97. Building inputs should be checked for accuracy, and
-          the calculator assumes that the entered utility inputs will remain the
-          same for every year from 2024 to 2050. The following tables summarize
-          input information, output summaries, and additional graphics are
-          provided on the second page. Visit be-exchange.org/calculator for more
-          information, and refer to the “Notes and Clarifications” section of
-          this report for additional context.
+          This report provides a summary of 100 Address Street’s standing with
+          respect to NYC Local Law 97. Building inputs should be checked for
+          accurarcy. The calculator assumes that the entered utility inputs
+          remain the same for every year from 2024 to 2050. Visit
+          be-exchange.org/calculator for more information, and refer to the
+          Notes and Clarifications section in the appendix of this report for
+          additional context.
         </Paragraph>
       </Block>
 
       <Block>
         <LL97SummaryTable />
+        <DynamicText />
       </Block>
       {/* <PageBreakAfter>i</PageBreakAfter> */}
       <Block>
+        <H1>{address}</H1>
+        <H2>{querylabel}</H2>
         <SubHeaderLined>Carbon Threshold Summary</SubHeaderLined>
+
+        <Paragraph>
+          The below summary details building carbon emissions across each LL97
+          compliance period in relation to your building’s emissions threshold.
+          If your building uses electricity, yearly emissions will decline
+          between 2029 and 2030, due to a lower carbon coefficient for
+          electricity consumption starting in 2030. This coefficient was
+          established to reflect New York’s commitment to adding renewable
+          energy sources to the electric grid.
+        </Paragraph>
         <ChartContainer>
           <ChartView
             view_type="carbon"
@@ -81,6 +119,12 @@ const PrintContent = () => {
 
       <Block>
         <SubHeaderLined>Utility and Penalty Cost Summary</SubHeaderLined>
+        <Paragraph>
+          The below summary details utility costs and estimated penalties across
+          each LL97 compliance period. Estimated yearly utility costs are found
+          at the first row of the table. Estimated yearly penalties for each
+          compliance period are found on the second row of the table.
+        </Paragraph>
         <ChartContainer>
           <ChartView
             view_type="cost"
@@ -95,6 +139,8 @@ const PrintContent = () => {
       <PageBreakAfter>i</PageBreakAfter>
 
       <Block>
+        <H1>{address}</H1>
+        <H2>{querylabel}</H2>
         <UtilityInputsTable />
       </Block>
 
