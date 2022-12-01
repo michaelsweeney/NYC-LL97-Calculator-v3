@@ -1,5 +1,4 @@
 import ChartView from "components/charts/chartview";
-import { SubHeaderLined } from "styles/typography";
 
 import { NotesAndClarifications } from "./notesandclarifications";
 import { InlineStylesType } from "types";
@@ -14,16 +13,17 @@ import DynamicText from "./dynamictext";
 import { useAppSelector } from "store/hooks";
 import WhatNow from "./whatnow";
 
-import { PrintH1, PrintH2 } from "styles/components";
+import { PrintH1, PrintH2, PrintH3 } from "styles/components";
 
 const Paragraph = styled.div`
   /* margin: 20px; */
+  font-family: CircularStd-Bold;
 `;
 const RootContainer = styled.div`
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 30px;
-  font-family: "CircularStd-Bold";
+  font-family: CircularStd-Bold;
 `;
 
 const Block = styled.div`
@@ -77,7 +77,7 @@ const PrintContent = () => {
       <Block>
         <PrintH1>{address}</PrintH1>
         <PrintH2>{querylabel}</PrintH2>
-        <SubHeaderLined>Introduction</SubHeaderLined>
+        <PrintH3>Introduction</PrintH3>
         <Paragraph>
           This report provides a summary of the {address} building's standing
           with respect to NYC Local Law 97. Building inputs should be checked
@@ -97,7 +97,7 @@ const PrintContent = () => {
       <Block>
         <PrintH1>{address}</PrintH1>
         <PrintH2>{querylabel}</PrintH2>
-        <SubHeaderLined>Carbon Threshold Summary</SubHeaderLined>
+        <PrintH3>Carbon Threshold Summary</PrintH3>
 
         <Paragraph>
           The below summary details building carbon emissions across each LL97
@@ -121,7 +121,7 @@ const PrintContent = () => {
       {/* <PageBreakAfter>i</PageBreakAfter> */}
 
       <Block>
-        <SubHeaderLined>Utility and Penalty Cost Summary</SubHeaderLined>
+        <PrintH3>Utility and Penalty Cost Summary</PrintH3>
         <Paragraph>
           The below summary details utility costs and estimated penalties across
           each LL97 compliance period. Estimated yearly utility costs are found

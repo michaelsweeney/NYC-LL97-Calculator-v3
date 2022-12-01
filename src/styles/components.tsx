@@ -88,10 +88,12 @@ export const PTDPrimary = styled(PTD)`
 
 export const PrintUL = styled.ul`
   padding-left: 0px;
+  font-family: CircularStd-Bold;
 `;
 
 export const PrintLI = styled.li`
   margin-bottom: 5px;
+  font-family: CircularStd-Bold;
 `;
 
 export const PrintH1 = styled.div`
@@ -102,5 +104,10 @@ export const PrintH1 = styled.div`
 export const PrintH2 = styled(SubHeaderLined)`
   margin-bottom: 24px;
   font-size: 24px;
+  font-family: CircularStd-Bold;
+`;
+
+export const PrintH3 = styled(SubHeaderLined)`
+  font-size: 20px;
   font-family: CircularStd-Bold;
 `;

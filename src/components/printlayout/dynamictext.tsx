@@ -27,6 +27,7 @@ const HighlightWrapper = (props: any) => {
 const HighlightText = styled.span`
   /* font-family: CircularStd-Bold; */
   background-color: ${colors.primary.main};
+  white-space: nowrap;
   /* padding-left: 2px; */
   /* padding-right: 2px; */
 `;
