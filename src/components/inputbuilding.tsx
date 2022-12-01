@@ -11,7 +11,11 @@ import { InlineStylesType } from "types";
 import { RemoveTypeButton } from "styles/components";
 import SingleSelect from "./singleselect";
 import FocusNumberInput from "./focusnumberinput";
-import { ButtonSecondary, AddBuildingTypeButton } from "styles/components";
+import {
+  ButtonSecondary,
+  AddBuildingTypeButton,
+  TableCellNoBorder,
+} from "styles/components";
 import { building_type_co2_coefficients } from "locallaw/lookups";
 
 import { buildingInputActions } from "store/buildinginputslice";
@@ -110,21 +114,23 @@ const InputBuilding = () => {
         <Table sx={styles.table} size="small">
           <TableBody>
             <TableRow>
-              <TableCell sx={styles.bldg_id_col}></TableCell>
+              <TableCellNoBorder sx={styles.bldg_id_col}></TableCellNoBorder>
               <TableCell sx={styles.input_select_col} variant="head">
                 Building Input
               </TableCell>
               <TableCell sx={styles.input_area_col} variant="head">
                 Area (SF)
               </TableCell>
-              <TableCell sx={styles.rm_btn_col}></TableCell>
+              <TableCellNoBorder sx={styles.rm_btn_col}></TableCellNoBorder>
             </TableRow>
 
             {building_types.map((bldg_type, i) => {
               return (
                 <TableRow key={i}>
-                  <TableCell sx={styles.bldg_id_col}>{i + 1}</TableCell>
-                  <TableCell sx={styles.input_select_col}>
+                  <TableCellNoBorder sx={styles.bldg_id_col}>
+                    {i + 1}
+                  </TableCellNoBorder>
+                  <TableCellNoBorder sx={styles.input_select_col}>
                     <SingleSelect
                       value={bldg_type.building_type}
                       callback={(v) => {
@@ -140,8 +146,8 @@ const InputBuilding = () => {
                         (e) => e.building_type
                       )}
                     />
-                  </TableCell>
-                  <TableCell sx={styles.input_area_col}>
+                  </TableCellNoBorder>
+                  <TableCellNoBorder sx={styles.input_area_col}>
                     <FocusNumberInput
                       value={bldg_type.building_area}
                       callback={(v) => {
@@ -151,8 +157,8 @@ const InputBuilding = () => {
                         );
                       }}
                     />
-                  </TableCell>
-                  <TableCell sx={styles.rm_btn_col}>
+                  </TableCellNoBorder>
+                  <TableCellNoBorder sx={styles.rm_btn_col}>
                     {building_types.length === 1 ? (
                       <span></span>
                     ) : (
@@ -164,7 +170,7 @@ const InputBuilding = () => {
                         X
                       </RemoveTypeButton>
                     )}
-                  </TableCell>
+                  </TableCellNoBorder>
                 </TableRow>
               );
             })}

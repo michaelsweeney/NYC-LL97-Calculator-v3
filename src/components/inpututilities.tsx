@@ -20,6 +20,7 @@ import { ll84QueryActions } from "store/ll84queryslice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import styled from "styled-components";
 import { uiActions } from "store/uislice";
+import { TableCellNoBorder } from "styles/components";
 
 const defaultPadding = "5px";
 const styles: InlineStylesType = {
@@ -105,7 +106,9 @@ const InputUtilities = () => {
               return (
                 <React.Fragment key={i}>
                   <TableRow>
-                    <TableCell sx={styles.bldg_id_col}>i</TableCell>
+                    <TableCellNoBorder sx={styles.bldg_id_col}>
+                      i
+                    </TableCellNoBorder>
                     <TableCell sx={styles.fuel_col} variant="head">
                       {
                         fuel_keys_to_labels[
@@ -120,29 +123,35 @@ const InputUtilities = () => {
                         ]
                       }
                     </TableCell>
-                    <TableCell sx={styles.rm_btn_col}>i</TableCell>
+                    <TableCellNoBorder sx={styles.rm_btn_col}>
+                      i
+                    </TableCellNoBorder>
                   </TableRow>
 
                   <TableRow>
-                    <TableCell sx={styles.bldg_id_col}>i</TableCell>
+                    <TableCellNoBorder sx={styles.bldg_id_col}>
+                      i
+                    </TableCellNoBorder>
 
-                    <TableCell sx={styles.fuel_col}>
+                    <TableCellNoBorder sx={styles.fuel_col}>
                       <FocusNumberInput
                         value={fuel_obj.consumption}
                         callback={(v) => {
                           handleFuelConsumptionChange(fuel, v as number);
                         }}
                       />
-                    </TableCell>
-                    <TableCell sx={styles.rate_col}>
+                    </TableCellNoBorder>
+                    <TableCellNoBorder sx={styles.rate_col}>
                       <FocusNumberInput
                         value={fuel_obj.rate}
                         callback={(v) => {
                           handleFuelRateChange(fuel, v as number);
                         }}
                       />
-                    </TableCell>
-                    <TableCell sx={styles.rm_btn_col}>i</TableCell>
+                    </TableCellNoBorder>
+                    <TableCellNoBorder sx={styles.rm_btn_col}>
+                      i
+                    </TableCellNoBorder>
                   </TableRow>
                 </React.Fragment>
               );

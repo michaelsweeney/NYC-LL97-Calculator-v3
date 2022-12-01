@@ -1,6 +1,6 @@
 import ChartView from "components/charts/chartview";
 
-import { NotesAndClarifications } from "./notesandclarifications";
+import { NotesAndClarifications } from "./printnotesandclarifications";
 import { InlineStylesType } from "types";
 
 import UtilityInputsTable from "./utilityinputstable";
@@ -22,7 +22,7 @@ const Paragraph = styled.div`
 const RootContainer = styled.div`
   margin-top: 0px;
   margin-bottom: 0px;
-  padding: 30px;
+  padding: 0px;
   font-family: CircularStd-Bold;
 `;
 
@@ -79,9 +79,9 @@ const PrintContent = () => {
         <PrintH2>{querylabel}</PrintH2>
         <PrintH3>Introduction</PrintH3>
         <Paragraph>
-          This report provides a summary of the {address} building's standing
-          with respect to NYC Local Law 97. Building inputs should be checked
-          for accurarcy. The calculator assumes that the entered utility inputs
+          This report provides a summary for "{address}" and its standing with
+          respect to NYC Local Law 97. Building inputs should be checked for
+          accurarcy. The calculator assumes that the entered utility inputs
           remain the same for every year from 2024 to 2050. Visit
           be-exchange.org/calculator for more information, and refer to the
           Notes and Clarifications section in the appendix of this report for

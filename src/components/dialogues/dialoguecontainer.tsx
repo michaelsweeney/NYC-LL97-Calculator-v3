@@ -3,6 +3,7 @@ import { colors } from "styles/colors";
 import { ReturnIconButton } from "components/iconbuttons";
 import React from "react";
 import { useEffect } from "react";
+import { ButtonSecondary } from "styles/components";
 const Content = styled.div`
   height: calc(100% - 50px);
   padding-left: 25px;
@@ -29,7 +30,7 @@ export const HeadText = styled("div")`
   font-family: CircularStd-Bold;
   font-size: 24px;
   position: relative;
-  top: -20px;
+  /* top: -20px; */
 `;
 
 const HeaderLeft = styled.div`
@@ -42,8 +43,8 @@ const HeaderRight = styled.div`
   text-align: right;
   width: 25%;
   position: relative;
-  top: -8px;
-  right: -15px;
+  top: -11px;
+  /* right: -15px; */
 `;
 
 type DialogueContainerPropTypes = {
@@ -80,11 +81,15 @@ const DialogueContainer = (props: DialogueContainerPropTypes) => {
           <HeadText>{props.title}</HeadText>
         </HeaderLeft>
         <HeaderRight>
-          <ReturnIconButton
-            width={50}
-            height={40}
-            clickCallback={handleClick}
-          ></ReturnIconButton>
+          <div>
+            <ButtonSecondary
+              onClick={handleClick}
+              color="secondary"
+              variant="contained"
+            >
+              close
+            </ButtonSecondary>
+          </div>
         </HeaderRight>
       </Header>
       <Content>{props.children}</Content>

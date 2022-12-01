@@ -158,12 +158,6 @@ const BuildingSummaryDialogue = () => {
           calculator.
         </End>
       </div>
-
-      <div>
-        <CloseButton color="secondary" variant="outlined">
-          Close
-        </CloseButton>
-      </div>
     </DialogueContainer>
   );
 };

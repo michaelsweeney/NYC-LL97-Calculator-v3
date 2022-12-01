@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "./colors";
-import { Input, Button } from "@mui/material";
+import { Input, Button, TableCell } from "@mui/material";
 import { SubHeaderLined } from "./typography";
 
 export const StyledInput = styled(Input)`
@@ -16,6 +16,7 @@ export const StyledInput = styled(Input)`
 
 export const ButtonSecondary = styled(Button)<{}>`
   font-family: CircularStd-Bold;
+  border-radius: 0;
   &:hover {
     box-shadow: 0;
   }
@@ -86,6 +87,14 @@ export const PTDPrimary = styled(PTD)`
   border-bottom: 2px solid ${colors.primary.main};
 `;
 
+export const UL = styled.ul`
+  padding-left: 0px;
+`;
+
+export const LI = styled.li`
+  margin-bottom: 5px;
+`;
+
 export const PrintUL = styled.ul`
   padding-left: 0px;
   font-family: CircularStd-Bold;
@@ -110,4 +119,8 @@ export const PrintH2 = styled(SubHeaderLined)`
 export const PrintH3 = styled(SubHeaderLined)`
   font-size: 20px;
   font-family: CircularStd-Bold;
+`;
+
+export const TableCellNoBorder = styled(TableCell)`
+  border: none;
 `;

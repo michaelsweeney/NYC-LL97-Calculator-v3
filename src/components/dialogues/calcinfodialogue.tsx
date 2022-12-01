@@ -6,7 +6,7 @@ import DialogueContainer from "./dialoguecontainer";
 
 import NoFineLanguage from "./nofinelanguage";
 import NoInputLanguage from "./noinputlanguage";
-import { NotesAndClarifications } from "components/printlayout/notesandclarifications";
+import { NotesAndClarifications } from "components/notesandclarifications";
 import { ButtonSecondary } from "styles/components";
 
 import styled from "styled-components";
@@ -94,15 +94,6 @@ const CalcInfoDialogue = () => {
       <div>
         <NotesAndClarifications />
       </div>
-      <Footer>
-        <CloseButton
-          onClick={handleCloseDialogue}
-          color="secondary"
-          variant="outlined"
-        >
-          close
-        </CloseButton>
-      </Footer>
     </DialogueContainer>
   );
 };

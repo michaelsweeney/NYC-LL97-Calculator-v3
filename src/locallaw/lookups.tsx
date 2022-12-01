@@ -505,7 +505,7 @@ export const bar_keys_to_labels = {
   steam: "Steam",
   fuel_two: "Fuel Oil 2",
   fuel_four: "Fuel Oil 4",
-  fine: "Fine",
+  fine: "Penalty",
   threshold_carbon: "Carbon Threshold",
   under_carbon: "Carbon Below Threshold",
   excess_carbon: "Carbon Over Threshold",

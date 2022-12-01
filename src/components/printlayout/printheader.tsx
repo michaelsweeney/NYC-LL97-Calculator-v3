@@ -36,23 +36,8 @@ const LL97Container = styled.div`
 // right position
 const BeExLogoContainer = styled.span`
   position: absolute;
-  right: -110px;
-  bottom: 25px;
-`;
-
-const BeExText = styled.div`
-  color: ${colors.secondary.main};
-  font-size: 12px;
-  font-family: CircularStd-Medium;
-  padding: 0;
-  line-height: 12px;
-  letter-spacing: 0px;
-`;
-
-const BeExTextContainer = styled.div`
-  position: relative;
-  right: 0;
-  bottom: 0;
+  right: 20px;
+  bottom: 15px;
 `;
 
 const PrintHeader = () => {
@@ -67,14 +52,7 @@ const PrintHeader = () => {
         <CalcLogo width={175} />
       </LL97Container>
       <BeExLogoContainer>
-        <div style={{ width: 175 }}>
-          <BeExLogoFull />
-          <BeExTextContainer>
-            <BeExText>building</BeExText>
-            <BeExText>energy</BeExText>
-            <BeExText>exchange</BeExText>
-          </BeExTextContainer>
-        </div>
+        <img alt="beex-logo" width="60" src="Logo_Beex-Full (rgb).png" />
       </BeExLogoContainer>
     </Root>
   );
