@@ -12,6 +12,9 @@ import styled from "styled-components";
 import DynamicText from "./dynamictext";
 
 import { useAppSelector } from "store/hooks";
+import WhatNow from "./whatnow";
+
+import { PrintH1, PrintH2 } from "styles/components";
 
 const Paragraph = styled.div`
   /* margin: 20px; */
@@ -20,17 +23,7 @@ const RootContainer = styled.div`
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 30px;
-`;
-
-const H1 = styled.div`
-  font-size: 36px;
-  font-family: CircularStd-Bold;
-`;
-
-const H2 = styled(SubHeaderLined)`
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-family: CircularStd-Bold;
+  font-family: "CircularStd-Bold";
 `;
 
 const Block = styled.div`
@@ -66,19 +59,29 @@ const PrintContent = () => {
     (state) => state
   );
 
+  let no_print =
+    building_outputs.is_input_info_missing ||
+    !building_outputs.is_greater_than_25k_sf;
+
   let address = ll84_query.ll84_building_name;
   let querylabel = `${ll84_query.ll84_year_label} data`;
 
-  return (
+  return no_print ? (
+    <div>
+      there is a problem with your building input data (either input data is
+      missing, or the building is less than 25,000 SF and not subject to LL97
+      fines). please revise and retry.
+    </div>
+  ) : (
     <RootContainer>
       <Block>
-        <H1>{address}</H1>
-        <H2>{querylabel}</H2>
+        <PrintH1>{address}</PrintH1>
+        <PrintH2>{querylabel}</PrintH2>
         <SubHeaderLined>Introduction</SubHeaderLined>
         <Paragraph>
-          This report provides a summary of 100 Address Street’s standing with
-          respect to NYC Local Law 97. Building inputs should be checked for
-          accurarcy. The calculator assumes that the entered utility inputs
+          This report provides a summary of the {address} building's standing
+          with respect to NYC Local Law 97. Building inputs should be checked
+          for accurarcy. The calculator assumes that the entered utility inputs
           remain the same for every year from 2024 to 2050. Visit
           be-exchange.org/calculator for more information, and refer to the
           Notes and Clarifications section in the appendix of this report for
@@ -92,8 +95,8 @@ const PrintContent = () => {
       </Block>
       {/* <PageBreakAfter>i</PageBreakAfter> */}
       <Block>
-        <H1>{address}</H1>
-        <H2>{querylabel}</H2>
+        <PrintH1>{address}</PrintH1>
+        <PrintH2>{querylabel}</PrintH2>
         <SubHeaderLined>Carbon Threshold Summary</SubHeaderLined>
 
         <Paragraph>
@@ -139,8 +142,8 @@ const PrintContent = () => {
       <PageBreakAfter>i</PageBreakAfter>
 
       <Block>
-        <H1>{address}</H1>
-        <H2>{querylabel}</H2>
+        <PrintH1>{address}</PrintH1>
+        <PrintH2>{querylabel}</PrintH2>
         <UtilityInputsTable />
       </Block>
 
@@ -149,6 +152,13 @@ const PrintContent = () => {
       </Block>
       <Block>
         <NotesAndClarifications />
+      </Block>
+      <PageBreakAfter>i</PageBreakAfter>
+
+      <Block>
+        <div style={{ marginTop: "125px" }}>
+          <WhatNow />
+        </div>
       </Block>
     </RootContainer>
   );

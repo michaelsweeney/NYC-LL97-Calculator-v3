@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "./colors";
 import { Input, Button } from "@mui/material";
+import { SubHeaderLined } from "./typography";
 
 export const StyledInput = styled(Input)`
   input[type="number"] {
@@ -91,4 +92,15 @@ export const PrintUL = styled.ul`
 
 export const PrintLI = styled.li`
   margin-bottom: 5px;
+`;
+
+export const PrintH1 = styled.div`
+  font-size: 36px;
+  font-family: CircularStd-Bold;
+`;
+
+export const PrintH2 = styled(SubHeaderLined)`
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-family: CircularStd-Bold;
 `;
