@@ -510,7 +510,7 @@ export const bar_keys_to_labels = {
   under_carbon: "Carbon Below Threshold",
   excess_carbon: "Carbon Over Threshold",
   total_carbon: "Total Carbon",
-  total_cost: "Total Cost",
+  total_cost: "Utility Cost",
 };
 
 export const fuel_keys_to_rate_labels = {
