@@ -76,11 +76,11 @@ const NavMenu = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleOpenLoadModal}>Search LL84 Database</MenuItem>
-        <MenuItem onClick={handleOpenInfoModal}>About This Calculator</MenuItem>
+        <MenuItem onClick={handleOpenLoadModal}>Find Your Building</MenuItem>
         <MenuItem onClick={handleOpenBuildingSummaryModal}>
           About Loaded Building
         </MenuItem>
+        <MenuItem onClick={handleOpenInfoModal}>About This Calculator</MenuItem>
         <MenuItem onClick={handleLoadDemoBuildling}>
           Load Sample Building
         </MenuItem>

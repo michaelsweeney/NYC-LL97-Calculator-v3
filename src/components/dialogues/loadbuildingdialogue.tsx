@@ -108,7 +108,7 @@ const LoadBuildingDialogue = () => {
         </p>
         <p>
           To find your building, select reporting year, then input BBL ID
-          number, property name, or address (case sensitive).
+          number, property name, or address <b>(case sensitive)</b>.
         </p>
 
         <SearchContainer>

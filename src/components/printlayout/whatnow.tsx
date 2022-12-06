@@ -34,7 +34,7 @@ const WhatNow = () => {
       <PrintH1>Next Steps</PrintH1>
       <p>
         Building Energy Exchange’s Climate Mobilization Act Series portal hosts
-        a collection of event media, FAQs, articles, and tools that demsitify
+        a collection of event media, FAQs, articles, and tools that demystify
         the legislative package and connect building stakeholders to solutions:
       </p>
       <LinkText

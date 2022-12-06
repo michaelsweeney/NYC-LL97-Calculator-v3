@@ -156,7 +156,7 @@ const PrintContent = () => {
       <PageBreakAfter>i</PageBreakAfter>
 
       <Block>
-        <div style={{ marginTop: "125px" }}>
+        <div style={{ marginTop: "110px" }}>
           <WhatNow />
         </div>
       </Block>
