@@ -45,10 +45,7 @@ const WhatNow = () => {
         NYC Accelerator offers free resources, training, and one-on-one expert
         guidance to help building owners comply with Local Law 97:
       </p>
-      <LinkText
-        link="https://accelerator.nyc"
-        label="https://accelerator.nyc"
-      />
+      <LinkText link="https://accelerator.nyc" label="accelerator.nyc" />
       <p>
         NYC Accelerator’s Property Assessed Clean Energy (PACE) financing
         program, offered in partnership with the New York City Energy Efficiency
@@ -56,7 +53,7 @@ const WhatNow = () => {
         and renewable energy upgrades:
       </p>
       <LinkText
-        link="accelerator.nyc/resources/finance/PACE"
+        link="https://accelerator.nyc/resources/finance/PACE"
         label="accelerator.nyc/resources/finance/PACE"
       />
       <p>
@@ -64,19 +61,23 @@ const WhatNow = () => {
         increase energy efficiency, save money, use renewable energy, and reduce
         reliance on fossil fuels:
       </p>
-      <LinkText
-        link="https://www.nyserda.ny.gov"
-        label="https://www.nyserda.ny.gov"
-      />
-      <p>NYC Sustainable Buildings Emissions Limits</p>
+      <LinkText link="https://www.nyserda.ny.gov" label="nyserda.ny.gov" />
+      <p>
+        The NYC Sustainable Buildings NYC Emissions Limits page provides
+        information on Local Law 97, including building emissions limits,
+        property types, and reporting requirements.
+      </p>
       <LinkText
         link="https://www.nyc.gov/site/sustainablebuildings/requirements/emissions-limits.page"
-        label="https://www.nyc.gov/site/sustainablebuildings/requirements/emissions-limits.page"
+        label="nyc.gov/site/sustainablebuildings/requirements/emissions-limits.page"
       />
-      <p>NYC Sustainable Buildings Covered Buildings</p>
+      <p>
+        The NYC Sustainable Buildings NYC Covered Buildings page details LL97
+        coverage criteria, plus a list of buildings that may be subject to LL97.
+      </p>
       <LinkText
         link="https://www.nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
-        label="https://www.nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
+        label="nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
       />
     </StyleWrapper>
   );

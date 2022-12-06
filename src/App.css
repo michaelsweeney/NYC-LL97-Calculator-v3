@@ -36,6 +36,8 @@ div {
 } 
 
 
+
+
 @media print {
 	.layout-container {
 		display: none !important;
