@@ -853,6 +853,8 @@ export const sample_ll84_data: LL84QueryPropertyTypes = {
   electricity_consumption_kbtu: (35678343 * 3.412).toString(),
   electricity_onsite_generated_kbtu: "Not Available",
   is_other_lookup_error: false,
+  is_type_lookup_error: false,
+  type_lookup_error_building_types: [],
 };
 
 export const range_year_lengths: { [key: string]: number } = {

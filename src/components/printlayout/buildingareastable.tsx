@@ -28,24 +28,26 @@ const BuildingAreasTable = (props: PropTypes) => {
       <SubHeaderLined>Building Areas</SubHeaderLined>
 
       <PTable>
-        <PTR>
-          <PTDPrimary>Building Type</PTDPrimary>
-          <PTDPrimary>Area (SF)</PTDPrimary>
-        </PTR>
-        {building_types.map((t, i) => {
-          return (
-            <PTR key={i}>
-              <PTDSecondary>{t.building_type}</PTDSecondary>
-              <PTDSecondary>{formatNumber(t.building_area)}</PTDSecondary>
-            </PTR>
-          );
-        })}
-        <PTR>
-          <PTDPrimary>Total Area</PTDPrimary>
-          <PTDPrimary>
-            {formatNumber(d3.sum(building_types.map((t) => t.building_area)))}
-          </PTDPrimary>
-        </PTR>
+        <TableBody>
+          <PTR>
+            <PTDPrimary>Building Type</PTDPrimary>
+            <PTDPrimary>Area (SF)</PTDPrimary>
+          </PTR>
+          {building_types.map((t, i) => {
+            return (
+              <PTR key={i}>
+                <PTDSecondary>{t.building_type}</PTDSecondary>
+                <PTDSecondary>{formatNumber(t.building_area)}</PTDSecondary>
+              </PTR>
+            );
+          })}
+          <PTR>
+            <PTDPrimary>Total Area</PTDPrimary>
+            <PTDPrimary>
+              {formatNumber(d3.sum(building_types.map((t) => t.building_area)))}
+            </PTDPrimary>
+          </PTR>
+        </TableBody>
       </PTable>
     </React.Fragment>
   );

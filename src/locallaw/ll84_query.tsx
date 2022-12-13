@@ -1,4 +1,4 @@
-import { ll84_year_lookups } from "./lookups";
+import { ll84_year_lookups, building_type_co2_coefficients } from "./lookups";
 import {
   LL84QueryObjTypes,
   LL84QueryPropertyTypes,
@@ -13,6 +13,7 @@ const sanitizeLL84QueryResultsObject = (
   colnamemap: ColumnNameMapType,
   ll84_year: LL84YearTypes
 ) => {
+  console.log(pobj);
   let pobj_length = Object.keys(pobj).length;
 
   let sanitized_obj: { [key: string]: any } = {};
@@ -52,10 +53,13 @@ const sanitizeLL84QueryResultsObject = (
     }
   });
 
+  sanitized_obj.type_lookup_error_building_types = [];
   // catch any types that are 'Other' and flag them
 
   let is_other_lookup_error = false;
+  let is_type_lookup_error = false;
 
+  // handle known 'other' case
   if (sanitized_obj["1st_property_use_type"] === "Other") {
     is_other_lookup_error = true;
     sanitized_obj["1st_property_use_type"] = "Office";
@@ -69,6 +73,46 @@ const sanitizeLL84QueryResultsObject = (
     sanitized_obj["3rd_property_use_type"] = "Office";
   }
   sanitized_obj.is_other_lookup_error = is_other_lookup_error;
+
+  // handle any other missing cases
+
+  let valid_building_types = building_type_co2_coefficients.map(
+    (e) => e.building_type
+  );
+
+  if (
+    !valid_building_types.includes(sanitized_obj["1st_property_use_type"]) &&
+    sanitized_obj["1st_property_use_type"] !== "Not Available"
+  ) {
+    is_type_lookup_error = true;
+    sanitized_obj.type_lookup_error_building_types.push(
+      sanitized_obj["1st_property_use_type"]
+    );
+    sanitized_obj["1st_property_use_type"] = "Office";
+  }
+  if (
+    !valid_building_types.includes(sanitized_obj["2nd_property_use_type"]) &&
+    sanitized_obj["2nd_property_use_type"] !== "Not Available"
+  ) {
+    is_type_lookup_error = true;
+    sanitized_obj.type_lookup_error_building_types.push(
+      sanitized_obj["2nd_property_use_type"]
+    );
+
+    sanitized_obj["2nd_property_use_type"] = "Office";
+  }
+  if (
+    !valid_building_types.includes(sanitized_obj["3rd_property_use_type"]) &&
+    sanitized_obj["3rd_property_use_type"] !== "Not Available"
+  ) {
+    is_type_lookup_error = true;
+    sanitized_obj.type_lookup_error_building_types.push(
+      sanitized_obj["3rd_property_use_type"]
+    );
+
+    sanitized_obj["3rd_property_use_type"] = "Office";
+  }
+  sanitized_obj.is_type_lookup_error = is_type_lookup_error;
 
   return sanitized_obj as LL84QueryPropertyTypes;
 };

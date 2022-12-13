@@ -58,6 +58,10 @@ const BuildingSummaryDialogue = () => {
     ll84_year_map[d.key] = d.label;
   });
 
+  let type_lookup_error_text = `"${ll84_selected_property.type_lookup_error_building_types
+    .filter((d) => d !== "Not Available")
+    .join(", ")}"`;
+
   return (
     <DialogueContainer
       closeCallback={handleCloseDialogue}
@@ -71,6 +75,18 @@ const BuildingSummaryDialogue = () => {
             LL97 rules. The "Other" type has been set to "Office." Please review
             and redefine the category or select one of the more-specific "Other"
             categories (i.e., "Other - Education", etc.).
+          </Warning>
+        ) : (
+          ""
+        )}
+        {ll84_selected_property.is_type_lookup_error &&
+        !ll84_selected_property.is_other_lookup_error ? (
+          <Warning>
+            Warning: An error occurred while translating LL84 building type(s){" "}
+            {type_lookup_error_text} to LL97 building types. Building type
+            square footage has been populated for each type, and all unknown
+            building types have been set to "Office." Please review and redefine
+            the inputs.
           </Warning>
         ) : (
           ""

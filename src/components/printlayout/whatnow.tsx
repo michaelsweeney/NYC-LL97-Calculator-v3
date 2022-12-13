@@ -63,16 +63,16 @@ const WhatNow = () => {
       </p>
       <LinkText link="https://www.nyserda.ny.gov" label="nyserda.ny.gov" />
       <p>
-        The NYC Sustainable Buildings NYC Emissions Limits page provides
-        information on Local Law 97, including building emissions limits,
-        property types, and reporting requirements.
+        The Sustainable Buildings NYC Emissions Limits page provides information
+        on Local Law 97, including building emissions limits, property types,
+        and reporting requirements.
       </p>
       <LinkText
         link="https://www.nyc.gov/site/sustainablebuildings/requirements/emissions-limits.page"
         label="nyc.gov/site/sustainablebuildings/requirements/emissions-limits.page"
       />
       <p>
-        The NYC Sustainable Buildings NYC Covered Buildings page details LL97
+        The Sustainable Buildings NYC Covered Buildings page details LL97
         coverage criteria, plus a list of buildings that may be subject to LL97.
       </p>
       <LinkText

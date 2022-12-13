@@ -34,35 +34,37 @@ const LL97SummaryTable = (props: PropTypes) => {
       <SubHeaderLined>LL97 Threshold Summary</SubHeaderLined>
 
       <PTable>
-        <PTR>
-          <PTDPrimary>Year</PTDPrimary>
-          <PTDPrimary>Threshold (tCO2e/yr)</PTDPrimary>
-          <PTDPrimary>GHG Emissions (tCO2e/yr)</PTDPrimary>
-          <PTDPrimary>Penalty ($/yr)</PTDPrimary>
-        </PTR>
+        <TableBody>
+          <PTR>
+            <PTDPrimary>Year</PTDPrimary>
+            <PTDPrimary>Threshold (tCO2e/yr)</PTDPrimary>
+            <PTDPrimary>GHG Emissions (tCO2e/yr)</PTDPrimary>
+            <PTDPrimary>Penalty ($/yr)</PTDPrimary>
+          </PTR>
 
-        {carbon_periods.length === 0 ? (
-          <PTR></PTR>
-        ) : (
-          carbon_periods.map((period, i) => {
-            return (
-              <PTR key={i}>
-                <PTDSecondary>{period.year}</PTDSecondary>
-                <PTDSecondary>
-                  {period.threshold.absolute
-                    ? formatNumber(period.threshold.absolute)
-                    : period.threshold.absolute}
-                </PTDSecondary>
-                <PTDSecondary>
-                  {formatNumber(period.carbon.absolute.total as number)}
-                </PTDSecondary>
-                <PTDSecondary>
-                  {formatCurrency(period.fine.absolute)}
-                </PTDSecondary>
-              </PTR>
-            );
-          })
-        )}
+          {carbon_periods.length === 0 ? (
+            <PTR></PTR>
+          ) : (
+            carbon_periods.map((period, i) => {
+              return (
+                <PTR key={i}>
+                  <PTDSecondary>{period.year}</PTDSecondary>
+                  <PTDSecondary>
+                    {period.threshold.absolute
+                      ? formatNumber(period.threshold.absolute)
+                      : period.threshold.absolute}
+                  </PTDSecondary>
+                  <PTDSecondary>
+                    {formatNumber(period.carbon.absolute.total as number)}
+                  </PTDSecondary>
+                  <PTDSecondary>
+                    {formatCurrency(period.fine.absolute)}
+                  </PTDSecondary>
+                </PTR>
+              );
+            })
+          )}
+        </TableBody>
       </PTable>
     </React.Fragment>
   );

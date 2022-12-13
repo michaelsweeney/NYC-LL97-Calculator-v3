@@ -139,6 +139,8 @@ export type LL84QueryPropertyTypes = {
   electricity_consumption_kbtu: string;
   electricity_onsite_generated_kbtu: string;
   is_other_lookup_error: boolean;
+  is_type_lookup_error: boolean;
+  type_lookup_error_building_types: string[];
 };
 
 export type LL97ConversionTypes = {

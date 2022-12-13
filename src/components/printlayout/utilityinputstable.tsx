@@ -47,32 +47,34 @@ const UtilityInputsTable = (props: PropTypes) => {
     <React.Fragment>
       <SubHeaderLined>Utility Inputs</SubHeaderLined>
       <PTable>
-        <PTR>
-          <PTDPrimary> Fuel Type</PTDPrimary>
-          <PTDPrimary> Consumption</PTDPrimary>
-          <PTDPrimary> Utility Rate</PTDPrimary>
-          <PTDPrimary> Annual Cost ($/yr)</PTDPrimary>
-        </PTR>
+        <TableBody>
+          <PTR>
+            <PTDPrimary> Fuel Type</PTDPrimary>
+            <PTDPrimary> Consumption</PTDPrimary>
+            <PTDPrimary> Utility Rate</PTDPrimary>
+            <PTDPrimary> Annual Cost ($/yr)</PTDPrimary>
+          </PTR>
 
-        {utility_array.map((d, i) => {
-          return (
-            <PTR key={i}>
-              <PTDSecondary>{d.fuel_type}</PTDSecondary>
-              <PTDSecondary>{formatNumber(d.fuel_consumption)}</PTDSecondary>
-              <PTDSecondary>{formatCurrency(d.utility_rate, 2)}</PTDSecondary>
-              <PTDSecondary>{formatCurrency(d.cost_per_year)}</PTDSecondary>
-            </PTR>
-          );
-        })}
+          {utility_array.map((d, i) => {
+            return (
+              <PTR key={i}>
+                <PTDSecondary>{d.fuel_type}</PTDSecondary>
+                <PTDSecondary>{formatNumber(d.fuel_consumption)}</PTDSecondary>
+                <PTDSecondary>{formatCurrency(d.utility_rate, 2)}</PTDSecondary>
+                <PTDSecondary>{formatCurrency(d.cost_per_year)}</PTDSecondary>
+              </PTR>
+            );
+          })}
 
-        <PTR>
-          <PTDPrimary colSpan={3}>Total Cost</PTDPrimary>
-          <PTDPrimary>
-            {`${formatCurrency(
-              d3.sum(utility_array.map((d) => d.cost_per_year))
-            )}`}
-          </PTDPrimary>
-        </PTR>
+          <PTR>
+            <PTDPrimary colSpan={3}>Total Cost</PTDPrimary>
+            <PTDPrimary>
+              {`${formatCurrency(
+                d3.sum(utility_array.map((d) => d.cost_per_year))
+              )}`}
+            </PTDPrimary>
+          </PTR>
+        </TableBody>
       </PTable>
     </React.Fragment>
   );
