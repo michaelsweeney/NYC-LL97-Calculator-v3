@@ -13,7 +13,6 @@ const sanitizeLL84QueryResultsObject = (
   colnamemap: ColumnNameMapType,
   ll84_year: LL84YearTypes
 ) => {
-  console.log(pobj);
   let pobj_length = Object.keys(pobj).length;
 
   let sanitized_obj: { [key: string]: any } = {};
@@ -141,7 +140,7 @@ const handleLL84QueryResponse = (
   let column_query_string = query_columns
     .map(
       (c, i) =>
-        `${c} LIKE '%25${val}%25' ${
+        `UPPER(${c}) LIKE '%25${val.toUpperCase()}%25' ${
           i + 1 === query_columns.length ? "" : "OR "
         }`
     )

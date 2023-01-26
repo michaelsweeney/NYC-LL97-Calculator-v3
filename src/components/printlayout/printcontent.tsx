@@ -121,6 +121,8 @@ const PrintContent = () => {
       {/* <PageBreakAfter>i</PageBreakAfter> */}
 
       <Block>
+        <PrintH1>{address}</PrintH1>
+        <PrintH2>{querylabel}</PrintH2>
         <PrintH3>Utility and Penalty Cost Summary</PrintH3>
         <Paragraph>
           The below summary details utility costs and estimated penalties across
@@ -156,7 +158,8 @@ const PrintContent = () => {
       <PageBreakAfter>i</PageBreakAfter>
 
       <Block>
-        <div style={{ marginTop: "110px" }}>
+        {/* <div style={{ marginTop: "110px" }}>  // margintop removed*/}
+        <div style={{}}>
           <WhatNow />
         </div>
       </Block>

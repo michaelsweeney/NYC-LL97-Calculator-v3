@@ -79,6 +79,13 @@ const WhatNow = () => {
         link="https://www.nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
         label="nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
       />
+      <p>sustainable building espm filing guide</p>
+      <LinkText link="https://accelerator.nyc/offerings/shc" label="link tbd" />
+      <p>sustainability help center... text tbd.</p>
+      <LinkText
+        link="https://accelerator.nyc/offerings/shc"
+        label="accelerator.nyc/offerings/shc"
+      />
     </StyleWrapper>
   );
 };

@@ -77,7 +77,15 @@ const CalcInfoDialogue = () => {
         <ul>
           <li>
             Select occupancy type(s) and input area(s). To add more than one
-            occupancy type use the "Add Occupancy Type" button.
+            occupancy type use the "Add Occupancy Type" button. For area inputs,
+            use square footage as defined in{" "}
+            <a
+              href="https://www.nyc.gov/html/gbee/downloads/pdf/150428_NYC%20LL84%20Data%20Disclosure%20Definitions.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Local Law 84{" "}
+            </a>{" "}
           </li>
           <li>
             Enter your annual consumption per fuel source for the entire
