@@ -79,12 +79,17 @@ const WhatNow = () => {
         link="https://www.nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
         label="nyc.gov/site/sustainablebuildings/requirements/covered-buildings.page"
       />
-      <p>sustainable building espm filing guide</p>
-      <LinkText link="https://accelerator.nyc/offerings/shc" label="link tbd" />
-      <p>sustainability help center... text tbd.</p>
+
+      <p>
+        The NYC Sustainability Help Center offers free assistance for inquiries
+        relating to various NYC sustainability laws. Contact the help center for
+        questions relating to compliance guidelines, help with reporting
+        requirements, and assistance to improve the accuracy of your next
+        benchmarking report.
+      </p>
       <LinkText
-        link="https://accelerator.nyc/offerings/shc"
-        label="accelerator.nyc/offerings/shc"
+        link="cunybpltraining.org/sustainability-help-center/"
+        label="cunybpltraining.org/sustainability-help-center/"
       />
     </StyleWrapper>
   );

@@ -53,6 +53,8 @@ const sanitizeLL84QueryResultsObject = (
   });
 
   sanitized_obj.type_lookup_error_building_types = [];
+  sanitized_obj.type_lookup_error_building_ids = [];
+
   // catch any types that are 'Other' and flag them
 
   let is_other_lookup_error = false;
@@ -88,6 +90,7 @@ const sanitizeLL84QueryResultsObject = (
       sanitized_obj["1st_property_use_type"]
     );
     sanitized_obj["1st_property_use_type"] = "Office";
+    sanitized_obj.type_lookup_error_building_ids.push(0);
   }
   if (
     !valid_building_types.includes(sanitized_obj["2nd_property_use_type"]) &&
@@ -97,6 +100,7 @@ const sanitizeLL84QueryResultsObject = (
     sanitized_obj.type_lookup_error_building_types.push(
       sanitized_obj["2nd_property_use_type"]
     );
+    sanitized_obj.type_lookup_error_building_ids.push(1);
 
     sanitized_obj["2nd_property_use_type"] = "Office";
   }
@@ -108,6 +112,7 @@ const sanitizeLL84QueryResultsObject = (
     sanitized_obj.type_lookup_error_building_types.push(
       sanitized_obj["3rd_property_use_type"]
     );
+    sanitized_obj.type_lookup_error_building_ids.push(2);
 
     sanitized_obj["3rd_property_use_type"] = "Office";
   }

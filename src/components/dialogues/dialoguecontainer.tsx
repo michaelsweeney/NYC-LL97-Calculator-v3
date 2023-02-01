@@ -53,6 +53,7 @@ type DialogueContainerPropTypes = {
   footer?: React.ReactNode;
   closeCallback: () => void;
   title: string;
+  closeButtonLabel?: string;
 };
 
 const DialogueContainer = (props: DialogueContainerPropTypes) => {
@@ -87,7 +88,7 @@ const DialogueContainer = (props: DialogueContainerPropTypes) => {
               color="secondary"
               variant="contained"
             >
-              close
+              {props.closeButtonLabel ? props.closeButtonLabel : "close"}
             </ButtonSecondary>
           </div>
         </HeaderRight>

@@ -51,6 +51,7 @@ const LL84ResultsTable = () => {
 
   const handleLoadBuilding = (selected_ll84_data: LL84QueryPropertyTypes) => {
     dispatch(ll84QueryActions.setSelectedLL84Property(selected_ll84_data));
+    dispatch(ll84QueryActions.setHasLL84SummaryBeenClosed(false));
     let ll97_inputs = LL84SelectionToLL97Inputs(selected_ll84_data);
 
     dispatch(

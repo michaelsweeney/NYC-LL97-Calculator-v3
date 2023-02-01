@@ -102,6 +102,7 @@ export type LL84QuerySliceTypes = {
   ll84_query_results: LL84QueryPropertyTypes[];
   ll84_selected_property: LL84QueryPropertyTypes;
   is_ll84_loaded: boolean;
+  has_ll84_summary_been_closed: boolean;
   is_ll84_overridden: boolean;
   ll84_year_label: string | undefined;
   ll84_building_name: string | undefined;
@@ -141,6 +142,7 @@ export type LL84QueryPropertyTypes = {
   is_other_lookup_error: boolean;
   is_type_lookup_error: boolean;
   type_lookup_error_building_types: string[];
+  type_lookup_error_building_ids: number[];
 };
 
 export type LL97ConversionTypes = {

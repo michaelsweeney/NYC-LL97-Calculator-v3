@@ -13,6 +13,7 @@ const initialState: LL84QuerySliceTypes = {
   ll84_selected_property: {} as LL84QueryPropertyTypes,
   is_ll84_loaded: false,
   is_ll84_overridden: false,
+  has_ll84_summary_been_closed: false,
   ll84_year_label: undefined,
   ll84_building_name: undefined,
 };
@@ -55,6 +56,9 @@ export const ll84QuerySlice = createSlice({
       state.is_ll84_overridden = false;
       state.ll84_building_name = action.payload.property_name;
       state.ll84_year_label = getLL84LookupTitle(action.payload.ll84_year);
+    },
+    setHasLL84SummaryBeenClosed: (state, action: PayloadAction<boolean>) => {
+      state.has_ll84_summary_been_closed = action.payload;
     },
   },
 });

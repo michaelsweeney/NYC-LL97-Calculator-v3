@@ -19,7 +19,7 @@ const Sidebar = () => {
       <InputBuilding />
       <SidebarSubHeader>Utility Inputs</SidebarSubHeader>
       <InputUtilities />
-      <SidebarSubHeader>Custom Deductions</SidebarSubHeader>
+      <SidebarSubHeader>Carbon Deductions</SidebarSubHeader>
       <InputOnsiteGeneration />
     </div>
   );

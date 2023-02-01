@@ -855,6 +855,7 @@ export const sample_ll84_data: LL84QueryPropertyTypes = {
   is_other_lookup_error: false,
   is_type_lookup_error: false,
   type_lookup_error_building_types: [],
+  type_lookup_error_building_ids: [],
 };
 
 export const range_year_lengths: { [key: string]: number } = {
