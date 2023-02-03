@@ -106,12 +106,12 @@ const BuildingSummaryDialogue = () => {
           {ll84_selected_property.is_type_lookup_error &&
           !ll84_selected_property.is_other_lookup_error ? (
             <Warning>
-              Warning: An error occurred while translating LL84 building type(s){" "}
-              {type_lookup_error_text} to LL97 building types. Building type
-              square footage has been populated for each type, and all unknown
-              building types have been set to "Office" and are highlighted in
-              red below. Please review and, if necessary, redefine the building
-              inputs.
+              Warning: your building's LL84 entry contains one or more building
+              types not defined in LL97. Building type square footage has been
+              populated from the LL84 entry, and all unrecognized building types
+              have been set to "Office." Undefined building types are
+              highlighted in red below. Please review and, if necessary,
+              redefine using the building input dropdown menu.
             </Warning>
           ) : (
             ""
