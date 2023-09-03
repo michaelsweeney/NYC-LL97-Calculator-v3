@@ -55,6 +55,7 @@ export type CarbonCoefficientTypes =
   | "something_else";
 
 export type LL84YearTypes =
+  | "ll84_2023_cal_2022"
   | "ll84_2022_cal_2021"
   | "ll84_2021_cal_2020"
   | "ll84_2020_cal_2019"

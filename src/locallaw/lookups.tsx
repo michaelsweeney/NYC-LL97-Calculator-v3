@@ -548,6 +548,39 @@ export const default_utility_rates = {
 };
 export const ll84_year_lookups: LL84QueryObjTypes[] = [
   {
+    key: "ll84_2023_cal_2022",
+    title: "LL84 2023 (calendar year 2022)",
+    documentation:
+      "https://dev.socrata.com/foundry/data.cityofnewyork.us/5zyy-y8am",
+    endpoint: "https://data.cityofnewyork.us/resource/5zyy-y8am.json",
+    label: "2023 (cal year 2022)",
+    column_name_map: [
+      ["property_name", "property_name"],
+      ["property_id", "property_id"],
+      ["address_1", "address_1"],
+      ["nyc_bbl", "nyc_borough_block_and_lot"],
+      ["nyc_bin", "nyc_building_identification"],
+      ["1st_property_use_type", "largest_property_use_type"],
+      ["1st_property_use_sf", "largest_property_use_type_1"],
+      ["2nd_property_use_type", "_2nd_largest_property_use"],
+      ["2nd_property_use_sf", "_2nd_largest_property_use_1"],
+      ["3rd_property_use_type", "_3rd_largest_property_use"],
+      ["3rd_property_use_sf", "_3rd_largest_property_use_1"],
+      ["fuel_oil_2_consumption_kbtu", "fuel_oil_2_use_kbtu"],
+      ["fuel_oil_4_consumption_kbtu", "fuel_oil_4_use_kbtu"],
+      ["district_steam_consumption_kbtu", "district_steam_use_kbtu"],
+      ["natural_gas_consumption_kbtu", "natural_gas_use_kbtu"],
+      ["electricity_consumption_kbtu", "electricity_use_grid_purchase"],
+      ["electricity_onsite_generated_kbtu", "electricity_use_generated"],
+    ],
+    query_columns: [
+      "property_name",
+      "nyc_borough_block_and_lot",
+      "address_1",
+      "nyc_building_identification",
+    ],
+  },
+  {
     key: "ll84_2022_cal_2021",
     title: "LL84 2022 (calendar year 2021)",
     documentation:
