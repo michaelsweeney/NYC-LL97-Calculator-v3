@@ -150,7 +150,17 @@ const handleLL84QueryResponse = (
         }`
     )
     .join("");
-  let query = `${endpoint}?$query=SELECT ${all_columns_string} WHERE ${column_query_string} LIMIT 8
+
+  let report_filter = "";
+  if (ll84_year_obj.key == "ll84_2023_cal_2022") {
+    report_filter = "AND report_year = '2022'";
+  }
+  if (ll84_year_obj.key == "ll84_2024_cal_2023") {
+    report_filter = "AND report_year = '2023'";
+  }
+
+  let query = `
+    ${endpoint}?$query=SELECT ${all_columns_string} WHERE (${column_query_string}) ${report_filter}LIMIT 8
     `;
 
   let xmlhttp = new XMLHttpRequest();

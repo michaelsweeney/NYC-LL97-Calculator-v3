@@ -8,7 +8,7 @@ import {
 
 const initialState: LL84QuerySliceTypes = {
   ll84_query_input: "",
-  ll84_year_selection: "ll84_2023_cal_2022",
+  ll84_year_selection: "ll84_2024_cal_2023",
   ll84_query_results: [] as LL84QueryPropertyTypes[],
   ll84_selected_property: {} as LL84QueryPropertyTypes,
   is_ll84_loaded: false,
